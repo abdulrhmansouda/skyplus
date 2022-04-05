@@ -36,50 +36,15 @@
                                             </ul>
                                         </div>
                                     @endif
-                                    <ul class="nav nav-tabs mb-3">
-                                        <li class="nav-item">
-                                            <button type="button" class="nav-link active" data-tab="admin"
-                                                onclick="openTab(event)">مشرف</button>
-                                        </li>
-                                        <li class="nav-item">
-                                            <button type="button" class="nav-link" data-tab="user"
-                                                onclick="openTab(event)">مستخدم</button>
-                                    </ul>
                                     <div class="tab-content">
                                         {{-- @if(old('user'))
                                         @dd(old('user'))
                                         @endif --}}
-                                        <div class="tab-pane  " id="admin">
-                                            <form action="{{ route('login') }}" method="POST">
-                                                @csrf
-                                                <input type="hidden" name="user" value="admin">
-                                                <label> اسم المشرف<span class="text-danger"> * </span> </label>
-                                                <div class="mb-3">
-                                                    <input type="name" class="form-control" aria-label="name"
-                                                        name="username" aria-describedby="name-addon" required>
-                                                </div>
-                                                <label> كلمة المرور<span class="text-danger"> * </span> </label>
-                                                <div class="mb-3">
-                                                    <input type="Password" class="form-control" aria-label="Password"
-                                                        name="password" aria-describedby="password-addon" required>
-                                                </div>
-                                                <div class="form-check form-switch">
-                                                    <input class="form-check-input" type="checkbox" id="rememberMe"
-                                                        name="remember" checked="">
-                                                    <label class="form-check-label" for="rememberMe">تذكرني</label>
-                                                </div>
-                                                <a class="text-info h6 mb-0" href="./add-admin.html">انشاء مشرف جديد</a>
-                                                <div class="text-center">
-                                                    <button type="submit"
-                                                        class="btn bg-gradient-info w-100 mt-1 mb-0 h5">دخول</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="tab-pane active" id="user">
+                                        <div class="" >
                                             <form action="{{ route('login') }}" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="user" value="point">
-                                                <label> اسم النقطة<span class="text-danger"> * </span> </label>
+                                                <label> الاسم <span class="text-danger"> * </span> </label>
                                                 <div class="mb-3">
                                                     <input type="name" class="form-control" aria-label="name"
                                                         name="username" aria-describedby="name-addon" required>
@@ -126,15 +91,6 @@
                 damping: '0.5'
             }
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-        }
-
-        function openTab(event) {
-            document.querySelectorAll(`.nav-link`).forEach((nav => nav.classList.remove("active")))
-            event.target.classList.add("active");
-            document.querySelectorAll(`.tab-pane`).forEach((tab => {
-                tab.classList.remove("active");
-            }))
-            document.querySelector(`#${event.target.dataset.tab}`).classList.add("active")
         }
     </script>
 </body>

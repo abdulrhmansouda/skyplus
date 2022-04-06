@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\PackageController;
+use App\Http\Controllers\Admin\PointController;
+use App\Http\Controllers\Admin\SubscriberController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,30 +27,24 @@ Route::middleware(['auth', 'admin'])
     ->group(function () {
         Route::prefix('/home')
             ->group(function () {
-                Route::get('/', function () {
-                    return view('admin.pages.home');
-                })->name('home');
+                Route::get('/', [HomeController::class, 'index'])->name('home');
             });
 
         Route::prefix('/points')
             ->group(function () {
-                Route::get('/', function () {
-                    return view('admin.pages.points');
-                })->name('points');
+                Route::get('/', [PointController::class, 'index'])->name('points');
+                Route::post('/store',[PointController::class,'store'])->name('points.store');
+                Route::delete('/destroy/{point}',[PointController::class,'destroy'])->name('points.destroy');
             });
 
         Route::prefix('/subscribers')
             ->group(function () {
-                Route::get('/', function () {
-                    return view('admin.pages.subscribers');
-                })->name('subscribers');    
+                Route::get('/', [SubscriberController::class, 'index'])->name('subscribers');
             });
 
-            Route::prefix('/packages')
+        Route::prefix('/packages')
             ->group(function () {
-                Route::get('/', function () {
-                    return view('admin.pages.packages');
-                })->name('packages');    
+                Route::get('/', [PackageController::class, 'index'])->name('packages');
             });
     });
 

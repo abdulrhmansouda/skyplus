@@ -16,6 +16,14 @@ return new class extends Migration
         Schema::create('points', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
+            // $table->string('name');
+            $table->text('address')->nullable();
+            $table->string('image')->nullable();
+            $table->bigInteger('account');
+            $table->string('tc')->nullable();
+            $table->text('description')->nullable();
+            $table->boolean('borrowingIsAllowed')->nullable();
+            $table->string('phone')->nullable();
             $table->timestamps();
         });
     }

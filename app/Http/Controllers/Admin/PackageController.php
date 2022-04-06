@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Point;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class PointController extends Controller
+class PackageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class PointController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.pages.packages');
     }
 
     /**
@@ -41,10 +41,10 @@ class PointController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Point  $point
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Point $point)
+    public function show($id)
     {
         //
     }
@@ -52,10 +52,10 @@ class PointController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Point  $point
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Point $point)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +64,10 @@ class PointController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Point  $point
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Point $point)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +75,10 @@ class PointController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Point  $point
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Point $point)
+    public function destroy($id)
     {
         //
     }

@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'username',
     ];
 
     /**
@@ -42,6 +43,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function admin(){
+        return $this->hasOne(Admin::class);
+    }
+
+    public function point(){
+        return $this->hasOne(Point::class);
+    }
 
     public function isAdmin(){
         return $this->role === 'admin' ;

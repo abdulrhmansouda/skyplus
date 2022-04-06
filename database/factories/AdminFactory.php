@@ -17,7 +17,7 @@ class AdminFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'phone' => $this->faker->phoneNumber,
         ];
     }
 }

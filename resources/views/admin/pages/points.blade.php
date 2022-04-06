@@ -901,7 +901,7 @@
                     </li>
                 </ul> --}}
 
-                {{-- {{ $points->links() }} --}}
+                {{ $points->links() }}
                 <!-- end pagination -->
             </div>
         </div>

@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory()
-        ->count(10)
+        ->count(100)
         ->hasPoint(1)
         ->create(['role'=>'point']);
     //     Admin::factory(10)->create([

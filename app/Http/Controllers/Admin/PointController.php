@@ -19,7 +19,7 @@ class PointController extends Controller
     public function index()
     {
         return view('admin.pages.points',[
-            'points' => Point::with('user')->get(),
+            'points' => Point::with('user')->paginate(10),
         ]);
     }
 

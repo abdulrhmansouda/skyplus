@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StorePointRequest;
+use App\Http\Requests\Admin\UpdatePointRequest;
 use App\Models\Point;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -86,16 +87,16 @@ class PointController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+    // /**
+    //  * Show the form for editing the specified resource.
+    //  *
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function edit($id)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -106,8 +107,36 @@ class PointController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        // dd($request->all());
+        $point = Point::findOrFail($id);
+        // dd($point);
+        // dd($request->hasFile('image'));
+        if($request->hasFile('image') && $request->file('image')->isValid()){
+            // dd($request->all());
+
+            $image = $request->file('image');
+            $point->image = $image->store('points','images');
+        }
+        // dd($point);
+
+// dd(is_null($request->password));
+        $point->user->update([
+            'username' => $request->username,
+            'role' => 'point',
+            'password' => is_null($request->password) ? $point->user->password : Hash::make($request->password),
+        ]);
+
+        $point->name = $request->name;
+
+        $point->account = $request->account;
+
+        $point->description = $request->description;
+
+        $point->update();
+
+        session()->flash('success' ,'تم تعديل النقطة الجديدة بنجاح');
+
+        return redirect(route('admin.points'));    }
 
     /**
      * Remove the specified resource from storage.

@@ -34,7 +34,7 @@
                 <form action="" method="GET">
                     <div class="input-group">
                         <span class="input-group-text text-body"><button class="submit"><i class="fas fa-search" aria-hidden="true"></i></button></span>
-                        <input type="text" class="form-control" placeholder="أكتب هنا..." name="s" value="{{ $search ? $search : '' }}">
+                        <input type="text" class="form-control" placeholder="أكتب هنا..." name="s" value="@if(isset($search)){{ $search ? $search : '' }}@endif">
                     </div>
                 </form>
             </div>

@@ -38,6 +38,7 @@ Route::middleware(['auth', 'admin'])
             ->group(function () {
                 Route::get('/', [PointController::class, 'index'])->name('points');
                 Route::post('/store', [PointController::class, 'store'])->name('points.store');
+                Route::put('/update/{point}', [PointController::class, 'update'])->name('points.update');
                 Route::delete('/destroy/{point}', [PointController::class, 'destroy'])->name('points.destroy');
             });
 

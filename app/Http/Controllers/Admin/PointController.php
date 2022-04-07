@@ -57,10 +57,11 @@ class PointController extends Controller
 
         $point->user_id = User::create([
             'username' => $request->username,
-            'name' => $request->name,
             'role' => 'point',
             'password' => Hash::make($request->password),
         ])->id;
+
+        $point->name = $request->name;
 
         $point->account = $request->account;
 

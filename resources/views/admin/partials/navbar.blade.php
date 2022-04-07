@@ -31,10 +31,12 @@
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 px-0" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                <div class="input-group">
-                    <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                    <input type="text" class="form-control" placeholder="أكتب هنا...">
-                </div>
+                <form action="" method="GET">
+                    <div class="input-group">
+                        <span class="input-group-text text-body"><button class="submit"><i class="fas fa-search" aria-hidden="true"></i></button></span>
+                        <input type="text" class="form-control" placeholder="أكتب هنا..." name="s" value="{{ $search ? $search : '' }}">
+                    </div>
+                </form>
             </div>
             <ul class="navbar-nav me-auto ms-0 justify-content-end">
                 <li class="nav-item d-xl-none pe-3 d-flex align-items-center">

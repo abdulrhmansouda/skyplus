@@ -17,8 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('login'));
 });
 
 Route::middleware(['auth', 'admin'])
@@ -33,8 +37,8 @@ Route::middleware(['auth', 'admin'])
         Route::prefix('/points')
             ->group(function () {
                 Route::get('/', [PointController::class, 'index'])->name('points');
-                Route::post('/store',[PointController::class,'store'])->name('points.store');
-                Route::delete('/destroy/{point}',[PointController::class,'destroy'])->name('points.destroy');
+                Route::post('/store', [PointController::class, 'store'])->name('points.store');
+                Route::delete('/destroy/{point}', [PointController::class, 'destroy'])->name('points.destroy');
             });
 
         Route::prefix('/subscribers')
@@ -48,11 +52,18 @@ Route::middleware(['auth', 'admin'])
             });
     });
 
-Route::middleware(['auth', 'point'])->group(function () {
-    Route::get('/welcome1', function () {
-        return 'user';
+Route::middleware(['auth', 'point'])
+    ->prefix('/point')
+    ->name('point.')
+    ->group(function () {
+        Route::prefix('/home')
+            ->group(function () {
+                Route::get('/',function(){
+                    return 'point';
+                })->name('home');
+            });
     });
-});
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

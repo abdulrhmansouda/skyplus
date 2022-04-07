@@ -16,10 +16,18 @@ class PointController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if($request->s){
+            $points = Point::where('name','LIKE',"%$request->s%")->paginate(10);
+        }
+        else{
+            $points = Point::paginate(10);
+        }
+        // dd($points);
         return view('admin.pages.points',[
-            'points' => Point::with('user')->paginate(10),
+            'points' => $points,
+            'search' => $request->s,
         ]);
     }
 

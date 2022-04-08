@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <script src="{{ asset('/assets/js/fontawsome.js') }}" crossorigin="anonymous"></script>
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('/assets/css/soft-ui-dashboard.css?v=1.0.3') }}" rel="stylesheet" />
 
@@ -19,11 +19,11 @@
 
 </head>
 
-<body class="g-sidenav-show rtl bg-gray-100">
+<body class="bg-gray-100 g-sidenav-show rtl">
 
     @include('admin.partials.aside')
 
-    <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg overflow-hidden">
+    <main class="mt-1 overflow-hidden main-content position-relative max-height-vh-100 h-100 border-radius-lg">
         <!-- Navbar -->
         @include('admin.partials.navbar')
         <!-- End Navbar -->
@@ -37,6 +37,7 @@
 
         @if (session()->has('error'))
             <div class="alert alert-danger">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 {{ session()->get('error') }}
             </div>
         @endif
@@ -244,7 +245,7 @@
     <script src="{{ asset('/assets/js/plugins/choices.min.js') }}"></script>
 
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="{{ asset('/assets/js/soft-ui-dashboard.min.js?v=1.0.3') }}"></script>
+    <script src="{{ asset('/assets/js/soft-ui-dashboard.js') }}"></script>
 </body>
 
 </html>

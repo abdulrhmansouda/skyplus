@@ -1,22 +1,22 @@
 <aside
-class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-end me-3 rotate-caret"
+class="my-3 border-0 sidenav navbar navbar-vertical navbar-expand-xs border-radius-xl fixed-end me-3 rotate-caret"
 id="sidenav-main" data-color="info">
 <div class="sidenav-header">
-  <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute start-0 top-0 d-none d-xl-none"
+  <i class="top-0 p-3 cursor-pointer fas fa-times text-secondary opacity-5 position-absolute start-0 d-none d-xl-none"
     aria-hidden="true" id="iconSidenav"></i>
-  <a class="navbar-brand m-0" href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html"
+  <a class="m-0 navbar-brand" href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html"
     target="_blank">
     <img src="{{ asset('/assets/img/skyplus.jpg') }}" class="navbar-brand-img h-100" alt="main_logo">
     <span class="me-1 font-weight-bold">skyplus</span>
   </a>
 </div>
-<hr class="horizontal dark mt-0">
-<div class="collapse navbar-collapse px-0 w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
+<hr class="mt-0 horizontal dark">
+<div class="w-auto px-0 collapse navbar-collapse max-height-vh-100 h-100" id="sidenav-collapse-main">
   <ul class="navbar-nav">
     <li class="nav-item">
       <a class="nav-link @if(Route::currentRouteName() === "admin.home" ) active @endif " href="{{ route('admin.home') }}">
         <div
-          class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center ms-2 d-flex align-items-center justify-content-center">
+          class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
           <svg class="text-dark" width="16px" height="16px" viewBox="0 0 42 42" version="1.1"
             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <g id="Basic-Elements" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -47,7 +47,7 @@ id="sidenav-main" data-color="info">
         {{-- @dd(Route::currentRouteName() === "admin.home") --}}
         {{-- strcmp($str1, $str2) --}}
         <div
-          class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center ms-2 d-flex align-items-center justify-content-center">
+          class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
           <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink">
             <title>shop </title>
@@ -73,7 +73,7 @@ id="sidenav-main" data-color="info">
     <li class="nav-item">
       <a class="nav-link @if(Route::currentRouteName() === "admin.subscribers" ) active @endif" href="{{ route('admin.subscribers') }}">
         <div
-          class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center ms-2 d-flex align-items-center justify-content-center">
+          class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
           <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink">
             <title>customer-support</title>
@@ -103,7 +103,7 @@ id="sidenav-main" data-color="info">
     <li class="nav-item">
       <a class="nav-link @if(Route::currentRouteName() === "admin.packages" ) active @endif" href="{{ route('admin.packages') }}">
         <div
-          class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center ms-2 d-flex align-items-center justify-content-center">
+          class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
           <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink">
             <title>credit-card</title>
@@ -129,7 +129,7 @@ id="sidenav-main" data-color="info">
     <li class="nav-item">
       <a class="nav-link " href="../pages/recharge.html">
         <div
-          class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center ms-2 d-flex align-items-center justify-content-center">
+          class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
           <svg class="text-dark" width="16px" height="16px" viewBox="0 0 42 42" version="1.1"
             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <title>office</title>
@@ -157,7 +157,7 @@ id="sidenav-main" data-color="info">
     <li class="nav-item">
       <a class="nav-link " href="../pages/reports.html">
         <div
-          class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center ms-2 d-flex align-items-center justify-content-center">
+          class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
           <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink">
             <title>document</title>
@@ -183,7 +183,7 @@ id="sidenav-main" data-color="info">
     <li class="nav-item">
       <a class="nav-link " href="../pages/setting.html">
         <div
-          class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center ms-2 d-flex align-items-center justify-content-center">
+          class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
           <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink">
             <title>settings</title>
@@ -212,7 +212,7 @@ id="sidenav-main" data-color="info">
     <li class="nav-item">
       <a class="nav-link " data-bs-toggle="modal" href="#logout">
         <div
-          class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center ms-2 d-flex align-items-center justify-content-center">
+          class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
           <svg class="text-dark" width="16px" height="16px" viewBox="0 0 40 40" version="1.1"
             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <title>spaceship</title>

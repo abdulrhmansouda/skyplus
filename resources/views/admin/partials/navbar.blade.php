@@ -1,12 +1,12 @@
-<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
+<nav class="px-0 mx-4 shadow-none navbar navbar-main navbar-expand-lg border-radius-xl" id="navbarBlur"
     navbar-scroll="true">
-    <div class="container-fluid py-1 px-3">
+    <div class="px-3 py-1 container-fluid">
         <nav aria-label="breadcrumb">
-            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 ">
-                <li class="breadcrumb-item text-sm ps-2"><a class="opacity-5 text-dark" href="{{ route('admin.home') }}">
+            <ol class="px-0 pt-1 pb-0 mb-0 bg-transparent breadcrumb ">
+                <li class="text-sm breadcrumb-item ps-2"><a class="opacity-5 text-dark" href="{{ route('admin.home') }}">
                     لوحات
                         التحكم</a></li>
-                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">
+                <li class="text-sm breadcrumb-item text-dark active" aria-current="page">
                     @switch(Route::currentRouteName())
                         @case('admin.home')
                             الرئيسية
@@ -29,6 +29,7 @@
                 </li>
             </ol>
         </nav>
+<<<<<<< HEAD
         <div class="collapse navbar-collapse mt-sm-0 mt-2 px-0" id="navbar">
             @switch(Route::currentRouteName())
             @case('admin.home')
@@ -40,10 +41,13 @@
             @case('admin.subscribers')
 
             @case('admin.packages')
+=======
+        <div class="px-0 mt-2 collapse navbar-collapse mt-sm-0" id="navbar">
+>>>>>>> 10c45aac3653a01a3e5f6171062ebe933c7f3ed2
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                 <form action="" method="GET">
                     <div class="input-group">
-                        <span class="input-group-text text-body"><button class="submit"><i class="fas fa-search" aria-hidden="true"></i></button></span>
+                        <span class="input-group-text text-body"><button class="submit search-button" ><i class="fas fa-search" aria-hidden="true"></i></button></span>
                         <input type="text" class="form-control" placeholder="أكتب هنا..." name="s" value="@if(isset($search)){{ $search ? $search : '' }}@endif">
                     </div>
                 </form>
@@ -56,7 +60,7 @@
 
             <ul class="navbar-nav me-auto ms-0 justify-content-end">
                 <li class="nav-item d-xl-none pe-3 d-flex align-items-center">
-                    <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                    <a href="javascript:;" class="p-0 nav-link text-body" id="iconNavbarSidenav">
                         <div class="sidenav-toggler-inner">
                             <i class="sidenav-toggler-line"></i>
                             <i class="sidenav-toggler-line"></i>
@@ -65,23 +69,23 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown ps-2 d-flex align-items-center">
-                    <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton"
+                    <a href="javascript:;" class="p-0 nav-link text-body" id="dropdownMenuButton"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-bell cursor-pointer"></i>
+                        <i class="cursor-pointer fa fa-bell"></i>
                     </a>
-                    <ul class="dropdown-menu  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                    <ul class="px-2 py-3 dropdown-menu me-sm-n4" aria-labelledby="dropdownMenuButton">
                         <li class="mb-2">
                             <a class="dropdown-item border-radius-md" href="javascript:;">
-                                <div class="d-flex py-1">
+                                <div class="py-1 d-flex">
                                     <div class="my-auto">
                                         <img src="{{ asset('/assets/img/team-2.jpg') }}"
-                                            class="avatar avatar-sm  ms-3 ">
+                                            class="avatar avatar-sm ms-3 ">
                                     </div>
                                     <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="text-sm font-weight-normal mb-1">
+                                        <h6 class="mb-1 text-sm font-weight-normal">
                                             <span class="font-weight-bold">New message</span> from Laur
                                         </h6>
-                                        <p class="text-xs text-secondary mb-0">
+                                        <p class="mb-0 text-xs text-secondary">
                                             <i class="fa fa-clock me-1"></i>
                                             13 minutes ago
                                         </p>
@@ -91,16 +95,16 @@
                         </li>
                         <li class="mb-2">
                             <a class="dropdown-item border-radius-md" href="javascript:;">
-                                <div class="d-flex py-1">
+                                <div class="py-1 d-flex">
                                     <div class="my-auto">
                                         <img src="{{ asset('/assets/img/small-logos/logo-spotify.svg') }}"
-                                            class="avatar avatar-sm bg-gradient-dark  ms-3 ">
+                                            class="avatar avatar-sm bg-gradient-dark ms-3 ">
                                     </div>
                                     <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="text-sm font-weight-normal mb-1">
+                                        <h6 class="mb-1 text-sm font-weight-normal">
                                             <span class="font-weight-bold">New album</span> by Travis Scott
                                         </h6>
-                                        <p class="text-xs text-secondary mb-0">
+                                        <p class="mb-0 text-xs text-secondary">
                                             <i class="fa fa-clock me-1"></i>
                                             1 day
                                         </p>
@@ -110,8 +114,8 @@
                         </li>
                         <li>
                             <a class="dropdown-item border-radius-md" href="javascript:;">
-                                <div class="d-flex py-1">
-                                    <div class="avatar avatar-sm bg-gradient-secondary  ms-3  my-auto">
+                                <div class="py-1 d-flex">
+                                    <div class="my-auto avatar avatar-sm bg-gradient-secondary ms-3">
                                         <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"
                                             xmlns="http://www.w3.org/2000/svg"
                                             xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -134,10 +138,10 @@
                                         </svg>
                                     </div>
                                     <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="text-sm font-weight-normal mb-1">
+                                        <h6 class="mb-1 text-sm font-weight-normal">
                                             Payment successfully completed
                                         </h6>
-                                        <p class="text-xs text-secondary mb-0">
+                                        <p class="mb-0 text-xs text-secondary">
                                             <i class="fa fa-clock me-1"></i>
                                             2 days
                                         </p>

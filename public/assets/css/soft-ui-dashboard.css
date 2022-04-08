@@ -23336,8 +23336,7 @@ hr.horizontal.gray-light {
 .table th {
   white-space: nowrap;
 }
-.table td p ,
-.table td .modal-title {
+.table td .modal *  {
    white-space: initial;
 }
 

@@ -4,7 +4,7 @@
 @section('title', 'نقاط البيع')
 
 @section('content')
-    <div class="container-fluid py-4">
+    <div class="py-4 container-fluid">
         <!-- start add  -->
         <button type="button" class="btn bg-gradient-dark btn-sm" data-bs-toggle="modal" data-bs-target="#add">
             إضافة
@@ -17,7 +17,7 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">إضافة </h5>
+                <h5 class="modal-title" id="exampleModalLabel">إضافة نقطة بيع</h5>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
@@ -48,9 +48,10 @@
                                 <textarea class="form-control" id="info" rows="3" name="description"></textarea>
                             </div>
                         </div>
+                        
                         <div class="modal-footer">
                             <span class="btn btn-secondary" data-bs-dismiss="modal">الغاء</span>
-                            <button type="submit" class="btn btn-primary">حفظ</button>
+                            <button type="submit" class="btn btn-info">حفظ</button>
                         </div>
                     </div>
                 </div>
@@ -59,8 +60,8 @@
         <!-- end add  -->
         <div class="row">
             <div class="col-12">
-                <div class="card mb-4">
-                    <div class="card-body px-0 pt-0 pb-2">
+                <div class="mb-4 card">
+                    <div class="px-0 pt-0 pb-2 card-body">
                         @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -70,27 +71,27 @@
                                 </ul>
                             </div>
                         @endif
-                        <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0">
+                        <div class="p-0 table-responsive">
+                            <table class="table mb-0 align-items-center">
                                 <thead>
                                     <tr>
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3">
                                             الاسم</th>
                                         <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
+                                            class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             الرصيد</th>
                                         <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
+                                            class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Price</th>
                                         <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
+                                            class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Quantity</th>
                                         <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
+                                            class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             status</th>
                                         <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
+                                            class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             action</th>
                                     </tr>
                                 </thead>
@@ -98,7 +99,7 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <div class="d-flex px-2 py-1">
+                                                <div class="px-2 py-1 d-flex">
                                                     <div>
                                                         <img src="{{ $point->imageUrl }}" class="avatar avatar-sm ms-3"
                                                             alt="user1">
@@ -109,22 +110,22 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0">{{ $point->account }}</p>
+                                                <p class="mb-0 text-xs font-weight-bold">{{ $point->account }}</p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0">100 </p>
+                                                <p class="mb-0 text-xs font-weight-bold">100 </p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0">10</p>
+                                                <p class="mb-0 text-xs font-weight-bold">10</p>
                                             </td>
-                                            <td class="align-middle text-sm">
+                                            <td class="text-sm align-middle">
                                                 <span class="badge badge-sm bg-gradient-success">on</span>
                                             </td>
                                             <td class="align-middle ">
                                                 <!-- start view1 -->
                                                 <div class="d-inline-block">
                                                     <a href="javascript:;"
-                                                        class="text-secondary font-weight-bold text-xs px-1 "
+                                                        class="px-1 text-xs text-secondary font-weight-bold "
                                                         data-toggle="tooltip" data-original-title="view user"
                                                         data-bs-toggle="modal" data-bs-target="#view{{ $point->id }}">
                                                         <i class="fas fa-eye fs-6"></i>
@@ -147,19 +148,19 @@
                                                                                 <img src="{{ $point->image ? $point->imageUrl : asset('images/no_image.webp') }}"
                                                                                     alt="img1" class="rounded w-100">
                                                                                 {{-- <div
-                                                                                    class="position-absolute top-0 right-0 d-flex gap-1 p-1">
+                                                                                    class="top-0 right-0 gap-1 p-1 position-absolute d-flex">
                                                                                     <a href="javascript:;"
-                                                                                        class="text-secondary font-weight-bold text-xs"
+                                                                                        class="text-xs text-secondary font-weight-bold"
                                                                                         data-toggle="tooltip"
                                                                                         data-original-title="Edit user">
-                                                                                        <i class="fas fa-edit fs-6 bg-primary text-white p-1 rounded"
+                                                                                        <i class="p-1 text-white rounded fas fa-edit fs-6 bg-primary"
                                                                                             aria-hidden="true"></i>
                                                                                     </a>
                                                                                     <a href="javascript:;"
-                                                                                        class="text-secondary font-weight-bold text-xs "
+                                                                                        class="text-xs text-secondary font-weight-bold "
                                                                                         data-toggle="tooltip"
                                                                                         data-original-title="Edit user">
-                                                                                        <i class="fas fa-trash fs-6 bg-primary text-white p-1 rounded"
+                                                                                        <i class="p-1 text-white rounded fas fa-trash fs-6 bg-primary"
                                                                                             aria-hidden="true"></i>
                                                                                     </a>
                                                                                 </div> --}}
@@ -172,7 +173,7 @@
                                                                             <label for="imgs">الصور</label>
                                                                             <!-- start slider  -->
                                                                             <div class="row">
-                                                                                <div class="col-md-12 mx-auto">
+                                                                                <div class="mx-auto col-md-12">
                                                                                     <div id="caeousel1"
                                                                                         class="carousel slide"
                                                                                         data-bs-ride="carousel">
@@ -201,19 +202,19 @@
                                                                                                         alt="img1"
                                                                                                         class="rounded w-100">
                                                                                                     <div
-                                                                                                        class="position-absolute top-0 right-0 d-flex gap-1 p-1">
+                                                                                                        class="top-0 right-0 gap-1 p-1 position-absolute d-flex">
                                                                                                         <a href="javascript:;"
-                                                                                                            class="text-secondary font-weight-bold text-xs"
+                                                                                                            class="text-xs text-secondary font-weight-bold"
                                                                                                             data-toggle="tooltip"
                                                                                                             data-original-title="Edit user">
-                                                                                                            <i class="fas fa-edit fs-6 bg-primary text-white p-1 rounded"
+                                                                                                            <i class="p-1 text-white rounded fas fa-edit fs-6 bg-primary"
                                                                                                                 aria-hidden="true"></i>
                                                                                                         </a>
                                                                                                         <a href="javascript:;"
-                                                                                                            class="text-secondary font-weight-bold text-xs "
+                                                                                                            class="text-xs text-secondary font-weight-bold "
                                                                                                             data-toggle="tooltip"
                                                                                                             data-original-title="Edit user">
-                                                                                                            <i class="fas fa-trash fs-6 bg-primary text-white p-1 rounded"
+                                                                                                            <i class="p-1 text-white rounded fas fa-trash fs-6 bg-primary"
                                                                                                                 aria-hidden="true"></i>
                                                                                                         </a>
                                                                                                     </div>
@@ -226,19 +227,19 @@
                                                                                                         alt="img1"
                                                                                                         class="rounded w-100">
                                                                                                     <div
-                                                                                                        class="position-absolute top-0 right-0 d-flex gap-1 p-1">
+                                                                                                        class="top-0 right-0 gap-1 p-1 position-absolute d-flex">
                                                                                                         <a href="javascript:;"
-                                                                                                            class="text-secondary font-weight-bold text-xs"
+                                                                                                            class="text-xs text-secondary font-weight-bold"
                                                                                                             data-toggle="tooltip"
                                                                                                             data-original-title="Edit user">
-                                                                                                            <i class="fas fa-edit fs-6 bg-primary text-white p-1 rounded"
+                                                                                                            <i class="p-1 text-white rounded fas fa-edit fs-6 bg-primary"
                                                                                                                 aria-hidden="true"></i>
                                                                                                         </a>
                                                                                                         <a href="javascript:;"
-                                                                                                            class="text-secondary font-weight-bold text-xs "
+                                                                                                            class="text-xs text-secondary font-weight-bold "
                                                                                                             data-toggle="tooltip"
                                                                                                             data-original-title="Edit user">
-                                                                                                            <i class="fas fa-trash fs-6 bg-primary text-white p-1 rounded"
+                                                                                                            <i class="p-1 text-white rounded fas fa-trash fs-6 bg-primary"
                                                                                                                 aria-hidden="true"></i>
                                                                                                         </a>
                                                                                                     </div>
@@ -251,19 +252,19 @@
                                                                                                         alt="img1"
                                                                                                         class="rounded w-100">
                                                                                                     <div
-                                                                                                        class="position-absolute top-0 right-0 d-flex gap-1 p-1">
+                                                                                                        class="top-0 right-0 gap-1 p-1 position-absolute d-flex">
                                                                                                         <a href="javascript:;"
-                                                                                                            class="text-secondary font-weight-bold text-xs"
+                                                                                                            class="text-xs text-secondary font-weight-bold"
                                                                                                             data-toggle="tooltip"
                                                                                                             data-original-title="Edit user">
-                                                                                                            <i class="fas fa-edit fs-6 bg-primary text-white p-1 rounded"
+                                                                                                            <i class="p-1 text-white rounded fas fa-edit fs-6 bg-primary"
                                                                                                                 aria-hidden="true"></i>
                                                                                                         </a>
                                                                                                         <a href="javascript:;"
-                                                                                                            class="text-secondary font-weight-bold text-xs "
+                                                                                                            class="text-xs text-secondary font-weight-bold "
                                                                                                             data-toggle="tooltip"
                                                                                                             data-original-title="Edit user">
-                                                                                                            <i class="fas fa-trash fs-6 bg-primary text-white p-1 rounded"
+                                                                                                            <i class="p-1 text-white rounded fas fa-trash fs-6 bg-primary"
                                                                                                                 aria-hidden="true"></i>
                                                                                                         </a>
                                                                                                     </div>
@@ -348,7 +349,7 @@
                                                 <!-- start edit 1 -->
                                                 <div class="d-inline-block">
                                                     <a href="javascript:;"
-                                                        class="text-secondary font-weight-bold text-xs px-1 "
+                                                        class="px-1 text-xs text-secondary font-weight-bold "
                                                         data-toggle="tooltip" data-original-title="Edit user"
                                                         data-bs-toggle="modal" data-bs-target="#edit{{ $point->id }}">
                                                         <i class="fas fa-edit fs-6"></i>
@@ -376,19 +377,19 @@
                                                                                 <img src="{{ $point->image ? $point->imageUrl : asset('images/no_image.webp') }}"
                                                                                     alt="img1" class="rounded w-100">
                                                                                 {{-- <div
-                                                                                    class="position-absolute top-0 right-0 d-flex gap-1 p-1">
+                                                                                    class="top-0 right-0 gap-1 p-1 position-absolute d-flex">
                                                                                     <a href="javascript:;"
-                                                                                        class="text-secondary font-weight-bold text-xs"
+                                                                                        class="text-xs text-secondary font-weight-bold"
                                                                                         data-toggle="tooltip"
                                                                                         data-original-title="Edit user">
-                                                                                        <i class="fas fa-edit fs-6 bg-primary text-white p-1 rounded"
+                                                                                        <i class="p-1 text-white rounded fas fa-edit fs-6 bg-primary"
                                                                                             aria-hidden="true"></i>
                                                                                     </a>
                                                                                     <a href="javascript:;"
-                                                                                        class="text-secondary font-weight-bold text-xs "
+                                                                                        class="text-xs text-secondary font-weight-bold "
                                                                                         data-toggle="tooltip"
                                                                                         data-original-title="Edit user">
-                                                                                        <i class="fas fa-trash fs-6 bg-primary text-white p-1 rounded"
+                                                                                        <i class="p-1 text-white rounded fas fa-trash fs-6 bg-primary"
                                                                                             aria-hidden="true"></i>
                                                                                     </a>
                                                                                 </div> --}}
@@ -401,7 +402,7 @@
                                                                             <label for="imgs">الصور</label>
                                                                             <!-- start slider  -->
                                                                             <div class="row">
-                                                                                <div class="col-md-12 mx-auto">
+                                                                                <div class="mx-auto col-md-12">
                                                                                     <div id="caeousel1"
                                                                                         class="carousel slide"
                                                                                         data-bs-ride="carousel">
@@ -430,19 +431,19 @@
                                                                                                         alt="img1"
                                                                                                         class="rounded w-100">
                                                                                                     <div
-                                                                                                        class="position-absolute top-0 right-0 d-flex gap-1 p-1">
+                                                                                                        class="top-0 right-0 gap-1 p-1 position-absolute d-flex">
                                                                                                         <a href="javascript:;"
-                                                                                                            class="text-secondary font-weight-bold text-xs"
+                                                                                                            class="text-xs text-secondary font-weight-bold"
                                                                                                             data-toggle="tooltip"
                                                                                                             data-original-title="Edit user">
-                                                                                                            <i class="fas fa-edit fs-6 bg-primary text-white p-1 rounded"
+                                                                                                            <i class="p-1 text-white rounded fas fa-edit fs-6 bg-primary"
                                                                                                                 aria-hidden="true"></i>
                                                                                                         </a>
                                                                                                         <a href="javascript:;"
-                                                                                                            class="text-secondary font-weight-bold text-xs "
+                                                                                                            class="text-xs text-secondary font-weight-bold "
                                                                                                             data-toggle="tooltip"
                                                                                                             data-original-title="Edit user">
-                                                                                                            <i class="fas fa-trash fs-6 bg-primary text-white p-1 rounded"
+                                                                                                            <i class="p-1 text-white rounded fas fa-trash fs-6 bg-primary"
                                                                                                                 aria-hidden="true"></i>
                                                                                                         </a>
                                                                                                     </div>
@@ -455,19 +456,19 @@
                                                                                                         alt="img1"
                                                                                                         class="rounded w-100">
                                                                                                     <div
-                                                                                                        class="position-absolute top-0 right-0 d-flex gap-1 p-1">
+                                                                                                        class="top-0 right-0 gap-1 p-1 position-absolute d-flex">
                                                                                                         <a href="javascript:;"
-                                                                                                            class="text-secondary font-weight-bold text-xs"
+                                                                                                            class="text-xs text-secondary font-weight-bold"
                                                                                                             data-toggle="tooltip"
                                                                                                             data-original-title="Edit user">
-                                                                                                            <i class="fas fa-edit fs-6 bg-primary text-white p-1 rounded"
+                                                                                                            <i class="p-1 text-white rounded fas fa-edit fs-6 bg-primary"
                                                                                                                 aria-hidden="true"></i>
                                                                                                         </a>
                                                                                                         <a href="javascript:;"
-                                                                                                            class="text-secondary font-weight-bold text-xs "
+                                                                                                            class="text-xs text-secondary font-weight-bold "
                                                                                                             data-toggle="tooltip"
                                                                                                             data-original-title="Edit user">
-                                                                                                            <i class="fas fa-trash fs-6 bg-primary text-white p-1 rounded"
+                                                                                                            <i class="p-1 text-white rounded fas fa-trash fs-6 bg-primary"
                                                                                                                 aria-hidden="true"></i>
                                                                                                         </a>
                                                                                                     </div>
@@ -480,19 +481,19 @@
                                                                                                         alt="img1"
                                                                                                         class="rounded w-100">
                                                                                                     <div
-                                                                                                        class="position-absolute top-0 right-0 d-flex gap-1 p-1">
+                                                                                                        class="top-0 right-0 gap-1 p-1 position-absolute d-flex">
                                                                                                         <a href="javascript:;"
-                                                                                                            class="text-secondary font-weight-bold text-xs"
+                                                                                                            class="text-xs text-secondary font-weight-bold"
                                                                                                             data-toggle="tooltip"
                                                                                                             data-original-title="Edit user">
-                                                                                                            <i class="fas fa-edit fs-6 bg-primary text-white p-1 rounded"
+                                                                                                            <i class="p-1 text-white rounded fas fa-edit fs-6 bg-primary"
                                                                                                                 aria-hidden="true"></i>
                                                                                                         </a>
                                                                                                         <a href="javascript:;"
-                                                                                                            class="text-secondary font-weight-bold text-xs "
+                                                                                                            class="text-xs text-secondary font-weight-bold "
                                                                                                             data-toggle="tooltip"
                                                                                                             data-original-title="Edit user">
-                                                                                                            <i class="fas fa-trash fs-6 bg-primary text-white p-1 rounded"
+                                                                                                            <i class="p-1 text-white rounded fas fa-trash fs-6 bg-primary"
                                                                                                                 aria-hidden="true"></i>
                                                                                                         </a>
                                                                                                     </div>
@@ -577,7 +578,7 @@
                                                 <!-- start delete 1 -->
                                                 <div class="d-inline-block">
                                                     <a href="javascript:;"
-                                                        class="text-secondary font-weight-bold text-xs px-1 "
+                                                        class="px-1 text-xs text-secondary font-weight-bold "
                                                         data-toggle="tooltip" data-original-title="Edit user"
                                                         data-bs-toggle="modal" data-bs-target="#delete{{ $point->id }}">
                                                         <i class="fas fa-trash fs-6"></i>
@@ -588,15 +589,14 @@
                                                         aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                                             <div class="modal-content">
-                                                                <div class="modal-header border-0 text-center pb-0">
+                                                                <div class="pb-0 text-center border-0 modal-header">
                                                                     <h5 class="modal-title" id="deleteLabel ">
                                                                         هل انت متأكد من أنك تريد حذف
-                                                                        <br>
                                                                         <strong>النقطة {{ $point->user->name }}
                                                                             ؟</strong>
                                                                     </h5>
                                                                 </div>
-                                                                <div class="modal-footer border-0">
+                                                                <div class="border-0 modal-footer">
                                                                     <button type="button" class="btn btn-secondary"
                                                                         data-bs-dismiss="modal">الغاء</button>
                                                                     <form
@@ -618,7 +618,7 @@
                                         </tr>
                                         {{-- <tr>
                                             <td>
-                                                <div class="d-flex px-2 py-1">
+                                                <div class="px-2 py-1 d-flex">
                                                     <div>
                                                         <img src="{{ asset('/assets/img/team-2.jpg') }}"
                                                             class="avatar avatar-sm ms-3" alt="user1">
@@ -629,22 +629,22 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0">clothing</p>
+                                                <p class="mb-0 text-xs font-weight-bold">clothing</p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0">100 </p>
+                                                <p class="mb-0 text-xs font-weight-bold">100 </p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0">10</p>
+                                                <p class="mb-0 text-xs font-weight-bold">10</p>
                                             </td>
-                                            <td class="align-middle text-sm">
+                                            <td class="text-sm align-middle">
                                                 <span class="badge badge-sm bg-gradient-danger">off</span>
                                             </td>
                                             <td class="align-middle ">
                                                 <!-- start view2 -->
                                                 <div class="d-inline-block">
                                                     <a href="javascript:;"
-                                                        class="text-secondary font-weight-bold text-xs px-1 "
+                                                        class="px-1 text-xs text-secondary font-weight-bold "
                                                         data-toggle="tooltip" data-original-title="view user"
                                                         data-bs-toggle="modal" data-bs-target="#view2">
                                                         <i class="fas fa-eye fs-6"></i>
@@ -670,7 +670,7 @@
                                                                             <h6>الصور</h6>
                                                                             <!-- start slider  -->
                                                                             <div class="row">
-                                                                                <div class="col-md-12 mx-auto">
+                                                                                <div class="mx-auto col-md-12">
                                                                                     <div id="caeouselView1"
                                                                                         class="carousel slide"
                                                                                         data-bs-ride="carousel">
@@ -748,7 +748,7 @@
                                                                                 <p>الشرح هنا</p>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="modal-footer border-0">
+                                                                    <div class="border-0 modal-footer">
                                                                         <button type="button" class="btn btn-secondary"
                                                                             data-bs-dismiss="modal">الغاء</button>
                                                                         <button type="button"
@@ -764,7 +764,7 @@
                                                 <!-- start edit 2 -->
                                                 <div class="d-inline-block">
                                                     <a href="javascript:;"
-                                                        class="text-secondary font-weight-bold text-xs px-1 "
+                                                        class="px-1 text-xs text-secondary font-weight-bold "
                                                         data-toggle="tooltip" data-original-title="Edit user"
                                                         data-bs-toggle="modal" data-bs-target="#edit2">
                                                         <i class="fas fa-edit fs-6"></i>
@@ -787,19 +787,19 @@
                                                                                 <img src="{{ asset('/assets/img/home-decor-2.jpg') }}"
                                                                                     alt="img1" class="rounded w-100">
                                                                                 <div
-                                                                                    class="position-absolute top-0 right-0 d-flex gap-1 p-1">
+                                                                                    class="top-0 right-0 gap-1 p-1 position-absolute d-flex">
                                                                                     <a href="javascript:;"
-                                                                                        class="text-secondary font-weight-bold text-xs"
+                                                                                        class="text-xs text-secondary font-weight-bold"
                                                                                         data-toggle="tooltip"
                                                                                         data-original-title="Edit user">
-                                                                                        <i class="fas fa-edit fs-6 bg-primary text-white p-1 rounded"
+                                                                                        <i class="p-1 text-white rounded fas fa-edit fs-6 bg-primary"
                                                                                             aria-hidden="true"></i>
                                                                                     </a>
                                                                                     <a href="javascript:;"
-                                                                                        class="text-secondary font-weight-bold text-xs "
+                                                                                        class="text-xs text-secondary font-weight-bold "
                                                                                         data-toggle="tooltip"
                                                                                         data-original-title="Edit user">
-                                                                                        <i class="fas fa-trash fs-6 bg-primary text-white p-1 rounded"
+                                                                                        <i class="p-1 text-white rounded fas fa-trash fs-6 bg-primary"
                                                                                             aria-hidden="true"></i>
                                                                                     </a>
                                                                                 </div>
@@ -812,7 +812,7 @@
                                                                             <label for="imgs">الصور</label>
                                                                             <!-- start slider  -->
                                                                             <div class="row">
-                                                                                <div class="col-md-12 mx-auto">
+                                                                                <div class="mx-auto col-md-12">
                                                                                     <div id="caeousel1"
                                                                                         class="carousel slide"
                                                                                         data-bs-ride="carousel">
@@ -841,19 +841,19 @@
                                                                                                         alt="img1"
                                                                                                         class="rounded w-100">
                                                                                                     <div
-                                                                                                        class="position-absolute top-0 right-0 d-flex gap-1 p-1">
+                                                                                                        class="top-0 right-0 gap-1 p-1 position-absolute d-flex">
                                                                                                         <a href="javascript:;"
-                                                                                                            class="text-secondary font-weight-bold text-xs"
+                                                                                                            class="text-xs text-secondary font-weight-bold"
                                                                                                             data-toggle="tooltip"
                                                                                                             data-original-title="Edit user">
-                                                                                                            <i class="fas fa-edit fs-6 bg-primary text-white p-1 rounded"
+                                                                                                            <i class="p-1 text-white rounded fas fa-edit fs-6 bg-primary"
                                                                                                                 aria-hidden="true"></i>
                                                                                                         </a>
                                                                                                         <a href="javascript:;"
-                                                                                                            class="text-secondary font-weight-bold text-xs "
+                                                                                                            class="text-xs text-secondary font-weight-bold "
                                                                                                             data-toggle="tooltip"
                                                                                                             data-original-title="Edit user">
-                                                                                                            <i class="fas fa-trash fs-6 bg-primary text-white p-1 rounded"
+                                                                                                            <i class="p-1 text-white rounded fas fa-trash fs-6 bg-primary"
                                                                                                                 aria-hidden="true"></i>
                                                                                                         </a>
                                                                                                     </div>
@@ -866,19 +866,19 @@
                                                                                                         alt="img1"
                                                                                                         class="rounded w-100">
                                                                                                     <div
-                                                                                                        class="position-absolute top-0 right-0 d-flex gap-1 p-1">
+                                                                                                        class="top-0 right-0 gap-1 p-1 position-absolute d-flex">
                                                                                                         <a href="javascript:;"
-                                                                                                            class="text-secondary font-weight-bold text-xs"
+                                                                                                            class="text-xs text-secondary font-weight-bold"
                                                                                                             data-toggle="tooltip"
                                                                                                             data-original-title="Edit user">
-                                                                                                            <i class="fas fa-edit fs-6 bg-primary text-white p-1 rounded"
+                                                                                                            <i class="p-1 text-white rounded fas fa-edit fs-6 bg-primary"
                                                                                                                 aria-hidden="true"></i>
                                                                                                         </a>
                                                                                                         <a href="javascript:;"
-                                                                                                            class="text-secondary font-weight-bold text-xs "
+                                                                                                            class="text-xs text-secondary font-weight-bold "
                                                                                                             data-toggle="tooltip"
                                                                                                             data-original-title="Edit user">
-                                                                                                            <i class="fas fa-trash fs-6 bg-primary text-white p-1 rounded"
+                                                                                                            <i class="p-1 text-white rounded fas fa-trash fs-6 bg-primary"
                                                                                                                 aria-hidden="true"></i>
                                                                                                         </a>
                                                                                                     </div>
@@ -891,19 +891,19 @@
                                                                                                         alt="img1"
                                                                                                         class="rounded w-100">
                                                                                                     <div
-                                                                                                        class="position-absolute top-0 right-0 d-flex gap-1 p-1">
+                                                                                                        class="top-0 right-0 gap-1 p-1 position-absolute d-flex">
                                                                                                         <a href="javascript:;"
-                                                                                                            class="text-secondary font-weight-bold text-xs"
+                                                                                                            class="text-xs text-secondary font-weight-bold"
                                                                                                             data-toggle="tooltip"
                                                                                                             data-original-title="Edit user">
-                                                                                                            <i class="fas fa-edit fs-6 bg-primary text-white p-1 rounded"
+                                                                                                            <i class="p-1 text-white rounded fas fa-edit fs-6 bg-primary"
                                                                                                                 aria-hidden="true"></i>
                                                                                                         </a>
                                                                                                         <a href="javascript:;"
-                                                                                                            class="text-secondary font-weight-bold text-xs "
+                                                                                                            class="text-xs text-secondary font-weight-bold "
                                                                                                             data-toggle="tooltip"
                                                                                                             data-original-title="Edit user">
-                                                                                                            <i class="fas fa-trash fs-6 bg-primary text-white p-1 rounded"
+                                                                                                            <i class="p-1 text-white rounded fas fa-trash fs-6 bg-primary"
                                                                                                                 aria-hidden="true"></i>
                                                                                                         </a>
                                                                                                     </div>
@@ -954,7 +954,7 @@
                                                                             <textarea class="form-control" id="info" rows="3"></textarea>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="modal-footer border-0">
+                                                                    <div class="border-0 modal-footer">
                                                                         <button type="button" class="btn btn-secondary"
                                                                             data-bs-dismiss="modal">الغاء</button>
                                                                         <button type="button"
@@ -970,7 +970,7 @@
                                                 <!-- start delete 2-->
                                                 <div class="d-inline-block">
                                                     <a href="javascript:;"
-                                                        class="text-secondary font-weight-bold text-xs px-1 "
+                                                        class="px-1 text-xs text-secondary font-weight-bold "
                                                         data-toggle="tooltip" data-original-title="Edit user"
                                                         data-bs-toggle="modal" data-bs-target="#delete2">
                                                         <i class="fas fa-trash fs-6"></i>
@@ -980,7 +980,7 @@
                                                         aria-labelledby="deleteLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                                             <div class="modal-content">
-                                                                <div class="modal-header border-0 text-center pb-0">
+                                                                <div class="pb-0 text-center border-0 modal-header">
                                                                     <h5 class="modal-title" id="deleteLabel ">هل تريد
                                                                         تأكيد حذف العنصر</h5>
                                                                 </div>

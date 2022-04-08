@@ -69,109 +69,114 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <h6 class="mb-0 text-sm">John Michael</h6>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">200</p>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">100 </p>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">10</p>
-                                        </td>
+                                    @foreach ($packages as $package)
+                                        <tr>
+                                            <td>
+                                                <h6 class="mb-0 text-sm">{{ $package->name }}</h6>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0">{{ $package->price }}</p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0">100 </p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0">10</p>
+                                            </td>
 
-                                        <td class="align-middle ">
+                                            <td class="align-middle ">
 
-                                            <!-- start edit 1 -->
-                                            <div class="d-inline-block">
-                                                <a href="javascript:;" class="text-secondary font-weight-bold text-xs px-1 "
-                                                    data-toggle="tooltip" data-original-title="Edit user"
-                                                    data-bs-toggle="modal" data-bs-target="#edit1">
-                                                    <i class="fas fa-edit fs-6"></i>
-                                                </a>
-                                                <!-- satrt edit Modal -->
-                                                <form action="">
-                                                    <div class="modal fade" id="edit1" tabindex="-1" role="dialog"
-                                                        aria-labelledby="add" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered modal-xs"
-                                                            role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title font-bold">تعديل الباقة
-                                                                    </h5>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="form-group">
-                                                                        <label>
-                                                                            اسم الباقة
-                                                                            <span class="text-danger"> * </span>
-                                                                        </label>
-                                                                        <input type="text" class="form-control" required>
+                                                <!-- start edit 1 -->
+                                                <div class="d-inline-block">
+                                                    <a href="javascript:;"
+                                                        class="text-secondary font-weight-bold text-xs px-1 "
+                                                        data-toggle="tooltip" data-original-title="Edit user"
+                                                        data-bs-toggle="modal" data-bs-target="#edit1">
+                                                        <i class="fas fa-edit fs-6"></i>
+                                                    </a>
+                                                    <!-- satrt edit Modal -->
+                                                    <form action="">
+                                                        <div class="modal fade" id="edit1" tabindex="-1" role="dialog"
+                                                            aria-labelledby="add" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered modal-xs"
+                                                                role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title font-bold">تعديل الباقة
+                                                                        </h5>
                                                                     </div>
-                                                                    <div class="form-group">
-                                                                        <label>
-                                                                            سعر الباقة
-                                                                            <span class="text-danger"> * </span>
-                                                                        </label>
-                                                                        <input type="number" class="form-control"
-                                                                            required>
+                                                                    <div class="modal-body">
+                                                                        <div class="form-group">
+                                                                            <label>
+                                                                                اسم الباقة
+                                                                                <span class="text-danger"> * </span>
+                                                                            </label>
+                                                                            <input type="text" class="form-control"
+                                                                                required>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label>
+                                                                                سعر الباقة
+                                                                                <span class="text-danger"> * </span>
+                                                                            </label>
+                                                                            <input type="number" class="form-control"
+                                                                                required>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="submit"
-                                                                        class="btn btn-info">حفظ</button>
-                                                                    <span type="button" class="btn btn-secondary"
-                                                                        data-bs-dismiss="modal">الغاء</span>
+                                                                    <div class="modal-footer">
+                                                                        <button type="submit"
+                                                                            class="btn btn-info">حفظ</button>
+                                                                        <span type="button" class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">الغاء</span>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </form>
-                                                <!-- end edit Modal -->
-                                            </div>
-                                            <!-- end edit 1 -->
-                                            <!-- start delete 1 -->
-                                            <div class="d-inline-block">
-                                                <a href="javascript:;" class="text-secondary font-weight-bold text-xs px-1 "
-                                                    data-toggle="tooltip" data-original-title="Edit user"
-                                                    data-bs-toggle="modal" data-bs-target="#delete1">
-                                                    <i class="fas fa-trash fs-6"></i>
-                                                </a>
-                                                <!--start delete Modal -->
-                                                <div class="modal fade" id="delete1" tabindex="-1" role="dialog"
-                                                    aria-labelledby="deleteLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header border-0 text-center pb-0">
-                                                                <h5 class="modal-title" id="deleteLabel ">هل تريد
-                                                                    تأكيد حذف المشترك</h5>
-                                                            </div>
-                                                            <div class="modal-footer border-0">
-                                                                <form action="">
-                                                                    <button type="submit"
-                                                                        class="btn btn-info">حذف</button>
-                                                                </form>
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-bs-dismiss="modal">الغاء</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    </form>
+                                                    <!-- end edit Modal -->
                                                 </div>
-                                                <!--end delete Modal -->
-                                            </div>
-                                            <!-- end delete -->
-                                        </td>
-                                    </tr>
+                                                <!-- end edit 1 -->
+                                                <!-- start delete 1 -->
+                                                <div class="d-inline-block">
+                                                    <a href="javascript:;"
+                                                        class="text-secondary font-weight-bold text-xs px-1 "
+                                                        data-toggle="tooltip" data-original-title="Edit user"
+                                                        data-bs-toggle="modal" data-bs-target="#delete1">
+                                                        <i class="fas fa-trash fs-6"></i>
+                                                    </a>
+                                                    <!--start delete Modal -->
+                                                    <div class="modal fade" id="delete1" tabindex="-1" role="dialog"
+                                                        aria-labelledby="deleteLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header border-0 text-center pb-0">
+                                                                    <h5 class="modal-title" id="deleteLabel ">هل تريد
+                                                                        تأكيد حذف المشترك</h5>
+                                                                </div>
+                                                                <div class="modal-footer border-0">
+                                                                    <form action="">
+                                                                        <button type="submit"
+                                                                            class="btn btn-info">حذف</button>
+                                                                    </form>
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">الغاء</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--end delete Modal -->
+                                                </div>
+                                                <!-- end delete -->
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
                 <!-- start pagination -->
-                <ul class="pagination pagination-info">
+                {{-- <ul class="pagination pagination-info">
                     <li class="page-item">
                         <a class="page-link" href="#link" aria-label="Previous">
                             <span aria-hidden="true"> <i class="fas fa-angle-right" aria-hidden="true"></i>
@@ -200,7 +205,8 @@
                             </span>
                         </a>
                     </li>
-                </ul>
+                </ul> --}}
+                {{ $packages->links() }}
                 <!-- end pagination -->
             </div>
         </div>

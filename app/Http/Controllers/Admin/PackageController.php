@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Package;
 use Illuminate\Http\Request;
 
 class PackageController extends Controller
@@ -12,9 +13,22 @@ class PackageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.pages.packages');
+        if ($request->s) {
+            $packages = Package::where('name', 'LIKE', "%$request->s%")->paginate(10);
+        } else {
+            $packages = Package::paginate(10);
+        }
+        // dd($points);
+        return view('admin.pages.packages', [
+            'packages' => $packages,
+            'search' => $request->s,
+        ]);
+        // return view('admin.pages.subscribers',[
+        //     'subs' => Subscriber::paginate(10),
+        // ]);  
+        // return view('admin.pages.packages');
     }
 
     /**

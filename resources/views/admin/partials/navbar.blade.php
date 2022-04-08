@@ -30,6 +30,16 @@
             </ol>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 px-0" id="navbar">
+            @switch(Route::currentRouteName())
+            @case('admin.home')
+
+            @break
+
+            @case('admin.points')
+
+            @case('admin.subscribers')
+
+            @case('admin.packages')
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                 <form action="" method="GET">
                     <div class="input-group">
@@ -38,6 +48,12 @@
                     </div>
                 </form>
             </div>
+            @break
+
+            @default
+            need works from navbar
+        @endswitch
+
             <ul class="navbar-nav me-auto ms-0 justify-content-end">
                 <li class="nav-item d-xl-none pe-3 d-flex align-items-center">
                     <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">

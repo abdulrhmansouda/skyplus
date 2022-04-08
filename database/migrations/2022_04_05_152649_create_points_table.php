@@ -22,7 +22,8 @@ return new class extends Migration
             $table->bigInteger('account');
             $table->string('tc')->nullable();
             $table->text('description')->nullable();
-            $table->boolean('borrowingIsAllowed')->nullable();
+            $table->boolean('borrowing_is_allowed')->nullable();
+            $table->enum('status',['active','deactivate']);
             $table->string('phone')->nullable();
             $table->timestamps();
         });

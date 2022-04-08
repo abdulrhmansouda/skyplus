@@ -592,7 +592,7 @@
                                                                     <h5 class="modal-title" id="deleteLabel ">
                                                                         هل انت متأكد من أنك تريد حذف
                                                                         <br>
-                                                                        <strong>النقطة {{ $point->user->name }}
+                                                                        <strong>النقطة {{ $point->name }}
                                                                             ؟</strong>
                                                                     </h5>
                                                                 </div>

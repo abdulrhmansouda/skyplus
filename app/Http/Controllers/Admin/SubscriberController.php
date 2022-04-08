@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Subscriber;
 use Illuminate\Http\Request;
 
 class SubscriberController extends Controller
@@ -12,10 +13,24 @@ class SubscriberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.pages.subscribers');
-    }
+
+        if($request->s){
+            $subs = Subscriber::where('name','LIKE',"%$request->s%")->paginate(10);
+        }
+        else{
+            $subs = Subscriber::paginate(10);
+        }
+        // dd($points);
+        return view('admin.pages.subscribers',[
+            'subs' => $subs,
+            'search' => $request->s,
+        ]);
+        // return view('admin.pages.subscribers',[
+        //     'subs' => Subscriber::paginate(10),
+        // ]);  
+      }
 
     /**
      * Show the form for creating a new resource.

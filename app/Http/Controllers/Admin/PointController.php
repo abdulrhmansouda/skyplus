@@ -23,7 +23,7 @@ class PointController extends Controller
             $points = Point::where('name','LIKE',"%$request->s%")->paginate(10);
         }
         else{
-            $points = Point::paginate(10);
+            $points = Point::paginate(5);
         }
         // dd($points);
         return view('admin.pages.points',[

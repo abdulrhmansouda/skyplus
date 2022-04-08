@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Admin;
+use App\Models\Package;
 use App\Models\Point;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -30,12 +31,10 @@ class DatabaseSeeder extends Seeder
         ->count(100)
         ->hasPoint(1)
         ->create(['role'=>'point']);
-    //     Admin::factory(10)->create([
-    //         'user_id' => User::factory(10)->create(['role' => 'admin'])->first()->id,
-    //     ]);
 
-    //     Point::factory(10)->create([
-    //         'user_id' => User::factory(10)->create(['role' => 'point'])->first()->id,
-    //     ]);
+        Package::factory()
+        ->count(10)
+        ->hasSubscribers(10)
+        ->create();
     }
 }

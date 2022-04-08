@@ -22,7 +22,7 @@ class PointFactory extends Factory
                 'account' => $this->faker->numberBetween(),
                 'tc' => $this->faker->phoneNumber,
                 'description' => $this->faker->paragraph,
-                'borrowingIsAllowed' => $this->faker->boolean,
+                'borrowing_is_allowed' => $this->faker->boolean,
                 'phone' => $this->faker->phoneNumber,
         ];
     }

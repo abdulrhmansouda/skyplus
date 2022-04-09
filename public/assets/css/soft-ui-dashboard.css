@@ -4874,6 +4874,7 @@ fieldset:disabled .btn {
   .nav-link[data-bs-toggle="collapse"]{
     border: none;
     width: calc(100% - 1rem);
+    background-color:transparent;
   }
 .collapse .ul-links{
   padding-right: 5rem;
@@ -23335,6 +23336,9 @@ hr.horizontal.gray-light {
 .table th {
   white-space: nowrap;
 }
+.table td .modal *  {
+   white-space: initial;
+}
 
 .table.align-items-center td,
 .table.align-items-center th {
@@ -25508,5 +25512,15 @@ border:none;}
   border: 1px solid gray;
   padding: 3px;
   border-radius: 3px;
+}
+.alert{
+color:#fff;
+position: fixed;
+bottom:0;
+z-index:9999;
+}
+.modal-footer{
+display: flex;
+  justify-content:center;
 }
 /*# sourceMappingURL=dashboard-free.css.map */

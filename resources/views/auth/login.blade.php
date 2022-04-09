@@ -14,21 +14,22 @@
 </head>
 
 <body class="rtl">
-    <main class="main-content  mt-0">
+    <main class="mt-0 main-content">
         <section>
             <div class="page-header min-vh-100">
                 <div class="container">
                     <div class="row">
-                        <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
-                            <div class="card card-plain mt-5">
-                                <div class="card-header pb-0 text-left bg-transparent">
+                        <div class="mx-auto col-xl-4 col-lg-5 col-md-6 d-flex flex-column">
+                            <div class="mt-5 card card-plain">
+                                <div class="pb-0 text-left bg-transparent card-header">
                                     <img src={{ asset('/assets/img/skyplus.jpg') }} alt="skyplus"
                                         class="mx-auto my-2 d-block" width="150">
-                                    <h2 class="font-weight-bolder text-info text-gradient text-center">تسجيل الدخول</h2>
+                                    <h2 class="text-center font-weight-bolder text-info text-gradient">تسجيل الدخول</h2>
                                 </div>
                                 <div class="card-body">
                                     @if ($errors->any())
                                         <div class="alert alert-danger">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                             <ul>
                                                 @foreach ($errors->all() as $error)
                                                     <li>{{ $error }}</li>
@@ -54,12 +55,12 @@
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input" type="checkbox" id="rememberMe2"
                                                         name="remeber" checked="">
-                                                    <label class="form-check-label font-bold"
+                                                    <label class="font-bold form-check-label"
                                                         for="rememberMe2">تذكرني</label>
                                                 </div>
                                                 <div class="text-center">
                                                     <button type="submit"
-                                                        class="btn bg-gradient-info w-100 mt-4 mb-0 h5">دخول</button>
+                                                        class="mt-4 mb-0 btn bg-gradient-info w-100 h5">دخول</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -68,8 +69,8 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="oblique position-absolute top-0 h-100 d-md-block d-none ms-n8">
-                                <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
+                            <div class="top-0 oblique position-absolute h-100 d-md-block d-none ms-n8">
+                                <div class="bg-cover oblique-image position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
                                     style="background-image:url('../assets/img/curved-images/background.jpg')"></div>
                             </div>
                         </div>

@@ -4,7 +4,7 @@
 @section('title', 'الباقات')
 
 @section('content')
-    <div class="container-fluid py-4">
+    <div class="py-4 container-fluid">
         <!-- start add  -->
         <button type="button" class="btn bg-gradient-dark btn-sm" data-bs-toggle="modal" data-bs-target="#add">
             إضافة
@@ -15,7 +15,7 @@
                 <div class="modal-dialog modal-dialog-centered modal-xs" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title font-bold">إضافة باقة</h5>
+                            <h5 class="font-bold modal-title">إضافة باقة</h5>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
@@ -44,27 +44,22 @@
         <!-- end add  -->
         <div class="row">
             <div class="col-12">
-                <div class="card mb-4">
+                <div class="mb-4 card">
 
-                    <div class="card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0">
+                    <div class="px-0 pt-0 pb-2 card-body">
+                        <div class="p-0 table-responsive">
+                            <table class="table mb-0 align-items-center">
                                 <thead>
                                     <tr>
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3">
                                             اسم الباقة</th>
                                         <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
+                                            class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             سعر الباقة </th>
+                                       
                                         <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
-                                            ID</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
-                                            admin_id</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
+                                            class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         </th>
                                     </tr>
                                 </thead>
@@ -75,21 +70,16 @@
                                                 <h6 class="mb-0 text-sm">{{ $package->name }}</h6>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0">{{ $package->price }}</p>
+                                                <p class="mb-0 text-xs font-weight-bold">{{ $package->price }}</p>
                                             </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0">100 </p>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0">10</p>
-                                            </td>
+                                         
 
                                             <td class="align-middle ">
 
                                                 <!-- start edit 1 -->
                                                 <div class="d-inline-block">
                                                     <a href="javascript:;"
-                                                        class="text-secondary font-weight-bold text-xs px-1 "
+                                                        class="px-1 text-xs text-secondary font-weight-bold "
                                                         data-toggle="tooltip" data-original-title="Edit user"
                                                         data-bs-toggle="modal" data-bs-target="#edit1">
                                                         <i class="fas fa-edit fs-6"></i>
@@ -102,7 +92,7 @@
                                                                 role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <h5 class="modal-title font-bold">تعديل الباقة
+                                                                        <h5 class="font-bold modal-title">تعديل الباقة
                                                                         </h5>
                                                                     </div>
                                                                     <div class="modal-body">
@@ -139,7 +129,7 @@
                                                 <!-- start delete 1 -->
                                                 <div class="d-inline-block">
                                                     <a href="javascript:;"
-                                                        class="text-secondary font-weight-bold text-xs px-1 "
+                                                        class="px-1 text-xs text-secondary font-weight-bold "
                                                         data-toggle="tooltip" data-original-title="Edit user"
                                                         data-bs-toggle="modal" data-bs-target="#delete1">
                                                         <i class="fas fa-trash fs-6"></i>
@@ -149,11 +139,11 @@
                                                         aria-labelledby="deleteLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                                             <div class="modal-content">
-                                                                <div class="modal-header border-0 text-center pb-0">
+                                                                <div class="pb-0 text-center border-0 modal-header">
                                                                     <h5 class="modal-title" id="deleteLabel ">هل تريد
-                                                                        تأكيد حذف المشترك</h5>
+                                                                        تأكيد حذف الباقة</h5>
                                                                 </div>
-                                                                <div class="modal-footer border-0">
+                                                                <div class="border-0 modal-footer">
                                                                     <form action="">
                                                                         <button type="submit"
                                                                             class="btn btn-info">حذف</button>

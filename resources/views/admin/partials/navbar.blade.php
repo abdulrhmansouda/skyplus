@@ -30,6 +30,7 @@
             </ol>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 px-0" id="navbar">
+        <div class="px-0 mt-2 collapse navbar-collapse mt-sm-0" id="navbar">
             @switch(Route::currentRouteName())
             @case('admin.home')
 

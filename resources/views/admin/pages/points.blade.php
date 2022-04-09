@@ -241,36 +241,11 @@
                                                                     </div>
                                                                 </div>
 
-
-                                                <!-- start delete 1 -->
-                                                <div class="d-inline-block">
-                                                    <a href="javascript:;"
-                                                        class="px-1 text-xs text-secondary font-weight-bold "
-                                                        data-toggle="tooltip" data-original-title="Edit user"
-                                                        data-bs-toggle="modal" data-bs-target="#delete{{ $point->id }}">
-                                                        <i class="fas fa-trash fs-6"></i>
-                                                    </a>
-                                                    <!--start delete Modal -->
-                                                    <div class="modal fade" id="delete{{ $point->id }}"
-                                                        tabindex="-1" role="dialog" aria-labelledby="deleteLabel"
-                                                        aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="pb-0 text-center border-0 modal-header">
-                                                                    <h5 class="modal-title" id="deleteLabel ">
-                                                                        هل انت متأكد من أنك تريد حذف
-                                                                        <br>
-                                                                        <strong>النقطة {{ $point->name }}
-                                                                        <strong>النقطة {{ $point->user->name }}
-                                                                            ؟</strong>
-                                                                    </h5>
-
                                                                 <div class="col-12">
                                                                     <div class="form-group">
                                                                         <h6>العنوان</h6>
                                                                         <p>{{$point->description}}</p>
                                                                     </div>
-
                                                                 </div>
                                                                 <div class="col-md-12">
                                                                     <h6>مسموح الدين</h6>

@@ -21,7 +21,7 @@
                 <span class="relative z-0 inline-flex shadow-sm rounded-md">
                     <ul class="pagination pagination-info">
 
-                        {{-- Previous Page Link --}}
+                        {{-- Previous Page Link
                         @if (!$paginator->onFirstPage())
                             <li class="page-item">
                                 <a class="page-link" href="{{ $paginator->previousPageUrl() }}"
@@ -30,7 +30,7 @@
                                     </span>
                                 </a>
                             </li>
-                        @endif
+                        @endif --}}
 
                         {{-- Pagination Elements --}}
                         @foreach ($elements as $element)
@@ -57,7 +57,7 @@
                             @endif
                         @endforeach
 
-                        {{-- Next Page Link --}}
+                        {{-- Next Page Link
                         @if ($paginator->hasMorePages())
                             <li class="page-item">
                                 <a class="page-link" href="{{ $paginator->nextPageUrl() }}" aria-label="Next">
@@ -66,7 +66,7 @@
                                     </span>
                                 </a>
                             </li>
-                        @endif
+                        @endif --}}
                     </ul>
 
                 </span>

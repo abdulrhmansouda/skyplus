@@ -592,12 +592,9 @@
                                                                 <div class="pb-0 text-center border-0 modal-header">
                                                                     <h5 class="modal-title" id="deleteLabel ">
                                                                         هل انت متأكد من أنك تريد حذف
-<<<<<<< HEAD
                                                                         <br>
                                                                         <strong>النقطة {{ $point->name }}
-=======
                                                                         <strong>النقطة {{ $point->user->name }}
->>>>>>> 10c45aac3653a01a3e5f6171062ebe933c7f3ed2
                                                                             ؟</strong>
                                                                     </h5>
                                                                 </div>

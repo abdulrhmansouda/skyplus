@@ -24,7 +24,7 @@ return new class extends Migration
             $table->float('commission');
             $table->text('description')->nullable();
             $table->boolean('borrowing_is_allowed')->nullable();
-            $table->enum('status',['active','deactivate']);
+            $table->enum('status',['active','deactivate'])->default('active');
             $table->string('phone')->nullable();
             $table->timestamps();
         });

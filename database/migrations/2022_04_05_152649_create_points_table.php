@@ -20,7 +20,8 @@ return new class extends Migration
             $table->text('address')->nullable();
             $table->string('image')->nullable();
             $table->bigInteger('account');
-            $table->string('tc')->nullable();
+            $table->string('t_c')->nullable();
+            $table->float('commission');
             $table->text('description')->nullable();
             $table->boolean('borrowing_is_allowed')->nullable();
             $table->enum('status',['active','deactivate']);

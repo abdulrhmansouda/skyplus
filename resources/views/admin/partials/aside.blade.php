@@ -181,6 +181,17 @@ id="sidenav-main" data-color="info">
       </a>
     </li>
     <li class="nav-item">
+          <a class="nav-link " href="../pages/admins.html">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center ms-2 d-flex align-items-center justify-content-center">
+           
+              <svg xmlns="http://www.w3.org/2000/svg" class="text-dark " width="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"></path>
+              </svg>
+            </div>
+            <span class="nav-link-text me-1">المشرفين</span>
+          </a>
+        </li>
+    <li class="nav-item">
           <button data-bs-toggle="collapse" data-bs-target="#setting" aria-expanded="false" aria-controls="setting" class="nav-link " href="../pages/setting.html">
             <div class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

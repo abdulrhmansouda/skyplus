@@ -29,6 +29,7 @@
                 </li>
             </ol>
         </nav>
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 px-0" id="navbar">
         <div class="px-0 mt-2 collapse navbar-collapse mt-sm-0" id="navbar">
             @switch(Route::currentRouteName())
             @case('admin.home')
@@ -40,6 +41,8 @@
             @case('admin.subscribers')
 
             @case('admin.packages')
+
+        <div class="px-0 mt-2 collapse navbar-collapse mt-sm-0" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                 <form action="" method="GET">
                     <div class="input-group">

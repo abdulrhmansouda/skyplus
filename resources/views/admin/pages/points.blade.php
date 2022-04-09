@@ -167,8 +167,8 @@
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold">096622</p>
                                     </td>
-                                  
-                                   
+
+
                                     <td class="align-middle ">
                                         <!-- start view1 -->
                                         <div class="d-inline-block">
@@ -262,166 +262,165 @@
                                             </div>
                                         </div>
                                         <!-- end Modal view1  -->
-                    </div>
-                    <!-- end view1 -->
-                    <!-- start edit 1 -->
-                    <div class="d-inline-block">
-                        <a href="javascript:;" class="px-1 text-xs text-secondary font-weight-bold " data-toggle="tooltip" data-original-title="Edit user" data-bs-toggle="modal" data-bs-target="#edit{{ $point->id }}">
-                            <i class="fas fa-edit fs-6"></i>
-                        </a>
-                        <!-- satrt edit Modal -->
-                        <form action="{{ route('admin.points.update', $point->id) }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')
-                            <div class="modal fade" id="edit{{ $point->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">
-                                                تعديل </h5>
+                                        <!-- end view1 -->
+                                        <!-- start edit 1 -->
+                                        <div class="d-inline-block">
+                                            <a href="javascript:;" class="px-1 text-xs text-secondary font-weight-bold " data-toggle="tooltip" data-original-title="Edit user" data-bs-toggle="modal" data-bs-target="#edit{{ $point->id }}">
+                                                <i class="fas fa-edit fs-6"></i>
+                                            </a>
+                                            <!-- satrt edit Modal -->
+                                            <form action="{{ route('admin.points.update', $point->id) }}" method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="modal fade" id="edit{{ $point->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">
+                                                                    تعديل </h5>
+                                                            </div>
+
+                                                            <div class="modal-body">
+                                                                <div class="row">
+                                                                    <div class="col-12">
+                                                                        <div class="form-group">
+                                                                            <label for="img{{ $point->id }}" class="w-100">الصورة
+                                                                                <input type="file" class="form-control d-none" id="img{{ $point->id }}" name="image" onchange="readURL(this);">
+                                                                                <img src="{{ $point->image ? $point->imageUrl : asset('images/no_image.webp') }}" alt="pos image" class="mx-auto border rounded-circle d-block" width="150">
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12">
+                                                                        <div class="form-group">
+                                                                            <label>اسم المستخدم
+                                                                                <span class="text-danger"> * </span>
+                                                                            </label>
+                                                                            <input type="text" class="form-control" placeholder="ادخل الاسم المستخدم" name="username" value="{{ $point->user->username }}" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label>الاسم
+                                                                                <span class="text-danger"> * </span>
+                                                                            </label>
+                                                                            <input type="text" class="form-control" placeholder="ادخل الاسم" name="name" value="{{ $point->name }}" required>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label>كلمة المرور
+                                                                                <span class="text-danger"> * </span>
+                                                                            </label>
+                                                                            <input type="password" class="form-control" placeholder="ادخل كلمة المرور الجديدة" name="password" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label>
+                                                                                T.C
+                                                                                <span class="text-danger"> * </span>
+                                                                            </label>
+                                                                            <input type="number" class="form-control" required placeholder="ادخل ال T.C">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label>
+                                                                                رقم الهاتف
+                                                                                <span class="text-danger"> * </span>
+                                                                            </label>
+                                                                            <input type="number" class="form-control" placeholder="ادخل رقم الهاتف" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label>الرصيد
+                                                                                <span class="text-danger"> * </span>
+                                                                            </label>
+                                                                            <input type="number" class="form-control" placeholder="ادخل الرصيد" name="account" value="{{ $point->account }}" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label>
+                                                                                العمولة
+                                                                                <span class="text-danger"> * </span>
+                                                                            </label>
+                                                                            <input type="number" class="form-control" required placeholder="الادخال بالنسبة المؤية مثلا 1">
+                                                                        </div>
+                                                                    </div>
+
+
+
+                                                                    <div class="col-12">
+                                                                        <div class="form-group">
+                                                                            <label>العنوان</label>
+                                                                            <textarea class="form-control" rows="3" name="description" placeholder="ادخل العنوان">{{ $point->description }}</textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group">
+                                                                            <input class="form-check-input" type="checkbox" value="" id="isReligion{{ $point->id }}" checked="">
+                                                                            <label class="form-check-label" for="isReligion{{ $point->id }}">مسموح الدين</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-info">تعديل</button>
+                                                                <span class="btn btn-secondary" data-bs-dismiss="modal">الغاء</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
+                                        <!-- end Modal edit  -->
 
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="img{{ $point->id }}" class="w-100">الصورة
-                                                            <input type="file" class="form-control d-none" id="img{{ $point->id }}" name="image" onchange="readURL(this);">
-                                                            <img src="{{ $point->image ? $point->imageUrl : asset('images/no_image.webp') }}" alt="pos image" class="mx-auto border rounded-circle d-block" width="150">
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label>اسم المستخدم
-                                                            <span class="text-danger"> * </span>
-                                                        </label>
-                                                        <input type="text" class="form-control" placeholder="ادخل الاسم المستخدم" name="username" value="{{ $point->user->username }}" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>الاسم
-                                                            <span class="text-danger"> * </span>
-                                                        </label>
-                                                        <input type="text" class="form-control" placeholder="ادخل الاسم" name="name" value="{{ $point->name }}" required>
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>كلمة المرور
-                                                            <span class="text-danger"> * </span>
-                                                        </label>
-                                                        <input type="password" class="form-control" placeholder="ادخل كلمة المرور الجديدة" name="password" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>
-                                                            T.C
-                                                            <span class="text-danger"> * </span>
-                                                        </label>
-                                                        <input type="number" class="form-control" required placeholder="ادخل ال T.C">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>
-                                                            رقم الهاتف
-                                                            <span class="text-danger"> * </span>
-                                                        </label>
-                                                        <input type="number" class="form-control" placeholder="ادخل رقم الهاتف" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>الرصيد
-                                                            <span class="text-danger"> * </span>
-                                                        </label>
-                                                        <input type="number" class="form-control" placeholder="ادخل الرصيد" name="account" value="{{ $point->account }}" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>
-                                                            العمولة
-                                                            <span class="text-danger"> * </span>
-                                                        </label>
-                                                        <input type="number" class="form-control" required placeholder="الادخال بالنسبة المؤية مثلا 1">
-                                                    </div>
-                                                </div>
-
-
-
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label>العنوان</label>
-                                                        <textarea class="form-control" rows="3" name="description" placeholder="ادخل العنوان">{{ $point->description }}</textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <input class="form-check-input" type="checkbox" value="" id="isReligion{{ $point->id }}" checked="">
-                                                        <label class="form-check-label" for="isReligion{{ $point->id }}">مسموح الدين</label>
+                                        <!-- start delete 1 -->
+                                        <div class="d-inline-block">
+                                            <a href="javascript:;" class="px-1 text-xs text-secondary font-weight-bold " data-toggle="tooltip" data-original-title="Edit user" data-bs-toggle="modal" data-bs-target="#delete{{ $point->id }}">
+                                                <i class="fas fa-trash fs-6"></i>
+                                            </a>
+                                            <!--start delete Modal -->
+                                            <div class="modal fade" id="delete{{ $point->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="pb-0 text-center border-0 modal-header">
+                                                            <h5 class="modal-title" id="deleteLabel ">
+                                                                هل انت متأكد من أنك تريد حذف
+                                                                <strong>النقطة {{ $point->name }}
+                                                                </strong>
+                                                            </h5>
+                                                        </div>
+                                                        <div class="border-0 modal-footer">
+                                                            <form action="{{ route('admin.points.destroy', $point->id) }}" method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-info">حذف</button>
+                                                            </form>
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <!--end delete Modal -->
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-info">تعديل</button>
-                                            <span class="btn btn-secondary" data-bs-dismiss="modal">الغاء</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+                                        <!-- end delete -->
+                                    </td>
+                                </tr>
+                            </tbody>
+                            @endforeach
+                        </table>
                     </div>
-                    <!-- end Modal edit  -->
 
-                    <!-- start delete 1 -->
-                    <div class="d-inline-block">
-                        <a href="javascript:;" class="px-1 text-xs text-secondary font-weight-bold " data-toggle="tooltip" data-original-title="Edit user" data-bs-toggle="modal" data-bs-target="#delete{{ $point->id }}">
-                            <i class="fas fa-trash fs-6"></i>
-                        </a>
-                        <!--start delete Modal -->
-                        <div class="modal fade" id="delete{{ $point->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="pb-0 text-center border-0 modal-header">
-                                        <h5 class="modal-title" id="deleteLabel ">
-                                            هل انت متأكد من أنك تريد حذف
-                                            <strong>النقطة {{ $point->name }}
-                                            </strong>
-                                        </h5>
-                                    </div>
-                                    <div class="border-0 modal-footer">
-                                        <form action="{{ route('admin.points.destroy', $point->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-info">حذف</button>
-                                        </form>
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end delete Modal -->
-                    </div>
-                    <!-- end delete -->
-                    </td>
-                    </tr>
-                    </tbody>
-                    @endforeach
-                    </table>
                 </div>
-
             </div>
         </div>
-    </div>
-    <!-- start pagination -->
-    {{-- <ul class="pagination pagination-info">
+        <!-- start pagination -->
+        {{-- <ul class="pagination pagination-info">
                     <li class="page-item">
                         <a class="page-link" href="#link" aria-label="Previous">
                             <span aria-hidden="true"> <i class="fas fa-angle-right" aria-hidden="true"></i>
@@ -452,9 +451,9 @@
                     </li>
                 </ul> --}}
 
-    {{ $points->links() }}
-    <!-- end pagination -->
-</div>
+        {{ $points->links() }}
+        <!-- end pagination -->
+    </div>
 </div>
 </div>
 @endsection

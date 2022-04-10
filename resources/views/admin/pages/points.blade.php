@@ -333,7 +333,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <input type="number" class="form-control" required placeholder="ادخل ال T.C" value="{{ $point->t_c }}"/>
+                                                                            <input type="text" class="form-control" required placeholder="ادخل ال T.C" value="{{ $point->t_c }}" name="t_c"/>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6">

@@ -20,7 +20,7 @@
 </head>
 
 <body class="bg-gray-100 g-sidenav-show rtl">
-<div class="spinner-parent ">
+<div class="spinner-parent d-none">
         <div class="spinner-border" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>

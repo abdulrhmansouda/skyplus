@@ -66,13 +66,13 @@
     <!--   Core JS Files   -->
 
     @yield('js')
-    <!-- <script src="{{ asset('/assets/js/core/popper.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/core/popper.min.js') }}"></script>
     <script src="{{ asset('/assets/js/core/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('/assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('/assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
+    <!-- <script src="{{ asset('/assets/js/plugins/perfect-scrollbar.min.js') }}"></script> -->
+    <!-- <script src="{{ asset('/assets/js/plugins/smooth-scrollbar.min.js') }}"></script> -->
     <script src="{{ asset('/assets/js/plugins/fullcalendar.min.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/chartjs.min.js') }}"></script>
-    <script>
+    <!-- <script>
         // var ctx = document.getElementById("chart-bars").getContext("2d");
 
         // new Chart(ctx, {
@@ -241,10 +241,11 @@
                 },
             },
         });
-    </script>
+    </script> -->
     <script src="{{ asset('/assets/js/plugins/choices.min.js') }}"></script>
 
-    <script src="{{ asset('/assets/js/soft-ui-dashboard.js') }}"></script> -->
+    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="{{ asset('/assets/js/soft-ui-dashboard.js') }}"></script>
 </body>
 
 </html>

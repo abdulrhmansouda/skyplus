@@ -409,6 +409,8 @@ window.addEventListener("resize", sidenavTypeOnResize);
 window.addEventListener("load", sidenavTypeOnResize);
 
 function sidenavTypeOnResize() {
+  document.querySelector(".spinner-parent").classList.add("d-none")
+
   let elements = document.querySelectorAll('[onclick="sidebarType(this)"]');
   if (window.innerWidth < 1200) {
     elements.forEach(function(el) {

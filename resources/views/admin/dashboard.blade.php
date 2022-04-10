@@ -20,7 +20,11 @@
 </head>
 
 <body class="bg-gray-100 g-sidenav-show rtl">
-
+<div class="spinner-parent ">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
     @include('admin.partials.aside')
 
     <main class="mt-1 main-content position-relative h-100 border-radius-lg">
@@ -68,8 +72,8 @@
     @yield('js')
     <script src="{{ asset('/assets/js/core/popper.min.js') }}"></script>
     <script src="{{ asset('/assets/js/core/bootstrap.min.js') }}"></script>
-    <!-- <script src="{{ asset('/assets/js/plugins/perfect-scrollbar.min.js') }}"></script> -->
-    <!-- <script src="{{ asset('/assets/js/plugins/smooth-scrollbar.min.js') }}"></script> -->
+    <script src="{{ asset('/assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/fullcalendar.min.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/chartjs.min.js') }}"></script>
     <!-- <script>

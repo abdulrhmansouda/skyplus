@@ -24,12 +24,17 @@ class StorePointRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required','string'],
+            'name' => ['required','string','min:2',],
             'username' => ['required','string','unique:users'],
             'password' => ['required','min:8'],
-            'image' => ['image'],
             'account' => ['required','numeric',],
-            'description' => ['string','max:1000',],
+            'commission' => ['required' ,'numeric' ,'min:0','max:100' ,],
+            't_c' => ['required' , 'string ','max:100'],
+            'phone' => ['required' , 'string ','max:100'],
+            'image' => ['nullable','image'],
+            'address' => ['nullable','string','max:1000',],
+            'borrowing_is_allowed' => ['string' ,],
+            'status' => ['bool',],
         ];
     }
 }

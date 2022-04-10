@@ -50,6 +50,7 @@ class PointController extends Controller
      */
     public function store(StorePointRequest $request)
     {
+        // dd($request->all());
         $point = new Point;
         if($request->hasFile('image') && $request->file('image')->isValid()){
             $image = $request->file('image');
@@ -62,9 +63,21 @@ class PointController extends Controller
             'password' => Hash::make($request->password),
         ])->id;
 
+         if($request->borrowing_is_allowed){
+             $point->borrowing_is_allowed = true;
+         }
+
         $point->name = $request->name;
 
         $point->account = $request->account;
+
+        $point->commission = $request->commission;
+
+        $point->t_c = $request->t_c;
+
+        $point->phone = $request->phone;
+
+        $point->address = $request->address;
 
         $point->description = $request->description;
 
@@ -105,38 +118,76 @@ class PointController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePointRequest $request, $id)
     {
-        // dd($request->all());
-        $point = Point::findOrFail($id);
-        // dd($point);
-        // dd($request->hasFile('image'));
-        if($request->hasFile('image') && $request->file('image')->isValid()){
-            // dd($request->all());
 
-            $image = $request->file('image');
-            $point->image = $image->store('points','images');
-        }
-        // dd($point);
+                // dd($request->all());
+                $point = Point::findOrFail($id);
+                if($request->hasFile('image') && $request->file('image')->isValid()){
+                    $image = $request->file('image');
+                    $point->image = $image->store('points','images');
+                }
+        
+                 $point->user->update([
+                    'username' => $request->username,
+                    'role' => 'point',
+                    'password' => is_null($request->password) ? $point->user->password : Hash::make($request->password),
+                    ]);
+        
+                 if($request->borrowing_is_allowed){
+                     $point->borrowing_is_allowed = true;
+                 }
+        
+                $point->name = $request->name;
+        
+                $point->account = $request->account;
+        
+                $point->commission = $request->commission;
+        
+                $point->t_c = $request->t_c;
+        
+                $point->phone = $request->phone;
+        
+                $point->address = $request->address;
+        
+                $point->description = $request->description;
+        
+                $point->update();
+        
+//                 session()->flash('success' ,'تم أنشاء تعديل النقطة  بنجاح');
+        
+//                 return redirect(route('admin.points'));
 
-// dd(is_null($request->password));
-        $point->user->update([
-            'username' => $request->username,
-            'role' => 'point',
-            'password' => is_null($request->password) ? $point->user->password : Hash::make($request->password),
-        ]);
+//         // dd($request->all());
+//         // dd($point);
+//         // dd($request->hasFile('image'));
+//         if($request->hasFile('image') && $request->file('image')->isValid()){
+//             // dd($request->all());
 
-        $point->name = $request->name;
+//             $image = $request->file('image');
+//             $point->image = $image->store('points','images');
+//         }
+//         // dd($point);
 
-        $point->account = $request->account;
+// // dd(is_null($request->password));
+//         $point->user->update([
+//             'username' => $request->username,
+//             'role' => 'point',
+//             'password' => is_null($request->password) ? $point->user->password : Hash::make($request->password),
+//         ]);
 
-        $point->description = $request->description;
+//         $point->name = $request->name;
 
-        $point->update();
+//         $point->account = $request->account;
+
+//         $point->description = $request->description;
+
+//         $point->update();
 
         session()->flash('success' ,'تم تعديل النقطة الجديدة بنجاح');
 
-        return redirect(route('admin.points'));    }
+        return redirect(route('admin.points'));  
+      }
 
     /**
      * Remove the specified resource from storage.

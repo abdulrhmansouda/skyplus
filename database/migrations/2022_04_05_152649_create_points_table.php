@@ -20,12 +20,12 @@ return new class extends Migration
             $table->text('address')->nullable();
             $table->string('image')->nullable();
             $table->bigInteger('account');
-            $table->string('t_c')->nullable();
+            $table->string('t_c');
+            $table->string('phone');
             $table->float('commission');
-            $table->text('description')->nullable();
-            $table->boolean('borrowing_is_allowed')->nullable();
+            // $table->text('description')->nullable();
+            $table->boolean('borrowing_is_allowed')->default(false);
             $table->enum('status',['active','deactivate'])->default('active');
-            $table->string('phone')->nullable();
             $table->timestamps();
         });
     }

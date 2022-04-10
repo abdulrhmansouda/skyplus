@@ -24,12 +24,17 @@ class UpdatePointRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['string'],
-            'username' => ['string','unique:users'],
+            'name' => ['required','string','min:2',],
+            'username' => ['required','string','unique:users'],
             'password' => ['nullable','min:8'],
+            'account' => ['required','numeric',],
+            'commission' => ['required' ,'numeric' ,'min:0','max:100' ,],
+            't_c' => ['required' , 'string ','max:100'],
+            'phone' => ['required' , 'string ','max:100'],
             'image' => ['nullable','image'],
-            'account' => ['numeric',],
-            'description' => ['string','max:1000',],
+            'address' => ['nullable','string','max:1000',],
+            'borrowing_is_allowed' => ['string' ,],
+            'status' => ['bool',],
         ];
     }
 }

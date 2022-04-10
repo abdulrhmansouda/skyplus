@@ -60,7 +60,7 @@
                                         T.C
                                         <span class="text-danger"> * </span>
                                     </label>
-                                    <input type="number" class="form-control" required placeholder="ادخل ال T.C">
+                                    <input type="number" class="form-control" required placeholder="ادخل ال T.C" name="t_c">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -69,7 +69,7 @@
                                         رقم الهاتف
                                         <span class="text-danger"> * </span>
                                     </label>
-                                    <input type="number" class="form-control" placeholder="ادخل رقم الهاتف" required>
+                                    <input type="number" class="form-control" placeholder="ادخل رقم الهاتف" required name="phone">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -86,18 +86,18 @@
                                         العمولة
                                         <span class="text-danger"> * </span>
                                     </label>
-                                    <input type="number" class="form-control" required placeholder="الادخال بالنسبة المؤية مثلا 1">
+                                    <input type="number" class="form-control" required placeholder="الادخال بالنسبة المؤية مثلا 1" name="commission">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>العنوان</label>
-                                    <textarea class="form-control" rows="3" name="description" placeholder="ادخل العنوان"></textarea>
+                                    <textarea class="form-control" rows="3" name="address" placeholder="ادخل العنوان"></textarea>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input class="form-check-input" type="checkbox" value="" id="isReligion" checked="">
+                                    <input class="form-check-input" type="checkbox" value="true" id="isReligion" checked="" name="borrowing_is_allowed">
                                     <label class="form-check-label" for="isReligion">مسموح الدين</label>
                                 </div>
                             </div>
@@ -106,7 +106,6 @@
 
                         </div>
                     </div>
-
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-info">حفظ</button>
                         <span class="btn btn-secondary" data-bs-dismiss="modal">الغاء</span>
@@ -134,16 +133,22 @@
                         <table class="table mb-0 align-items-center">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3">صاحب النقطة</th>
-                                    <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">اسم النقطة</th>
-                                    <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">العمولة</th>
-                                    <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">رقم الهاتف</th>
-                                    <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">T.C</th>
-                                    <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3">
+                                        صاحب النقطة</th>
+                                    <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        اسم النقطة</th>
+                                    <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        العمولة</th>
+                                    <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        رقم الهاتف</th>
+                                    <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        T.C</th>
+                                    <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    </th>
                                 </tr>
                             </thead>
-                            @foreach ($points as $point)
                             <tbody>
+                                @foreach ($points as $point)
                                 <tr>
                                     <td>
                                         <div class="px-2 py-1 d-flex">
@@ -156,16 +161,16 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="mb-0 text-xs font-weight-bold">نقطة1</p>
+                                        <p class="mb-0 text-xs font-weight-bold">{{ $point->user->username }}</p>
                                     </td>
                                     <td>
-                                        <p class="mb-0 text-xs font-weight-bold">10%</p>
+                                        <p class="mb-0 text-xs font-weight-bold">{{ $point->commission }}%</p>
                                     </td>
                                     <td>
-                                        <p class="mb-0 text-xs font-weight-bold">096622</p>
+                                        <p class="mb-0 text-xs font-weight-bold">{{ $point->phone }}</p>
                                     </td>
                                     <td>
-                                        <p class="mb-0 text-xs font-weight-bold">096622</p>
+                                        <p class="mb-0 text-xs font-weight-bold">{{ $point->t_c }}</p>
                                     </td>
 
 
@@ -188,7 +193,7 @@
                                                                 <div class="col-12">
                                                                     <div class="form-group">
                                                                         <h6 class="w-100">الصورة
-                                                                            <img src="{{ $point->image ? $point->imageUrl : asset('images/no_image.webp') }}" alt="pos image" class="mx-auto border rounded-circle d-block" width="150">
+                                                                            <img src="{{ $point->imageUrl }}" alt="pos image" class="mx-auto border rounded-circle d-block" width="150">
                                                                         </h6>
                                                                     </div>
                                                                 </div>
@@ -214,7 +219,7 @@
                                                                         <h6>
                                                                             T.C
                                                                         </h6>
-                                                                        gggg
+                                                                        {{ $point->t_c }}
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
@@ -222,7 +227,7 @@
                                                                         <h6>
                                                                             رقم الهاتف
                                                                         </h6>
-                                                                        56565
+                                                                        {{ $point->phone }}
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
@@ -237,19 +242,19 @@
                                                                         <h6>
                                                                             العمولة
                                                                         </h6>
-                                                                        3
+                                                                        {{ $point->commission }}
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="col-12">
                                                                     <div class="form-group">
                                                                         <h6>العنوان</h6>
-                                                                        <p>{{$point->description}}</p>
+                                                                        <p>{{ $point->address }}</p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12">
                                                                     <h6>مسموح الدين</h6>
-                                                                    نعم
+                                                                    {{ ($point->borrowing_is_allowed)? 'نعم' : 'لا' }}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -261,6 +266,8 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- </div> -->
+                                        <!-- </div> -->
                                         <!-- end Modal view1  -->
                                         <!-- end view1 -->
                                         <!-- start edit 1 -->
@@ -293,7 +300,8 @@
                                                                     <div class="col-12">
                                                                         <div class="form-group">
                                                                             <label>اسم المستخدم
-                                                                                <span class="text-danger"> * </span>
+                                                                                <span class="text-danger"> *
+                                                                                </span>
                                                                             </label>
                                                                             <input type="text" class="form-control" placeholder="ادخل الاسم المستخدم" name="username" value="{{ $point->user->username }}" required>
                                                                         </div>
@@ -301,7 +309,8 @@
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
                                                                             <label>الاسم
-                                                                                <span class="text-danger"> * </span>
+                                                                                <span class="text-danger"> *
+                                                                                </span>
                                                                             </label>
                                                                             <input type="text" class="form-control" placeholder="ادخل الاسم" name="name" value="{{ $point->name }}" required>
                                                                         </div>
@@ -311,44 +320,49 @@
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
                                                                             <label>كلمة المرور
-                                                                                <span class="text-danger"> * </span>
+                                                                                <span class="text-danger"> *
+                                                                                </span>
                                                                             </label>
-                                                                            <input type="password" class="form-control" placeholder="ادخل كلمة المرور الجديدة" name="password" required>
+                                                                            <input type="password" class="form-control" placeholder="ادخل كلمة المرور الجديدة" name="password">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
                                                                             <label>
                                                                                 T.C
-                                                                                <span class="text-danger"> * </span>
+                                                                                <span class="text-danger"> *
+                                                                                </span>
                                                                             </label>
-                                                                            <input type="number" class="form-control" required placeholder="ادخل ال T.C">
+                                                                            <input type="number" class="form-control" required placeholder="ادخل ال T.C" value="{{ $point->t_c }}"/>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
                                                                             <label>
                                                                                 رقم الهاتف
-                                                                                <span class="text-danger"> * </span>
+                                                                                <span class="text-danger"> *
+                                                                                </span>
                                                                             </label>
-                                                                            <input type="number" class="form-control" placeholder="ادخل رقم الهاتف" required>
+                                                                            <input type="tel" class="form-control" placeholder="ادخل رقم الهاتف" required value="{{ $point->phone }}"/>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
                                                                             <label>الرصيد
-                                                                                <span class="text-danger"> * </span>
+                                                                                <span class="text-danger"> *
+                                                                                </span>
                                                                             </label>
-                                                                            <input type="number" class="form-control" placeholder="ادخل الرصيد" name="account" value="{{ $point->account }}" required>
+                                                                            <input type="number" class="form-control" placeholder="ادخل الرصيد" name="account" value="{{ $point->account }}" required/>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
                                                                             <label>
                                                                                 العمولة
-                                                                                <span class="text-danger"> * </span>
+                                                                                <span class="text-danger"> *
+                                                                                </span>
                                                                             </label>
-                                                                            <input type="number" class="form-control" required placeholder="الادخال بالنسبة المؤية مثلا 1">
+                                                                            <input type="number" class="form-control" required placeholder="الادخال بالنسبة المؤية مثلا 1" name="{{ $point->commission }}">
                                                                         </div>
                                                                     </div>
 
@@ -357,13 +371,14 @@
                                                                     <div class="col-12">
                                                                         <div class="form-group">
                                                                             <label>العنوان</label>
-                                                                            <textarea class="form-control" rows="3" name="description" placeholder="ادخل العنوان">{{ $point->description }}</textarea>
+                                                                            <textarea class="form-control" rows="3" name="description" placeholder="ادخل العنوان">{{ $point->address }}</textarea>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-12">
                                                                         <div class="form-group">
-                                                                            <input class="form-check-input" type="checkbox" value="" id="isReligion{{ $point->id }}" checked="">
-                                                                            <label class="form-check-label" for="isReligion{{ $point->id }}">مسموح الدين</label>
+                                                                            <input class="form-check-input" type="checkbox" value="true" id="isReligion{{ $point->id }}" @if($point->borrowing_is_allowed)checked="" @endif>
+                                                                            <label class="form-check-label" for="isReligion{{ $point->id }}">مسموح
+                                                                                الدين</label>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -411,8 +426,8 @@
                                         <!-- end delete -->
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
-                            @endforeach
                         </table>
                     </div>
 
@@ -420,41 +435,10 @@
             </div>
         </div>
         <!-- start pagination -->
-        {{-- <ul class="pagination pagination-info">
-                    <li class="page-item">
-                        <a class="page-link" href="#link" aria-label="Previous">
-                            <span aria-hidden="true"> <i class="fas fa-angle-right" aria-hidden="true"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#link">1</a>
-                    </li>
-                    <li class="page-item active">
-                        <a class="page-link" href="#link">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#link">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#link">4</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#link">5</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#link" aria-label="Next">
-                            <span aria-hidden="true">
-                                <i class="fas fa-angle-left" aria-hidden="true"></i>
-                            </span>
-                        </a>
-                    </li>
-                </ul> --}}
 
         {{ $points->links() }}
         <!-- end pagination -->
     </div>
-</div>
 </div>
 @endsection
 
@@ -467,12 +451,12 @@
 <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
-      }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        var options = {
+            damping: '0.5'
+        }
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
-  </script>
+</script>
 <script src="{{ asset('/assets/js/plugins/fullcalendar.min.js') }}"></script>
 <script src="{{ asset('/assets/js/plugins/chartjs.min.js') }}"></script>
 <script src="{{ asset('/assets/js/plugins/choices.min.js') }}"></script>

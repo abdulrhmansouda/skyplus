@@ -284,7 +284,7 @@
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title">
-                                                                    تعديل </h5>
+                                                                     تعديل </h5>
                                                             </div>
 
                                                             <div class="modal-body">

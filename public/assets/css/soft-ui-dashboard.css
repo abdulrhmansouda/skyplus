@@ -2956,6 +2956,7 @@ textarea.form-control-lg {
 
 .form-check-input[type="checkbox"] {
   border-radius: 0.35rem;
+  border: 1px solid rgba(0, 0, 0, .25);
 }
 
 .form-check-input[type="radio"] {
@@ -2979,6 +2980,8 @@ textarea.form-control-lg {
 
 .form-check-input:checked[type="checkbox"] {
   background-image: linear-gradient(310deg, #141727 0%, #3a416f 100%);
+  border: 1px solid white;
+  outline: 1px solid rgba(0, 0, 0, .25);
 }
 
 .form-check-input:checked[type="radio"] {

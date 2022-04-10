@@ -69,7 +69,7 @@
                                         رقم الهاتف
                                         <span class="text-danger"> * </span>
                                     </label>
-                                    <input type="number" class="form-control" placeholder="ادخل رقم الهاتف" required name="phone">
+                                    <input type="tel" class="form-control" placeholder="ادخل رقم الهاتف" required name="phone">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -86,7 +86,7 @@
                                         العمولة
                                         <span class="text-danger"> * </span>
                                     </label>
-                                    <input type="number" class="form-control" required placeholder="الادخال بالنسبة المؤية مثلا 1" name="commission">
+                                    <input type="number" class="form-control" required placeholder="الادخال بالنسبة المؤية مثلا 1" name="commission" step="0.01">
                                 </div>
                             </div>
                             <div class="col-12">
@@ -362,7 +362,8 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <input type="number" class="form-control" required placeholder="الادخال بالنسبة المؤية مثلا 1" name="{{ $point->commission }}">
+                                                                            <input type="number" class="form-control" required placeholder="الادخال بالنسبة المؤية مثلا 1"name="commission" value="{{ $point->commission }}"  step="0.01" >
+                                                                            
                                                                         </div>
                                                                     </div>
 

@@ -5725,6 +5725,7 @@ fieldset:disabled .btn {
   display: flex;
   padding-left: 0;
   list-style: none;
+  flex-wrap: wrap;
 }
 
 .page-link {

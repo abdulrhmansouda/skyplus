@@ -23,7 +23,7 @@
 
     @include('admin.partials.aside')
 
-    <main class="mt-1 main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+    <main class="mt-1 position-relative h-100 border-radius-lg">
         <!-- Navbar -->
         @include('admin.partials.navbar')
         <!-- End Navbar -->

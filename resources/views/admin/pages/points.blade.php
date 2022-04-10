@@ -286,7 +286,7 @@
                                                                         <div class="form-group">
                                                                             <label for="img{{ $point->id }}" class="w-100">الصورة
                                                                                 <input type="file" class="form-control d-none" id="img{{ $point->id }}" name="image" onchange="readURL(this);">
-                                                                                <img src="{{ $point->image ? $point->imageUrl : asset('images/no_image.webp') }}" alt="pos image" class="mx-auto border rounded-circle d-block object-cover" width="150" height="150">
+                                                                                <img src="{{ $point->image ? $point->imageUrl : asset('images/no_image.webp') }}" alt="pos image" class="object-cover mx-auto border rounded-circle d-block" width="150" height="150">
                                                                             </label>
                                                                         </div>
                                                                     </div>
@@ -462,9 +462,9 @@
 <!--   Core JS Files   -->
 <script src="{{ asset('/assets/js/core/popper.min.js') }}"></script>
 <script src="{{ asset('/assets/js/core/bootstrap.min.js') }}"></script>
-<!-- <script src="{{ asset('/assets/js/plugins/perfect-scrollbar.min.js') }}"></script> -->
-<!-- <script src="{{ asset('/assets/js/plugins/smooth-scrollbar.min.js') }}"></script> -->
-<!-- <script>
+<script src="{{ asset('/assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
+<script src="{{ asset('/assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
+<script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
       var options = {
@@ -472,10 +472,11 @@
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
-  </script> -->
+  </script>
 <script src="{{ asset('/assets/js/plugins/fullcalendar.min.js') }}"></script>
 <script src="{{ asset('/assets/js/plugins/chartjs.min.js') }}"></script>
 <script src="{{ asset('/assets/js/plugins/choices.min.js') }}"></script>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
 
 <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{ asset('/assets/js/soft-ui-dashboard.js') }}"></script>

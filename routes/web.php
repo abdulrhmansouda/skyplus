@@ -46,6 +46,7 @@ Route::middleware(['auth', 'admin'])
             ->group(function () {
                 Route::get('/', [SubscriberController::class, 'index'])->name('subscribers');
                 Route::post('/store', [SubscriberController::class, 'store'])->name('subscribers.store');
+                Route::put('/update/{subscriber}', [SubscriberController::class, 'update'])->name('subscribers.update');
                 Route::delete('/destroy/{subscriber}', [SubscriberController::class, 'destroy'])->name('subscribers.destroy');
             });
 

@@ -101,8 +101,8 @@ class SubscriberController extends Controller
      */
     public function update(Request $request, $id)
     {
-                dd($request->all());
-                $sub = new Subscriber;
+                // dd($request->all());
+                $sub = Subscriber::findOrFail($id);
 
                 $sub->name = $request->name;
                 $sub->t_c = $request->t_c;
@@ -115,9 +115,9 @@ class SubscriberController extends Controller
                 $sub->status = $request->status;
                 $sub->address = $request->address;
                 $sub->installation_address = $request->installation_address;
-                $sub->save();
+                $sub->update();
         
-                session()->flash('success' ,"تم اضافة المشترك $sub->name بنجاح");
+                session()->flash('success' ,"تم تعديل المشترك $sub->name بنجاح");
         
                 return redirect(route('admin.subscribers'));
     }

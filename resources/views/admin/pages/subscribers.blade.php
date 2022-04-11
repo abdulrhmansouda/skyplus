@@ -73,16 +73,6 @@
                                     </label>
                                     <input type="tel" class="form-control" required name="phone">
                                 </div>
-<<<<<<< HEAD
-                                <div class="col-lg-4 col-md-6">
-                                    <div class="form-group">
-                                        <label>
-                                            التاريخ
-                                            <span class="text-danger"> * </span>
-                                        </label>
-                                        <input type="date" class="form-control" required name="subscribtion_date" value="{{ date("Y-m-d H:i:s") }}">
-                                    </div>
-=======
                             </div>
                             <div class="col-lg-4 col-md-6">
                                 <div class="form-group">
@@ -91,7 +81,6 @@
                                         <span class="text-danger"> * </span>
                                     </label>
                                     <input type="date" class="form-control" required name="subscribtion_date">
->>>>>>> 2761fe2dbe23733a3d120b90d8d3f779b375c90a
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6">
@@ -368,7 +357,9 @@
                                                 <i class="fas fa-edit fs-6"></i>
                                             </a>
                                             <!-- satrt edit Modal -->
-                                            <form action="">
+                                            <form action="{{ route('admin.subscribers.update',$sub->id) }}" method="POST">
+                                                @csrf
+                                                @method('PUT')
                                                 <div class="modal fade" id="edit{{ $sub->id }}" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                                                         <div class="modal-content">
@@ -385,7 +376,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <input type="text" class="form-control" required value="{{ $sub->name }}">
+                                                                            <input name="name" type="text" class="form-control" required value="{{ $sub->name }}">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-4 col-md-6">
@@ -395,7 +386,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <input type="text" class="form-control" required value="{{ $sub->t_c }}">
+                                                                            <input name="t_c" type="text" class="form-control" required value="{{ $sub->t_c }}">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-4 col-md-6">
@@ -405,7 +396,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <input type="number" class="form-control" required value="{{ $sub->sub_id }}">
+                                                                            <input name="sub_id" type="number" class="form-control" required value="{{ $sub->sub_id }}">
                                                                         </div>
                                                                     </div>
 
@@ -416,7 +407,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <input type="number" class="form-control" required value="{{ $sub->subscriber_number }}">
+                                                                            <input name="subscriber_number" type="number" class="form-control" required value="{{ $sub->subscriber_number }}">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-4 col-md-6">
@@ -426,7 +417,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <input type="text" class="form-control" required value="{{ $sub->mother }}">
+                                                                            <input name="mother" type="text" class="form-control" required value="{{ $sub->mother }}">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-4 col-md-6">
@@ -436,7 +427,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <input type="tel" class="form-control" required value="{{ $sub->phone }}">
+                                                                            <input name="phone" type="tel" class="form-control" required value="{{ $sub->phone }}">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-4 col-md-6">
@@ -446,7 +437,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <input type="date" class="form-control" value="{{ $sub->created_at->format('d/m/Y') }}">
+                                                                            <input name="subscribtion_date" type="date" class="form-control" value="{{ $sub->created_at->format('Y-m-d') }}" >
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-4 col-md-6">
@@ -472,7 +463,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <select name="package" required class="form-control" name="status">
+                                                                            <select required class="form-control" name="status">
                                                                                 @switch($sub->status)
                                                                                 @case('active')
                                                                                 <option value="active" selected> نشط</option>
@@ -495,33 +486,7 @@
                                                                                 @default
                                                                                 @endswitch
 
-<<<<<<< HEAD
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-lg-4 col-md-6">
-                                                                                <div class="form-group">
-                                                                                    <label>
-                                                                                        العنوان
-                                                                                        <span class="text-danger"> *
-                                                                                        </span>
-                                                                                    </label>
-                                                                                    <textarea name="address" cols="30" rows="3" required class="form-control">{{ $sub->address }}</textarea>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-lg-4 col-md-6">
-                                                                                <div class="form-group">
-                                                                                    <label>
-                                                                                        مكان التركيب
-                                                                                        <span class="text-danger"> *
-                                                                                        </span>
-                                                                                    </label>
-                                                                                    <textarea name="installation_address" cols="30" rows="3" required class="form-control">{{ $sub->installation_address }}</textarea>
-                                                                                </div>
-                                                                            </div>
-=======
                                                                             </select>
->>>>>>> 2761fe2dbe23733a3d120b90d8d3f779b375c90a
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-4 col-md-6">
@@ -531,7 +496,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <textarea name="address" cols="30" rows="3" required class="form-control"></textarea>
+                                                                            <textarea name="address" cols="30" rows="3" required class="form-control">  {{ $sub->address }}</textarea>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-4 col-md-6">
@@ -541,7 +506,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <textarea name="location" cols="30" rows="3" required class="form-control"></textarea>
+                                                                            <textarea name="installation_address" cols="30" rows="3" required class="form-control"> {{ $sub->installation_address }}</textarea>
                                                                         </div>
                                                                     </div>
                                                                 </div>

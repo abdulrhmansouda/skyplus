@@ -73,16 +73,6 @@
                                     </label>
                                     <input type="tel" class="form-control" required name="phone">
                                 </div>
-<<<<<<< HEAD
-                                <div class="col-lg-4 col-md-6">
-                                    <div class="form-group">
-                                        <label>
-                                            التاريخ
-                                            <span class="text-danger"> * </span>
-                                        </label>
-                                        <input type="date" class="form-control" required name="subscribtion_date" value="{{ date("Y-m-d H:i:s") }}">
-                                    </div>
-=======
                             </div>
                             <div class="col-lg-4 col-md-6">
                                 <div class="form-group">
@@ -91,7 +81,6 @@
                                         <span class="text-danger"> * </span>
                                     </label>
                                     <input type="date" class="form-control" required name="subscribtion_date">
->>>>>>> 2761fe2dbe23733a3d120b90d8d3f779b375c90a
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6">
@@ -446,7 +435,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <input type="date" class="form-control" value="{{ $sub->created_at->format('d/m/Y') }}">
+                                                                            <input type="date" class="form-control" value="{{ $sub->created_at->format('Y-m-d') }}" >
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-4 col-md-6">
@@ -495,33 +484,7 @@
                                                                                 @default
                                                                                 @endswitch
 
-<<<<<<< HEAD
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-lg-4 col-md-6">
-                                                                                <div class="form-group">
-                                                                                    <label>
-                                                                                        العنوان
-                                                                                        <span class="text-danger"> *
-                                                                                        </span>
-                                                                                    </label>
-                                                                                    <textarea name="address" cols="30" rows="3" required class="form-control">{{ $sub->address }}</textarea>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-lg-4 col-md-6">
-                                                                                <div class="form-group">
-                                                                                    <label>
-                                                                                        مكان التركيب
-                                                                                        <span class="text-danger"> *
-                                                                                        </span>
-                                                                                    </label>
-                                                                                    <textarea name="installation_address" cols="30" rows="3" required class="form-control">{{ $sub->installation_address }}</textarea>
-                                                                                </div>
-                                                                            </div>
-=======
                                                                             </select>
->>>>>>> 2761fe2dbe23733a3d120b90d8d3f779b375c90a
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-4 col-md-6">

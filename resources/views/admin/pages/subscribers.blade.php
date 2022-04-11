@@ -35,7 +35,7 @@
                                         T_C
                                         <span class="text-danger"> * </span>
                                     </label>
-                                    <input type="number" class="form-control" required name="t_c">
+                                    <input type="text" class="form-control" required name="t_c">
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6">
@@ -384,7 +384,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <input type="number" class="form-control" required value="{{ $sub->t_c }}">
+                                                                            <input type="text" class="form-control" required value="{{ $sub->t_c }}">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-4 col-md-6">

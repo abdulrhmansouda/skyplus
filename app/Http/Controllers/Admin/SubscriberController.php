@@ -81,16 +81,16 @@ class SubscriberController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+    // /**
+    //  * Show the form for editing the specified resource.
+    //  *
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function edit($id)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -101,7 +101,25 @@ class SubscriberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+                dd($request->all());
+                $sub = new Subscriber;
+
+                $sub->name = $request->name;
+                $sub->t_c = $request->t_c;
+                $sub->sub_id = $request->sub_id;
+                $sub->subscriber_number = $request->subscriber_number;
+                $sub->mother = $request->mother;
+                $sub->phone = $request->phone;
+                $sub->subscribtion_date = $request->subscribtion_date;
+                $sub->package_id = $request->package_id;
+                $sub->status = $request->status;
+                $sub->address = $request->address;
+                $sub->installation_address = $request->installation_address;
+                $sub->save();
+        
+                session()->flash('success' ,"تم اضافة المشترك $sub->name بنجاح");
+        
+                return redirect(route('admin.subscribers'));
     }
 
     /**

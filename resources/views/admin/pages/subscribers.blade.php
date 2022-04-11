@@ -80,7 +80,7 @@
                                             التاريخ
                                             <span class="text-danger"> * </span>
                                         </label>
-                                        <input type="date" class="form-control" required name="subscribtion_date">
+                                        <input type="date" class="form-control" required name="subscribtion_date" value="{{ date("Y-m-d H:i:s") }}">
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-6">
@@ -546,7 +546,7 @@
                                                                                         <span class="text-danger"> *
                                                                                         </span>
                                                                                     </label>
-                                                                                    <textarea name="address" cols="30" rows="3" required class="form-control"></textarea>
+                                                                                    <textarea name="address" cols="30" rows="3" required class="form-control">{{ $sub->address }}</textarea>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-lg-4 col-md-6">
@@ -556,7 +556,7 @@
                                                                                         <span class="text-danger"> *
                                                                                         </span>
                                                                                     </label>
-                                                                                    <textarea name="location" cols="30" rows="3" required class="form-control"></textarea>
+                                                                                    <textarea name="installation_address" cols="30" rows="3" required class="form-control">{{ $sub->installation_address }}</textarea>
                                                                                 </div>
                                                                             </div>
                                                                         </div>

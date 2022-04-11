@@ -308,47 +308,37 @@
                                                                 </div>
                                                                 <div class="col-lg-4 col-md-6">
                                                                     <div class="form-group">
-                                                                        <label>
-                                                                            رقم الهاتف
-                                                                            <span class="text-danger"> *
-                                                                            </span>
-                                                                        </label>
-                                                                        <input type="tel" class="form-control" required>
-                                                                        <div class="col-lg-4 col-md-6">
-                                                                            <div class="form-group">
-                                                                                <h6>
-                                                                                    حالة المستخدم
-                                                                                </h6>
-                                                                                @if ($sub->status === 'active')
-                                                                                <span class="badge badge-sm bg-gradient-success">مفعل</span>
-                                                                                @elseif($sub->status === 'deactive')
-                                                                                <span class="badge badge-sm bg-gradient-danger">غير
-                                                                                    مفعل</span>
-                                                                                @else
-                                                                                <span class="badge badge-sm bg-gradient-danger">مغلق</span>
-                                                                                @endif
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-4 col-md-6">
-                                                                            <div class="form-group">
-                                                                                <h6>
-                                                                                    العنوان
-                                                                                </h6>
-                                                                                <p>
-                                                                                    {{ $sub->address }}
-                                                                                </p>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-4 col-md-6">
-                                                                            <div class="form-group">
-                                                                                <h6>
-                                                                                    مكان التركيب
-                                                                                </h6>
-                                                                                <p>
-                                                                                    {{ $sub->installation_address }}
-                                                                                </p>
-                                                                            </div>
-                                                                        </div>
+                                                                        <h6>
+                                                                            حالة المستخدم
+                                                                        </h6>
+                                                                        @if ($sub->status === 'active')
+                                                                        <span class="badge badge-sm bg-gradient-success">مفعل</span>
+                                                                        @elseif($sub->status === 'deactive')
+                                                                        <span class="badge badge-sm bg-gradient-danger">غير
+                                                                            مفعل</span>
+                                                                        @else
+                                                                        <span class="badge badge-sm bg-gradient-danger">مغلق</span>
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-6">
+                                                                    <div class="form-group">
+                                                                        <h6>
+                                                                            العنوان
+                                                                        </h6>
+                                                                        <p>
+                                                                            {{ $sub->address }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-6">
+                                                                    <div class="form-group">
+                                                                        <h6>
+                                                                            مكان التركيب
+                                                                        </h6>
+                                                                        <p>
+                                                                            {{ $sub->installation_address }}
+                                                                        </p>
                                                                     </div>
                                                                 </div>
                                                             </div>

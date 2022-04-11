@@ -25,6 +25,7 @@ class SubscriberFactory extends Factory
             'mother' => $this->faker->name,
             'address' => $this->faker->address,
             'installation_address' => $this->faker->address,
+            'subscribtion_date' => $this->faker->date,
         ];
 
 

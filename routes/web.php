@@ -45,6 +45,8 @@ Route::middleware(['auth', 'admin'])
         Route::prefix('/subscribers')
             ->group(function () {
                 Route::get('/', [SubscriberController::class, 'index'])->name('subscribers');
+                Route::post('/store', [SubscriberController::class, 'store'])->name('subscribers.store');
+                Route::delete('/destroy/{subscriber}', [SubscriberController::class, 'destroy'])->name('subscribers.destroy');
             });
 
         Route::prefix('/packages')

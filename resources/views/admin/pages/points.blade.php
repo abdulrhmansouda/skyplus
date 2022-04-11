@@ -293,7 +293,7 @@
                                                                         <div class="form-group">
                                                                             <label for="img{{ $point->id }}" class="w-100">الصورة
                                                                                 <input type="file" class="form-control d-none" id="img{{ $point->id }}" name="image" onchange="readURL(this);">
-                                                                                <img src="{{ $point->image ? $point->imageUrl : asset('images/no_image.webp') }}" alt="pos image" class="object-cover mx-auto border rounded-circle d-block" width="150" height="150">
+                                                                                <img src="{{ $point->imageUrl }}" alt="pos image" class="object-cover mx-auto border rounded-circle d-block" width="150" height="150">
                                                                             </label>
                                                                         </div>
                                                                     </div>

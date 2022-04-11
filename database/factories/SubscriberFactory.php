@@ -20,8 +20,11 @@ class SubscriberFactory extends Factory
             'name' => $this->faker->name,
             't_c' => $this->faker->phoneNumber,
             'phone' => $this->faker->phoneNumber,
+            'sub_id' => $this->faker->numberBetween(),
             'subscriber_number' => $this->faker->numberBetween(1000000000,2147483641),
             'mother' => $this->faker->name,
+            'address' => $this->faker->address,
+            'installation_address' => $this->faker->address,
         ];
 
 

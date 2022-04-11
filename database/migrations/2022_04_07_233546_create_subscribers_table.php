@@ -16,12 +16,16 @@ return new class extends Migration
         Schema::create('subscribers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('package_id');
+            $table->unsignedBigInteger('sub_id')->unique();
             $table->string('name');
             $table->string('t_c');
             $table->string('phone');
             $table->string('subscriber_number');
             $table->string('mother');
-            $table->enum('status',['active','deactivate'])->nullable();
+            $table->text('address')->nullable();
+            $table->text('installation_address')->nullable();
+            $table->enum('status',['active','deactivate','closed'])->default('active');
+            $table->timestamp('subscribtion_date');
             $table->timestamps();
         });
     }

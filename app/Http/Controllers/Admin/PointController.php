@@ -118,10 +118,10 @@ class PointController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePointRequest $request, $id)
+    public function update(Request $request, $id)
     {
 
-                // dd($request->all());
+                dd($request->all());
                 $point = Point::findOrFail($id);
                 if($request->hasFile('image') && $request->file('image')->isValid()){
                     $image = $request->file('image');
@@ -153,36 +153,6 @@ class PointController extends Controller
                 $point->description = $request->description;
         
                 $point->update();
-        
-//                 session()->flash('success' ,'تم أنشاء تعديل النقطة  بنجاح');
-        
-//                 return redirect(route('admin.points'));
-
-//         // dd($request->all());
-//         // dd($point);
-//         // dd($request->hasFile('image'));
-//         if($request->hasFile('image') && $request->file('image')->isValid()){
-//             // dd($request->all());
-
-//             $image = $request->file('image');
-//             $point->image = $image->store('points','images');
-//         }
-//         // dd($point);
-
-// // dd(is_null($request->password));
-//         $point->user->update([
-//             'username' => $request->username,
-//             'role' => 'point',
-//             'password' => is_null($request->password) ? $point->user->password : Hash::make($request->password),
-//         ]);
-
-//         $point->name = $request->name;
-
-//         $point->account = $request->account;
-
-//         $point->description = $request->description;
-
-//         $point->update();
 
         session()->flash('success' ,'تم تعديل النقطة الجديدة بنجاح');
 

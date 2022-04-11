@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreSubscriberRequest;
+use App\Models\Package;
 use App\Models\Subscriber;
 use Illuminate\Http\Request;
 
@@ -22,25 +24,22 @@ class SubscriberController extends Controller
         else{
             $subs = Subscriber::paginate(10);
         }
-        // dd($points);
         return view('admin.pages.subscribers',[
             'subs' => $subs,
+            'packages' => Package::all(),
             'search' => $request->s,
         ]);
-        // return view('admin.pages.subscribers',[
-        //     'subs' => Subscriber::paginate(10),
-        // ]);  
       }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    // /**
+    //  * Show the form for creating a new resource.
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function create()
+    // {
+    //     //
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -48,9 +47,27 @@ class SubscriberController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSubscriberRequest $request)
     {
-        //
+        // dd($request->all());
+        $sub = new Subscriber;
+
+        $sub->name = $request->name;
+        $sub->t_c = $request->t_c;
+        $sub->sub_id = $request->sub_id;
+        $sub->subscriber_number = $request->subscriber_number;
+        $sub->mother = $request->mother;
+        $sub->phone = $request->phone;
+        $sub->subscribtion_date = $request->subscribtion_date;
+        $sub->package_id = $request->package_id;
+        $sub->status = $request->status;
+        $sub->address = $request->address;
+        $sub->installation_address = $request->installation_address;
+        $sub->save();
+
+        session()->flash('success' ,"تم اضافة المشترك $sub->name بنجاح");
+
+        return redirect(route('admin.subscribers'));
     }
 
     /**
@@ -93,8 +110,12 @@ class SubscriberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Subscriber $subscriber)
     {
-        //
+        // $subscriber->delete();
+        $subscriber->status = 'closed';
+        $subscriber->update();
+        session()->flash('success',"تم اغلاق المشترك $subscriber->name بنجاح");
+        return redirect(route('admin.subscribers'));
     }
 }

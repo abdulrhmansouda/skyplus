@@ -70,7 +70,7 @@
                                         رقم الهاتف
                                         <span class="text-danger"> * </span>
                                     </label>
-                                    <input type="number" class="form-control" required>
+                                    <input type="tel" class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6">
@@ -399,7 +399,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <input type="number" class="form-control" required>
+                                                                            <input type="tel" class="form-control" required>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-4 col-md-6">

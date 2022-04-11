@@ -65,6 +65,16 @@
                                         <input type="text" class="form-control" required name="mother">
                                     </div>
                                 </div>
+<<<<<<< HEAD
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label>
+                                        رقم الهاتف
+                                        <span class="text-danger"> * </span>
+                                    </label>
+                                    <input type="tel" class="form-control" required>
+=======
                                 <div class="col-lg-4 col-md-6">
                                     <div class="form-group">
                                         <label>
@@ -73,6 +83,7 @@
                                         </label>
                                         <input type="number" class="form-control" required name="phone">
                                     </div>
+>>>>>>> 4f21a91920061b69970227a60d84b59768d53713
                                 </div>
                                 <div class="col-lg-4 col-md-6">
                                     <div class="form-group">
@@ -321,6 +332,17 @@
                                                                                 {{ $sub->package->name }}
                                                                             </div>
                                                                         </div>
+<<<<<<< HEAD
+                                                                    </div>
+                                                                    <div class="col-lg-4 col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label>
+                                                                                رقم الهاتف
+                                                                                <span class="text-danger"> *
+                                                                                </span>
+                                                                            </label>
+                                                                            <input type="tel" class="form-control" required>
+=======
                                                                         <div class="col-lg-4 col-md-6">
                                                                             <div class="form-group">
                                                                                 <h6>
@@ -338,6 +360,7 @@
                                                                                         class="badge badge-sm bg-gradient-danger">مغلق</span>
                                                                                 @endif
                                                                             </div>
+>>>>>>> 4f21a91920061b69970227a60d84b59768d53713
                                                                         </div>
                                                                         <div class="col-lg-4 col-md-6">
                                                                             <div class="form-group">

@@ -35,6 +35,8 @@
         {{-- @dd(Route::currentRouteName()) --}}
         @if (session()->has('success'))
             <div class="alert alert-success">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            
                 {{ session()->get('success') }}
             </div>
         @endif

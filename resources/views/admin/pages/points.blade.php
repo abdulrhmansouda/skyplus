@@ -320,8 +320,6 @@
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
                                                                             <label>كلمة المرور
-                                                                                <span class="text-danger"> *
-                                                                                </span>
                                                                             </label>
                                                                             <input type="password" class="form-control" placeholder="ادخل كلمة المرور الجديدة" name="password">
                                                                         </div>
@@ -343,7 +341,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <input type="tel" class="form-control" placeholder="ادخل رقم الهاتف" required value="{{ $point->phone }}"/>
+                                                                            <input type="tel" class="form-control" placeholder="ادخل رقم الهاتف" required value="{{ $point->phone }}" name="phone"/>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6">

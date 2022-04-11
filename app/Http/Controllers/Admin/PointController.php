@@ -79,7 +79,7 @@ class PointController extends Controller
 
         $point->address = $request->address;
 
-        $point->description = $request->description;
+        // $point->description = $request->description;
 
         $point->save();
 
@@ -150,7 +150,7 @@ class PointController extends Controller
         
                 $point->address = $request->address;
         
-                $point->description = $request->description;
+                // $point->description = $request->description;
         
                 $point->update();
 

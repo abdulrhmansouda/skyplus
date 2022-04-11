@@ -121,7 +121,7 @@ class PointController extends Controller
     public function update(Request $request, $id)
     {
 
-                dd($request->all());
+                // dd($request->all());
                 $point = Point::findOrFail($id);
                 if($request->hasFile('image') && $request->file('image')->isValid()){
                     $image = $request->file('image');

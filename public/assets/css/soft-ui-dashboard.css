@@ -25539,4 +25539,9 @@ display: flex;
   justify-content: center;
   align-items: center;
 }
+.object-fit-cover{
+  object-fit: cover;
+  -ms-object-fit: cover;
+  -o-object-fit: cover;
+}
 /*# sourceMappingURL=dashboard-free.css.map */

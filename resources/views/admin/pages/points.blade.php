@@ -24,7 +24,7 @@
                                 <div class="form-group">
                                     <label for="img" class="w-100">الصورة
                                         <input type="file" class="form-control d-none" id="img" name="image" onchange="readURL(this);">
-                                        <img src="{{ asset('/assets/img/add.png') }}" alt="pos image" class="mx-auto border rounded-circle d-block" width="150">
+                                        <img src="{{ asset('/assets/img/add.png') }}" alt="pos image" class="mx-auto border rounded-circle d-block object-fit-cover" width="150" height="150">
                                     </label>
                                 </div>
                             </div>
@@ -153,7 +153,7 @@
                                     <td>
                                         <div class="px-2 py-1 d-flex">
                                             <div>
-                                                <img src="{{ $point->imageUrl }}" class="avatar avatar-sm ms-3" alt="user1">
+                                                <img src="{{ $point->imageUrl }}" class="avatar avatar-sm ms-3 object-fit-cover rounded-circle" alt="user1"  width="50" height="50">
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
                                                 <h6 class="mb-0 text-sm">{{ $point->name }}</h6>
@@ -193,7 +193,7 @@
                                                                 <div class="col-12">
                                                                     <div class="form-group">
                                                                         <h6 class="w-100">الصورة
-                                                                            <img src="{{ $point->imageUrl }}" alt="pos image" class="mx-auto border rounded-circle d-block" width="150">
+                                                                            <img src="{{ $point->imageUrl }}" alt="pos image" class="mx-auto border rounded-circle d-block object-fit-cover" width="150" height="150">
                                                                         </h6>
                                                                     </div>
                                                                 </div>
@@ -293,7 +293,7 @@
                                                                         <div class="form-group">
                                                                             <label for="img{{ $point->id }}" class="w-100">الصورة
                                                                                 <input type="file" class="form-control d-none" id="img{{ $point->id }}" name="image" onchange="readURL(this);">
-                                                                                <img src="{{ $point->imageUrl }}" alt="pos image" class="object-cover mx-auto border rounded-circle d-block" width="150" height="150">
+                                                                                <img src="{{ $point->imageUrl }}" alt="pos image" class="mx-auto border rounded-circle d-block object-fit-cover" width="150" height="150">
                                                                             </label>
                                                                         </div>
                                                                     </div>

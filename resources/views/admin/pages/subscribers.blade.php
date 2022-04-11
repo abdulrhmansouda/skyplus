@@ -494,7 +494,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <textarea name="address" cols="30" rows="3" required class="form-control"></textarea>
+                                                                            <textarea name="address" cols="30" rows="3" required class="form-control">  {{ $sub->address }}</textarea>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-4 col-md-6">
@@ -504,7 +504,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <textarea name="location" cols="30" rows="3" required class="form-control"></textarea>
+                                                                            <textarea name="location" cols="30" rows="3" required class="form-control"> {{ $sub->installation_address }}</textarea>
                                                                         </div>
                                                                     </div>
                                                                 </div>

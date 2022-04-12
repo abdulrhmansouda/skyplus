@@ -522,7 +522,7 @@
                                         </div>
                                         <!-- end edit 1 -->
                                         <!-- start delete 1 -->
-                                        <div class="d-inline-block">
+                                        <div class="d-inline-block d-none">
                                             <a href="javascript:;" class="px-1 text-xs text-secondary font-weight-bold " data-toggle="tooltip" data-original-title="Edit user" data-bs-toggle="modal" data-bs-target="#delete{{ $sub->id }}">
                                                 <i class="fas fa-trash fs-6"></i>
                                             </a>

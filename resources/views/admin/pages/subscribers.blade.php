@@ -204,12 +204,12 @@
                                     </td>
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold">
-                                            {{ $sub->created_at->format('d/m/Y') }}
+                                            {{ date_format(date_create($sub->package_start),"d/m/Y") }}
                                         </p>
                                     </td>
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold">
-                                            {{ $sub->created_at->format('d/m/Y') }}
+                                            {{ date_format(date_create($sub->package_end),"d/m/Y") }}
                                         </p>
                                     </td>
                                     <td>

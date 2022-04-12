@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\PointController;
 use App\Http\Controllers\Admin\SubscriberController;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,16 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+Route::get('/test',function(){
+
+    $date = Carbon::now();
+
+    $date = new Carbon('1999-9-11');
+
+    dd($date->addMonth());
+
+});
 
 Route::get('/', function () {
     return redirect(route('login'));

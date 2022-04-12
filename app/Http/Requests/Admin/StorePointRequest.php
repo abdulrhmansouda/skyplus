@@ -29,7 +29,7 @@ class StorePointRequest extends FormRequest
             'password' => ['required','min:8'],
             'account' => ['required','numeric',],
             'commission' => ['required' ,'numeric' ,'min:0','max:100' ,],
-            't_c' => ['required' , 'string ','max:100'],
+            't_c' => ['required' , 'string ','min:11' ,'max:11' ],
             'phone' => ['required' , 'string ','max:100'],
             'image' => ['nullable','image'],
             'address' => ['nullable','string','max:1000',],

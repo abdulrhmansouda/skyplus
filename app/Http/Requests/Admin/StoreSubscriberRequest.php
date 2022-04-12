@@ -26,7 +26,7 @@ class StoreSubscriberRequest extends FormRequest
     {
         return [
             'name' => ['required' ,'string' ,'min:2' ,'max:100' ],
-            't_c' => ['required' ,'string' , 'max:100' ],
+            't_c' => ['required' ,'string' , 'min:11' ,'max:11' ],
             'phone' => ['required' ,'string' , 'max:100' ],
             'sub_id' => ['required' ,'numeric' ,'unique:subscribers' ,],
             'subscriber_number' => ['required' ,'numeric' ,'unique:subscribers' ,],

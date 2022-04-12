@@ -279,6 +279,7 @@
                                             <form action="{{ route('admin.points.update', $point->id) }}" method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 @method('PUT')
+                                                <input type="hidden" name="id" value="{{ $point->user->id }}">
                                                 <div class="modal fade" id="edit{{ $point->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">

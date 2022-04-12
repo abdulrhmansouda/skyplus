@@ -32,7 +32,7 @@
                             <div class="col-lg-4 col-md-6">
                                 <div class="form-group">
                                     <label>
-                                        T_C
+                                        T.C
                                         <span class="text-danger"> * </span>
                                     </label>
                                     <input type="text" class="form-control" required name="t_c">
@@ -252,7 +252,7 @@
                                                                 <div class="col-lg-4 col-md-6">
                                                                     <div class="form-group">
                                                                         <h6>
-                                                                            T_C
+                                                                            T.C
                                                                         </h6>
                                                                         {{ $sub->t_c }}
                                                                     </div>
@@ -385,7 +385,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <input name="t_c" type="text" class="form-control" required value="{{ $sub->t_c }}">
+                                                                            <input name="t_c" type="number" class="form-control" required value="{{ $sub->t_c }}" pattern="\d{11}"/>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-4 col-md-6">

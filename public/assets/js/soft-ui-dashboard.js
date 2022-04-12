@@ -432,3 +432,11 @@ function readURL(input) {
       reader.readAsDataURL(input.files[0]);
   }
 }
+Date.prototype.toDateInputValue = (function() {
+  var local = new Date(this);
+  local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+  return local.toJSON().slice(0,10);
+});
+document.querySelectorAll(".date-now").forEach((date)=>{
+  date.value = new Date().toDateInputValue();
+})

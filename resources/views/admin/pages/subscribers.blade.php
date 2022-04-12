@@ -80,7 +80,7 @@
                                         التاريخ
                                         <span class="text-danger"> * </span>
                                     </label>
-                                    <input type="date" class="form-control" required name="subscribtion_date">
+                                    <input type="date" class="form-control date-now" required name="subscribtion_date">
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6">
@@ -161,9 +161,8 @@
                                         اسم المشترك</th>
                                     <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         T_C </th>
-                                    {{-- <th
-                                            class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            ID</th> --}}
+                                    <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        ID</th>
                                     <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         رقم المشترك</th>
                                     <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -191,9 +190,9 @@
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold">{{ $sub->t_c }}</p>
                                     </td>
-                                    {{-- <td>
-                                                    <p class="mb-0 text-xs font-weight-bold">100 </p>
-                                                </td> --}}
+                                    <td>
+                                        <p class="mb-0 text-xs font-weight-bold">{{ $sub->sub_id }} </p>
+                                    </td>
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold">{{ $sub->subscriber_number }}</p>
                                     </td>
@@ -435,7 +434,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <input type="date" class="form-control" value="{{ $sub->created_at->format('Y-m-d') }}" >
+                                                                            <input type="date" class="form-control" value="{{ $sub->created_at->format('Y-m-d') }}">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-4 col-md-6">
@@ -494,7 +493,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <textarea name="address" cols="30" rows="3" required class="form-control">  {{ $sub->address }}</textarea>
+                                                                            <textarea name="address" cols="30" rows="3" required class="form-control"> {{ $sub->address }}</textarea>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-4 col-md-6">

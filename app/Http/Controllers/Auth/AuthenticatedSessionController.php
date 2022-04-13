@@ -38,7 +38,11 @@ class AuthenticatedSessionController extends Controller
             return redirect( route('admin.home') );
         }
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        if(Auth::user()->isPoint()){
+            return redirect( route('point.subscribers') );
+        }
+
+        // return redirect()->intended(RouteServiceProvider::HOME);
 
     }
 

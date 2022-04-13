@@ -6,6 +6,9 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\PointController;
 use App\Http\Controllers\Admin\SubscriberController;
+use App\Http\Controllers\Point\ChangePasswordController as PointChangePasswordController;
+use App\Http\Controllers\Point\SubscriberController as PointSubscriberController;
+// use App\Http\Controllers\Point\SubscriberController as PointSubscriberController;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 
@@ -96,6 +99,23 @@ Route::middleware(['auth', 'point'])
                 Route::get('/', function () {
                     return 'point';
                 })->name('home');
+            });
+
+            Route::prefix('/subscribers')
+            ->group(function () {
+                Route::get('/', [PointSubscriberController::class, 'index'])->name('subscribers');
+
+            });
+
+            Route::prefix('/sitting')
+            ->name('setting.')
+            ->group(function () {
+                    Route::prefix('/change-password')
+                    ->name('change-password.')
+                    ->group(function () {
+                        Route::get('/', [PointChangePasswordController::class, 'index'])->name('index');
+                        Route::put('/update', [PointChangePasswordController::class, 'update'])->name('update');
+                    });
             });
     });
 

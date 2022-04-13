@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('packages', function (Blueprint $table) {
+        Schema::create('project_settings', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->unsignedBigInteger('price');
-            $table->timestamp('start');
-            $table->timestamp('end')->nullable();
+            $table->string('bot_username');
+            $table->string('bot_token');
+            $table->string('chat_id');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('packages');
+        Schema::dropIfExists('project_setings');
     }
 };

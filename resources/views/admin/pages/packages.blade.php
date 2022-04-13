@@ -57,6 +57,14 @@
                                         <th
                                             class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             سعر الباقة </th>
+
+                                            <th
+                                            class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                             تبدأ الباقة من </th>
+
+                                            <th
+                                            class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                             تنتهي الباقة عند </th>
                                        
                                         <th
                                             class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -71,6 +79,14 @@
                                             </td>
                                             <td>
                                                 <p class="mb-0 text-xs font-weight-bold">{{ $package->price }}</p>
+                                            </td>
+
+                                            <td>
+                                                <p class="mb-0 text-xs font-weight-bold">{{ date_format(date_create($package->start),'Y/m/d') }}</p>
+                                            </td>
+
+                                            <td>
+                                                <p class="mb-0 text-xs font-weight-bold">{{ date_format(date_create($package->end),'Y/m/d') }}</p>
                                             </td>
                                          
 

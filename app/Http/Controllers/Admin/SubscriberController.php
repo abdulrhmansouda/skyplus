@@ -19,7 +19,12 @@ class SubscriberController extends Controller
     {
 
         if ($request->s) {
-            $subs = Subscriber::where('name', 'LIKE', "%$request->s%")->paginate(10);
+            $subs = Subscriber::where('name', 'LIKE', "%$request->s%")
+            ->orWhere('t_c', 'LIKE', "%$request->s%")
+            ->orWhere('sub_id', 'LIKE', "%$request->s%")
+            ->orWhere('subscriber_number', 'LIKE', "%$request->s%")
+            ->orWhere('phone', 'LIKE', "%$request->s%")
+            ->paginate(10);
         } else {
             $subs = Subscriber::paginate(10);
         }

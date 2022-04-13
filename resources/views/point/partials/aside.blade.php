@@ -98,7 +98,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="modal" href="#">
+                <a class="nav-link" data-bs-toggle="modal" href="#logout">
                     <div
                         class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
                         <svg class="text-dark" width="16px" height="16px" viewBox="0 0 40 40" version="1.1"

@@ -59,4 +59,8 @@ class User extends Authenticatable
         return $this->role === 'point' ;
     }
 
+    public function isSuperAdmin(){
+        return $this->id === 1 ;
+    }
+
 }

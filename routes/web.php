@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\BindingAppController;
+use App\Http\Controllers\Admin\ChangePasswordController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\PointController;
@@ -22,14 +24,13 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/test',function(){
+Route::get('/test', function () {
 
     $date = Carbon::now();
 
     $date = new Carbon('1999-9-11');
 
     dd($date->addMonth());
-
 });
 
 Route::get('/', function () {
@@ -65,6 +66,25 @@ Route::middleware(['auth', 'admin'])
             ->group(function () {
                 Route::get('/', [PackageController::class, 'index'])->name('packages');
             });
+
+        Route::prefix('/sitting')
+            ->name('setting.')
+            ->group(function () {
+                Route::prefix('/binding-app')
+                    ->middleware(['superadmin'])
+                    ->name('binding-app.')
+                    ->group(function () {
+                        Route::get('/', [BindingAppController::class, 'index'])->name('index');
+                        Route::put('/update', [BindingAppController::class, 'update'])->name('update');
+                    });
+
+                    Route::prefix('/change-password')
+                    ->name('change-password.')
+                    ->group(function () {
+                        Route::get('/', [ChangePasswordController::class, 'index'])->name('index');
+                        Route::put('/update', [ChangePasswordController::class, 'update'])->name('update');
+                    });
+            });
     });
 
 Route::middleware(['auth', 'point'])
@@ -73,7 +93,7 @@ Route::middleware(['auth', 'point'])
     ->group(function () {
         Route::prefix('/home')
             ->group(function () {
-                Route::get('/',function(){
+                Route::get('/', function () {
                     return 'point';
                 })->name('home');
             });

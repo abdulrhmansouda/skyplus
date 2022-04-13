@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,9 +17,15 @@ class PackageFactory extends Factory
      */
     public function definition()
     {
+        $date = $this->faker->date;
+        $carbon0 = new Carbon($date);
+        $carbon1 = new Carbon ($date);
+        $carbon1 = $carbon1->addMonths($this->faker->numberBetween(1,12));
         return [
             'name' => $this->faker->name,
             'price' => $this->faker->numberBetween(1,1000000000),
+            'start' => $carbon0,
+            'end' => $carbon1,
         ];
     }
 }

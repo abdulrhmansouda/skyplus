@@ -89,7 +89,7 @@
                                         اسم الباقة
                                         <span class="text-danger"> * </span>
                                     </label>
-                                    <select class="form-control" required name="package_id">
+                                    <select class="form-select" required name="package_id">
                                         <option value="">اختر باقة</option>
                                         @foreach ($packages as $package)
                                         <option value="{{ $package->id }}">{{ $package->name }}</option>
@@ -103,7 +103,7 @@
                                         حالة المستخدم
                                         <span class="text-danger"> * </span>
                                     </label>
-                                    <select class="form-control" required name="status">
+                                    <select class="form-select" required name="status">
                                         <option value="active"> نشط</option>
                                         <option value="deactive"> غير نشط</option>
                                         <option value="closed">مغلق</option>
@@ -446,7 +446,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <select required class="form-control" name="package_id">
+                                                                            <select required class="form-select" name="package_id">
                                                                                 @foreach ($packages as $package)
                                                                                 <option value="{{ $package->id }}" @if($sub->package_id===$package->id)selected @endif>
                                                                                     {{ $package->name }}
@@ -462,7 +462,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <select required class="form-control" name="status">
+                                                                            <select required class="form-select" name="status">
                                                                                 @switch($sub->status)
                                                                                 @case('active')
                                                                                 <option value="active" selected> نشط</option>

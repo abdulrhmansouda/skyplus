@@ -20,26 +20,21 @@ class PackageController extends Controller
         } else {
             $packages = Package::paginate(10);
         }
-        // dd($points);
         return view('admin.pages.packages', [
             'packages' => $packages,
             'search' => $request->s,
         ]);
-        // return view('admin.pages.subscribers',[
-        //     'subs' => Subscriber::paginate(10),
-        // ]);  
-        // return view('admin.pages.packages');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    // /**
+    //  * Show the form for creating a new resource.
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function create()
+    // {
+    //     //
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -49,30 +44,42 @@ class PackageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required','string' ,'unique:packages','min:2','max:1000'],
+            'price' => ['required','numeric'],
+        ]);
+        // dd($request->all());
+        $package = new Package;
+        $package->name = $request->name;
+        $package->price = $request->price;
+        $package->save();
+
+        session()->flash('success','تم اضافة الباقة بنجاح');
+
+        return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+    // /**
+    //  * Display the specified resource.
+    //  *
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function show($id)
+    // {
+    //     //
+    // }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+    // /**
+    //  * Show the form for editing the specified resource.
+    //  *
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function edit($id)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -83,7 +90,20 @@ class PackageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => ['required','string' ,"unique:packages,name,$id",'min:2','max:1000'],
+            'price' => ['required','numeric'],
+        ]);
+        // dd($request->all());
+
+        $package = Package::findOrFail($id);
+        $package->name = $request->name;
+        $package->price = $request->price;
+        $package->update();
+
+        session()->flash('success','تم تعديل الباقة بنجاح');
+
+        return redirect()->back();
     }
 
     /**
@@ -92,8 +112,10 @@ class PackageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Package $package)
     {
-        //
+        $package->delete();
+        session()->flash('success'," تم حذف الباقة $package->name بنجاح");
+        return redirect()->back();
     }
 }

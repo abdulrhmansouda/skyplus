@@ -10,7 +10,8 @@
             إضافة
         </button>
         <!-- add Modal -->
-        <form action="">
+        <form action="{{ route('admin.packages.store') }}" method="POST">
+            @csrf
             <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-xs" role="document">
                     <div class="modal-content">
@@ -23,14 +24,14 @@
                                     اسم الباقة
                                     <span class="text-danger"> * </span>
                                 </label>
-                                <input type="text" class="form-control" required>
+                                <input name="name" type="text" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label>
                                     سعر الباقة
                                     <span class="text-danger"> * </span>
                                 </label>
-                                <input type="number" class="form-control" required>
+                                <input name="price" type="number" class="form-control" required>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -47,6 +48,16 @@
                 <div class="mb-4 card">
 
                     <div class="px-0 pt-0 pb-2 card-body">
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
                         <div class="p-0 table-responsive">
                             <table class="table mb-0 align-items-center">
                                 <thead>
@@ -57,14 +68,6 @@
                                         <th
                                             class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             سعر الباقة </th>
-
-                                            <th
-                                            class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                             تبدأ الباقة من </th>
-
-                                            <th
-                                            class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                             تنتهي الباقة عند </th>
                                        
                                         <th
                                             class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -81,15 +84,6 @@
                                                 <p class="mb-0 text-xs font-weight-bold">{{ $package->price }}</p>
                                             </td>
 
-                                            <td>
-                                                <p class="mb-0 text-xs font-weight-bold">{{ date_format(date_create($package->start),'Y/m/d') }}</p>
-                                            </td>
-
-                                            <td>
-                                                <p class="mb-0 text-xs font-weight-bold">{{ date_format(date_create($package->end),'Y/m/d') }}</p>
-                                            </td>
-                                         
-
                                             <td class="align-middle ">
 
                                                 <!-- start edit 1 -->
@@ -97,12 +91,14 @@
                                                     <a href="javascript:;"
                                                         class="px-1 text-xs text-secondary font-weight-bold "
                                                         data-toggle="tooltip" data-original-title="Edit user"
-                                                        data-bs-toggle="modal" data-bs-target="#edit1">
+                                                        data-bs-toggle="modal" data-bs-target="#edit{{ $package->id }}">
                                                         <i class="fas fa-edit fs-6"></i>
                                                     </a>
                                                     <!-- satrt edit Modal -->
-                                                    <form action="">
-                                                        <div class="modal fade" id="edit1" tabindex="-1" role="dialog"
+                                                    <form action="{{ route('admin.packages.update',$package->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <div class="modal fade" id="edit{{ $package->id }}" tabindex="-1" role="dialog"
                                                             aria-labelledby="add" aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered modal-xs"
                                                                 role="document">
@@ -117,7 +113,7 @@
                                                                                 اسم الباقة
                                                                                 <span class="text-danger"> * </span>
                                                                             </label>
-                                                                            <input type="text" class="form-control"
+                                                                            <input name="name" type="text" class="form-control" value="{{ $package->name }}"
                                                                                 required>
                                                                         </div>
                                                                         <div class="form-group">
@@ -125,7 +121,7 @@
                                                                                 سعر الباقة
                                                                                 <span class="text-danger"> * </span>
                                                                             </label>
-                                                                            <input type="number" class="form-control"
+                                                                            <input name="price" type="number" class="form-control" value="{{ $package->price }}"
                                                                                 required>
                                                                         </div>
                                                                     </div>
@@ -147,11 +143,11 @@
                                                     <a href="javascript:;"
                                                         class="px-1 text-xs text-secondary font-weight-bold "
                                                         data-toggle="tooltip" data-original-title="Edit user"
-                                                        data-bs-toggle="modal" data-bs-target="#delete1">
+                                                        data-bs-toggle="modal" data-bs-target="#delete{{ $package->id }}">
                                                         <i class="fas fa-trash fs-6"></i>
                                                     </a>
                                                     <!--start delete Modal -->
-                                                    <div class="modal fade" id="delete1" tabindex="-1" role="dialog"
+                                                    <div class="modal fade" id="delete{{ $package->id }}" tabindex="-1" role="dialog"
                                                         aria-labelledby="deleteLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                                             <div class="modal-content">
@@ -160,7 +156,9 @@
                                                                         تأكيد حذف الباقة</h5>
                                                                 </div>
                                                                 <div class="border-0 modal-footer">
-                                                                    <form action="">
+                                                                    <form action="{{ route('admin.packages.destroy',$package->id) }}" method="POST">
+                                                                        @csrf
+                                                                        @method('DELETE')
                                                                         <button type="submit"
                                                                             class="btn btn-info">حذف</button>
                                                                     </form>
@@ -182,36 +180,6 @@
                     </div>
                 </div>
                 <!-- start pagination -->
-                {{-- <ul class="pagination pagination-info">
-                    <li class="page-item">
-                        <a class="page-link" href="#link" aria-label="Previous">
-                            <span aria-hidden="true"> <i class="fas fa-angle-right" aria-hidden="true"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#link">1</a>
-                    </li>
-                    <li class="page-item active">
-                        <a class="page-link" href="#link">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#link">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#link">4</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#link">5</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#link" aria-label="Next">
-                            <span aria-hidden="true">
-                                <i class="fas fa-angle-left" aria-hidden="true"></i>
-                            </span>
-                        </a>
-                    </li>
-                </ul> --}}
                 {{ $packages->links() }}
                 <!-- end pagination -->
             </div>

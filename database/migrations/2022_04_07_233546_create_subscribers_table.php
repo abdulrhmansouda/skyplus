@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('mother');
             $table->text('address')->nullable();
             $table->text('installation_address')->nullable();
-            $table->enum('status',['active','deactivate','closed'])->default('active');
+            $table->enum('status',['active','deactive','closed'])->default('active');
             $table->timestamp('package_start');
             $table->timestamp('package_end')->nullable();
             $table->timestamps();

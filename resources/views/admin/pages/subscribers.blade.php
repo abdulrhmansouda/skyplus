@@ -77,7 +77,7 @@
                             <div class="col-lg-4 col-md-6">
                                 <div class="form-group">
                                     <label>
-                                        التاريخ
+                                        تاريخ بدء الباقة
                                         <span class="text-danger"> * </span>
                                     </label>
                                     <input type="date" class="form-control date-now" required name="subscribtion_date">
@@ -294,7 +294,7 @@
                                                                         <h6>
                                                                             التاريخ
                                                                         </h6>
-                                                                        {{ $sub->created_at->format('d/m/Y') }}
+                                                                        {{ $sub->start_package }}
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-4 col-md-6">
@@ -359,6 +359,7 @@
                                             <form action="{{ route('admin.subscribers.update',$sub->id) }}" method="POST">
                                                 @csrf
                                                 @method('PUT')
+                                                <input type="hidden" name="_id" value="{{ $sub->id }}">
                                                 <div class="modal fade" id="edit{{ $sub->id }}" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                                                         <div class="modal-content">
@@ -432,11 +433,11 @@
                                                                     <div class="col-lg-4 col-md-6">
                                                                         <div class="form-group">
                                                                             <label>
-                                                                                التاريخ
+                                                                                تاريخ بدء الباقة
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <input name="subscribtion_date" type="date" class="form-control" value="{{ $sub->created_at->format('Y-m-d') }}" >
+                                                                            <input name="package_start" type="date" class="form-control" value="{{ date_format(date_create($sub->package_start),'Y-d-m') }}" >
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-4 col-md-6">
@@ -521,33 +522,6 @@
                                             <!-- end edit Modal -->
                                         </div>
                                         <!-- end edit 1 -->
-                                        <!-- start delete 1 -->
-                                        <div class="d-inline-block d-none">
-                                            <a href="javascript:;" class="px-1 text-xs text-secondary font-weight-bold " data-toggle="tooltip" data-original-title="Edit user" data-bs-toggle="modal" data-bs-target="#delete{{ $sub->id }}">
-                                                <i class="fas fa-trash fs-6"></i>
-                                            </a>
-                                            <!--start delete Modal -->
-                                            <div class="modal fade" id="delete{{ $sub->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="pb-0 text-center border-0 modal-header">
-                                                            <h5 class="modal-title" id="deleteLabel ">هل تريد
-                                                                أغلاق المشترك {{ $sub->name }} ؟</h5>
-                                                        </div>
-                                                        <div class="border-0 modal-footer">
-                                                            <form action="{{ route('admin.subscribers.destroy', $sub->id) }}" method="POST">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class="btn btn-info">حذف</button>
-                                                            </form>
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--end delete Modal -->
-                                        </div>
-                                        <!-- end delete -->
                                     </td>
                                 </tr>
                                 @endforeach

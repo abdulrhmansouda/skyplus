@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreSubscriberRequest;
+use App\Http\Requests\Admin\UpdateSubscriberRrequest;
 use App\Models\Package;
 use App\Models\Subscriber;
 use Illuminate\Http\Request;
@@ -62,8 +63,10 @@ class SubscriberController extends Controller
         $sub->subscriber_number = $request->subscriber_number;
         $sub->mother = $request->mother;
         $sub->phone = $request->phone;
-        $sub->subscribtion_date = $request->subscribtion_date;
+        $sub->package_start = $request->package_start;
+        // $sub->package_end = $request->package_start->addMonths(months);
         $sub->package_id = $request->package_id;
+        // dd($request->all());
         $sub->status = $request->status;
         $sub->address = $request->address;
         $sub->installation_address = $request->installation_address;
@@ -103,7 +106,7 @@ class SubscriberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateSubscriberRrequest $request, $id)
     {
         // dd($request->all());
         $sub = Subscriber::findOrFail($id);
@@ -114,7 +117,8 @@ class SubscriberController extends Controller
         $sub->subscriber_number = $request->subscriber_number;
         $sub->mother = $request->mother;
         $sub->phone = $request->phone;
-        $sub->subscribtion_date = $request->subscribtion_date;
+        $sub->package_start = $request->package_start;
+        // $sub->package_end = $request->package_start->addMonths(months);
         $sub->package_id = $request->package_id;
         $sub->status = $request->status;
         $sub->address = $request->address;

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('price');
-            $table->timestamp('start');
-            $table->timestamp('end')->nullable();
+            // $table->timestamp('start');
+            // $table->timestamp('end')->nullable();
             $table->timestamps();
         });
     }

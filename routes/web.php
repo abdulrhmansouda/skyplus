@@ -68,6 +68,9 @@ Route::middleware(['auth', 'admin'])
         Route::prefix('/packages')
             ->group(function () {
                 Route::get('/', [PackageController::class, 'index'])->name('packages');
+                Route::post('/store', [PackageController::class, 'store'])->name('packages.store');
+                Route::put('/update/{package}', [PackageController::class, 'update'])->name('packages.update');
+                Route::delete('/destroy/{package}', [PackageController::class, 'destroy'])->name('packages.destroy');
             });
 
         Route::prefix('/sitting')

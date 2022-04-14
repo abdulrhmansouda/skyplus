@@ -13,16 +13,20 @@
                             الرئيسية
                         @break
 
-                        @case('admin.points')
+                        @case('admin.points.index')
                             نقاط البيع
                         @break
 
-                        @case('admin.subscribers')
+                        @case('admin.subscribers.index')
                             المشتركين
                         @break
 
-                        @case('admin.packages')
+                        @case('admin.packages.index')
                             الباقات
+                        @break
+
+                        @case('admin.recharge.index')
+                            شحن رصيد
                         @break
 
                         @case('admin.setting.binding-app.index')
@@ -42,10 +46,11 @@
         <div class="collapse navbar-collapse mt-sm-0 mt-2 px-0" id="navbar">
             <div class="px-0 mt-2 collapse navbar-collapse mt-sm-0" id="navbar">
                 @switch(Route::currentRouteName())
-                    @case('admin.points')
-                    @case('admin.subscribers')
+                    @case('admin.points.index')
+                    @case('admin.subscribers.index')
+                    @case('admin.packages.index')
 
-                    @case('admin.packages')
+                    @case('admin.recharge.index')
                         <div class="px-0 mt-2 collapse navbar-collapse mt-sm-0" id="navbar">
                             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                                 <form action="" method="GET">

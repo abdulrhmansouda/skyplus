@@ -28,6 +28,8 @@ return new class extends Migration
             $table->timestamp('package_start');
             $table->timestamp('package_end')->nullable();
             $table->timestamps();
+            // $table->foreign('package_id')->references('id')->on('packages')
+            // ->onDelete('restrict');
         });
     }
 

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Package;
+use Exception;
 use Illuminate\Http\Request;
+use Mockery\Exception\InvalidOrderException;
 
 class PackageController extends Controller
 {
@@ -116,6 +118,13 @@ class PackageController extends Controller
     {
         $package->delete();
         session()->flash('success'," تم حذف الباقة $package->name بنجاح");
+        // try {
+        //     $package->delete();
+        //     session()->flash('success'," تم حذف الباقة $package->name بنجاح");
+        // } catch (Exception $e) {
+        //     session()->flash('error',"لا يمكن حذف الباقة $package->name لوجود مشتركين لهذه الباقة");
+        // }
+ 
         return redirect()->back();
     }
 }

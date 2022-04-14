@@ -213,7 +213,7 @@
                                         </p>
                                     </td>
                                     <td>
-                                        <p class="mb-0 text-xs font-weight-bold">{{ $sub->package->name }}</p>
+                                        <p class="mb-0 text-xs font-weight-bold">{{ $sub->package ? $sub->package->name : 'الباقة محذوفة' }}</p>
                                     </td>
                                     <td class="text-sm align-middle">
                                         @if ($sub->status === 'active')
@@ -302,7 +302,7 @@
                                                                         <h6>
                                                                             اسم الباقة
                                                                         </h6>
-                                                                        {{ $sub->package->name }}
+                                                                        {{ $sub->package ? $sub->package->name : 'الباقة محذوفة' }}
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-4 col-md-6">

@@ -5,23 +5,13 @@ use App\Http\Controllers\Admin\ChangePasswordController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\PointController;
+use App\Http\Controllers\Admin\RechargeController;
 use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Point\ChangePasswordController as PointChangePasswordController;
 use App\Http\Controllers\Point\SubscriberController as PointSubscriberController;
-// use App\Http\Controllers\Point\SubscriberController as PointSubscriberController;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -50,27 +40,37 @@ Route::middleware(['auth', 'admin'])
             });
 
         Route::prefix('/points')
+        ->name('points.')
             ->group(function () {
-                Route::get('/', [PointController::class, 'index'])->name('points');
-                Route::post('/store', [PointController::class, 'store'])->name('points.store');
-                Route::put('/update/{point}', [PointController::class, 'update'])->name('points.update');
-                Route::delete('/destroy/{point}', [PointController::class, 'destroy'])->name('points.destroy');
+                Route::get('/', [PointController::class, 'index'])->name('index');
+                Route::post('/store', [PointController::class, 'store'])->name('store');
+                Route::put('/update/{point}', [PointController::class, 'update'])->name('update');
+                Route::delete('/destroy/{point}', [PointController::class, 'destroy'])->name('destroy');
             });
 
         Route::prefix('/subscribers')
+        ->name('subscribers.')
             ->group(function () {
-                Route::get('/', [SubscriberController::class, 'index'])->name('subscribers');
-                Route::post('/store', [SubscriberController::class, 'store'])->name('subscribers.store');
-                Route::put('/update/{subscriber}', [SubscriberController::class, 'update'])->name('subscribers.update');
-                Route::delete('/destroy/{subscriber}', [SubscriberController::class, 'destroy'])->name('subscribers.destroy');
+                Route::get('/', [SubscriberController::class, 'index'])->name('index');
+                Route::post('/store', [SubscriberController::class, 'store'])->name('store');
+                Route::put('/update/{subscriber}', [SubscriberController::class, 'update'])->name('update');
+                Route::delete('/destroy/{subscriber}', [SubscriberController::class, 'destroy'])->name('destroy');
             });
 
         Route::prefix('/packages')
+        ->name('packages.')
             ->group(function () {
-                Route::get('/', [PackageController::class, 'index'])->name('packages');
-                Route::post('/store', [PackageController::class, 'store'])->name('packages.store');
-                Route::put('/update/{package}', [PackageController::class, 'update'])->name('packages.update');
-                Route::delete('/destroy/{package}', [PackageController::class, 'destroy'])->name('packages.destroy');
+                Route::get('/', [PackageController::class, 'index'])->name('index');
+                Route::post('/store', [PackageController::class, 'store'])->name('store');
+                Route::put('/update/{package}', [PackageController::class, 'update'])->name('update');
+                Route::delete('/destroy/{package}', [PackageController::class, 'destroy'])->name('destroy');
+            });
+
+            Route::prefix('/recharge')
+            ->name('recharge.')
+            ->group(function () {
+                Route::get('/', [RechargeController::class, 'index'])->name('index');
+                Route::put('/charge/{point}',[RechargeController::class,'charge'])->name('charge');
             });
 
         Route::prefix('/sitting')

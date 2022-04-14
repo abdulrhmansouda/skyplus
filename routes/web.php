@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BindingAppController;
 use App\Http\Controllers\Admin\ChangePasswordController;
 use App\Http\Controllers\Admin\HomeController;
@@ -71,6 +72,15 @@ Route::middleware(['auth', 'admin'])
             ->group(function () {
                 Route::get('/', [RechargeController::class, 'index'])->name('index');
                 Route::put('/charge/{point}',[RechargeController::class,'charge'])->name('charge');
+            });
+
+            Route::prefix('/admins')
+            ->name('admins.')
+            ->middleware(['superadmin'])
+            ->group(function () {
+                Route::get('/', [AdminController::class, 'index'])->name('index');
+                Route::post('/store',[AdminController::class,'store'])->name('store');
+                Route::delete('/destroy/{admin}',[AdminController::class,'destroy'])->name('destroy');
             });
 
         Route::prefix('/sitting')

@@ -37,7 +37,12 @@ class DatabaseSeeder extends Seeder
         User::factory()
         ->count(10)
         ->hasPoint(1)
-        ->create(['role'=>'point']);
+        ->create(['role' => 'point']);
+
+        User::factory()
+        ->count(100)
+        ->hasAdmin(1)
+        ->create(['role' => 'admin']);
 
         Package::factory()
         ->count(10)

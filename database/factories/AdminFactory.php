@@ -17,6 +17,8 @@ class AdminFactory extends Factory
     public function definition()
     {
         return [
+            'name' => $this->faker->name,
+            't_c' => $this->faker->numberBetween(10000000000,33333333333),  
             'phone' => $this->faker->phoneNumber,
         ];
     }

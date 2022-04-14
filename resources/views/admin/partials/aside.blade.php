@@ -182,8 +182,9 @@
                     <span class="nav-link-text me-1">تقارير</span>
                 </a>
             </li>
+            @if(Auth::user()->isSuperAdmin())
             <li class="nav-item">
-                <a class="nav-link " href="../pages/admins.html">
+                <a class="nav-link @if(Route::currentRouteName() === 'admin.admins.index') active @endif" href="{{ route('admin.admins.index') }}">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center ms-2 d-flex align-items-center justify-content-center">
 
@@ -197,6 +198,7 @@
                     <span class="nav-link-text me-1">المشرفين</span>
                 </a>
             </li>
+            @endif
             <li class="nav-item">
                 <button data-bs-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#setting"
                     aria-expanded="false" aria-controls="setting"

@@ -37,6 +37,10 @@
                             الاعدادات / تغيير كلمة المرور
                         @break
 
+                        @case('admin.admins.index')
+                              المشرفين
+                        @break
+
                         @default
                             need works from navbar
                     @endswitch
@@ -48,9 +52,11 @@
                 @switch(Route::currentRouteName())
                     @case('admin.points.index')
                     @case('admin.subscribers.index')
-                    @case('admin.packages.index')
 
+                    @case('admin.packages.index')
                     @case('admin.recharge.index')
+
+                    @case('admin.admins.index')
                         <div class="px-0 mt-2 collapse navbar-collapse mt-sm-0" id="navbar">
                             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                                 <form action="" method="GET">

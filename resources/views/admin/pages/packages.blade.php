@@ -153,7 +153,9 @@
                                                             <div class="modal-content">
                                                                 <div class="pb-0 text-center border-0 modal-header">
                                                                     <h5 class="modal-title" id="deleteLabel ">هل تريد
-                                                                        تأكيد حذف الباقة</h5>
+                                                                        تأكيد حذف الباقة
+                                                                        {{ $package->name }}
+                                                                    </h5>
                                                                 </div>
                                                                 <div class="border-0 modal-footer">
                                                                     <form action="{{ route('admin.packages.destroy',$package->id) }}" method="POST">

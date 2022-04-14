@@ -24,6 +24,10 @@ class DatabaseSeeder extends Seeder
             'user_id' => User::factory(1)->create(['username' => 'skyplus', 'role' => 'admin'])->first()->id,
         ]);
 
+        Admin::factory(1)->create([
+            'user_id' => User::factory(1)->create(['username' => 'skyplus1', 'role' => 'admin'])->first()->id,
+        ]);
+
         Point::factory(1)->create([
             'user_id' => User::factory(1)->create(['username' => 'point', 'role' => 'point'])->first()->id,
         ]);

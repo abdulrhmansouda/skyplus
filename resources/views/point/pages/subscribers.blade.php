@@ -71,9 +71,7 @@
                                     </th>
                                     <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         اسم الأم</th>
-                                    <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        رقم الهاتف
-                                    </th>
+                                  
                                     <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         تاريخ البدء </th>
 
@@ -107,9 +105,7 @@
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold">{{ $sub->mother }}</p>
                                     </td>
-                                    <td>
-                                        <p class="mb-0 text-xs font-weight-bold">{{ $sub->phone }}</p>
-                                    </td>
+                                  
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold">
                                             {{ $sub->start_package }}

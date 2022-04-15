@@ -5,10 +5,29 @@
 
 @section('content')
 <div class="py-4 container-fluid">
+    <div class="d-flex">
+        <button type="button" class="btn bg-gradient-dark mx-2 btn-sm" data-bs-toggle="modal" data-bs-target="#add">
+            إضافة
+        </button>
+        <!-- start import  -->
+        <form action="" class="me-auto">
+            <label class="btn btn-light mx-3  btn-sm ps-3 pe-3">
+                <i class="fas fa-file-import mx-1"></i>
+                استيراد
+                <input type="file" class="d-none" accept=".xlsx" onchange="form.submit()">
+            </label>
+        </form>
+        <!-- end import  -->
+        <!-- start export  -->
+        <form action="">
+            <button class="btn btn-white  btn-sm ps-3 pe-3">
+                <i class="fas fa-file-export mx-1"></i>
+                تصدير
+            </button>
+        </form>
+        <!-- end export  -->
+    </div>
     <!-- start add  -->
-    <button type="button" class="btn bg-gradient-dark btn-sm" data-bs-toggle="modal" data-bs-target="#add">
-        إضافة
-    </button>
     <!-- add Modal -->
     <form action="{{ route('admin.subscribers.store') }}" method="POST">
         @csrf
@@ -113,6 +132,15 @@
                             <div class="col-lg-4 col-md-6">
                                 <div class="form-group">
                                     <label>
+                                        منفذ المهمة
+                                        <span class="text-danger"> * </span>
+                                    </label>
+                                    <input type="text" class="form-control" required name=" ">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label>
                                         العنوان
                                         <span class="text-danger"> * </span>
                                     </label>
@@ -140,6 +168,36 @@
     </form>
     <!-- end add  -->
     <div class="row">
+      
+        <!-- start filter -->
+        <div class="col-md-6">
+            <form action="">
+                <div class="form-group form-row">
+                    <span>ترتيب حسب حقل</span>
+                    <select required class="form-select input-200" name="package_id" onchange="form.submit()">
+                        <option>اختر احد الحقول</option>
+                        <option>اسم المشترك</option>
+                        <option>T_C</option>
+                        <option>تاريخ البدء</option>
+                        <option>حالة المستخدم</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <!-- end filter -->
+          <!-- start pagination show  -->
+          <div class="col-md-6">
+            <form action="">
+                <div class="form-group form-row  flex-row-reverse">
+                    <button class="btn btn-secondary m-0 btn-sm">تغير</button>
+                    <input type="number" class="form-control input-75 py-1" name="" value="10">
+                    عرض في كل صفحة
+                </div>
+            </form>
+        </div>
+        <!-- end pagination show  -->
+    </div>
+    <div class="row">
         <div class="col-12">
             <div class="mb-4 card">
                 <div class="px-0 pt-0 pb-2 card-body">
@@ -165,10 +223,6 @@
                                         ID</th>
                                     <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         رقم المشترك</th>
-                                    <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        اسم الأم</th>
-                                    <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        رقم الهاتف</th>
                                     <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         تاريخ البدء </th>
                                     <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -196,12 +250,7 @@
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold">{{ $sub->subscriber_number }}</p>
                                     </td>
-                                    <td>
-                                        <p class="mb-0 text-xs font-weight-bold">{{ $sub->mother }}</p>
-                                    </td>
-                                    <td>
-                                        <p class="mb-0 text-xs font-weight-bold">{{ $sub->phone }}</p>
-                                    </td>
+
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold">
                                             {{ $sub->start_package }}
@@ -323,6 +372,14 @@
                                                                 <div class="col-lg-4 col-md-6">
                                                                     <div class="form-group">
                                                                         <h6>
+                                                                            منفذ المهمة
+                                                                        </h6>
+                                                                        محمد محمد
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-6">
+                                                                    <div class="form-group">
+                                                                        <h6>
                                                                             العنوان
                                                                         </h6>
                                                                         <p>
@@ -386,7 +443,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <input name="t_c" type="number" class="form-control" required value="{{ $sub->t_c }}" pattern="\d{11}"/>
+                                                                            <input name="t_c" type="number" class="form-control" required value="{{ $sub->t_c }}" pattern="\d{11}" />
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-4 col-md-6">
@@ -437,7 +494,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <input name="package_start" type="date" class="form-control" value="{{ date_format(date_create($sub->package_start),'Y-d-m') }}" >
+                                                                            <input name="package_start" type="date" class="form-control" value="{{ date_format(date_create($sub->package_start),'Y-d-m') }}">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-4 col-md-6">
@@ -492,6 +549,14 @@
                                                                     <div class="col-lg-4 col-md-6">
                                                                         <div class="form-group">
                                                                             <label>
+                                                                                منفذ المهمة
+                                                                            </label>
+                                                                            <input type="text" class="form-control" name=" " readonly>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label>
                                                                                 العنوان
                                                                                 <span class="text-danger"> *
                                                                                 </span>
@@ -522,14 +587,44 @@
                                             <!-- end edit Modal -->
                                         </div>
                                         <!-- end edit 1 -->
+                                        <!-- start delete 1 -->
+                                        <div class="d-inline-block">
+                                            <a href="javascript:;" class="px-1 text-xs text-secondary font-weight-bold " data-toggle="tooltip" data-original-title="delete user" data-bs-toggle="modal" data-bs-target="#delete{{ $sub->id }}">
+                                                <i class="fas fa-ban fs-6" aria-hidden="true"></i>
+                                            </a>
+                                            <!--start delete Modal -->
+                                            <div class="modal fade" id="delete{{ $sub->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="pb-0 text-center border-0 modal-header">
+                                                            <h5 class="modal-title" id="deleteLabel ">
+                                                                انت متأكد من أنك تريد ايقاف
+                                                                <strong>المشترك {{ $sub->name }}
+                                                                </strong>
+                                                            </h5>
+                                                        </div>
+                                                        <div class="border-0 modal-footer">
+                                                            <form action="http://127.0.0.1:8000/admin/dashboard/points/destroy/2" method="POST">
+                                                                <input type="hidden" name="_token" value="GkHNAkKU2r4Mqcqu0HhrWNFGuMeWyXcdCJzrpPF4"> <input type="hidden" name="_method" value="DELETE"> <button type="submit" class="btn btn-info">حذف</button>
+                                                            </form>
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--end delete Modal -->
+                                        </div>
+                                        <!-- end delete 1 -->
                                     </td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
+
                     </div>
                 </div>
             </div>
+
             <!-- start pagination -->
             {{ $subs->links() }}
             <!-- end pagination -->

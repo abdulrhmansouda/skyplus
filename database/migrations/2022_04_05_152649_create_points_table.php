@@ -25,7 +25,7 @@ return new class extends Migration
             $table->float('commission');
             // $table->text('description')->nullable();
             $table->boolean('borrowing_is_allowed')->default(false);
-            $table->enum('status',['active','deactivate'])->default('active');
+            $table->enum('status',['active','deactive','closed'])->default('active');
             $table->timestamps();
         });
     }

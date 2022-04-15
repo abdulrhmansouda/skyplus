@@ -1,0 +1,205 @@
+{{-- <div class="d-inline-block">
+                                                    <a href="javascript:;"
+                                                        class="px-1 text-xs text-secondary font-weight-bold "
+                                                        data-toggle="tooltip" data-original-title="Edit user"
+                                                        data-bs-toggle="modal" data-bs-target="#edit{{ $sub->id }}">
+                                                        <i class="fas fa-edit fs-6"></i>
+                                                    </a>
+                                                    <!-- satrt edit Modal -->
+                                                    <form action="{{ route('admin.subscribers.update', $sub->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <input type="hidden" name="_id" value="{{ $sub->id }}">
+                                                        <div class="modal fade" id="edit{{ $sub->id }}"
+                                                            tabindex="-1" role="dialog" aria-labelledby="add"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered modal-xl"
+                                                                role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="font-bold modal-title">تعديل الشترك
+                                                                        </h5>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="row">
+                                                                            <div class="col-lg-4 col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <label>
+                                                                                        اسم المشترك
+                                                                                        <span class="text-danger"> *
+                                                                                        </span>
+                                                                                    </label>
+                                                                                    <input name="name" type="text"
+                                                                                        class="form-control" required
+                                                                                        value="{{ $sub->name }}">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-lg-4 col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <label>
+                                                                                        T_C
+                                                                                        <span class="text-danger"> *
+                                                                                        </span>
+                                                                                    </label>
+                                                                                    <input name="t_c" type="number"
+                                                                                        class="form-control" required
+                                                                                        value="{{ $sub->t_c }}"
+                                                                                        pattern="\d{11}" />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-lg-4 col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <label>
+                                                                                        ID
+                                                                                        <span class="text-danger"> *
+                                                                                        </span>
+                                                                                    </label>
+                                                                                    <input name="sub_id" type="number"
+                                                                                        class="form-control" required
+                                                                                        value="{{ $sub->sub_id }}">
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-lg-4 col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <label>
+                                                                                        رقم المشترك
+                                                                                        <span class="text-danger"> *
+                                                                                        </span>
+                                                                                    </label>
+                                                                                    <input name="subscriber_number"
+                                                                                        type="number"
+                                                                                        class="form-control" required
+                                                                                        value="{{ $sub->subscriber_number }}">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-lg-4 col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <label>
+                                                                                        اسم الأم
+                                                                                        <span class="text-danger"> *
+                                                                                        </span>
+                                                                                    </label>
+                                                                                    <input name="mother" type="text"
+                                                                                        class="form-control" required
+                                                                                        value="{{ $sub->mother }}">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-lg-4 col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <label>
+                                                                                        رقم الهاتف
+                                                                                        <span class="text-danger"> *
+                                                                                        </span>
+                                                                                    </label>
+                                                                                    <input name="phone" type="tel"
+                                                                                        class="form-control" required
+                                                                                        value="{{ $sub->phone }}">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-lg-4 col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <label>
+                                                                                        تاريخ بدء الباقة
+                                                                                        <span class="text-danger"> *
+                                                                                        </span>
+                                                                                    </label>
+                                                                                    <input name="package_start" type="date"
+                                                                                        class="form-control"
+                                                                                        value="{{ date_format(date_create($sub->package_start), 'Y-d-m') }}">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-lg-4 col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <label>
+                                                                                        اسم الباقة
+                                                                                        <span class="text-danger"> *
+                                                                                        </span>
+                                                                                    </label>
+                                                                                    <select required class="form-select"
+                                                                                        name="package_id">
+                                                                                        @foreach ($packages as $package)
+                                                                                            <option
+                                                                                                value="{{ $package->id }}"
+                                                                                                @if ($sub->package_id === $package->id) selected @endif>
+                                                                                                {{ $package->name }}
+                                                                                            </option>
+                                                                                        @endforeach
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-lg-4 col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <label>
+                                                                                        حالة المستخدم
+                                                                                        <span class="text-danger"> *
+                                                                                        </span>
+                                                                                    </label>
+                                                                                    <select required class="form-select"
+                                                                                        name="status">
+                                                                                        @switch($sub->status)
+                                                                                            @case('active')
+                                                                                                <option value="active" selected> نشط
+                                                                                                </option>
+                                                                                                <option value="deactive"> غير نشط
+                                                                                                </option>
+                                                                                                <option value="closed">مغلق</option>
+                                                                                            @break
+
+                                                                                            @case('active')
+                                                                                                <option value="active"> نشط</option>
+                                                                                                <option value="deactive" selected>
+                                                                                                    غير نشط</option>
+                                                                                                <option value="closed">مغلق</option>
+                                                                                            @break
+
+                                                                                            @case('closed')
+                                                                                                <option value="active"> نشط</option>
+                                                                                                <option value="deactive"> غير نشط
+                                                                                                </option>
+                                                                                                <option value="closed" selected>مغلق
+                                                                                                </option>
+                                                                                            @break
+
+                                                                                            @default
+                                                                                        @endswitch
+
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-lg-4 col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <label>
+                                                                                        العنوان
+                                                                                        <span class="text-danger"> *
+                                                                                        </span>
+                                                                                    </label>
+                                                                                    <textarea name="address" cols="30" rows="3" required class="form-control"> {{ $sub->address }}</textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-lg-4 col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <label>
+                                                                                        مكان التركيب
+                                                                                        <span class="text-danger"> *
+                                                                                        </span>
+                                                                                    </label>
+                                                                                    <textarea name="installation_address" cols="30" rows="3" required
+                                                                                        class="form-control">{{ $sub->installation_address }}</textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="submit"
+                                                                            class="btn btn-info">حفظ</button>
+                                                                        <span type="button" class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">الغاء</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                    <!-- end edit Modal -->
+                                                </div> --}}

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('t_c');
             $table->string('phone');
-            $table->string('subscriber_number');
+            $table->string('subscriber_number')->unique();
             $table->string('mother');
             $table->text('address')->nullable();
             $table->text('installation_address')->nullable();

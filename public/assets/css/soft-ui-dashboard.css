@@ -25559,4 +25559,17 @@ display: flex;
 .input-200{
   max-width :200px;
 }
+.applyBtn{
+  margin-bottom: 0;
+  background: #21d4fd;
+}
+.cancelBtn {
+  margin-bottom: 0;
+}
+.bg-gray{
+  background:#eee;
+}
+.bg-gray{
+  background:#eee;
+}
 /*# sourceMappingURL=dashboard-free.css.map */

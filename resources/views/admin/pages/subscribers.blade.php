@@ -6,13 +6,13 @@
 @section('content')
 <div class="py-4 container-fluid">
     <div class="d-flex">
-        <button type="button" class="btn bg-gradient-dark mx-2 btn-sm" data-bs-toggle="modal" data-bs-target="#add">
+        <button type="button" class="mx-2 btn bg-gradient-dark btn-sm" data-bs-toggle="modal" data-bs-target="#add">
             إضافة
         </button>
         <!-- start import  -->
         <form action="" class="me-auto">
-            <label class="btn btn-light mx-3  btn-sm ps-3 pe-3">
-                <i class="fas fa-file-import mx-1"></i>
+            <label class="mx-3 btn btn-light btn-sm ps-3 pe-3">
+                <i class="mx-1 fas fa-file-import"></i>
                 استيراد
                 <input type="file" class="d-none" accept=".xlsx" onchange="form.submit()">
             </label>
@@ -20,9 +20,9 @@
         <!-- end import  -->
         <!-- start export  -->
         <form action="">
-            <button class="btn btn-white  btn-sm ps-3 pe-3">
-                <i class="fas fa-file-export mx-1"></i>
+            <button class="btn btn-white btn-sm ps-3 pe-3">
                 تصدير
+                <i class="mx-1 fas fa-file-export"></i>
             </button>
         </form>
         <!-- end export  -->
@@ -188,9 +188,9 @@
           <!-- start pagination show  -->
           <div class="col-md-6">
             <form action="">
-                <div class="form-group form-row  flex-row-reverse">
-                    <button class="btn btn-secondary m-0 btn-sm">تغير</button>
-                    <input type="number" class="form-control input-75 py-1" name="" value="10">
+                <div class="flex-row-reverse form-group form-row">
+                    <button class="m-0 btn btn-secondary btn-sm">تغير</button>
+                    <input type="number" class="py-1 form-control input-75" name="" value="10">
                     عرض في كل صفحة
                 </div>
             </form>
@@ -407,6 +407,7 @@
                                             </div>
                                         </div>
                                         <!-- end view1 -->
+                                        
                                         <!-- start edit 1 -->
                                         <div class="d-inline-block">
                                             <a href="javascript:;" class="px-1 text-xs text-secondary font-weight-bold " data-toggle="tooltip" data-original-title="Edit user" data-bs-toggle="modal" data-bs-target="#edit{{ $sub->id }}">

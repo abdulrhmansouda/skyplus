@@ -16,11 +16,11 @@ class Subscriber extends Model
     }
 
     public function getStartPackageAttribute(){
-        return date_format(date_create($this->package_start), 'd/m/Y');
+        return date_format(date_create($this->package_start), 'Y-m-d');
     }
 
     public function getEndPackageAttribute(){
-        return date_format(date_create($this->package_end), 'd/m/Y');
+        return date_format(date_create($this->package_end), 'Y-m-d');
     }
 
     public function getDaysToEndAttribute(){

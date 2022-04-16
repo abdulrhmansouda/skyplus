@@ -64,9 +64,8 @@ class SubscriberController extends Controller
         $sub->mother = $request->mother;
         $sub->phone = $request->phone;
         $sub->package_start = $request->package_start;
-        // $sub->package_end = $request->package_start->addMonths(months);
+        $sub->package_end = $request->package_start;
         $sub->package_id = $request->package_id;
-        // dd($request->all());
         $sub->status = $request->status;
         $sub->address = $request->address;
         $sub->installation_address = $request->installation_address;
@@ -74,30 +73,8 @@ class SubscriberController extends Controller
 
         session()->flash('success', "تم اضافة المشترك $sub->name بنجاح");
 
-        return redirect(route('admin.subscribers'));
+        return redirect()->back();
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    // /**
-    //  * Show the form for editing the specified resource.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function edit($id)
-    // {
-    //     //
-    // }
 
     /**
      * Update the specified resource in storage.
@@ -108,7 +85,6 @@ class SubscriberController extends Controller
      */
     public function update(UpdateSubscriberRrequest $request, $id)
     {
-        // dd($request->all());
         $sub = Subscriber::findOrFail($id);
 
         $sub->name = $request->name;
@@ -118,7 +94,7 @@ class SubscriberController extends Controller
         $sub->mother = $request->mother;
         $sub->phone = $request->phone;
         $sub->package_start = $request->package_start;
-        // $sub->package_end = $request->package_start->addMonths(months);
+        $sub->package_end = $request->package_start;
         $sub->package_id = $request->package_id;
         $sub->status = $request->status;
         $sub->address = $request->address;
@@ -127,7 +103,7 @@ class SubscriberController extends Controller
 
         session()->flash('success', "تم تعديل المشترك $sub->name بنجاح");
 
-        return redirect(route('admin.subscribers'));
+        return redirect()->back();
     }
 
     /**
@@ -138,7 +114,6 @@ class SubscriberController extends Controller
      */
     public function destroy(Subscriber $subscriber)
     {
-        // $subscriber->delete();
         if ($subscriber->status !== 'closed') {
             $subscriber->status = 'closed';
             $subscriber->update();
@@ -146,6 +121,6 @@ class SubscriberController extends Controller
         } else {
             session()->flash('success', "المشترك $subscriber->name مغلق بالفعل!");
         }
-        return redirect(route('admin.subscribers'));
+        return redirect()->back();
     }
 }

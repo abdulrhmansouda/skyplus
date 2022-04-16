@@ -31,7 +31,7 @@ class StoreSubscriberRequest extends FormRequest
             'sub_id' => ['required' ,'numeric' ,'unique:subscribers' ,],
             'subscriber_number' => ['required' ,'numeric' ,'unique:subscribers' ,],
             'mother' => ['required' ,'string' ,'min:2' ,'max:100' ],
-            'subscribtion_date' => ['required' ,'date' ,],
+            'package_start' => ['required' ,'date' ,],
             'package_id' => ['required' ,'exists:packages,id' ,],
             'status' => ['required' , Rule::in(['active', 'deactive' , 'closed']) ],
             'address' => ['required' ,'string' ,'max:1000' ],

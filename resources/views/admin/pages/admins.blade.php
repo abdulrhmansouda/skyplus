@@ -317,7 +317,7 @@
                                                             <form action="{{ route('admin.admins.destroy',$admin->id) }}" method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <button type="submit" class="btn btn-info">حذف</button>
+                                                                <button type="submit" class="btn btn-info">ايقاف</button>
                                                             </form>
                                                         </div>
                                                     </div>

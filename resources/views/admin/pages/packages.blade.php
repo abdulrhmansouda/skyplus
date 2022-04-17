@@ -153,7 +153,7 @@
                                                             <div class="modal-content">
                                                                 <div class="pb-0 text-center border-0 modal-header">
                                                                     <h5 class="modal-title" id="deleteLabel ">هل تريد
-                                                                        تأكيد حذف الباقة
+                                                                        تأكيد ايقاف الباقة
                                                                         {{ $package->name }}
                                                                     </h5>
                                                                 </div>
@@ -162,7 +162,7 @@
                                                                         @csrf
                                                                         @method('DELETE')
                                                                         <button type="submit"
-                                                                            class="btn btn-info">حذف</button>
+                                                                            class="btn btn-info">ايقاف</button>
                                                                     </form>
                                                                     <button type="button" class="btn btn-secondary"
                                                                         data-bs-dismiss="modal">الغاء</button>

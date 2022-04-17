@@ -25572,4 +25572,8 @@ display: flex;
 .bg-gray{
   background:#eee;
 }
+.information-user i{
+width:25px;
+  text-align:center;
+}
 /*# sourceMappingURL=dashboard-free.css.map */

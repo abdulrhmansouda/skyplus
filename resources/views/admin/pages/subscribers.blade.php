@@ -613,7 +613,7 @@
                                                             <form action="{{ route('admin.subscribers.destroy',$sub->id) }}" method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                 <button type="submit" class="btn btn-info">حذف</button>
+                                                                 <button type="submit" class="btn btn-info">ايقاف</button>
                                                             </form>
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
                                                         </div>

@@ -50,7 +50,7 @@
                                         </li>
                                     @else
                                         <li class="page-item">
-                                            <a class="page-link" href="{{ $url }}&pagination_number={{ $paginator->perPage() }}">{{ $page }}</a>
+                                            <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                                         </li>
                                     @endif
                                 @endforeach

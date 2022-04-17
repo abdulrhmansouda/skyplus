@@ -33,6 +33,7 @@ class UpdateSubscriberRrequest extends FormRequest
             'package_start' => ['required' ,'date' ,],
             'package_id' => ['required' ,'exists:packages,id' ,],
             'status' => ['required' , Rule::in(['active', 'deactive' , 'closed']) ],
+            'mission_executor' => ['required','string','max:1000'],
             'address' => ['required' ,'string' ,'max:1000' ],
             'installation_address' => ['required' ,'string' ,'max:1000' ],
 

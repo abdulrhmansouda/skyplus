@@ -11,8 +11,24 @@ class Subscriber extends Model
 {
     use HasFactory;
 
+    protected $with=[
+        'package',
+    ];
+
     public function package(){
         return $this->belongsTo(Package::class);
+    }
+
+    public function getPackageNameAttribute(){
+        return $this->package->name;
+    }
+
+    public function getStateAttribute(){
+        switch($this->status){
+            case 'active': return 'نشط';
+            case 'deactive': return 'غير نشط';
+            case 'closed': return 'مغلق';
+        }
     }
 
     public function getStartPackageAttribute(){

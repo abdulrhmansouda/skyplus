@@ -21,7 +21,8 @@
         <!-- start export  -->
         <form action="{{ route('admin.subscribers.export') }}" method="GET">
             <input type="hidden" name="pagination_number" value="{{ $pagination_number }}" >
-            <input type="hidden" name="page" value="{{ $page - 1 }}" >
+            <input type="hidden" name="page" value="{{ $page }}" >
+            <input type="hidden" name="sort_by" value="{{ $sort_by }}">
 
             <button class="btn btn-white btn-sm ps-3 pe-3">
                 تصدير
@@ -102,7 +103,7 @@
                                         تاريخ بدء الباقة
                                         <span class="text-danger"> * </span>
                                     </label>
-                                    <input type="date" class="form-control date-now" required name="subscribtion_date">
+                                    <input type="date" class="form-control date-now" required name="package_start">
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6">
@@ -138,7 +139,7 @@
                                         منفذ المهمة
                                         <span class="text-danger"> * </span>
                                     </label>
-                                    <input type="text" class="form-control" required name=" ">
+                                    <input type="text" class="form-control" required name="mission_executor">
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6">
@@ -174,15 +175,16 @@
       
         <!-- start filter -->
         <div class="col-md-6">
-            <form action="">
+            <form action="" method="GET">
+                <input type="hidden" name="pagination_number" value="{{ $pagination_number }}">
+                <input type="hidden" name="page" value="{{ $page }}">
                 <div class="form-group form-row">
                     <span>ترتيب حسب حقل</span>
-                    <select required class="form-select input-200" name="package_id" onchange="form.submit()">
-                        <option>اختر احد الحقول</option>
-                        <option>اسم المشترك</option>
-                        <option>T_C</option>
-                        <option>تاريخ البدء</option>
-                        <option>حالة المستخدم</option>
+                    <select required class="form-select input-200" name="sort_by" onchange="form.submit()">
+                        <option @if($sort_by === 'name') selected @endif value="name">اسم المشترك</option>
+                        <option @if($sort_by === 't_c') selected @endif value="t_c">T_C</option>
+                        <option @if($sort_by === 'package_start') selected @endif value="package_start">تاريخ البدء</option>
+                        <option @if($sort_by === 'status') selected @endif value="status">حالة المستخدم</option>
                     </select>
                 </div>
             </form>
@@ -377,7 +379,7 @@
                                                                         <h6>
                                                                             منفذ المهمة
                                                                         </h6>
-                                                                        محمد محمد
+                                                                        {{ $sub->mission_executor }}
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-4 col-md-6">
@@ -498,7 +500,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <input name="package_start" type="date" class="form-control" value="{{ date_format(date_create($sub->package_start),'Y-d-m') }}">
+                                                                            <input name="package_start" type="date" class="form-control" value="{{ $sub->start_package }}">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-4 col-md-6">
@@ -555,7 +557,7 @@
                                                                             <label>
                                                                                 منفذ المهمة
                                                                             </label>
-                                                                            <input type="text" class="form-control" name=" " readonly>
+                                                                            <input type="text" class="form-control" name="mission_executor" value="{{ $sub->mission_executor }}" readonly>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-4 col-md-6">
@@ -608,8 +610,10 @@
                                                             </h5>
                                                         </div>
                                                         <div class="border-0 modal-footer">
-                                                            <form action="http://127.0.0.1:8000/admin/dashboard/points/destroy/2" method="POST">
-                                                                <input type="hidden" name="_token" value="GkHNAkKU2r4Mqcqu0HhrWNFGuMeWyXcdCJzrpPF4"> <input type="hidden" name="_method" value="DELETE"> <button type="submit" class="btn btn-info">حذف</button>
+                                                            <form action="{{ route('admin.subscribers.destroy',$sub->id) }}" method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                 <button type="submit" class="btn btn-info">حذف</button>
                                                             </form>
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
                                                         </div>

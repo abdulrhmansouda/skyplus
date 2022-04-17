@@ -186,7 +186,7 @@
             <li class="nav-item">
                 <a class="nav-link @if(Route::currentRouteName() === 'admin.admins.index') active @endif" href="{{ route('admin.admins.index') }}">
                     <div
-                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center ms-2 d-flex align-items-center justify-content-center">
+                        class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
 
                         <svg xmlns="http://www.w3.org/2000/svg" class="text-dark " width="20" viewBox="0 0 20 20"
                             fill="currentColor">
@@ -204,7 +204,7 @@
                     aria-expanded="false" aria-controls="setting"
                     class="nav-link @if (Route::currentRouteName() === 'admin.setting.binding-app.index' || Route::currentRouteName() === 'admin.setting.change-password.index') active @endif" href="../pages/setting.html">
                     <div
-                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center ms-2 d-flex align-items-center justify-content-center">
+                        class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1"
                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>settings</title>
@@ -237,6 +237,7 @@
                         @endif
                         <li class="@if (Route::currentRouteName() === 'admin.setting.change-password.index') active @endif"><a 
                              href="{{ route('admin.setting.change-password.index') }}">تغير كلمة المرور</a></li>
+                        <li class=""><a href=""> معلومات التواصل</a></li>
                     </ul>
                     </a>
             </li>

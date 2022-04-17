@@ -19,7 +19,10 @@
         </form>
         <!-- end import  -->
         <!-- start export  -->
-        <form action="">
+        <form action="{{ route('admin.subscribers.export') }}" method="GET">
+            <input type="hidden" name="pagination_number" value="{{ $pagination_number }}" >
+            <input type="hidden" name="page" value="{{ $page - 1 }}" >
+
             <button class="btn btn-white btn-sm ps-3 pe-3">
                 تصدير
                 <i class="mx-1 fas fa-file-export"></i>
@@ -187,10 +190,10 @@
         <!-- end filter -->
           <!-- start pagination show  -->
           <div class="col-md-6">
-            <form action="">
+            <form action="" method="GET">
                 <div class="flex-row-reverse form-group form-row">
                     <button class="m-0 btn btn-secondary btn-sm">تغير</button>
-                    <input type="number" class="py-1 form-control input-75" name="" value="10">
+                    <input type="number" class="py-1 form-control input-75" name="pagination_number" value="{{ $pagination_number }}">
                     عرض في كل صفحة
                 </div>
             </form>

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreSubscriberRequest;
 use App\Http\Requests\Admin\UpdateSubscriberRrequest;
 use App\Models\Package;
 use App\Models\Subscriber;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SubscriberController extends Controller
 {
@@ -18,33 +20,32 @@ class SubscriberController extends Controller
      */
     public function index(Request $request)
     {
-
+// dd($request->all());
         if ($request->s) {
             $subs = Subscriber::where('name', 'LIKE', "%$request->s%")
             ->orWhere('t_c', 'LIKE', "%$request->s%")
             ->orWhere('sub_id', 'LIKE', "%$request->s%")
             ->orWhere('subscriber_number', 'LIKE', "%$request->s%")
             ->orWhere('phone', 'LIKE', "%$request->s%")
-            ->paginate(10);
+            ->paginate($request->pagination_number);
         } else {
-            $subs = Subscriber::paginate(10);
+            $subs = Subscriber::paginate($request->pagination_number);
         }
         return view('admin.pages.subscribers', [
             'subs' => $subs,
             'packages' => Package::all(),
             'search' => $request->s,
+            'page' => $request->page ?? 1,
+            'pagination_number' => $request->pagination_number ?? 10,
         ]);
     }
 
-    // /**
-    //  * Show the form for creating a new resource.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function create()
-    // {
-    //     //
-    // }
+    public function export(Request $request){
+        // dd($request->all());
+        $subs = Subscriber::skip($request->page*$request->pagination_number)->take($request->pagination_number);
+        $export = new UsersExport($subs);
+        return Excel::download($export,'subscribers.xlsx');
+    }
 
     /**
      * Store a newly created resource in storage.

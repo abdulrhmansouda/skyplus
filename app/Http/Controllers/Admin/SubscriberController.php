@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\SubscribersExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreSubscriberRequest;
 use App\Http\Requests\Admin\UpdateSubscriberRrequest;
 use App\Models\Package;
 use App\Models\Subscriber;
+use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SubscriberController extends Controller
 {
@@ -19,32 +23,43 @@ class SubscriberController extends Controller
     public function index(Request $request)
     {
 
-        if ($request->s) {
-            $subs = Subscriber::where('name', 'LIKE', "%$request->s%")
+        $pagination_number = $request->pagination_number ?? 10;
+        $sort_by = $request->sort_by ?? 'name';
+        $page = $request->page ?? 1;
+        $s = $request->s ?? '';
+        $subs = Subscriber::where('name', 'LIKE', "%$request->s%")
             ->orWhere('t_c', 'LIKE', "%$request->s%")
             ->orWhere('sub_id', 'LIKE', "%$request->s%")
             ->orWhere('subscriber_number', 'LIKE', "%$request->s%")
-            ->orWhere('phone', 'LIKE', "%$request->s%")
-            ->paginate(10);
-        } else {
-            $subs = Subscriber::paginate(10);
+            ->orWhere('phone', 'LIKE', "%$request->s%");
+
+        if ($request->sort_by) {
+                $subs->orderBy($request->sort_by);
         }
+
+
         return view('admin.pages.subscribers', [
-            'subs' => $subs,
+            'subs' => $subs->paginate($request->pagination_number)
+            ->appends(['pagination_number' => $pagination_number,'sort_by' => $sort_by]),
             'packages' => Package::all(),
-            'search' => $request->s,
+            'search' => $s ,
+            'page' => $page ,
+            'pagination_number' => $pagination_number ,
+            'sort_by' => $sort_by,
         ]);
     }
 
-    // /**
-    //  * Show the form for creating a new resource.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function create()
-    // {
-    //     //
-    // }
+    public function export(Request $request)
+    {
+        // dd($request->all());
+        $pagination_number = $request->pagination_number ?? 10;
+        $sort_by = $request->sort_by ?? 'name';
+        $page = ( $request->page -1 ) ?? 1;
+        $subs = Subscriber::orderBy($sort_by)->skip($page * $pagination_number)
+        ->take($pagination_number);
+        $export = new SubscribersExport($subs);
+        return Excel::download($export, 'subscribers.xlsx');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -67,6 +82,7 @@ class SubscriberController extends Controller
         $sub->package_end = $request->package_start;
         $sub->package_id = $request->package_id;
         $sub->status = $request->status;
+        $sub->mission_executor = $request->mission_executor;
         $sub->address = $request->address;
         $sub->installation_address = $request->installation_address;
         $sub->save();
@@ -97,6 +113,7 @@ class SubscriberController extends Controller
         $sub->package_end = $request->package_start;
         $sub->package_id = $request->package_id;
         $sub->status = $request->status;
+        $sub->mission_executor = $request->mission_executor;
         $sub->address = $request->address;
         $sub->installation_address = $request->installation_address;
         $sub->update();
@@ -119,7 +136,7 @@ class SubscriberController extends Controller
             $subscriber->update();
             session()->flash('success', "تم اغلاق المشترك $subscriber->name بنجاح");
         } else {
-            session()->flash('success', "المشترك $subscriber->name مغلق بالفعل!");
+            session()->flash('error', "المشترك $subscriber->name مغلق بالفعل!");
         }
         return redirect()->back();
     }

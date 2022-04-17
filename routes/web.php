@@ -56,6 +56,7 @@ Route::middleware(['auth', 'admin'])
                 Route::post('/store', [SubscriberController::class, 'store'])->name('store');
                 Route::put('/update/{subscriber}', [SubscriberController::class, 'update'])->name('update');
                 Route::delete('/destroy/{subscriber}', [SubscriberController::class, 'destroy'])->name('destroy');
+                Route::get('/export',[SubscriberController::class,'export'])->name('export');
             });
 
         Route::prefix('/packages')

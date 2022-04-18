@@ -135,9 +135,9 @@ class PointController extends Controller
         if ($point->status !== 'closed') {
             $point->status = 'closed';
             $point->update();
-            session()->flash('success', "تم اغلاق المشترك $point->name بنجاح");
+            session()->flash('success', "تم اغلاق النقطة $point->name بنجاح");
         } else {
-            session()->flash('error', "المشترك $point->name مغلق بالفعل!");
+            session()->flash('error', "النقطة $point->name مغلق بالفعل!");
         }
         return redirect()->back();
     }

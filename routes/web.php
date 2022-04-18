@@ -83,6 +83,7 @@ Route::middleware(['auth', 'admin'])
             ->group(function () {
                 Route::get('/', [AdminController::class, 'index'])->name('index');
                 Route::post('/store',[AdminController::class,'store'])->name('store');
+                Route::put('/update/{admin}' ,[AdminController::class,'update'])->name('update');
                 Route::delete('/destroy/{admin}',[AdminController::class,'destroy'])->name('destroy');
             });
 

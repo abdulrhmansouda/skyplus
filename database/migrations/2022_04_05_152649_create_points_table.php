@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('t_c');
             $table->string('phone');
             $table->float('commission');
-            // $table->text('description')->nullable();
             $table->boolean('borrowing_is_allowed')->default(false);
             $table->enum('status',['active','closed'])->default('active');
             $table->timestamps();

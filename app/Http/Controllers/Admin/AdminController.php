@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreAdminRequest;
+use App\Http\Requests\Admin\UpdateAdminRequest;
 use App\Models\Admin;
 use App\Models\User;
-// use App\Http\Middleware\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 
 
 class AdminController extends Controller
@@ -35,72 +35,37 @@ class AdminController extends Controller
         ]);
     }
 
-    // /**
-    //  * Show the form for creating a new resource.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function create()
-    // {
-    //     //
-    // }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAdminRequest $request)
     {
-        // dd($request->all());
-        $request->validate([
-            'name' => ['required', 'string', 'min:2',],
-            'username' => ['required', 'string', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            't_c' => ['required', 'string ', 'min:11', 'max:11'],
-            'phone' => ['required', 'string ', 'max:100'],
-        ]);
-        // dd(1);
-        // $user = 
 
-        Admin::create([
-            'name' => $request->name,
-            'user_id' => User::create([
-                'username' => $request->username,
-                'role' => 'admin',
-                'password' => Hash::make($request->password),
-            ])->id,
-            't_c' => $request->t_c,
-            'phone' => $request->phone,
-        ]);
+        $user = new User;
+            $user->username = $request->username;
+            $user->role = 'admin';
+            $user->password = Hash::make($request->password);
+
+            $user->save();
+
+            $admin = new Admin;
+
+            $admin->name = $request->name;
+            $admin->user_id = $user->id;
+            $admin->t_c = $request->t_c;
+            $admin->phone = $request->phone;
+            // $admin->status = $request->status;
+
+            $admin->save();
 
         session()->flash('success', 'تم انشاء المشرف بنجاح');
 
         return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -109,9 +74,30 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateAdminRequest $request, $id)
     {
-        //
+        // dd($request->all());
+        $user = User::findOrFail($id);
+        $admin = $user->admin;
+
+        $user->username = $request->username;
+        // $user->role = 'admin';
+        $user->password = $request->password ? Hash::make($request->password) : $user->password;
+
+        $user->update();
+
+        // $admin = new Admin;
+
+        $admin->name = $request->name;
+        $admin->user_id = $user->id;
+        $admin->t_c = $request->t_c;
+        $admin->phone = $request->phone;
+        $admin->status = $request->status;
+        $admin->update();
+
+    session()->flash('success', 'تم تعديل المشرف بنجاح');
+
+    return redirect()->back();
     }
 
     /**
@@ -122,16 +108,13 @@ class AdminController extends Controller
      */
     public function destroy(Admin $admin)
     {
-        if ($admin->user->isSuperAdmin()) {
-            session()->flash('error', 'هذا حساب الsuper admin لا يمكن حذفه');
-            return redirect()->back();
+        if ($admin->status !== 'closed') {
+            $admin->status = 'closed';
+            $admin->update();
+            session()->flash('success', "تم اغلاق المشرف $admin->name بنجاح");
+        } else {
+            session()->flash('error', "المشرف $admin->name مغلق بالفعل!");
         }
-
-        $user = User::findOrFail($admin->user_id);
-        $admin->delete();
-        $user->delete();
-
-        session()->flash('success', "تم حذف المشرف $admin->name بنجاح");
         return redirect()->back();
     }
 }

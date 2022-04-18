@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('t_c');
             $table->string('phone');
+            $table->enum('status',['active','closed'])->default('active');
             $table->timestamps();
         });
     }

@@ -137,8 +137,11 @@
                                         <p class="text-xs font-weight-bold mb-0">{{ $admin->t_c }}</p>
                                     </td>
                                     <td class="text-sm align-middle">
+                                        @if ($admin->status === 'active')
                                         <span class="badge badge-sm bg-gradient-success">مفعل</span>
-                                    </td>
+                                        @else
+                                        <span class="badge badge-sm bg-gradient-danger">مغلق</span>
+                                        @endif                                    </td>
                                     <td class="align-middle ">
                                         <!-- start view1 -->
                                         <div class="d-inline-block">
@@ -192,8 +195,11 @@
                                                                         <h6>
                                                                             حالة المستخدم
                                                                         </h6>
+                                                                        @if ($admin->status === 'active')
                                                                         <span class="badge badge-sm bg-gradient-success">مفعل</span>
-                                                                    </div>
+                                                                        @else
+                                                                        <span class="badge badge-sm bg-gradient-danger">مغلق</span>
+                                                                        @endif                                                                            </div>
                                                                 </div>
 
                                                             </div>
@@ -209,12 +215,14 @@
                                         <!-- end view1 -->
                                         <!-- start edit  -->
                                         <div class="d-inline-block">
-                                            <a href="javascript:;" class="px-1 text-xs text-secondary font-weight-bold " data-toggle="tooltip" data-original-title="Edit user" data-bs-toggle="modal" data-bs-target="#edit2">
+                                            <a href="javascript:;" class="px-1 text-xs text-secondary font-weight-bold " data-toggle="tooltip" data-original-title="Edit user" data-bs-toggle="modal" data-bs-target="#edit{{ $admin->id }}">
                                                 <i class="fas fa-edit fs-6" aria-hidden="true"></i>
                                             </a>
                                             <!-- satrt edit Modal -->
-                                            <form action="http://127.0.0.1:8000/admin/dashboard/points/update/2" method="POST" enctype="multipart/form-data">
-                                                <input type="hidden" name="_token" value="GkHNAkKU2r4Mqcqu0HhrWNFGuMeWyXcdCJzrpPF4"> <input type="hidden" name="_method" value="PUT"> <input type="hidden" name="id" value="4">
+                                            <form action="{{ route('admin.admins.update',$admin->id)}}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <input type="hidden" name="id" value="{{ $admin->user->id }}">
                                                 <div class="modal fade" id="edit{{ $admin->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
@@ -230,7 +238,7 @@
                                                                                 اسم المشرف
                                                                                 <span class="text-danger"> * </span>
                                                                             </label>
-                                                                            <input name="name" type="text" class="form-control" required>
+                                                                            <input name="name" type="text" class="form-control" required value="{{ $admin->name }}">
                                                                         </div>
                                                                     </div>
                                                                     <div class=" col-md-6">
@@ -239,16 +247,16 @@
                                                                                 اسم المستخدم
                                                                                 <span class="text-danger"> * </span>
                                                                             </label>
-                                                                            <input name="username" type="text" class="form-control" required>
+                                                                            <input name="username" type="text" class="form-control" required value="{{ $admin->user->username }}">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
                                                                             <label>
                                                                                 كلمة المرور
-                                                                                <span class="text-danger"> * </span>
+                                                                                {{-- <span class="text-danger"> * </span> --}}
                                                                             </label>
-                                                                            <input name="password" type="password" class="form-control" required>
+                                                                            <input name="password" type="password" class="form-control" >
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6">
@@ -257,7 +265,7 @@
                                                                                 هاتف
                                                                                 <span class="text-danger"> * </span>
                                                                             </label>
-                                                                            <input name="phone" type="tel" class="form-control" required>
+                                                                            <input name="phone" type="tel" class="form-control" required value="{{ $admin->phone }}">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6">
@@ -266,7 +274,7 @@
                                                                                 t_c
                                                                                 <span class="text-danger"> * </span>
                                                                             </label>
-                                                                            <input name="t_c" type="number" class="form-control" required>
+                                                                            <input name="t_c" type="number" class="form-control" required value="{{ $admin->t_c }}">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6">
@@ -276,9 +284,9 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <select required="" class="form-select" name="status">
-                                                                                <option value="active" selected=""> مفعل</option>
-                                                                                <option value="closed">مفلق</option>
+                                                                            <select required class="form-select" name="status">
+                                                                                <option value="active" @if($admin->status === 'active') selected @endif> مفعل</option>
+                                                                                <option value="closed" @if($admin->status === 'closed') selected @endif>مفلق</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>

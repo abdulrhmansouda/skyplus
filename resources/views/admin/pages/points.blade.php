@@ -176,8 +176,11 @@
                                         <p class="mb-0 text-xs font-weight-bold">{{ $point->t_c }}</p>
                                     </td>
                                     <td class="text-sm align-middle">
+                                        @if ($point->status === 'active')
                                         <span class="badge badge-sm bg-gradient-success">مفعل</span>
-                                    </td>
+                                        @else
+                                        <span class="badge badge-sm bg-gradient-danger">مغلق</span>
+                                        @endif                                    </td>
 
                                     <td class="align-middle ">
                                         <!-- start view1 -->
@@ -255,8 +258,11 @@
                                                                         <h6>
                                                                             حالة المستخدم
                                                                         </h6>
+                                                                        @if ($point->status === 'active')
                                                                         <span class="badge badge-sm bg-gradient-success">مفعل</span>
-                                                                    </div>
+                                                                        @else
+                                                                        <span class="badge badge-sm bg-gradient-danger">مغلق</span>
+                                                                        @endif                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <h6>مسموح الدين</h6>

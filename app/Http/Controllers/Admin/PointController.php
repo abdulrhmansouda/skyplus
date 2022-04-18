@@ -19,28 +19,16 @@ class PointController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->s){
-            $points = Point::where('name','LIKE',"%$request->s%")->paginate(10);
-        }
-        else{
-            $points = Point::paginate(10);
-        }
-        // dd($points);
-        return view('admin.pages.points',[
-            'points' => $points,
-            'search' => $request->s,
+
+        $s = $request->s ?? '';
+
+        $points = Point::where('name', 'LIKE', "%$s%");
+
+        return view('admin.pages.points', [
+            'points' => $points->paginate(10),
+            'search' => $s,
         ]);
     }
-
-    // /**
-    //  * Show the form for creating a new resource.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function create()
-    // {
-    //     //
-    // }
 
     /**
      * Store a newly created resource in storage.
@@ -52,9 +40,9 @@ class PointController extends Controller
     {
         // dd($request->all());
         $point = new Point;
-        if($request->hasFile('image') && $request->file('image')->isValid()){
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $image = $request->file('image');
-            $point->image = $image->store('points','images');
+            $point->image = $image->store('points', 'images');
         }
 
         $point->user_id = User::create([
@@ -63,9 +51,9 @@ class PointController extends Controller
             'password' => Hash::make($request->password),
         ])->id;
 
-         if($request->borrowing_is_allowed){
-             $point->borrowing_is_allowed = true;
-         }
+        if ($request->borrowing_is_allowed) {
+            $point->borrowing_is_allowed = true;
+        }
 
         $point->name = $request->name;
 
@@ -79,37 +67,13 @@ class PointController extends Controller
 
         $point->address = $request->address;
 
-        // $point->description = $request->description;
-
         $point->save();
 
-        session()->flash('success' ,'تم أنشاء النقطة الجديدة بنجاح');
+        session()->flash('success', 'تم أنشاء النقطة الجديدة بنجاح');
 
-        return redirect(route('admin.points'));
-
+        return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    // /**
-    //  * Show the form for editing the specified resource.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function edit($id)
-    // {
-    //     //
-    // }
 
     /**
      * Update the specified resource in storage.
@@ -121,43 +85,44 @@ class PointController extends Controller
     public function update(UpdatePointRequest $request, $id)
     {
 
-                // dd($request->all());
-                $point = Point::findOrFail($id);
-                if($request->hasFile('image') && $request->file('image')->isValid()){
-                    $image = $request->file('image');
-                    $point->image = $image->store('points','images');
-                }
-        
-                 $point->user->update([
-                    'username' => $request->username,
-                    'role' => 'point',
-                    'password' => is_null($request->password) ? $point->user->password : Hash::make($request->password),
-                    ]);
-        
-                 if($request->borrowing_is_allowed){
-                     $point->borrowing_is_allowed = true;
-                 }
-        
-                $point->name = $request->name;
-        
-                $point->account = $request->account;
-        
-                $point->commission = $request->commission;
-        
-                $point->t_c = $request->t_c;
-        
-                $point->phone = $request->phone;
-        
-                $point->address = $request->address;
-        
-                // $point->description = $request->description;
-        
-                $point->update();
+        // dd($request->all());
+        $point = Point::findOrFail($id);
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $image = $request->file('image');
+            $point->image = $image->store('points', 'images');
+        }
 
-        session()->flash('success' ,'تم تعديل النقطة الجديدة بنجاح');
+        $point->user->update([
+            'username' => $request->username,
+            'role' => 'point',
+            'password' => is_null($request->password) ? $point->user->password : Hash::make($request->password),
+        ]);
 
-        return redirect(route('admin.points'));  
-      }
+        if ($request->borrowing_is_allowed) {
+            $point->borrowing_is_allowed = true;
+        }
+
+        $point->name = $request->name;
+
+        $point->account = $request->account;
+
+        $point->commission = $request->commission;
+
+        $point->t_c = $request->t_c;
+
+        $point->phone = $request->phone;
+
+        $point->address = $request->address;
+
+        $point->status = $request->status;
+
+
+        $point->update();
+
+        session()->flash('success', 'تم تعديل النقطة الجديدة بنجاح');
+
+        return redirect()->back();
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -167,9 +132,13 @@ class PointController extends Controller
      */
     public function destroy(Point $point)
     {
-        User::findOrFail($point->user_id)->delete();
-        $point->delete();
-        session()->flash('success','تم حذف النقطة بنجاح');
-        return redirect(route('admin.points'));
+        if ($point->status !== 'closed') {
+            $point->status = 'closed';
+            $point->update();
+            session()->flash('success', "تم اغلاق المشترك $point->name بنجاح");
+        } else {
+            session()->flash('error', "المشترك $point->name مغلق بالفعل!");
+        }
+        return redirect()->back();
     }
 }

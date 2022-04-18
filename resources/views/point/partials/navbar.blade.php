@@ -29,7 +29,7 @@
                         <div class="input-group">
                             <span class="input-group-text text-body"><button class="submit search-button"><i
                                         class="fas fa-search" aria-hidden="true"></i></button></span>
-                            <input type="text" class="form-control" placeholder="أكتب هنا..." name="s"
+                            <input type="text" class="form-control" placeholder="ابحث لتسديد فاتورة" name="s"
                                 value="@if (isset($search)) {{ $search ? $search : '' }} @endif">
                         </div>
                     </form>

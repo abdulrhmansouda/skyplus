@@ -348,7 +348,7 @@
                                                                         <h6>
                                                                             رقم الهاتف
                                                                         </h6>
-                                                                        {{ $sub->phone }}
+                                                                        <bdi>{{ $sub->phone }}</bdi>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-4 col-md-6">

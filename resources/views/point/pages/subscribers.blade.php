@@ -29,31 +29,39 @@
             </div>
         </div>
 
-        <!-- <div class="col-lg-3 col-sm-6">
+        <div class="col-lg-3 col-sm-6">
             <div class="card">
                 <div class="p-3 card-body">
                     <div class="row">
-                       <div class="col-8">
+                        <div class="col-8">
                             <div class="numbers">
-                                <p class="mb-0 text-sm text-capitalize font-weight-bold">العمولة</p>
+                                <p class="mb-0 text-sm text-capitalize font-weight-bold">الربح</p>
                                 <h5 class="mb-0 font-weight-bolder">
-                                    {{ Auth::user()->point->commission }}%
+                                    {{ Auth::user()->point->commission }}
                                 </h5>
                             </div>
-                        </div> 
+                        </div>
                         <div class="col-4 text-start">
                             <div class="text-center shadow icon icon-shape bg-gradient-info border-radius-md">
-                                <i class="fas fa-shopping-cart" text-lg="" opacity-10="" aria-hidden="true"></i>
+                                <i class="fas fa-coins" text-lg="" opacity-10="" aria-hidden="true"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
     </div>
     <div class="row">
+        <!-- if search  -->
         <div class="col-12">
             <div class="mb-4 card">
+                <div class="card-header pb-0">
+                    <div class="row">
+                        <div class="col-12">
+                            <h6>المشتركين</h6>
+                        </div>
+                    </div>
+                </div>
                 <div class="px-0 pt-0 pb-2 card-body">
                     <div class="p-0 table-responsive">
                         <table class="table mb-0 align-items-center">
@@ -65,7 +73,7 @@
                                     <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         T_C </th>
                                     <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        الرقم
+                                        رقم المشترك
                                     </th>
                                     <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         تاريخ البدء </th>
@@ -122,137 +130,134 @@
                                                 <i class="fas fa-eye"></i>
                                             </a>
                                             <!-- satrt view1 Modal -->
-                                            <form action="">
-                                                <div class="modal fade" id="view{{ $sub->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">
-                                                                    عرض المشترك </h5>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="row">
-                                                                    <div class="col-lg-4 col-md-6">
-                                                                        <div class="form-group">
+                                            <div class="modal fade" id="view{{ $sub->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">
+                                                                عرض المشترك </h5>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-4 col-md-6">
+                                                                    <div class="form-group">
+                                                                        <h6>
+                                                                            اسم المشترك
                                                                             <h6>
-                                                                                اسم المشترك
-                                                                                <h6>
-                                                                                    {{ $sub->name }}
-                                                                        </div>
+                                                                                {{ $sub->name }}
                                                                     </div>
-                                                                    <div class="col-lg-4 col-md-6">
-                                                                        <div class="form-group">
-                                                                            <h6>
-                                                                                T.C
-                                                                            </h6>
-                                                                            {{ $sub->t_c }}
-                                                                        </div>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-6">
+                                                                    <div class="form-group">
+                                                                        <h6>
+                                                                            T_C
+                                                                        </h6>
+                                                                        {{ $sub->t_c }}
                                                                     </div>
-                                                                    <div class="col-lg-4 col-md-6">
-                                                                        <div class="form-group">
-                                                                            <h6>
-                                                                                رقم المشترك
-                                                                            </h6>
-                                                                            {{ $sub->subscriber_number }}
-                                                                        </div>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-6">
+                                                                    <div class="form-group">
+                                                                        <h6>
+                                                                            رقم المشترك
+                                                                        </h6>
+                                                                        {{ $sub->subscriber_number }}
                                                                     </div>
-                                                                  
-                                                                    <div class="col-lg-4 col-md-6">
-                                                                        <div class="form-group">
-                                                                            <h6>
-                                                                                رقم الهاتف
-                                                                            </h6>
-                                                                            {{ $sub->phone }}
-                                                                        </div>
+                                                                </div>
+
+                                                                <div class="col-lg-4 col-md-6">
+                                                                    <div class="form-group">
+                                                                        <h6>
+                                                                            رقم الهاتف
+                                                                        </h6>
+                                                                        <bdi>{{ $sub->phone }}</bdi>
                                                                     </div>
-                                                                    <div class="col-lg-4 col-md-6">
-                                                                        <div class="form-group">
-                                                                            <h6>
-                                                                                اسم الباقة
-                                                                            </h6>
-                                                                            {{ $sub->package ? $sub->package->name : 'الباقة محذوفة' }}
-                                                                        </div>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-6">
+                                                                    <div class="form-group">
+                                                                        <h6>
+                                                                            اسم الباقة
+                                                                        </h6>
+                                                                        {{ $sub->package ? $sub->package->name : 'الباقة محذوفة' }}
                                                                     </div>
-                                                                    <div class="col-lg-4 col-md-6">
-                                                                        <div class="form-group">
-                                                                            <h6>
-                                                                                سعر الباقة
-                                                                            </h6>
-                                                                            {{ $sub->package->price }}
-                                                                        </div>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-6">
+                                                                    <div class="form-group">
+                                                                        <h6>
+                                                                            سعر الباقة
+                                                                        </h6>
+                                                                        {{ $sub->package->price }}
                                                                     </div>
-                                                                    <div class="col-lg-4 col-md-6">
-                                                                        <div class="form-group">
-                                                                            <h6>
-                                                                                تاريخ البدء
-                                                                            </h6>
-                                                                            {{ $sub->start_package }}
-                                                                        </div>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-6">
+                                                                    <div class="form-group">
+                                                                        <h6>
+                                                                            تاريخ البدء
+                                                                        </h6>
+                                                                        {{ $sub->start_package }}
                                                                     </div>
-                                                                    <div class="col-lg-4 col-md-6">
-                                                                        <div class="form-group">
-                                                                            <h6>
-                                                                                تاريخ الانتهاء
-                                                                            </h6>
-                                                                            {{ $sub->end_package }}
-                                                                        </div>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-6">
+                                                                    <div class="form-group">
+                                                                        <h6>
+                                                                            تاريخ الانتهاء
+                                                                        </h6>
+                                                                        {{ $sub->end_package }}
                                                                     </div>
-                                                                    <div class="col-lg-4 col-md-6">
-                                                                        <div class="form-group">
-                                                                            <h6>
-                                                                                 الايام المتبقية
-                                                                            </h6>
-                                                                            {{ $sub->days_to_end }}
-                                                                        </div>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-6">
+                                                                    <div class="form-group">
+                                                                        <h6>
+                                                                            الايام المتبقية
+                                                                        </h6>
+                                                                        {{ $sub->days_to_end }}
                                                                     </div>
-                                                                    
-                                                                    <div class="col-lg-4 col-md-6">
-                                                                        <div class="form-group">
-                                                                            <h6>
-                                                                                حالة المستخدم
-                                                                            </h6>
-                                                                            @if ($sub->status === 'active')
-                                                                            <span class="badge badge-sm bg-gradient-success">مفعل</span>
-                                                                            @elseif($sub->status === 'deactive')
-                                                                            <span class="badge badge-sm bg-gradient-danger">غير
-                                                                                مفعل</span>
-                                                                            @else
-                                                                            <span class="badge badge-sm bg-gradient-danger">مغلق</span>
-                                                                            @endif
-                                                                        </div>
+                                                                </div>
+
+                                                                <div class="col-lg-4 col-md-6">
+                                                                    <div class="form-group">
+                                                                        <h6>
+                                                                            حالة المستخدم
+                                                                        </h6>
+                                                                        @if ($sub->status === 'active')
+                                                                        <span class="badge badge-sm bg-gradient-success">مفعل</span>
+                                                                        @elseif($sub->status === 'deactive')
+                                                                        <span class="badge badge-sm bg-gradient-danger">غير
+                                                                            مفعل</span>
+                                                                        @else
+                                                                        <span class="badge badge-sm bg-gradient-danger">مغلق</span>
+                                                                        @endif
                                                                     </div>
-                                                                   
-                                                                    <div class="col-lg-4 col-md-6">
-                                                                        <div class="form-group">
-                                                                            <h6>
-                                                                                العنوان
-                                                                            </h6>
-                                                                            <p>
-                                                                                {{ $sub->address }}
-                                                                            </p>
-                                                                        </div>
+                                                                </div>
+
+                                                                <div class="col-lg-4 col-md-6">
+                                                                    <div class="form-group">
+                                                                        <h6>
+                                                                            العنوان
+                                                                        </h6>
+                                                                        <p>
+                                                                            {{ $sub->address }}
+                                                                        </p>
                                                                     </div>
-                                                                    <div class="col-lg-4 col-md-6">
-                                                                        <div class="form-group">
-                                                                            <h6>
-                                                                                مكان التركيب
-                                                                            </h6>
-                                                                            <p>
-                                                                                {{ $sub->installation_address }}
-                                                                            </p>
-                                                                        </div>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-6">
+                                                                    <div class="form-group">
+                                                                        <h6>
+                                                                            مكان التركيب
+                                                                        </h6>
+                                                                        <p>
+                                                                            {{ $sub->installation_address }}
+                                                                        </p>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="modal-footer">
-                                                                <button type="submit" class="btn btn-info">حفظ</button>
-                                                                <span type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</span>
-                                                            </div>
-
                                                         </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-info" data-bs-dismiss="modal">اغلاق</button>
+                                                        </div>
+
                                                     </div>
                                                 </div>
-                                            </form>
+                                            </div>
                                             <!-- end Modal view1  -->
                                         </div>
                                         <!-- end view1 -->
@@ -375,7 +380,7 @@
                                         <!-- start maintenance1 -->
                                         <div class="d-inline-block">
                                             <a href="javascript:;" class="px-1 text-xs text-secondary font-weight-bold " data-toggle="tooltip" data-original-title="charge1 user" data-bs-toggle="modal" data-bs-target="#maintenance{{ $sub->id }}">
-                                                <i class="fas fa-cog"></i>
+                                                <i class="fas fa-wrench"></i>
                                             </a>
                                             <!-- satrt charge1 Modal -->
                                             <form action="">
@@ -384,7 +389,7 @@
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">
-                                                                    طلب دعم فني </h5>
+                                                                    طلب صيانة </h5>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row">
@@ -401,17 +406,7 @@
                                                                             <h6>
                                                                                 رقم الهاتف
                                                                             </h6>
-                                                                            {{ $sub->phone }}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-6">
-                                                                        <div class="form-group">
-                                                                            <h6>
-                                                                                العنوان
-                                                                            </h6>
-                                                                            <p>
-                                                                                {{ $sub->address }}
-                                                                            </p>
+                                                                            <bdi>{{ $sub->phone }}</bdi>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-12 ">
@@ -427,14 +422,7 @@
                                                                                 <div class="form-group">
                                                                                     <input class="" name="pay" type="radio" value="false" id="maintOptionB{{ $sub->id }}">
                                                                                     <label class="" for="maintOptionB{{ $sub->id }}">
-                                                                                        تركيب جديد</label>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-6">
-                                                                                <div class="form-group">
-                                                                                    <input class="" name="pay" type="radio" value="false" id="maintOptionC{{ $sub->id }}">
-                                                                                    <label class="" for="maintOptionC{{ $sub->id }}">
-                                                                                        قلب</label>
+                                                                                        تغيير باقة</label>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -472,6 +460,54 @@
             <!-- start pagination -->
             {{ $subs->links() }}
             <!-- end pagination -->
+        </div>
+        <!-- else -->
+        <div class="col-12">
+            <div class="mb-4 card">
+                <div class="card-header pb-0">
+                    <div class="row">
+                        <div class="col-12">
+                            <h6>عمليات التسديد لليوم</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-0 pt-0 pb-2 card-body">
+                    <div class="p-0 table-responsive">
+                        <table class="table mb-0 align-items-center">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3">
+                                        التاريخ
+                                    </th>
+                                    <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        اسم المشترك </th>
+                                    <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        رقم الهاتف </th>
+                                    <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        البيان </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <p class="mb-0 text-xs font-weight-bold"><bdi>  15/04/2022 10:00 pm</bdi> </p>
+                                    </td>
+                                    <td>
+                                        <p class="mb-0 text-xs font-weight-bold">محمد</p>
+                                    </td>
+                                    <td>
+                                        <p class="mb-0 text-xs font-weight-bold">522552055</p>
+                                    </td>
+                                    <td>
+                                        <p class="mb-0 text-xs font-weight-bold">.......بقيمة  تم تسديد الفاتورة للمشترك</p>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

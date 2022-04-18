@@ -235,7 +235,7 @@
                                                                         <h6>
                                                                             رقم الهاتف
                                                                         </h6>
-                                                                        {{ $point->phone }}
+                                                                        <bdi>{{ $point->phone }}</bdi>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">

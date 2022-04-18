@@ -38,7 +38,7 @@
                         @break
 
                         @case('admin.admins.index')
-                              المشرفين
+                            المشرفين
                         @break
 
                         @default
@@ -65,10 +65,20 @@
                                                     class="fas fa-search" aria-hidden="true"></i></button></span>
                                         <input type="text" class="form-control" placeholder="أكتب هنا..." name="s"
                                             value="@if (isset($search)) {{ $search ? $search : '' }} @endif">
+                                        @if (Route::currentRouteName() == 'admin.subscribers.index')
+                                            <input type="hidden" name="pagination_number"
+                                                value="@if (isset($pagination_number)) {{ $pagination_number }} @endif">
+                                            <input type="hidden" name="page"
+                                                value="@if (isset($page)) {{ $page }} @endif">
+                                            <input type="hidden" name="sort_by"
+                                                value="@if (isset($sort_by)) {{ $sort_by }} @endif">
+                                        @endif
+
                                     </div>
                                 </form>
                             </div>
                         @break
+
                     @endswitch
 
                     <ul class="navbar-nav me-auto ms-0 justify-content-end">

@@ -9,6 +9,15 @@ use Illuminate\Database\Eloquent\Model;
 class Package extends Model
 {
     use HasFactory;
+    // protected $fillable =[
+    //     'name',
+    //     'price',
+    // ];
+        protected $guarded = ['id'];
+
+        // public function getIdAttribute(){
+        //     return $this->id;
+        // }
 
     public function subscribers(){
         return $this->hasMany(Subscriber::class);

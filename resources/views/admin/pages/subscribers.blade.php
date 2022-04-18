@@ -10,11 +10,12 @@
             إضافة
         </button>
         <!-- start import  -->
-        <form action="" class="me-auto">
+        <form action="{{ route('admin.subscribers.import') }}" method="POST" enctype="multipart/form-data" class="me-auto">
+            @csrf
             <label class="mx-3 btn btn-light btn-sm ps-3 pe-3">
                 <i class="mx-1 fas fa-file-import"></i>
                 استيراد
-                <input type="file" class="d-none" accept=".xlsx" onchange="form.submit()">
+                <input type="file" class="d-none" accept=".xlsx" name="subscribers" onchange="form.submit()">
             </label>
         </form>
         <!-- end import  -->
@@ -23,6 +24,8 @@
             <input type="hidden" name="pagination_number" value="{{ $pagination_number }}" >
             <input type="hidden" name="page" value="{{ $page }}" >
             <input type="hidden" name="sort_by" value="{{ $sort_by }}">
+            <input type="hidden" name="s" value="{{ $search }}">
+
 
             <button class="btn btn-white btn-sm ps-3 pe-3">
                 تصدير
@@ -178,9 +181,11 @@
             <form action="" method="GET">
                 <input type="hidden" name="pagination_number" value="{{ $pagination_number }}">
                 <input type="hidden" name="page" value="{{ $page }}">
+                <input type="hidden" name="s" value="{{ $search }}">
                 <div class="form-group form-row">
                     <span>ترتيب حسب حقل</span>
                     <select required class="form-select input-200" name="sort_by" onchange="form.submit()">
+                        <option value="">اختر احد الحقول</option>
                         <option @if($sort_by === 'name') selected @endif value="name">اسم المشترك</option>
                         <option @if($sort_by === 't_c') selected @endif value="t_c">T_C</option>
                         <option @if($sort_by === 'package_start') selected @endif value="package_start">تاريخ البدء</option>
@@ -195,6 +200,9 @@
             <form action="" method="GET">
                 <div class="flex-row-reverse form-group form-row">
                     <button class="m-0 btn btn-secondary btn-sm">تغير</button>
+                    <input type="hidden" name="s" value="{{ $search }}">
+                    <input type="hidden" name="page" value="1">
+                    <input type="hidden" name="sort_by" value="{{ $sort_by }}">
                     <input type="number" class="py-1 form-control input-75" name="pagination_number" value="{{ $pagination_number }}">
                     عرض في كل صفحة
                 </div>

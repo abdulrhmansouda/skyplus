@@ -6,6 +6,7 @@ use App\Exports\SubscribersExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreSubscriberRequest;
 use App\Http\Requests\Admin\UpdateSubscriberRrequest;
+use App\Imports\SubscribersImport;
 use App\Models\Package;
 use App\Models\Subscriber;
 use Exception;
@@ -23,42 +24,62 @@ class SubscriberController extends Controller
     public function index(Request $request)
     {
 
-        $pagination_number = $request->pagination_number ?? 10;
-        $sort_by = $request->sort_by ?? 'name';
+        $sort_by = $request->sort_by;
         $page = $request->page ?? 1;
         $s = $request->s ?? '';
-        $subs = Subscriber::where('name', 'LIKE', "%$request->s%")
-            ->orWhere('t_c', 'LIKE', "%$request->s%")
-            ->orWhere('sub_id', 'LIKE', "%$request->s%")
-            ->orWhere('subscriber_number', 'LIKE', "%$request->s%")
-            ->orWhere('phone', 'LIKE', "%$request->s%");
+        $subs = Subscriber::where('name', 'LIKE', "%$s%")
+            ->orWhere('t_c', 'LIKE', "%$s%")
+            ->orWhere('sub_id', 'LIKE', "%$s%")
+            ->orWhere('subscriber_number', 'LIKE', "%$s%")
+            ->orWhere('phone', 'LIKE', "%$s%");
 
-        if ($request->sort_by) {
-                $subs->orderBy($request->sort_by);
+        $pagination_number = $request->pagination_number ?? $subs->count();
+
+
+        if ($sort_by) {
+            $subs->orderBy($request->sort_by);
         }
 
 
         return view('admin.pages.subscribers', [
-            'subs' => $subs->paginate($request->pagination_number)
-            ->appends(['pagination_number' => $pagination_number,'sort_by' => $sort_by]),
+            'subs' => $subs->paginate($pagination_number)
+                ->appends(['pagination_number' => $pagination_number, 'sort_by' => $sort_by, 's' => $s]),
             'packages' => Package::all(),
-            'search' => $s ,
-            'page' => $page ,
-            'pagination_number' => $pagination_number ,
+            'search' => $s,
+            'page' => $page,
+            'pagination_number' => $pagination_number,
             'sort_by' => $sort_by,
         ]);
+        return redirect()->back()->with('success', ' تم التصدير بنجاح');
     }
 
     public function export(Request $request)
     {
-        // dd($request->all());
-        $pagination_number = $request->pagination_number ?? 10;
-        $sort_by = $request->sort_by ?? 'name';
-        $page = ( $request->page -1 ) ?? 1;
-        $subs = Subscriber::orderBy($sort_by)->skip($page * $pagination_number)
-        ->take($pagination_number);
+        $sort_by = $request->sort_by;
+        $page = ($request->page - 1) ?? 1;
+        $s = $request->s ?? '';
+        $subs = Subscriber::where('name', 'LIKE', "%$s%")
+            ->orWhere('t_c', 'LIKE', "%$s%")
+            ->orWhere('sub_id', 'LIKE', "%$s%")
+            ->orWhere('subscriber_number', 'LIKE', "%$s%")
+            ->orWhere('phone', 'LIKE', "%$s%");
+
+        $pagination_number = $request->pagination_number ?? $subs->count();
+
+
+        if ($sort_by) {
+            $subs->orderBy($request->sort_by);
+        }
+        $subs = Subscriber::skip($page * $pagination_number)
+            ->take($pagination_number);
         $export = new SubscribersExport($subs);
         return Excel::download($export, 'subscribers.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        Excel::import(new SubscribersImport, $request->file('subscribers')->getRealPath());
+        return redirect()->back()->with('success', ' تم الاستيراد بنجاح');
     }
 
     /**

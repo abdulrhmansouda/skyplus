@@ -55,7 +55,7 @@
         <!-- if search  -->
         <div class="col-12">
             <div class="mb-4 card">
-                <div class="card-header pb-0">
+                <div class="pb-0 card-header">
                     <div class="row">
                         <div class="col-12">
                             <h6>المشتركين</h6>
@@ -409,24 +409,7 @@
                                                                             <bdi>{{ $sub->phone }}</bdi>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-12 ">
-                                                                        <div class="row">
-                                                                            <div class="col-6">
-                                                                                <div class="form-group">
-                                                                                    <input class="" name="pay" type="radio" value="true" id="maintOptionA{{ $sub->id }}" checked="">
-                                                                                    <label class="" for="maintOptionA{{ $sub->id }}">
-                                                                                        صيانة</label>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-6">
-                                                                                <div class="form-group">
-                                                                                    <input class="" name="pay" type="radio" value="false" id="maintOptionB{{ $sub->id }}">
-                                                                                    <label class="" for="maintOptionB{{ $sub->id }}">
-                                                                                        تغيير باقة</label>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
+                                                                   
                                                                     <div class="col-12">
                                                                         <div class="form-group">
                                                                             <label>
@@ -464,7 +447,7 @@
         <!-- else -->
         <div class="col-12">
             <div class="mb-4 card">
-                <div class="card-header pb-0">
+                <div class="pb-0 card-header">
                     <div class="row">
                         <div class="col-12">
                             <h6>عمليات التسديد لليوم</h6>

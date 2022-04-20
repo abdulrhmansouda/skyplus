@@ -14,13 +14,19 @@
     <script src="{{ asset('/assets/js/fontawsome.js') }}" crossorigin="anonymous"></script>
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('/assets/css/soft-ui-dashboard.css?v=1.0.3') }}" rel="stylesheet" />
-
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
     @yield('css')
 
 </head>
 
 <body class="bg-gray-100 g-sidenav-show rtl">
-<div class="spinner-parent d-none">
+    <div class="spinner-parent d-none">
         <div class="spinner-border" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
@@ -34,18 +40,18 @@
         <!-- content -->
         {{-- @dd(Route::currentRouteName()) --}}
         @if (session()->has('success'))
-            <div class="alert alert-success">
+        <div class="alert alert-success">
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            
-                {{ session()->get('success') }}
-            </div>
+
+            {{ session()->get('success') }}
+        </div>
         @endif
 
         @if (session()->has('error'))
-            <div class="alert alert-danger">
+        <div class="alert alert-danger">
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                {{ session()->get('error') }}
-            </div>
+            {{ session()->get('error') }}
+        </div>
         @endif
         @yield('content')
         <!-- End content -->

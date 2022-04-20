@@ -21,17 +21,15 @@ class AdminController extends Controller
     public function index(Request $request)
     {
 
-        if ($request->s) {
-            $admins = Admin::where('name', 'LIKE', "%$request->s%")
-                ->orWhere('t_c', 'LIKE', "%$request->s%")
-                ->orWhere('phone', 'LIKE', "%$request->s%")
-                ->paginate(10);
-        } else {
-            $admins = Admin::paginate(10);
-        }
+        $s = $request->s ?? '';
+
+            $admins = Admin::where('name', 'LIKE', "%$s%")
+                ->orWhere('t_c', 'LIKE', "%$s%")
+                ->orWhere('phone', 'LIKE', "%$s%");
+
         return view('admin.pages.admins', [
-            'admins' => $admins,
-            'search' => $request->s,
+            'admins' => $admins->paginate(10),
+            'search' => $s,
         ]);
     }
 

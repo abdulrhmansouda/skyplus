@@ -5,7 +5,7 @@
             aria-hidden="true" id="iconSidenav"></i>
         <a class="m-0 navbar-brand" href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html"
             target="_blank">
-            <img src="{{ asset('/assets/img/skyplus.jpg') }}" class="navbar-brand-img h-100" alt="main_logo">
+            <img src="{{ asset('/assets/img/skyplus.png') }}" class="navbar-brand-img h-100" alt="main_logo">
             <span class="me-1 font-weight-bold">skyplus</span>
         </a>
     </div>
@@ -179,9 +179,10 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text me-1">تقارير</span>
+                    <span class="nav-link-text me-1">التقارير</span>
                 </a>
             </li>
+            
             @if(Auth::user()->isSuperAdmin())
             <li class="nav-item">
                 <a class="nav-link @if(Route::currentRouteName() === 'admin.admins.index') active @endif" href="{{ route('admin.admins.index') }}">
@@ -199,6 +200,16 @@
                 </a>
             </li>
             @endif
+            <li class="nav-item">
+                <a class="nav-link " href="">
+                    <div class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
+                        <svg  width="12px" height="12px" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <span class="nav-link-text me-1">الدعم الفني</span>
+                </a>
+            </li>
             <li class="nav-item">
                 <button data-bs-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#setting"
                     aria-expanded="false" aria-controls="setting"
@@ -241,7 +252,7 @@
                     </ul>
                     </a>
             </li>
-
+           
             <li class="nav-item">
                 <a class="nav-link " data-bs-toggle="modal" href="#logout">
                     <div

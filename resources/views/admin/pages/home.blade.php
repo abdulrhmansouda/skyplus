@@ -111,7 +111,7 @@
                                     <form action="">
                                         <div class="mb-3">
                                             <input type="date" class="form-control" aria-label="name"
-                                                aria-describedby="name-addon" required value='2022-03-29'>
+                                                aria-describedby="name-addon" required value='2022-03-29' onchange="form.submit()">
                                         </div>
                                     </form>
                                     <span class="text-xs text-info">اختر تاريخ مختلف لعرض قيمه</span>

@@ -29,16 +29,20 @@
                             شحن رصيد
                         @break
 
+                        @case('admin.reports.index')
+                            التقارير
+                        @break
+
+                        @case('admin.admins.index')
+                            المشرفين
+                        @break
+
                         @case('admin.setting.binding-app.index')
                             الاعدادات / الربط
                         @break
 
                         @case('admin.setting.change-password.index')
                             الاعدادات / تغيير كلمة المرور
-                        @break
-
-                        @case('admin.admins.index')
-                            المشرفين
                         @break
 
                         @default

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\PointController;
 use App\Http\Controllers\Admin\RechargeController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Point\ChangePasswordController as PointChangePasswordController;
 use App\Http\Controllers\Point\SubscriberController as PointSubscriberController;
@@ -86,6 +87,14 @@ Route::middleware(['auth', 'admin'])
                 Route::put('/update/{admin}' ,[AdminController::class,'update'])->name('update');
                 Route::delete('/destroy/{admin}',[AdminController::class,'destroy'])->name('destroy');
             });
+
+            Route::prefix('/reports')
+            ->name('reports.')
+            ->group(function () {
+                Route::get('/', [ReportController::class, 'index'])->name('index');
+                Route::post('/search',[ReportController::class, 'search'])->name('search');
+            });
+
 
         Route::prefix('/sitting')
             ->name('setting.')

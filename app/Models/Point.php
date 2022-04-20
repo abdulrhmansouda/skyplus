@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Point extends Model
 {
     use HasFactory;
-    protected $fillable =[
+    protected $fillable = [
         'user_id',
         'name',
         'address',
@@ -20,20 +20,25 @@ class Point extends Model
         'phone',
     ];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function getImageUrlAttribute(){
-        
+    public function reports()
+    {
+        return $this->hasMany(Report::class);
+    }
+
+    public function getImageUrlAttribute()
+    {
+
         $image = $this->image;
 
-        if($image){
+        if ($image) {
             return asset("images/$image");
         }
 
         return asset('images/default_user.png');
-
     }
-
 }

@@ -10,27 +10,26 @@ use Illuminate\Validation\Rule;
 
 class RechargeController extends Controller
 {
-    public function index(Request $request){
+    public function index(Request $request)
+    {
 
-        if($request->s){
-            $points = Point::where('name','LIKE',"%$request->s%")->paginate(10);
-        }
-        else{
-            $points = Point::paginate(10);
-        }
-        // dd($points);
-        return view('admin.pages.recharge',[
-            'points' => $points,
-            'search' => $request->s,
+        $s = $request->s ?? '';
+
+        $points = Point::where('status', 'active')->where('name', 'LIKE', "%$s%");
+
+        return view('admin.pages.recharge', [
+            'points' => $points->paginate(10),
+            'search' => $s,
         ]);
     }
 
-    public function charge(Request $request,$id){
+    public function charge(Request $request, $id)
+    {
         // dd($request);
         $request->validate([
-            'amount' => ['required','numeric'],
-            'payment_method' => [ 'required' , Rule::in(['cash', 'borrow' , 'bank'])],
-            'note' => [ 'nullable', 'string','max:1000'],
+            'amount' => ['required', 'numeric'],
+            'payment_method' => ['required', Rule::in(['cash', 'borrow', 'bank'])],
+            'note' => ['nullable', 'string', 'max:1000'],
         ]);
 
         // dd($request->all());
@@ -47,11 +46,7 @@ class RechargeController extends Controller
         $point->account = $point->account + $request->amount;
         $point->update();
 
-        session()->flash('success',"تم شحن المبلغ $request->amount الى النقطة $point->name بنجاح");
+        session()->flash('success', "تم شحن المبلغ $request->amount الى النقطة $point->name بنجاح");
         return redirect()->back();
-
-        
-
     }
-
 }

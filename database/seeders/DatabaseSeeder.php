@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Package;
 use App\Models\Point;
 use App\Models\ProjectSetting;
+use App\Models\Report;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -41,7 +42,10 @@ class DatabaseSeeder extends Seeder
         User::factory()
         ->count(10)
         ->hasPoint(1)
+        // ->hasReports(10)
         ->create(['role' => 'point']);
+
+        Report::factory(100)->create();
 
         User::factory()
         ->count(100)

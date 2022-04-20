@@ -157,7 +157,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="../pages/reports.html">
+                <a class="nav-link @if(Route::currentRouteName() === 'admin.reports.index') active @endif" href="{{ route('admin.reports.index') }}">
                     <div
                         class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1"

@@ -49,7 +49,7 @@ class SettingSocialController extends Controller
         $social->phone1 = $request->phone1;
         $social->phone2 = $request->phone2;
         $social->email = $request->email;
-        $social->whatsapp = $request->whatssapp;
+        $social->whatsapp = $request->whatsapp;
         $social->telegram_name = $request->telegram_name;
         $social->telegram_url = $request->telegram_url;
         $social->facebook_name = $request->facebook_name;

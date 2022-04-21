@@ -54,7 +54,7 @@
                                     <label>
                                         رقم الواتساب
                                     </label>
-                                    <input name="whatsapp" type="tel" class="form-control" value="00905312882165"
+                                    <input name="whatsapp" type="tel" class="form-control"
                                         placeholder="00901234567891" dir="auto" value="{{ $social->whatsapp }}">
                                 </div>
                             </div>

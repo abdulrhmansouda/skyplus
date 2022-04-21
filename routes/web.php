@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\RechargeController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Point\ChangePasswordController as PointChangePasswordController;
+use App\Http\Controllers\Point\SocialController;
 use App\Http\Controllers\Point\SubscriberController as PointSubscriberController;
 use App\Http\Controllers\SettingSocialController;
 use Illuminate\Support\Carbon;
@@ -129,16 +130,24 @@ Route::middleware(['auth', 'point'])
     ->prefix('/point')
     ->name('point.')
     ->group(function () {
-        Route::prefix('/home')
-            ->group(function () {
-                Route::get('/', function () {
-                    return 'point';
-                })->name('home');
-            });
+        // Route::prefix('/home')
+        //     ->group(function () {
+        //         Route::get('/', function () {
+        //             return 'point';
+        //         })->name('home');
+        //     });
 
             Route::prefix('/subscribers')
+            ->name('subscribers.')
             ->group(function () {
-                Route::get('/', [PointSubscriberController::class, 'index'])->name('subscribers');
+                Route::get('/', [PointSubscriberController::class, 'index'])->name('index');
+
+            });
+
+            Route::prefix('/social')
+            ->name('social.')
+            ->group(function () {
+                Route::get('/', [SocialController::class, 'index'])->name('index');
 
             });
 

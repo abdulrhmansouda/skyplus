@@ -15,8 +15,12 @@
                             الاعدادات / تغيير كلمة المرور
                         @break
 
+                        @case('point.social.index')
+                        الاعدادات / تغيير كلمة المرور
+                         @break
+
                         @default
-@dd(Route::currentRouteName())
+{{-- @dd(Route::currentRouteName()) --}}
                     @endswitch
                 </li>
             </ol>

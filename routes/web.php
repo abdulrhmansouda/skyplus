@@ -92,7 +92,8 @@ Route::middleware(['auth', 'admin'])
             ->name('reports.')
             ->group(function () {
                 Route::get('/', [ReportController::class, 'index'])->name('index');
-                Route::post('/search',[ReportController::class, 'search'])->name('search');
+                // Route::post('/search',[ReportController::class, 'search'])->name('search');
+                Route::get('/get',[ReportController::class, 'admin_export'])->name('export');
             });
 
 

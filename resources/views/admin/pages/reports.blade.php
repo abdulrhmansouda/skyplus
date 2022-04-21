@@ -11,10 +11,11 @@
                 <form action="" method="GET">
                     {{-- @csrf --}}
                     <div class="d-flex gap-3">
-                        <input name="daterange" type="text"  class="form-control w-50" value="{{ $daterange ?? '' }}" />
+                        <input name="daterange" type="text" class="form-control w-50" value="{{ $daterange ?? '' }}" />
                         <select name="points[]" multiple id="select_point" class="form-select">
+                            <?php $name_points = ''; ?>
                             @foreach ($points as $point)
-                                <option value="{{ $point->id }}">{{ $point->name }}</option>
+                                <option value="{{ $point->id }}" @if(in_array($point->id,$_points))<?php $name_points = "$name_points , $point->name"; ?>   selected @endif>{{ $point->name }}</option>
                             @endforeach
                         </select>
                         <button type="submit" class="btn btn-secondary mb-0  btn-sm ps-3 pe-3">بحث</button>
@@ -23,7 +24,12 @@
             </div>
 
             <div class="col-md-2">
-                <form action="">
+                <form action="{{ route('admin.reports.export') }}" method="GET">
+
+                    <input name="_daterange" type="hidden" value="{{ $daterange ?? '' }}" />
+
+                    <?php $value = base64_encode(serialize($_points)); ?>
+                    <input name="points" type="hidden" value="{{ $value }}">
                     <button class="btn btn-white  ps-3 pe-3 m-md-0 m-2">
                         تصدير الى excel
                         <i class="fas fa-file-export mx-1"></i>
@@ -47,8 +53,9 @@
                             <table class="table mb-0 align-items-center">
                                 <thead>
                                     <tr>
+                                        {{-- @foreach() --}}
                                         <th class="text-xs text-uppercase font-weight-bolder ps-3 bg-info  text-dark">
-                                            الحساب : الكل
+                                            الحساب : {{ $name_points === '' ? 'الكل' : $name_points }}
                                         </th>
                                         <th class="px-1 text-uppercase text-xs font-weight-bolder "></th>
                                         <th class="px-1 text-uppercase text-xs font-weight-bolder "></th>
@@ -63,9 +70,11 @@
                                         <td class="text-xs text-uppercase font-weight-bolder ps-3">
                                             اعتبارا من {{ $from }} الى تاريخ {{ $to }}
                                         </td>
-                                        <td class="px-1 text-uppercase text-xs font-weight-bolder ">الرصيد السابق {{ $pre }}
+                                        <td class="px-1 text-uppercase text-xs font-weight-bolder ">الرصيد السابق
+                                            {{ $pre }}
                                         </td>
-                                        <td class="px-1 text-uppercase text-xs font-weight-bolder ">250</td>
+                                        <td class="px-1 text-uppercase text-xs font-weight-bolder ">{{ $pre_account }}
+                                        </td>
                                         <td class="px-1 text-uppercase text-xs font-weight-bolder "></td>
                                         <td class="px-1 text-uppercase text-xs font-weight-bolder "></td>
                                         <td class="px-1 text-uppercase text-xs font-weight-bolder "></td>
@@ -87,10 +96,12 @@
                                         <td class="px-1 text-uppercase text-secondary text-xs font-weight-bolder"></td>
                                         <td class="px-1 text-uppercase text-secondary text-xs font-weight-bolder"></td>
                                         <td class="px-1 text-uppercase text-secondary text-xs font-weight-bolder"></td>
-                                        <td class="px-1 text-uppercase text-secondary text-xs font-weight-bolder">250</td>
+                                        <td class="px-1 text-uppercase text-secondary text-xs font-weight-bolder">
+                                            {{ $pre_account }}</td>
                                     </tr>
                                     <!-- start foreach -->
                                     @foreach ($reports as $report)
+                                    <?php $pre_account = $pre_account - $report->to_him + $report->on_him; ?>
                                         <tr>
                                             <td>
                                                 <div class="px-2 py-1 d-flex">
@@ -114,7 +125,7 @@
                                                 <p class="mb-0 text-xs font-weight-bold">{{ $report->to_him }}</p>
                                             </td>
                                             <td>
-                                                <p class="mb-0 text-xs font-weight-bold">{{ $report->pre_account }}</p>
+                                                <p class="mb-0 text-xs font-weight-bold">{{ $pre_account }}</p>
                                             </td>
 
                                         </tr>
@@ -135,7 +146,7 @@
                                         <td>
                                         </td>
                                         <td class="bg-info text-dark">
-                                            <p class="mb-0 text-xs font-weight-bold">1560.00</p>
+                                            <p class="mb-0 text-xs font-weight-bold">{{ $pre_account }}</p>
                                         </td>
                                         <td>
                                         </td>
@@ -147,7 +158,7 @@
                     </div>
                 </div>
                 <!-- start pagination -->
-               {{ $reports->links() }}
+                {{-- {{ $reports->links() }} --}}
                 <!-- end pagination -->
             </div>
         </div>

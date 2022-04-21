@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Exports\SubscribersExport;
+// use App\Helper\Script;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreSubscriberRequest;
 use App\Http\Requests\Admin\UpdateSubscriberRrequest;
 use App\Imports\SubscribersImport;
 use App\Models\Package;
 use App\Models\Subscriber;
-use Exception;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -23,6 +22,15 @@ class SubscriberController extends Controller
      */
     public function index(Request $request)
     {
+
+        // $a = new \App\Helper\Scripts;
+        // $a->convertToDeactive();
+        // Subscriber::__callStatic(convertToDeactive());
+// 
+        // $this->convertToDeactive();
+
+        // Subscriber::convertToDeactive();
+
 
         $sort_by = $request->sort_by;
         $page = $request->page ?? 1;
@@ -52,6 +60,17 @@ class SubscriberController extends Controller
         ]);
         return redirect()->back()->with('success', ' تم التصدير بنجاح');
     }
+
+    // public  function convertToDeactive(){
+    //     $subs = Subscriber::where('status','deactive')->all();
+    //     foreach($subs as $sub)
+    //     {
+    //         if($sub->days_to_end){
+    //             $sub->status = 'deactive';
+    //             $sub->update();
+    //         }
+    //     }
+    // }
 
     public function export(Request $request)
     {

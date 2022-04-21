@@ -45,7 +45,22 @@ class Subscriber extends Model
     public function getDaysToEndAttribute(){
         $d1 = new Carbon(now());
         $d2 = new Carbon($this->package_end);
-        return $d1->diffInDays($d2,false);
+        return $d1->diffInDays($d2,false) > 0 ? $d1->diffInDays($d2,false) : 0;
+    }
+
+    public static function convertToDeactive(){
+        $subs = static::where('status','active')->get();
+        foreach($subs as $sub)
+        {
+            // echo 1;
+            // dd($sub->days_to_end);
+            if($sub->days_to_end == 0){
+                // dd(1);
+                $sub->status = 'deactive';
+                $sub->update();
+            }
+        }
+        // return true;
     }
 
 }

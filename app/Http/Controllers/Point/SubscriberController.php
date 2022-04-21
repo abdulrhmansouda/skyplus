@@ -16,87 +16,32 @@ class SubscriberController extends Controller
     public function index(Request $request)
     {
 
-        if ($request->s) {
-            $subs = Subscriber::where('name', 'LIKE', "%$request->s%")
-            ->orWhere('t_c', 'LIKE', "%$request->s%")
-            ->orWhere('sub_id', 'LIKE', "%$request->s%")
-            ->orWhere('subscriber_number', 'LIKE', "%$request->s%")
-            ->orWhere('phone', 'LIKE', "%$request->s%")
-            ->paginate(10);
-        } else {
-            $subs = Subscriber::paginate(10);
-        }
+        $s = $request->s ?? '';
+
+            $subs = Subscriber::where('t_c', "$s")
+            ->orWhere('subscriber_number',"$s")
+            ->orWhere('phone', "$s");
+
+            // if($subs->get()->first())
+            // dd($subs->get()->first());
+
+            // where('t_c', 'LIKE', "%$s%")
+            // // ->orWhere('name', 'LIKE', "%$s%")
+            // // ->orWhere('sub_id', 'LIKE', "%$s%")
+            // ->orWhere('subscriber_number', 'LIKE', "%$s%")
+            // ->orWhere('phone', 'LIKE', "%$s%");
+
         return view('point.pages.subscribers', [
-            'subs' => $subs,
+            'subs' => $subs->get(),
             // 'packages' => Package::all(),
-            'search' => $request->s,
+            'search' => $s,
         ]);
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+
+    public function charge(){
+        
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

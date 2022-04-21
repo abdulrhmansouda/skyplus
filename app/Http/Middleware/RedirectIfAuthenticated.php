@@ -27,7 +27,7 @@ class RedirectIfAuthenticated
                         return redirect(route('admin.home'));
                     }
                     else{
-                        return redirect(route('point.subscribers'));
+                        return redirect(route('point.subscribers.index'));
                     }
                 // return redirect(RouteServiceProvider::HOME);
             }

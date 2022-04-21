@@ -26,7 +26,9 @@
             </ol>
         </nav>
         @switch(Route::currentRouteName())
-        @case('point.subscribers')
+
+        @case('point.subscribers.index')
+
             <div class="px-0 mt-2 collapse navbar-collapse mt-sm-0" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                     <form action="" method="GET">
@@ -39,6 +41,7 @@
                     </form>
                 </div>
             @break
+            
         @endswitch
         {{-- <div class="px-0 mt-2 collapse navbar-collapse mt-sm-0" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">

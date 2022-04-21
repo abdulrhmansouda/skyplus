@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Point\ChangePasswordController as PointChangePasswordController;
 use App\Http\Controllers\Point\SubscriberController as PointSubscriberController;
+use App\Http\Controllers\SettingSocialController;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 
@@ -113,6 +114,13 @@ Route::middleware(['auth', 'admin'])
                     ->group(function () {
                         Route::get('/', [ChangePasswordController::class, 'index'])->name('index');
                         Route::put('/update', [ChangePasswordController::class, 'update'])->name('update');
+                    });
+
+                    Route::prefix('/social')
+                    ->name('social.')
+                    ->group(function () {
+                        Route::get('/', [SettingSocialController::class, 'index'])->name('index');
+                        Route::put('/update', [SettingSocialController::class, 'update'])->name('update');
                     });
             });
     });

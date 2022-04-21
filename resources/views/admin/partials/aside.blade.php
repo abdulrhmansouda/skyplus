@@ -72,7 +72,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link @if (Route::currentRouteName() === 'admin.subscribers.index') active @endif"
-                    href="{{ route('admin.subscribers.index',['pagination_number' => 10]) }}">
+                    href="{{ route('admin.subscribers.index', ['pagination_number' => 10]) }}">
                     <div
                         class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1"
@@ -129,7 +129,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link @if(Route::currentRouteName() === 'admin.recharge.index') active @endif" href="{{ route('admin.recharge.index') }}">
+                <a class="nav-link @if (Route::currentRouteName() === 'admin.recharge.index') active @endif"
+                    href="{{ route('admin.recharge.index') }}">
                     <div
                         class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
                         <svg class="text-dark" width="16px" height="16px" viewBox="0 0 42 42" version="1.1"
@@ -157,7 +158,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link @if(Route::currentRouteName() === 'admin.reports.index') active @endif" href="{{ route('admin.reports.index') }}">
+                <a class="nav-link @if (Route::currentRouteName() === 'admin.reports.index') active @endif"
+                    href="{{ route('admin.reports.index') }}">
                     <div
                         class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1"
@@ -182,29 +184,34 @@
                     <span class="nav-link-text me-1">التقارير</span>
                 </a>
             </li>
-            
-            @if(Auth::user()->isSuperAdmin())
-            <li class="nav-item">
-                <a class="nav-link @if(Route::currentRouteName() === 'admin.admins.index') active @endif" href="{{ route('admin.admins.index') }}">
-                    <div
-                        class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
 
-                        <svg xmlns="http://www.w3.org/2000/svg" class="text-dark " width="20" viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path
-                                d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z">
-                            </path>
-                        </svg>
-                    </div>
-                    <span class="nav-link-text me-1">المشرفين</span>
-                </a>
-            </li>
+            @if (Auth::user()->isSuperAdmin())
+                <li class="nav-item">
+                    <a class="nav-link @if (Route::currentRouteName() === 'admin.admins.index') active @endif"
+                        href="{{ route('admin.admins.index') }}">
+                        <div
+                            class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" class="text-dark " width="20"
+                                viewBox="0 0 20 20" fill="currentColor">
+                                <path
+                                    d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z">
+                                </path>
+                            </svg>
+                        </div>
+                        <span class="nav-link-text me-1">المشرفين</span>
+                    </a>
+                </li>
             @endif
             <li class="nav-item">
                 <a class="nav-link " href="">
-                    <div class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
-                        <svg  width="12px" height="12px" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
+                    <div
+                        class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
+                        <svg width="12px" height="12px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
+                                clip-rule="evenodd" />
                         </svg>
                     </div>
                     <span class="nav-link-text me-1">الدعم الفني</span>
@@ -246,13 +253,15 @@
                             <li class="@if (Route::currentRouteName() === 'admin.setting.binding-app.index') active @endif"><a
                                     href="{{ route('admin.setting.binding-app.index') }}">الاعدادات الربط</a></li>
                         @endif
-                        <li class="@if (Route::currentRouteName() === 'admin.setting.change-password.index') active @endif"><a 
-                             href="{{ route('admin.setting.change-password.index') }}">تغير كلمة المرور</a></li>
-                        <li class=""><a href=""> معلومات التواصل</a></li>
+                        <li class="@if (Route::currentRouteName() === 'admin.setting.change-password.index') active @endif"><a
+                                href="{{ route('admin.setting.change-password.index') }}">تغير كلمة المرور</a></li>
+
+                        <li class="@if (Route::currentRouteName() === 'admin.setting.social.index') active @endif"><a
+                                href="{{ route('admin.setting.social.index') }}">معلومات التواصل</a></li>
                     </ul>
                     </a>
             </li>
-           
+
             <li class="nav-item">
                 <a class="nav-link " data-bs-toggle="modal" href="#logout">
                     <div

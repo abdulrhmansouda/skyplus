@@ -25576,4 +25576,7 @@ display: flex;
 width:25px;
   text-align:center;
 }
+.text-nowrap{
+  white-space:nowrap;
+}
 /*# sourceMappingURL=dashboard-free.css.map */

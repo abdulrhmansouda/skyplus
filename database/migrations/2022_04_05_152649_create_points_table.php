@@ -19,10 +19,11 @@ return new class extends Migration
             $table->string('name');
             $table->text('address')->nullable();
             $table->string('image')->nullable();
-            $table->bigInteger('account');
+            $table->double('account',30,3);
+            $table->double('commission',30,3);
+            $table->double('daily_profit',30,3)->default(0);
             $table->string('t_c');
             $table->string('phone');
-            $table->float('commission');
             $table->boolean('borrowing_is_allowed')->default(false);
             $table->enum('status',['active','closed'])->default('active');
             $table->timestamps();

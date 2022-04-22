@@ -35,8 +35,8 @@ class SubscriberFactory extends Factory
             'address' => $this->faker->address,
             'installation_address' => $this->faker->address,
             'mission_executor' => $this->faker->name,
-            'package_start' => $date->format('Y-m-d'),
-            'package_end' => $date1->format('Y-m-d'),
+            'package_start' => $date,
+            'package_end' => $date1,
         ];
 
 

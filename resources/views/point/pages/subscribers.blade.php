@@ -13,7 +13,7 @@
                         <div class=" row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="mb-0 text-sm text-capitalize font-weight-bold">الرصيد </p>
+                                    <p class="mb-0 text-sm text-capitalize font-weight-bold">الرصيد + الربح</p>
                                     <h5 class="mb-0 font-weight-bolder">
                                         {{ Auth::user()->point->account }}
                                     </h5>
@@ -37,7 +37,7 @@
                                 <div class="numbers">
                                     <p class="mb-0 text-sm text-capitalize font-weight-bold">الربح</p>
                                     <h5 class="mb-0 font-weight-bolder">
-                                        {{ Auth::user()->point->commission }}
+                                        {{ Auth::user()->point->daily_profit }}
                                     </h5>
                                 </div>
                             </div>
@@ -65,6 +65,17 @@
                             </div>
                         </div>
                         <div class="px-0 pt-0 pb-2 card-body">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <div class="p-0 table-responsive">
                                 <table class="table mb-0 align-items-center">
                                     <thead>
@@ -293,7 +304,11 @@
                                                             <i class="fas fa-money-bill-wave-alt"></i>
                                                         </a>
                                                         <!-- satrt charge1 Modal -->
-                                                        <form action="">
+                                                        <form action="{{ route('point.subscribers.charge', $sub->id) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            {{-- <input type="text"> --}}
                                                             <div class="modal fade" id="charge{{ $sub->id }}"
                                                                 tabindex="-1" role="dialog"
                                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -504,9 +519,8 @@
                     {{-- {{ $subs->links() }} --}}
                     <!-- end pagination -->
                 </div>
-                
             @elseif($search)
-            لا يوجد نتائج لعملية البحث هذه يمكن البحق فقط عن طريق رقم الهاتف او رقم المشترك او t_c
+                لا يوجد نتائج لعملية البحث هذه يمكن البحق فقط عن طريق رقم الهاتف او رقم المشترك او t_c
             @else
                 <!-- else -->
                 <div class="col-12">
@@ -527,35 +541,36 @@
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3">
                                                 التاريخ
                                             </th>
-                                            <th
+                                            {{-- <th
                                                 class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 اسم المشترك </th>
                                             <th
                                                 class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                رقم الهاتف </th>
+                                                رقم الهاتف </th> --}}
                                             <th
                                                 class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 البيان </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>
-                                                <p class="mb-0 text-xs font-weight-bold"><bdi> 15/04/2022 10:00 pm</bdi>
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p class="mb-0 text-xs font-weight-bold">محمد</p>
-                                            </td>
-                                            <td>
-                                                <p class="mb-0 text-xs font-weight-bold">522552055</p>
-                                            </td>
-                                            <td>
-                                                <p class="mb-0 text-xs font-weight-bold">.......بقيمة تم تسديد الفاتورة
-                                                    للمشترك</p>
-                                            </td>
+                                        @foreach ($reports as $report)
+                                            <tr>
+                                                <td>
+                                                    <p class="mb-0 text-xs font-weight-bold"><bdi>{{ $report->created_at }}</bdi>
+                                                    </p>
+                                                </td>
+                                                {{-- <td>
+                                                    <p class="mb-0 text-xs font-weight-bold">محمد</p>
+                                                </td>
+                                                <td>
+                                                    <p class="mb-0 text-xs font-weight-bold">522552055</p>
+                                                </td> --}}
+                                                <td>
+                                                    <p class="mb-0 text-xs font-weight-bold">{{ $report->report }}</p>
+                                                </td>
 
-                                        </tr>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

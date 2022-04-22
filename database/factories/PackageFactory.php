@@ -23,7 +23,7 @@ class PackageFactory extends Factory
         // $carbon1 = $carbon1->addMonths($this->faker->numberBetween(1,12));
         return [
             'name' => $this->faker->name,
-            'price' => $this->faker->numberBetween(1,1000000000),
+            'price' => $this->faker->numberBetween(1,100),
             // 'start' => $carbon0,
             // 'end' => $carbon1,
         ];

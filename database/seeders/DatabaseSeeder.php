@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
             // ->hasReports(10)
             ->create(['role' => 'point']);
 
-        Report::factory(100)->create();
+        Report::factory(10)->create();
 
         User::factory()
             ->count(10)

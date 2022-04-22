@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Models\Point;
 use App\Models\Subscriber;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -19,7 +20,8 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         $schedule->call(function () {
             Subscriber::convertToDeactive();
-        })->daily();
+            Point::resetDailyProfit();
+        })->daily();//daily
     }
 
     /**

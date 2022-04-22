@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Point;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\TelegramController;
 use App\Http\Requests\Point\ChargeSubscriberRequest;
 use App\Models\Report;
 use App\Models\Subscriber;
@@ -25,10 +26,9 @@ class SubscriberController extends Controller
             ->orWhere('subscriber_number', "$s")
             ->orWhere('phone', "$s");
 
-            $reports = Report::where('point_id',Auth::user()->point->id)
-            
-                            ->whereDate('created_at', now()->format('Y-m-d'))->get();
-            // dd($reports);
+        $reports = Report::where('point_id', Auth::user()->point->id)
+            ->whereDate('created_at', now()->format('Y-m-d'))->get();
+        // dd($reports);
 
         return view('point.pages.subscribers', [
             'subs' => $subs->get(),
@@ -41,7 +41,7 @@ class SubscriberController extends Controller
 
     public function charge(ChargeSubscriberRequest $request, $id)
     {
-        
+
         // dd($request->all());
         // dd(Auth::user()->username);
         // dd($id);
@@ -57,26 +57,29 @@ class SubscriberController extends Controller
             if ($amount <= $point->account) {
 
                 $pre_account = $point->account;
-                $profit = ($point->commission/100)*$amount;
+                $profit = ($point->commission / 100) * $amount;
                 // $point->account = $point->account - $amount;
                 $point->takeFromAccount($amount);
                 $point->addProfitToAccount($profit);
 
                 $sub->payMonths($month);
 
+                $message = "تم شحن تفعيل الباقة $package->name للمشترك رقم $sub->subscriber_number لمدة $month أشهر و تم اقطاع مبلغ $amount من الرصيد وأضافة مبلغ $profit .";
+
                 //make a report
                 $report = Report::create([
                     'point_id' => $point->id,
-                    'report' => "تم شحن تفعيل الباقة $package->name للمشترك رقم $sub->subscriber_number لمدة $month أشهر و تم اقطاع مبلغ $amount من الرصيد وأضافة مبلغ $profit .",
+                    'report' =>"تم شحن تفعيل الباقة $package->name للمشترك رقم $sub->subscriber_number لمدة $month أشهر و تم اقطاع مبلغ $amount من الرصيد وأضافة مبلغ $profit .",
                     'on_him' => $amount,
                     'to_him' => $profit,
                     'pre_account' => $pre_account,
                 ]);
-                // $report-
 
                 //send a massege to telegram
+                TelegramController::chargeMessage($message);
 
-                session()->flash('success' ,' تم دفع الفاتورة بنجاح');
+
+                session()->flash('success', ' تم دفع الفاتورة بنجاح');
             } elseif ($point->borrowing_is_allowed) {
                 // موضوع الدين
             }
@@ -85,6 +88,5 @@ class SubscriberController extends Controller
         }
 
         return redirect()->back();
-
     }
 }

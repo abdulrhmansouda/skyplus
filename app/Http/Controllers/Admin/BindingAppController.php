@@ -10,6 +10,7 @@ class BindingAppController extends Controller
 {
     public function index(){
 
+        // dd(ProjectSetting::first()->bot_username);
         return view('admin.pages.setting-binding-app',[
             'settings' => ProjectSetting::first(),
         ]);

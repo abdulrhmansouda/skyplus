@@ -92,7 +92,8 @@ class SubscriberController extends Controller
         $subs = Subscriber::skip($page * $pagination_number)
             ->take($pagination_number);
         $export = new SubscribersExport($subs);
-        return Excel::download($export, 'subscribers.xlsx');
+        $now = now();
+        return Excel::download($export, "subscribers_$now.xlsx");
     }
 
     public function import(Request $request)

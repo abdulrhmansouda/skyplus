@@ -22,6 +22,7 @@
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="theme-color" content="#ffffff">
   <link id="pagestyle" href={{ asset('/assets/css/soft-ui-dashboard.css?v=1.0.3') }} rel="stylesheet" />
+  @yield('css')
 </head>
 
 <body class="bg-gray-100 g-sidenav-show rtl">
@@ -76,6 +77,9 @@
 
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src={{ asset('/assets/js/soft-ui-dashboard.js') }}></script>
+
+  @yield('js')
+
 </body>
 
 </html>

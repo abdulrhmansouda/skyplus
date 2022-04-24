@@ -13,13 +13,13 @@
                 <div class="d-flex gap-2 align-items-center">
                     <input name="daterange" type="text" class="form-control w-50" value="{{ $daterange ?? '' }}" />
                     <div class="form-group d-flex m-0 gap-1">
-                        <input class="form-check-input" type="checkbox" value="true" id="all">
+                        <input name="all_date" class="form-check-input" type="checkbox" value="true" @if($all_date === "true")checked @endif id="all">
                         <label class="form-check-label text-nowrap" for="all">كل المدة
                             </label>
                     </div>
                     <select name="points[]" multiple id="select_point" class="form-select">
                         <?php $name_points = ''; ?>
-                        <option value="all">الكل</option>
+                        <option value="0" @if(in_array("0",$_points)) selected @endif>الكل</option>
                         @foreach ($points as $point)
                         <option value="{{ $point->id }}" @if(in_array($point->id,$_points))<?php $name_points = "$name_points , $point->name"; ?> selected @endif>{{ $point->name }}</option>
                         @endforeach
@@ -33,6 +33,7 @@
             <form action="{{ route('admin.reports.export') }}" method="GET">
 
                 <input name="_daterange" type="hidden" value="{{ $daterange ?? '' }}" />
+                <input name="all_date" type="hidden" value="{{ $all_date }}" >
 
                 <?php $value = base64_encode(serialize($_points)); ?>
                 <input name="points" type="hidden" value="{{ $value }}">

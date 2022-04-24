@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\RechargeController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Point\ChangePasswordController as PointChangePasswordController;
+use App\Http\Controllers\Point\ReportController as PointReportController;
 use App\Http\Controllers\Point\SocialController;
 use App\Http\Controllers\Point\SubscriberController as PointSubscriberController;
 use App\Http\Controllers\SettingSocialController;
@@ -44,7 +45,7 @@ Route::middleware(['auth', 'admin'])
             });
 
         Route::prefix('/points')
-        ->name('points.')
+            ->name('points.')
             ->group(function () {
                 Route::get('/', [PointController::class, 'index'])->name('index');
                 Route::post('/store', [PointController::class, 'store'])->name('store');
@@ -53,19 +54,18 @@ Route::middleware(['auth', 'admin'])
             });
 
         Route::prefix('/subscribers')
-        ->name('subscribers.')
+            ->name('subscribers.')
             ->group(function () {
                 Route::get('/', [SubscriberController::class, 'index'])->name('index');
                 Route::post('/store', [SubscriberController::class, 'store'])->name('store');
                 Route::put('/update/{subscriber}', [SubscriberController::class, 'update'])->name('update');
                 Route::delete('/destroy/{subscriber}', [SubscriberController::class, 'destroy'])->name('destroy');
-                Route::get('/export',[SubscriberController::class,'export'])->name('export');
-                Route::post('/import',[SubscriberController::class,'import'])->name('import');
-
+                Route::get('/export', [SubscriberController::class, 'export'])->name('export');
+                Route::post('/import', [SubscriberController::class, 'import'])->name('import');
             });
 
         Route::prefix('/packages')
-        ->name('packages.')
+            ->name('packages.')
             ->group(function () {
                 Route::get('/', [PackageController::class, 'index'])->name('index');
                 Route::post('/store', [PackageController::class, 'store'])->name('store');
@@ -73,29 +73,29 @@ Route::middleware(['auth', 'admin'])
                 Route::delete('/destroy/{package}', [PackageController::class, 'destroy'])->name('destroy');
             });
 
-            Route::prefix('/recharge')
+        Route::prefix('/recharge')
             ->name('recharge.')
             ->group(function () {
                 Route::get('/', [RechargeController::class, 'index'])->name('index');
-                Route::put('/charge/{point}',[RechargeController::class,'charge'])->name('charge');
+                Route::put('/charge/{point}', [RechargeController::class, 'charge'])->name('charge');
             });
 
-            Route::prefix('/admins')
+        Route::prefix('/admins')
             ->name('admins.')
             ->middleware(['superadmin'])
             ->group(function () {
                 Route::get('/', [AdminController::class, 'index'])->name('index');
-                Route::post('/store',[AdminController::class,'store'])->name('store');
-                Route::put('/update/{admin}' ,[AdminController::class,'update'])->name('update');
-                Route::delete('/destroy/{admin}',[AdminController::class,'destroy'])->name('destroy');
+                Route::post('/store', [AdminController::class, 'store'])->name('store');
+                Route::put('/update/{admin}', [AdminController::class, 'update'])->name('update');
+                Route::delete('/destroy/{admin}', [AdminController::class, 'destroy'])->name('destroy');
             });
 
-            Route::prefix('/reports')
+        Route::prefix('/reports')
             ->name('reports.')
             ->group(function () {
                 Route::get('/', [ReportController::class, 'index'])->name('index');
                 // Route::post('/search',[ReportController::class, 'search'])->name('search');
-                Route::get('/get',[ReportController::class, 'admin_export'])->name('export');
+                Route::get('/get', [ReportController::class, 'admin_export'])->name('export');
             });
 
 
@@ -110,14 +110,14 @@ Route::middleware(['auth', 'admin'])
                         Route::put('/update', [BindingAppController::class, 'update'])->name('update');
                     });
 
-                    Route::prefix('/change-password')
+                Route::prefix('/change-password')
                     ->name('change-password.')
                     ->group(function () {
                         Route::get('/', [ChangePasswordController::class, 'index'])->name('index');
                         Route::put('/update', [ChangePasswordController::class, 'update'])->name('update');
                     });
 
-                    Route::prefix('/social')
+                Route::prefix('/social')
                     ->name('social.')
                     ->group(function () {
                         Route::get('/', [SettingSocialController::class, 'index'])->name('index');
@@ -137,24 +137,30 @@ Route::middleware(['auth', 'point'])
         //         })->name('home');
         //     });
 
-            Route::prefix('/subscribers')
+        Route::prefix('/subscribers')
             ->name('subscribers.')
             ->group(function () {
                 Route::get('/', [PointSubscriberController::class, 'index'])->name('index');
-                Route::put('/charge/{subscriber}' , [PointSubscriberController::class,'charge'])->name('charge');
+                Route::put('/charge/{subscriber}', [PointSubscriberController::class, 'charge'])->name('charge');
             });
 
-            Route::prefix('/social')
+        Route::prefix('/reports')
+            ->name('reports.')
+            ->group(function () {
+                Route::get('/', [PointReportController::class, 'index'])->name('index');
+                Route::get('/get', [PointReportController::class, 'admin_export'])->name('export');
+            });
+
+        Route::prefix('/social')
             ->name('social.')
             ->group(function () {
                 Route::get('/', [SocialController::class, 'index'])->name('index');
-
             });
 
-            Route::prefix('/sitting')
+        Route::prefix('/sitting')
             ->name('setting.')
             ->group(function () {
-                    Route::prefix('/change-password')
+                Route::prefix('/change-password')
                     ->name('change-password.')
                     ->group(function () {
                         Route::get('/', [PointChangePasswordController::class, 'index'])->name('index');

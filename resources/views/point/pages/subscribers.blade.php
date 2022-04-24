@@ -298,7 +298,8 @@
                                                     <div class="d-inline-block">
                                                         <a href="javascript:;"
                                                             class="px-1 text-xs text-secondary font-weight-bold "
-                                                            data-toggle="tooltip" data-original-title="charge1 user"
+                                                            data-toggle="tooltip"
+                                                            data-original-title="charge{{ $sub->id }} user"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#charge{{ $sub->id }}">
                                                             <i class="fas fa-money-bill-wave-alt"></i>
@@ -315,124 +316,144 @@
                                                                 <div class="modal-dialog modal-dialog-centered"
                                                                     role="document">
                                                                     <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title"
-                                                                                id="exampleModalLabel">
-                                                                                دفع
-                                                                                فاتورة للمشترك </h5>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <div class="row">
-                                                                                <div class=" col-6">
-                                                                                    <div class="form-group">
-                                                                                        <h6>
-                                                                                            الاسم
-                                                                                        </h6>
-                                                                                        {{ $sub->name }}
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class=" col-6">
-                                                                                    <div class="form-group">
-                                                                                        <h6>
-                                                                                            الأيام المتبقية
-                                                                                        </h6>
-                                                                                        {{ $sub->days_to_end }}
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class=" col-6">
-                                                                                    <div class="form-group">
-                                                                                        <h6>
-                                                                                            اسم الباقة </h6>
-                                                                                        {{ $sub->package->name }}
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class=" col-6">
-                                                                                    <div class="form-group">
-                                                                                        <h6>
-                                                                                            سعر الباقة </h6>
-                                                                                        {{ $sub->package->price }}
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <div class=" col-6">
-                                                                                    <div class="form-group">
-                                                                                        <h6>
-                                                                                            حالة المشترك </h6>
-                                                                                        @if ($sub->status === 'active')
-                                                                                            <span
-                                                                                                class="badge badge-sm bg-gradient-success">مفعل</span>
-                                                                                        @elseif($sub->status === 'deactive')
-                                                                                            <span
-                                                                                                class="badge badge-sm bg-gradient-danger">غير
-                                                                                                مفعل</span>
-                                                                                        @else
-                                                                                            <span
-                                                                                                class="badge badge-sm bg-gradient-danger">مغلق</span>
-                                                                                        @endif
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class=" col-6">
-                                                                                    <div class="form-group">
-                                                                                        <h6>
-                                                                                            الأشهر </h6>
-                                                                                        <select name="month" id=""
-                                                                                            class="form-select">
-                                                                                            <option value="1">1</option>
-                                                                                            <option value="2">2</option>
-                                                                                            <option value="3">3</option>
-                                                                                            <option value="4">4</option>
-                                                                                            <option value="5">5</option>
-                                                                                            <option value="6">6</option>
-                                                                                            <option value="7">7</option>
-                                                                                            <option value="8">8</option>
-                                                                                            <option value="9">9</option>
-                                                                                            <option value="10">10</option>
-                                                                                            <option value="11">11</option>
-                                                                                            <option value="12">12</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-12 ">
-                                                                                    <div class="row">
-                                                                                        <div class="col-6">
-                                                                                            <div class="form-group">
-                                                                                                <input
-                                                                                                    class=""
-                                                                                                    name="pay" type="radio"
-                                                                                                    value="true"
-                                                                                                    id="allow{{ $sub->id }}"
-                                                                                                    checked>
-                                                                                                <label
-                                                                                                    class=""
-                                                                                                    for="allow{{ $sub->id }}">
-                                                                                                    تسديد</label>
-                                                                                            </div>
+                                                                        @if ($sub->status !== 'closed')
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title"
+                                                                                    id="exampleModalLabel">
+                                                                                    دفع
+                                                                                    فاتورة للمشترك </h5>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <div class="row">
+                                                                                    <div class=" col-6">
+                                                                                        <div class="form-group">
+                                                                                            <h6>
+                                                                                                الاسم
+                                                                                            </h6>
+                                                                                            {{ $sub->name }}
                                                                                         </div>
-                                                                                        <div class="col-6">
-                                                                                            <div class="form-group">
-                                                                                                <input
-                                                                                                    class=""
-                                                                                                    name="pay" type="radio"
-                                                                                                    value="false"
-                                                                                                    id="notALlow{{ $sub->id }}">
-                                                                                                <label
-                                                                                                    class=""
-                                                                                                    for="notALlow{{ $sub->id }}">
-                                                                                                    الغاء تسديد</label>
-                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class=" col-6">
+                                                                                        <div class="form-group">
+                                                                                            <h6>
+                                                                                                الأيام المتبقية
+                                                                                            </h6>
+                                                                                            {{ $sub->days_to_end }}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class=" col-6">
+                                                                                        <div class="form-group">
+                                                                                            <h6>
+                                                                                                اسم الباقة </h6>
+                                                                                            {{ $sub->package->name }}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class=" col-6">
+                                                                                        <div class="form-group">
+                                                                                            <h6>
+                                                                                                سعر الباقة </h6>
+                                                                                            {{ $sub->package->price }}
                                                                                         </div>
                                                                                     </div>
 
+                                                                                    <div class=" col-6">
+                                                                                        <div class="form-group">
+                                                                                            <h6>
+                                                                                                حالة المشترك </h6>
+                                                                                            @if ($sub->status === 'active')
+                                                                                                <span
+                                                                                                    class="badge badge-sm bg-gradient-success">مفعل</span>
+                                                                                            @elseif($sub->status === 'deactive')
+                                                                                                <span
+                                                                                                    class="badge badge-sm bg-gradient-danger">غير
+                                                                                                    مفعل</span>
+                                                                                            @else
+                                                                                                <span
+                                                                                                    class="badge badge-sm bg-gradient-danger">مغلق</span>
+                                                                                            @endif
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class=" col-6">
+                                                                                        <div class="form-group">
+                                                                                            <h6>
+                                                                                                الأشهر </h6>
+                                                                                            <select name="month" id=""
+                                                                                                class="form-select">
+                                                                                                <option value="1">1</option>
+                                                                                                <option value="2">2</option>
+                                                                                                <option value="3">3</option>
+                                                                                                <option value="4">4</option>
+                                                                                                <option value="5">5</option>
+                                                                                                <option value="6">6</option>
+                                                                                                <option value="7">7</option>
+                                                                                                <option value="8">8</option>
+                                                                                                <option value="9">9</option>
+                                                                                                <option value="10">10
+                                                                                                </option>
+                                                                                                <option value="11">11
+                                                                                                </option>
+                                                                                                <option value="12">12
+                                                                                                </option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-12 ">
+                                                                                        <div class="row">
+                                                                                            <div class="col-6">
+                                                                                                <div
+                                                                                                    class="form-group">
+                                                                                                    <input
+                                                                                                        class=""
+                                                                                                        name="pay"
+                                                                                                        type="radio"
+                                                                                                        value="true"
+                                                                                                        id="allow{{ $sub->id }}"
+                                                                                                        checked>
+                                                                                                    <label
+                                                                                                        class=""
+                                                                                                        for="allow{{ $sub->id }}">
+                                                                                                        تسديد</label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-6">
+                                                                                                <div
+                                                                                                    class="form-group">
+                                                                                                    <input
+                                                                                                        class=""
+                                                                                                        name="pay"
+                                                                                                        type="radio"
+                                                                                                        value="false"
+                                                                                                        id="notALlow{{ $sub->id }}">
+                                                                                                    <label
+                                                                                                        class=""
+                                                                                                        for="notALlow{{ $sub->id }}">
+                                                                                                        الغاء تسديد</label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
 
+
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="submit"
-                                                                                class="btn btn-info">حفظ</button>
-                                                                            <span type="button" class="btn btn-secondary"
-                                                                                data-bs-dismiss="modal">الغاء</span>
-                                                                        </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="submit"
+                                                                                    class="btn btn-info">حفظ</button>
+                                                                                <span type="button"
+                                                                                    class="btn btn-secondary"
+                                                                                    data-bs-dismiss="modal">الغاء</span>
+                                                                            </div>
+                                                                        @else
+                                                                            هذا المشترك مغلق الرجاء التواصل مع مركز الخدمة
+                                                                            لأعادة تفعيل
+                                                                            المشترك
+                                                                            <div class="modal-footer">
+                                                                        
+                                                                                <span type="button"
+                                                                                    class="btn btn-secondary"
+                                                                                    data-bs-dismiss="modal">الغاء</span>
+                                                                            </div>
+                                                                        @endif
 
                                                                     </div>
                                                                 </div>
@@ -541,12 +562,7 @@
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3">
                                                 التاريخ
                                             </th>
-                                            {{-- <th
-                                                class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                اسم المشترك </th>
-                                            <th
-                                                class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                رقم الهاتف </th> --}}
+
                                             <th
                                                 class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 البيان </th>
@@ -556,15 +572,11 @@
                                         @foreach ($reports as $report)
                                             <tr>
                                                 <td>
-                                                    <p class="mb-0 text-xs font-weight-bold"><bdi>{{ $report->created_at }}</bdi>
+                                                    <p class="mb-0 text-xs font-weight-bold">
+                                                        <bdi>{{ $report->created_at }}</bdi>
                                                     </p>
                                                 </td>
-                                                {{-- <td>
-                                                    <p class="mb-0 text-xs font-weight-bold">محمد</p>
-                                                </td>
-                                                <td>
-                                                    <p class="mb-0 text-xs font-weight-bold">522552055</p>
-                                                </td> --}}
+
                                                 <td>
                                                     <p class="mb-0 text-xs font-weight-bold">{{ $report->report }}</p>
                                                 </td>

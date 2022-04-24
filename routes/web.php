@@ -94,8 +94,7 @@ Route::middleware(['auth', 'admin'])
             ->name('reports.')
             ->group(function () {
                 Route::get('/', [ReportController::class, 'index'])->name('index');
-                // Route::post('/search',[ReportController::class, 'search'])->name('search');
-                Route::get('/get', [ReportController::class, 'admin_export'])->name('export');
+                Route::post('/export', [ReportController::class, 'admin_export'])->name('export');
             });
 
 
@@ -148,7 +147,7 @@ Route::middleware(['auth', 'point'])
             ->name('reports.')
             ->group(function () {
                 Route::get('/', [PointReportController::class, 'index'])->name('index');
-                Route::get('/get', [PointReportController::class, 'admin_export'])->name('export');
+                Route::post('/export', [PointReportController::class, 'export'])->name('export');
             });
 
         Route::prefix('/social')

@@ -25,14 +25,11 @@ return new class extends Migration
             $table->text('address')->nullable();
             $table->text('installation_address')->nullable();
             $table->enum('status',['active','deactive','closed'])->default('active');
-            // $table->timestamp('package_start');
             $table->date('package_start');
-            // $table->timestamp('package_end')->nullable();
             $table->date('package_end');
             $table->string('mission_executor');
             $table->timestamps();
-            // $table->foreign('package_id')->references('id')->on('packages')
-            // ->onDelete('restrict');
+
         });
     }
 

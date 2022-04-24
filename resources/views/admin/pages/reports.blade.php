@@ -18,10 +18,9 @@
                             </label>
                     </div>
                     <select name="points[]" multiple id="select_point" class="form-select">
-                        <?php $name_points = ''; ?>
                         <option value="0" @if(in_array("0",$_points)) selected @endif>الكل</option>
                         @foreach ($points as $point)
-                        <option value="{{ $point->id }}" @if(in_array($point->id,$_points))<?php $name_points = "$name_points , $point->name"; ?> selected @endif>{{ $point->name }}</option>
+                        <option value="{{ $point->id }}" @if(in_array($point->id,$_points))selected @endif>{{ $point->name }}</option>
                         @endforeach
                     </select>
                     <button type="submit" class="btn btn-secondary mb-0  btn-sm ps-3 pe-3">بحث</button>
@@ -30,8 +29,8 @@
         </div>
 
         <div class="col-md-2">
-            <form action="{{ route('admin.reports.export') }}" method="GET">
-
+            <form action="{{ route('admin.reports.export') }}" method="POST">
+                @csrf
                 <input name="_daterange" type="hidden" value="{{ $daterange ?? '' }}" />
                 <input name="all_date" type="hidden" value="{{ $all_date }}" >
 

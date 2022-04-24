@@ -131,7 +131,7 @@
                                     </label>
                                     <select class="form-select" required name="status">
                                         <option value="active"> نشط</option>
-                                        <option value="deactive"> غير نشط</option>
+                                        <option value="deactive" selected> غير نشط</option>
                                         <option value="closed">مغلق</option>
                                     </select>
                                 </div>

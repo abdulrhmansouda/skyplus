@@ -18,9 +18,9 @@ return new class extends Migration
             $table->foreignId('point_id');
             $table->string('report');
             $table->string('note')->nullable();
-            $table->bigInteger('on_him');
-            $table->bigInteger('to_him');
-            $table->bigInteger('pre_account');
+            $table->double('on_him',30,3);
+            $table->double('to_him',30,3);
+            $table->double('pre_account',30,3);
             $table->timestamps();
         });
     }

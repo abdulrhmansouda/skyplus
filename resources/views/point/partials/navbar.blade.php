@@ -7,8 +7,12 @@
                         التحكم</a></li>
                 <li class="text-sm breadcrumb-item text-dark active" aria-current="page">
                     @switch(Route::currentRouteName())
-                        @case('point.subscribers')
+                        @case('point.subscribers.index')
                             تسديد الفواتير
+                        @break
+
+                        @case('point.reports.index')
+                            التقارير
                         @break
 
                         @case('point.setting.change-password.index')
@@ -16,34 +20,31 @@
                         @break
 
                         @case('point.social.index')
-                        الاعدادات / تغيير كلمة المرور
-                         @break
+                            الاعدادات / تغيير كلمة المرور
+                        @break
 
                         @default
-{{-- @dd(Route::currentRouteName()) --}}
+                            {{-- @dd(Route::currentRouteName()) --}}
                     @endswitch
                 </li>
             </ol>
         </nav>
         @switch(Route::currentRouteName())
-
-        @case('point.subscribers.index')
-
-            <div class="px-0 mt-2 collapse navbar-collapse mt-sm-0" id="navbar">
-                <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                    <form action="" method="GET">
-                        <div class="input-group">
-                            <span class="input-group-text text-body"><button class="submit search-button"><i
-                                        class="fas fa-search" aria-hidden="true"></i></button></span>
-                            <input type="text" class="form-control" placeholder="ابحث لتسديد فاتورة" name="s"
-                                value="@if (isset($search)) {{ $search ? $search : '' }} @endif">
-                        </div>
-                    </form>
-                </div>
-            @break
-            
-        @endswitch
-        {{-- <div class="px-0 mt-2 collapse navbar-collapse mt-sm-0" id="navbar">
+            @case('point.subscribers.index')
+                <div class="px-0 mt-2 collapse navbar-collapse mt-sm-0" id="navbar">
+                    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                        <form action="" method="GET">
+                            <div class="input-group">
+                                <span class="input-group-text text-body"><button class="submit search-button"><i
+                                            class="fas fa-search" aria-hidden="true"></i></button></span>
+                                <input type="text" class="form-control" placeholder="ابحث لتسديد فاتورة" name="s"
+                                    value="@if (isset($search)) {{ $search ? $search : '' }} @endif">
+                            </div>
+                        </form>
+                    </div>
+                @break
+            @endswitch
+            {{-- <div class="px-0 mt-2 collapse navbar-collapse mt-sm-0" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                 <div class="input-group">
                     <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
@@ -144,5 +145,5 @@
                 </li>
             </ul>
         </div> --}}
-    </div>
+        </div>
 </nav>

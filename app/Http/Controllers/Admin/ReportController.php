@@ -29,8 +29,16 @@ class ReportController extends Controller
         $points = (in_array("0", $request->points ?? ["0"])) ? ["0"] : $request->points;
         // dd($points);
         $reports = Report::select('*');
-        if (!in_array("0", $points))
+        if (!in_array("0", $points)) {
             $reports = Report::whereIn('point_id', $points);
+
+            // collect the name of whole points
+            $name_points = '';
+            $_points = Point::whereIn('id', $points)->get();
+            foreach ($_points as $point) {
+                $name_points = "$name_points , $point->name";
+            }
+        }
 
         if ($all_date !== "true") {
             preg_match_all("/([^-]*) - (.*)/", $daterange, $date);
@@ -52,6 +60,7 @@ class ReportController extends Controller
         return view('admin.pages.reports', [
             'points' => Point::select(['id', 'name'])->get(),
             '_points' => $points ?? [],
+            'name_points' => $name_points ?? '',
             // 'reports' => $reports->paginate(10)->appends($request->all()),
             'reports' => $reports->get(),
             'daterange' => $daterange,
@@ -108,73 +117,7 @@ class ReportController extends Controller
         $from = isset($from) ? $from->format('d/m/Y') : 'all';
         $to = isset($to) ? $to->format('d/m/Y') : 'all';
 
-        $export = new ReportsExport($reports->get(), $name_points ?? '', $pre, $from, $to);
+        $export = new ReportsExport($reports->get(), $name_points ?? '', $pre, $from, $to,0);
         return Excel::download($export, "reports.xlsx");
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

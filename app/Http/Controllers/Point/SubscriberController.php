@@ -42,6 +42,9 @@ class SubscriberController extends Controller
 
     public function charge(ChargeSubscriberRequest $request, $id)
     {
+        // TelegramController::updatedActivity();
+        // dd(2);
+
         $month = $request->month;
         $pay = $request->pay;
 
@@ -127,7 +130,7 @@ class SubscriberController extends Controller
                 'type' => 'charge_subscriber',
             ]);
 
-            //send a massege to telegram
+            //send a massege to telegramلا
             TelegramController::chargeMessage($message);
 
             // make a invoice

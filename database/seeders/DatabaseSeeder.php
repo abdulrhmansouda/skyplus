@@ -9,6 +9,7 @@ use App\Models\Package;
 use App\Models\Point;
 use App\Models\ProjectSetting;
 use App\Models\Report;
+use App\Models\TelegramBot;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -53,11 +54,21 @@ class DatabaseSeeder extends Seeder
             ->create();
 
         ProjectSetting::create([
-            // 'bot_username' => 'grouupp_bot',
-            // 'bot_token' => '5108071797:AAG6GINlNe8O7115o-GfvJQgt06-BzbqreM',
-            // 'chat_id' => '-1001686278067',
-
             'maximum_amount_of_borrowing' => 0,
+        ]);
+
+        TelegramBot::create([
+            // 'bot_username' => 'grouupp_bot',
+            'type' => 'charge',
+            'bot_token' => '5108071797:AAG6GINlNe8O7115o-GfvJQgt06-BzbqreM',
+            'chat_id' => '-1001686278067',
+        ]);
+
+        TelegramBot::create([
+            // 'bot_username' => 'grouupp_bot',
+            'type' => 'support',
+            'bot_token' => '5356853807:AAFB7eoGMlHrHf475OroELKItScAd-bzEFg',
+            'chat_id' => '-1001509295078',
         ]);
 
         Social::create([

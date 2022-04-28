@@ -105,6 +105,9 @@ Route::middleware(['auth', 'admin'])
             ->name('support.')
             ->group(function () {
                 Route::get('/', [SupportController::class, 'index'])->name('index');
+                Route::post('/accept-request',[ SupportController::class , 'accept_request'])->name('accept_request');
+                Route::post('/reject-request',[ SupportController::class , 'reject_request'])->name('reject_request');
+
             });
 
 
@@ -151,6 +154,7 @@ Route::middleware(['auth', 'point'])
             ->name('support.')
             ->group(function () {
                 Route::get('/', [PointSupportController::class, 'index'])->name('index');
+                Route::post('/support_request',[ PointSupportController::class, 'support_request'])->name('support_request');
             });
 
         Route::prefix('/reports')

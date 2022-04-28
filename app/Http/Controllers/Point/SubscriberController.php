@@ -31,12 +31,10 @@ class SubscriberController extends Controller
         $reports = Report::where('type', 'charge_subscriber')
             ->where('point_id', Auth::user()->point->id)
             ->whereDate('created_at', now()->format('Y-m-d'))->get();
-        // dd($reports);
 
         return view('point.pages.subscribers', [
             'subs' => $subs->get(),
             'reports' => $reports,
-            // 'packages' => Package::all(),
             'search' => $s,
         ]);
     }
@@ -51,107 +49,67 @@ class SubscriberController extends Controller
         $sub = Subscriber::findOrFail($id);
         $package = $sub->package;
         $point = Auth::user()->point;
-        // dd($pay === 'true');
+
         if ($pay === 'true') {
             $amount = $month * $package->price;
-            if ($amount <= $point->account) {
-
-                $pre_account = $point->account;
-                $profit = ($point->commission / 100) * $amount;
-                // $point->account = $point->account - $amount;
-                $point->takeFromAccount($amount);
-                $point->addProfitToAccount($profit);
-
-                $sub->payMonths($month);
-
-                $message = "تم شحن/تفعيل الباقة $package->name للمشترك رقم $sub->subscriber_number لمدة $month أشهر و تم اقطاع مبلغ $amount من الرصيد وأضافة مبلغ $profit .";
-
-                //make a report
-                Report::create([
-                    'point_id' => $point->id,
-                    'report' => $message,
-                    'on_him' => $amount,
-                    'to_him' => $profit,
-                    'pre_account' => $pre_account,
-                    'type' => 'charge_subscriber',
-                ]);
-
-                //send a massege to telegram
-                TelegramController::chargeMessage($message);
-
-                // make a invoice
-
-                Invoice::create([
-                    'point_id' => $point->id,
-                    'subscriber_id' => $sub->id,
-                    'amount' => $amount,
-
-                    'month' => $month,
-                ]);
-
-
-                session()->flash('success', ' تم دفع الفاتورة بنجاح');
-            } elseif ($point->borrowing_is_allowed) {
-                // موضوع الدين
-                // dd(10);
-                $maximum_amount_of_borrowing = ProjectSetting::firstOrFail()->maximum_amount_of_borrowing;
-
-                if ($amount <= $point->account + $maximum_amount_of_borrowing) {
-                    // dd(9);
-                    $pre_account = $point->account;
-                    $profit = ($point->commission / 100) * $amount;
-                    // $point->account = $point->account - $amount;
-                    $point->takeFromAccount($amount);
-                    $point->addProfitToAccount($profit);
-
-                    $sub->payMonths($month);
-
-                    $message = "تم شحن/تفعيل الباقة $package->name للمشترك رقم $sub->subscriber_number لمدة $month أشهر و تم اقطاع مبلغ $amount من الرصيد وأضافة مبلغ $profit .";
-
-                    //make a report
-                    Report::create([
-                        'point_id' => $point->id,
-                        'report' => $message,
-                        'on_him' => $amount,
-                        'to_him' => $profit,
-                        'pre_account' => $pre_account,
-                        'type' => 'charge_subscriber',
-                    ]);
-
-                    //send a massege to telegram
-                    TelegramController::chargeMessage($message);
-
-                    // make a invoice
-
-                    Invoice::create([
-                        'point_id' => $point->id,
-                        'subscriber_id' => $sub->id,
-                        'amount' => $amount,
-
-                        'month' => $month,
-                    ]);
-
-
-                    session()->flash('success', ' تم دفع الفاتورة بنجاح');
-                }
+            // موضوع الدين
+            $maximum_amount_of_borrowing = ProjectSetting::firstOrFail()->maximum_amount_of_borrowing;
+            if (($amount > $point->account) && ($amount > $point->account + $maximum_amount_of_borrowing || !$point->borrowing_is_allowed)) {
+                session()->flash('error', 'لا يوجد رصيد كافي لتنفيذ عملية الشحن هذه');
+                return redirect()->back();
             }
+            // انتهاء موضوع الدين
+
+            $pre_account = $point->account;
+            $profit = ($point->commission / 100) * $amount;
+            $point->takeFromAccount($amount);
+            $point->addProfitToAccount($profit);
+
+            $sub->payMonths($month);
+
+            $message = "تم شحن/تفعيل الباقة $package->name للمشترك رقم $sub->subscriber_number لمدة $month أشهر و تم اقطاع مبلغ $amount من الرصيد وأضافة مبلغ $profit .";
+
+            //make a report
+            Report::create([
+                'point_id' => $point->id,
+                'report' => $message,
+                'on_him' => $amount,
+                'to_him' => $profit,
+                'pre_account' => $pre_account,
+                'type' => 'charge_subscriber',
+            ]);
+
+            //send a massege to telegram
+            TelegramController::chargeMessage($message);
+
+            // make a invoice
+
+            Invoice::create([
+                'point_id' => $point->id,
+                'subscriber_id' => $sub->id,
+                'amount' => $amount,
+
+                'month' => $month,
+            ]);
+
+
+            session()->flash('success', ' تم دفع الفاتورة بنجاح');
         } else {
             // الغاء التسديد
-            // dd(8);
-            $invoice_month = Invoice::where('subscriber_id',$sub->id)
-                                    ->where('point_id' , $point->id)
-                                    ->whereDate('created_at' , now()->format('Y-m-d'))
-                                    ->sum('month') ?? 0;
-            // dd($invoice_month);
-            if($month > $invoice_month){
-                session()->flash('error','انت لم تقم بدفع هذه الفاتور تأكد من المعلومات');
+            $invoice_month = Invoice::where('subscriber_id', $sub->id)
+                ->where('point_id', $point->id)
+                ->whereDate('created_at', now()->format('Y-m-d'))
+                ->sum('month') ?? 0;
+
+            if ($month > $invoice_month) {
+                session()->flash('error', 'انت لم تقم بدفع هذه الفاتور تأكد من المعلومات');
                 return redirect()->back();
             }
 
             $amount = $month * $package->price;
             $pre_account = $point->account;
             $profit = ($point->commission / 100) * $amount;
-            // $point->account = $point->account - $amount;
+
             $point->addToAccount($amount);
             $point->takeProfitFromAccount($profit);
 
@@ -162,7 +120,7 @@ class SubscriberController extends Controller
             //make a report
             Report::create([
                 'point_id' => $point->id,
-                'report' =>  $message ,
+                'report' =>  $message,
                 'on_him' => -1 * $amount,
                 'to_him' => -1 * $profit,
                 'pre_account' => $pre_account,

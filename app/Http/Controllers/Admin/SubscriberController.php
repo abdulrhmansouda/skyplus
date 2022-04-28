@@ -23,15 +23,6 @@ class SubscriberController extends Controller
     public function index(Request $request)
     {
 
-        // $a = new \App\Helper\Scripts;
-        // $a->convertToDeactive();
-        // Subscriber::__callStatic(convertToDeactive());
-// 
-        // $this->convertToDeactive();
-
-        // Subscriber::convertToDeactive();
-
-
         $sort_by = $request->sort_by;
         $page = $request->page ?? 1;
         $s = $request->s ?? '';
@@ -61,16 +52,6 @@ class SubscriberController extends Controller
         return redirect()->back()->with('success', ' تم التصدير بنجاح');
     }
 
-    // public  function convertToDeactive(){
-    //     $subs = Subscriber::where('status','deactive')->all();
-    //     foreach($subs as $sub)
-    //     {
-    //         if($sub->days_to_end){
-    //             $sub->status = 'deactive';
-    //             $sub->update();
-    //         }
-    //     }
-    // }
 
     public function export(Request $request)
     {

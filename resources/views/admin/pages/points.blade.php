@@ -407,7 +407,7 @@
                                                                     </div>
                                                                     <div class="col-md-12">
                                                                         <div class="form-group">
-                                                                            <input class="form-check-input" type="checkbox" value="true" id="isReligion{{ $point->id }}" @if ($point->borrowing_is_allowed) checked="" @endif>
+                                                                            <input name="borrowing_is_allowed" class="form-check-input" type="checkbox" value="true" id="isReligion{{ $point->id }}" @if ($point->borrowing_is_allowed) checked @endif>
                                                                             <label class="form-check-label" for="isReligion{{ $point->id }}">مسموح
                                                                                 الدين</label>
                                                                         </div>

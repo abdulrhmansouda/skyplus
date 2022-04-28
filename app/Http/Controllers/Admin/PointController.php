@@ -51,7 +51,7 @@ class PointController extends Controller
             'password' => Hash::make($request->password),
         ])->id;
 
-        if ($request->borrowing_is_allowed) {
+        if ($request->borrowing_is_allowed === 'ture') {
             $point->borrowing_is_allowed = true;
         }
 
@@ -98,7 +98,7 @@ class PointController extends Controller
             'password' => is_null($request->password) ? $point->user->password : Hash::make($request->password),
         ]);
 
-        if ($request->borrowing_is_allowed) {
+        if ($request->borrowing_is_allowed === 'true') {
             $point->borrowing_is_allowed = true;
         }
 

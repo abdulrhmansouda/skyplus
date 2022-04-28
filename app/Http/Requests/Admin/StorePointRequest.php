@@ -34,8 +34,8 @@ class StorePointRequest extends FormRequest
             'phone' => ['required' , 'string ','max:100'],
             'image' => ['nullable','image'],
             'address' => ['nullable','string','max:1000',],
-            'borrowing_is_allowed' => ['bool' ,],
-            'status' => ['required' , Rule::in(['active', 'deactive' , 'closed']) ],
+            'borrowing_is_allowed' => ['nullable' ,Rule::in(['true',]) ],
+            // 'status' => ['required' , Rule::in(['active', 'deactive' , 'closed']) ],
         ];
     }
 }

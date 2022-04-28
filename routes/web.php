@@ -10,10 +10,13 @@ use App\Http\Controllers\Admin\RechargeController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\SettingOtherController;
 use App\Http\Controllers\Admin\SubscriberController;
+use App\Http\Controllers\Admin\SupportController;
 use App\Http\Controllers\Point\ChangePasswordController as PointChangePasswordController;
 use App\Http\Controllers\Point\ReportController as PointReportController;
 use App\Http\Controllers\Point\SocialController;
 use App\Http\Controllers\Point\SubscriberController as PointSubscriberController;
+use App\Http\Controllers\Point\SupportController as PointSupportController;
+// use App\Http\Controllers\Point\SupportController;
 use App\Http\Controllers\SettingSocialController;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
@@ -98,17 +101,16 @@ Route::middleware(['auth', 'admin'])
                 Route::post('/export', [ReportController::class, 'admin_export'])->name('export');
             });
 
+        Route::prefix('/support')
+            ->name('support.')
+            ->group(function () {
+                Route::get('/', [SupportController::class, 'index'])->name('index');
+            });
+
 
         Route::prefix('/sitting')
             ->name('setting.')
             ->group(function () {
-                // Route::prefix('/binding-app')
-                //     ->middleware(['superadmin'])
-                //     ->name('binding-app.')
-                //     ->group(function () {
-                //         Route::get('/', [BindingAppController::class, 'index'])->name('index');
-                //         Route::put('/update', [BindingAppController::class, 'update'])->name('update');
-                //     });
 
                 Route::prefix('/change-password')
                     ->name('change-password.')
@@ -126,9 +128,9 @@ Route::middleware(['auth', 'admin'])
 
                 Route::prefix('/other-settings')
                     ->name('other.')
-                    ->group(function(){
-                        Route::get('/',[SettingOtherController::class,'index'])->name('index');
-                        Route::post('/update',[SettingOtherController::class,'update_maximum_amount_of_borrowing'])->name('update');
+                    ->group(function () {
+                        Route::get('/', [SettingOtherController::class, 'index'])->name('index');
+                        Route::post('/update', [SettingOtherController::class, 'update_maximum_amount_of_borrowing'])->name('update');
                     });
             });
     });
@@ -137,18 +139,18 @@ Route::middleware(['auth', 'point'])
     ->prefix('/point')
     ->name('point.')
     ->group(function () {
-        // Route::prefix('/home')
-        //     ->group(function () {
-        //         Route::get('/', function () {
-        //             return 'point';
-        //         })->name('home');
-        //     });
 
         Route::prefix('/subscribers')
             ->name('subscribers.')
             ->group(function () {
                 Route::get('/', [PointSubscriberController::class, 'index'])->name('index');
                 Route::put('/charge/{subscriber}', [PointSubscriberController::class, 'charge'])->name('charge');
+            });
+
+            Route::prefix('/support')
+            ->name('support.')
+            ->group(function () {
+                Route::get('/', [PointSupportController::class, 'index'])->name('index');
             });
 
         Route::prefix('/reports')

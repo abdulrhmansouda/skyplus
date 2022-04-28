@@ -37,6 +37,10 @@
                             المشرفين
                         @break
 
+                        @case('admin.support.index')
+                            الدعم الفني
+                        @break
+
                         @case('admin.setting.binding-app.index')
                             الاعدادات / الربط
                         @break
@@ -46,12 +50,12 @@
                         @break
 
                         @case('admin.setting.social.index')
-                        الاعدادات /  التواصل
-                    @break
+                            الاعدادات / التواصل
+                        @break
 
-                    @case('admin.setting.other.index')
-                    الاعدادات /  اعدادات أخرى
-                @break
+                        @case('admin.setting.other.index')
+                            الاعدادات / اعدادات أخرى
+                        @break
 
                         @default
                             need works from navbar

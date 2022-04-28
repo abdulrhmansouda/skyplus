@@ -11,6 +11,10 @@
                             تسديد الفواتير
                         @break
 
+                        @case('point.support.index')
+                             طلبات الدعم
+                        @break
+
                         @case('point.reports.index')
                             التقارير
                         @break

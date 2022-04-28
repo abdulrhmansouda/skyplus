@@ -412,6 +412,7 @@
                                             </form>
                                             <!-- end Modal charge1  -->
                                         </div>
+                                        <!-- end charge1 -->
                                         <!-- end maintenance1 -->
                                         <!-- start maintenance1 -->
                                         <div class="d-inline-block">
@@ -477,7 +478,7 @@
                                                                                 <option value="7">7</option>
                                                                                 <option value="8">8</option>
                                                                                 <option value="9">9</option>
-                                                                                <option value="10">10
+                                                                                <option value="10">10</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>

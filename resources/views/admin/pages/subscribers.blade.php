@@ -631,6 +631,90 @@
                                             <!--end delete Modal -->
                                         </div>
                                         <!-- end delete 1 -->
+                                          <!-- start charge1 -->
+                                          <div class="d-inline-block">
+                                            <a href="javascript:;" class="px-1 text-xs text-secondary font-weight-bold " data-toggle="tooltip" data-original-title="charge{{ $sub->id }} user" data-bs-toggle="modal" data-bs-target="#charge{{ $sub->id }}">
+                                                <i class="fas fa-money-bill-wave-alt"></i>
+                                            </a>
+                                            <!-- satrt charge1 Modal -->
+                                            <form action="{{ route('point.subscribers.charge', $sub->id) }}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="modal fade" id="charge{{ $sub->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">
+                                                                    تمديد أيام
+                                                                    فاتورة لمشترك </h5>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row">
+                                                                    <div class=" col-6">
+                                                                        <div class="form-group">
+                                                                            <h6>
+                                                                                الاسم
+                                                                            </h6>
+                                                                            {{ $sub->name }}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class=" col-6">
+                                                                        <div class="form-group">
+                                                                            <h6>
+                                                                                الأيام المتبقية
+                                                                            </h6>
+                                                                            {{ $sub->days_to_end }}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class=" col-6">
+                                                                        <div class="form-group">
+                                                                            <h6>
+                                                                                اسم الباقة </h6>
+                                                                            {{ $sub->package->name }}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class=" col-6">
+                                                                        <div class="form-group">
+                                                                            <h6>
+                                                                                سعر الباقة </h6>
+                                                                            {{ $sub->package->price }}
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class=" col-6">
+                                                                        <div class="form-group">
+                                                                            <h6>
+                                                                                حالة المشترك </h6>
+                                                                            @if ($sub->status === 'active')
+                                                                            <span class="badge badge-sm bg-gradient-success">مفعل</span>
+                                                                            @elseif($sub->status === 'deactive')
+                                                                            <span class="badge badge-sm bg-gradient-danger">غير
+                                                                                مفعل</span>
+                                                                            @else
+                                                                            <span class="badge badge-sm bg-gradient-danger">مغلق</span>
+                                                                            @endif
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class=" col-6">
+                                                                        <div class="form-group">
+                                                                            <h6>عدد الأيام </h6>
+                                                                           <input type="number" class="form-control" required>
+                                                                        </div>
+                                                                    </div>
+                                                                   
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-info">حفظ</button>
+                                                                <span type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <!-- end Modal charge1  -->
+                                        </div>
+                                        <!-- end charge1 -->
                                     </td>
                                 </tr>
                                 @endforeach

@@ -114,11 +114,28 @@
                                                                     <div class=" col-md-6">
                                                                         <div class="form-group">
                                                                             <h6>
+                                                                                 ID
+                                                                            </h6>
+                                                                            123365
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class=" col-md-6">
+                                                                        <div class="form-group">
+                                                                            <h6>
                                                                                 نوع الطلب
                                                                             </h6>
                                                                             صيانة
                                                                         </div>
                                                                     </div>
+                                                                    <div class=" col-md-6">
+                                                                        <div class="form-group">
+                                                                            <h6>
+                                                                                اسم الباقة الجديدة 
+                                                                            </h6>
+                                                                            باقة 2
+                                                                        </div>
+                                                                    </div>
+                                                                   
                                                                     <div class=" col-12">
                                                                         <div class="form-group">
                                                                             <h6>

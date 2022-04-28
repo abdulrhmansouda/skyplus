@@ -194,13 +194,11 @@
                 </button>
                 <div class="collapse @if (Route::currentRouteName() === 'admin.setting.binding-app.index' || Route::currentRouteName() === 'admin.setting.change-password.index') show @endif" id="setting">
                     <ul class="ul-links">
-                        @if (Auth::user()->isSuperAdmin())
-                        <li class="mb-1 @if (Route::currentRouteName() === 'admin.setting.binding-app.index') active @endif"><a href="{{ route('admin.setting.binding-app.index') }}">الاعدادات الربط</a></li>
-                        @endif
+    
                         <li class="mb-1 @if (Route::currentRouteName() === 'admin.setting.change-password.index') active @endif"><a href="{{ route('admin.setting.change-password.index') }}">تغير كلمة المرور</a></li>
 
                         <li class="mb-1 @if (Route::currentRouteName() === 'admin.setting.social.index') active @endif"><a href="{{ route('admin.setting.social.index') }}">معلومات التواصل</a></li>
-                        <li class="mb-1 @if (Route::currentRouteName() === 'admin.setting.social.index') active @endif"><a href="{{ route('admin.setting.social.index') }}">اعدادات أٌخرى</a></li>
+                        <li class="mb-1 @if (Route::currentRouteName() === 'admin.setting.other.index') active @endif"><a href="{{ route('admin.setting.other.index') }}">اعدادات أٌخرى</a></li>
                     </ul>
                 </div>
             </li>

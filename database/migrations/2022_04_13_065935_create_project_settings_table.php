@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('project_settings', function (Blueprint $table) {
             $table->id();
-            $table->string('bot_username');
-            $table->string('bot_token');
-            $table->string('chat_id');
+            $table->double('maximum_amount_of_borrowing',30,3);
+            // $table->string('bot_username');
+            // $table->string('bot_token');
+            // $table->string('chat_id');
             $table->timestamps();
         });
     }

@@ -45,6 +45,14 @@
                             الاعدادات / تغيير كلمة المرور
                         @break
 
+                        @case('admin.setting.social.index')
+                        الاعدادات /  التواصل
+                    @break
+
+                    @case('admin.setting.other.index')
+                    الاعدادات /  اعدادات أخرى
+                @break
+
                         @default
                             need works from navbar
                     @endswitch
@@ -85,7 +93,7 @@
 
                     @endswitch
 
-                    <ul class="navbar-nav me-auto ms-0 justify-content-end">
+                    {{-- <ul class="navbar-nav me-auto ms-0 justify-content-end">
                         <li class="nav-item d-xl-none pe-3 d-flex align-items-center">
                             <a href="javascript:;" class="p-0 nav-link text-body" id="iconNavbarSidenav">
                                 <div class="sidenav-toggler-inner">
@@ -96,7 +104,7 @@
                             </a>
                         </li>
           
-                    </ul>
+                    </ul> --}}
                 </div>
             </div>
 </nav>

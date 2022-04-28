@@ -53,9 +53,11 @@ class DatabaseSeeder extends Seeder
             ->create();
 
         ProjectSetting::create([
-            'bot_username' => 'grouupp_bot',
-            'bot_token' => '5108071797:AAG6GINlNe8O7115o-GfvJQgt06-BzbqreM',
-            'chat_id' => '-1001686278067',
+            // 'bot_username' => 'grouupp_bot',
+            // 'bot_token' => '5108071797:AAG6GINlNe8O7115o-GfvJQgt06-BzbqreM',
+            // 'chat_id' => '-1001686278067',
+
+            'maximum_amount_of_borrowing' => 0,
         ]);
 
         Social::create([

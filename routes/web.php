@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\PointController;
 use App\Http\Controllers\Admin\RechargeController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\SettingOtherController;
 use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Point\ChangePasswordController as PointChangePasswordController;
 use App\Http\Controllers\Point\ReportController as PointReportController;
@@ -101,13 +102,13 @@ Route::middleware(['auth', 'admin'])
         Route::prefix('/sitting')
             ->name('setting.')
             ->group(function () {
-                Route::prefix('/binding-app')
-                    ->middleware(['superadmin'])
-                    ->name('binding-app.')
-                    ->group(function () {
-                        Route::get('/', [BindingAppController::class, 'index'])->name('index');
-                        Route::put('/update', [BindingAppController::class, 'update'])->name('update');
-                    });
+                // Route::prefix('/binding-app')
+                //     ->middleware(['superadmin'])
+                //     ->name('binding-app.')
+                //     ->group(function () {
+                //         Route::get('/', [BindingAppController::class, 'index'])->name('index');
+                //         Route::put('/update', [BindingAppController::class, 'update'])->name('update');
+                //     });
 
                 Route::prefix('/change-password')
                     ->name('change-password.')
@@ -121,6 +122,13 @@ Route::middleware(['auth', 'admin'])
                     ->group(function () {
                         Route::get('/', [SettingSocialController::class, 'index'])->name('index');
                         Route::put('/update', [SettingSocialController::class, 'update'])->name('update');
+                    });
+
+                Route::prefix('/other-settings')
+                    ->name('other.')
+                    ->group(function(){
+                        Route::get('/',[SettingOtherController::class,'index'])->name('index');
+                        Route::post('/update',[SettingOtherController::class,'update_maximum_amount_of_borrowing'])->name('update');
                     });
             });
     });

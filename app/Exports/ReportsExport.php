@@ -35,12 +35,13 @@ class ReportsExport implements FromCollection
         $col = new Collection([['التقارير' ,'' ,'' ,'' ,'' ,'' ,'']]);
         $col = $col->add(['الحسابات :' ,$this->name_points ,'' ,'' ,'' ,'' ,'']);
         $col = $col->add(['اعتبار من' ,$this->from,'الى' ,$this->to ,'الرصيد السابق' ,$this->pre ,$pre_account]);
-        $col = $col->add(['التاريخ' ,'اسم النقطة' ,'البيان' ,'الملاحظة' ,'عليه' ,'له' ,'الرصيد']);
-        $col = $col->add(['' ,'' ,'الكل' ,'' ,'' ,'' ,$pre_account]);
+        $col = $col->add(['التاريخ' ,'اسم النقطة' ,'نوع البيان','البيان' ,'الملاحظة' ,'عليه' ,'له' ,'الرصيد']);
+        $col = $col->add(['' ,'' , '' ,'الكل' ,'' ,'' ,'' ,$pre_account]);
         foreach($this->reports as $report){
             $pre_account = $pre_account - $report->to_him + $report->on_him;
             $col = $col->add([$report->created_at,
             $report->point->name,
+            $report->type_report,
             $report->report,
             $report->note,
             $report->on_him ? $report->on_him : '0',

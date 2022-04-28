@@ -13,15 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('reports', function (Blueprint $table) {
+        Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->foreignId('point_id');
-            $table->string('report');
-            $table->string('note')->nullable();
-            $table->double('on_him',30,3);
-            $table->double('to_him',30,3);
-            $table->double('pre_account',30,3);
-            $table->enum('type',['charge_subscriber' , 'charge_point']);
+            $table->foreignId('subscriber_id');
+            $table->double('amount',30,3);
             $table->timestamps();
         });
     }
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reports');
+        Schema::dropIfExists('invoices');
     }
 };

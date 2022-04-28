@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Invoice;
+use App\Models\Subscriber;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -12,9 +14,29 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.pages.home');
+        $active = Subscriber::where('status' , 'active')->count();
+        $deactive = Subscriber::where('status' , 'deactive')->count();
+        $closed = Subscriber::where('status' , 'closed')->count();
+        $date = $request->date ?? now()->format('Y-m-d');
+
+        $count = Invoice::whereDate('created_at',$date);
+
+        $sum = clone $count;
+
+        $count = $count->count();
+        $sum = $sum->sum('amount');
+
+
+        return view('admin.pages.home',[
+            'active' => $active,
+            'deactive' => $deactive,
+            'closed' => $closed,
+            'date' => $date,
+            'count' => $count,
+            'sum' => $sum,
+        ]);
     }
 
     /**

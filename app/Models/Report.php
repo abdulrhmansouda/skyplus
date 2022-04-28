@@ -15,4 +15,12 @@ class Report extends Model
     {
         return $this->belongsTo(Point::class);
     }
+
+    public function getTypeReportAttribute(){
+        switch($this->type){
+            case "charge_point": return 'شحن رصيد لنقطة';
+            case "charge_subscriber": return 'تفعيل باقة لمشترك';
+        }
+    }
+
 }

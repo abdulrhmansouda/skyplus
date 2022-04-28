@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Point;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\TelegramController;
 use App\Http\Requests\Point\ChargeSubscriberRequest;
+use App\Models\Invoice;
 use App\Models\Report;
 use App\Models\Subscriber;
 use Illuminate\Http\Request;
@@ -26,7 +27,8 @@ class SubscriberController extends Controller
             ->orWhere('subscriber_number', "$s")
             ->orWhere('phone', "$s");
 
-        $reports = Report::where('point_id', Auth::user()->point->id)
+        $reports = Report::where('type','charge_subscriber')
+            ->where('point_id', Auth::user()->point->id)
             ->whereDate('created_at', now()->format('Y-m-d'))->get();
         // dd($reports);
 
@@ -67,16 +69,25 @@ class SubscriberController extends Controller
                 $message = "تم شحن تفعيل الباقة $package->name للمشترك رقم $sub->subscriber_number لمدة $month أشهر و تم اقطاع مبلغ $amount من الرصيد وأضافة مبلغ $profit .";
 
                 //make a report
-                $report = Report::create([
+                Report::create([
                     'point_id' => $point->id,
                     'report' =>"تم شحن تفعيل الباقة $package->name للمشترك رقم $sub->subscriber_number لمدة $month أشهر و تم اقطاع مبلغ $amount من الرصيد وأضافة مبلغ $profit .",
                     'on_him' => $amount,
                     'to_him' => $profit,
                     'pre_account' => $pre_account,
+                    'type' => 'charge_subscriber',
                 ]);
 
                 //send a massege to telegram
                 TelegramController::chargeMessage($message);
+
+                // make a invoice
+
+                Invoice::create([
+                    'point_id' => $point->id,
+                    'subscriber_id' => $sub->id,
+                    'amount' => $amount,
+                ]);
 
 
                 session()->flash('success', ' تم دفع الفاتورة بنجاح');

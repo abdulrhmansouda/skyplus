@@ -393,8 +393,8 @@
                                                                                 </span>
                                                                             </label>
                                                                             <select required="" class="form-select" name="status">
-                                                                                <option value="active" selected=""> مفعل</option>
-                                                                                <option value="closed">مفلق</option>
+                                                                                <option value="active" @if($point->status === 'active') selected @endif> مفعل</option>
+                                                                                <option value="closed" @if($point->status === 'closed') selected @endif>مفلق</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>

@@ -9,7 +9,6 @@
     <div class="row mb-3">
         <div class="col-md-10 ">
             <form action="" method="GET">
-                {{-- @csrf --}}
                 <div class="d-flex gap-2 align-items-center">
                     <input name="daterange" type="text" class="form-control w-50" value="{{ $daterange ?? '' }}" />
                     <div class="form-group d-flex m-0 gap-1">
@@ -89,6 +88,7 @@
                                 <tr class="bg-aliceblue">
                                     <td class="text-uppercase  text-xs font-weight-bolder ps-3">التاريخ</td>
                                     <td class="text-uppercase  text-xs font-weight-bolder ps-3">اسم النقطة</td>
+                                    <td class="px-1 text-uppercase  text-xs font-weight-bolder">نوع البيان</td>
                                     <td class="px-1 text-uppercase  text-xs font-weight-bolder">البيان</td>
                                     <td class="px-1 text-uppercase  text-xs font-weight-bolder">ملاحظات</td>
                                     <td class="px-1 text-uppercase  text-xs font-weight-bolder">عليه</td>
@@ -97,6 +97,7 @@
                                 </tr>
                                 <tr>
                                     <td class="text-uppercase text-secondary text-xs font-weight-bolder ps-3"></td>
+                                    <td class="px-1 text-uppercase text-secondary text-xs font-weight-bolder"></td>
                                     <td class="px-1 text-uppercase text-secondary text-xs font-weight-bolder"></td>
                                     <td class="px-1 text-uppercase text-secondary text-xs font-weight-bolder">الكل</td>
                                     <td class="px-1 text-uppercase text-secondary text-xs font-weight-bolder"></td>
@@ -118,6 +119,12 @@
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold">{{ $report->point->name }}</p>
                                     </td>
+
+                                    <td>
+                                        <p class="mb-0 text-xs font-weight-bold">{{ $report->type_report }}
+                                        </p>
+                                    </td>
+
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold">{{ $report->report }}
                                         </p>

@@ -11,7 +11,7 @@
         <ul class="navbar-nav">
 
             <li class="nav-item">
-                <a class="nav-link @if(Route::currentRouteName() === 'point.subscribers.index') active @endif" href="{{ route('point.subscribers.index') }}">
+                <button data-bs-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#actions" aria-expanded="false" aria-controls="actions" class="nav-link @if(Route::currentRouteName() === 'point.subscribers.index') active @endif" href="{{ route('point.subscribers.index') }}">
                     <div class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
                         <svg class="text-dark" width="16px" height="16px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>office</title>
@@ -29,8 +29,14 @@
                         </svg>
 
                     </div>
-                    <span class="nav-link-text me-1"> تسديد فاتورة</span>
-                </a>
+                    <span class="nav-link-text me-1">العمليات</span>
+                </button>
+                <div class="collapse @if (Route::currentRouteName() === 'admin.setting.binding-app.index' || Route::currentRouteName() === 'admin.setting.change-password.index') show @endif" id="actions">
+                    <ul class="ul-links">
+                        <li class="mb-1 @if(Route::currentRouteName() === 'point.subscribers.index') active @endif"><a href="{{ route('point.subscribers.index') }}">تسديد-صيانة</a></li>
+                        <li class="mb-1 "><a href="">طلبات الدعم</a></li>
+                    </ul>
+                </div>
             </li>
             <li class="nav-item">
                 <a class="nav-link @if(Route::currentRouteName() === 'point.reports.index') active @endif" href="{{ route('point.reports.index') }}">
@@ -88,17 +94,6 @@
                     <span class="nav-link-text me-1">الاعدادات</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link " href="">
-                    <div class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
-                        <svg  width="12px" height="12px" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <span class="nav-link-text me-1">طلبات الدعم</span>
-                </a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="modal" href="#logout">
                     <div class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">

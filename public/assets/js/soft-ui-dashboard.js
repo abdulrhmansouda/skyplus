@@ -409,7 +409,7 @@ window.addEventListener("resize", sidenavTypeOnResize);
 window.addEventListener("load", sidenavTypeOnResize);
 
 function sidenavTypeOnResize() {
-  document.querySelector(".spinner-parent").classList.add("d-none")
+  // document.querySelector(".spinner-parent").classList.add("d-none")
 
   let elements = document.querySelectorAll('[onclick="sidebarType(this)"]');
   if (window.innerWidth < 1200) {
@@ -440,3 +440,10 @@ Date.prototype.toDateInputValue = (function() {
 document.querySelectorAll(".date-now").forEach((date)=>{
   date.value = new Date().toDateInputValue();
 })
+function HideShowSelect(event){
+  if(event.target.value == 'false'){
+    event.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector(".form-packages").classList.toggle('d-none');
+  }else{
+    event.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector(".form-packages").classList.toggle('d-none');
+  }
+}

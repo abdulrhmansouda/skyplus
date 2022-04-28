@@ -90,5 +90,24 @@ class Subscriber extends Model
         }
     }
 
+    public function cancelPayMonths($month)
+    {
+
+            $start = new Carbon($this->package_start);
+            $end = new Carbon($this->package_end);
+            $start = $start->addDays(-30 * $month);
+            $end = $end->addDays(-30 * $month);
+            $this->package_start = $start;
+            $this->package_end = $end;
+            $this->update();
+            // dd($this->days_to_end);
+            if(!$this->days_to_end){
+            $this->status = 'deactive';
+            $this->update();
+        }
+
+        
+    }
+
     
 }

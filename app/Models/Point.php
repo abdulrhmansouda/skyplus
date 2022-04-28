@@ -52,6 +52,16 @@ class Point extends Model
         return false;
     }
 
+    public function takeFromAccount($amount)
+    {
+        if ($amount > 0) {
+            $this->account = $this->account - $amount;
+            $this->update();
+            return true;
+        }
+        return false;
+    }
+
     public function addProfitToAccount($amount)
     {
         if ($amount > 0) {
@@ -63,15 +73,18 @@ class Point extends Model
         return false;
     }
 
-    public function takeFromAccount($amount)
+    public function takeProfitFromAccount($amount)
     {
         if ($amount > 0) {
             $this->account = $this->account - $amount;
+            $this->daily_profit = $this->daily_profit - $amount;
             $this->update();
             return true;
         }
         return false;
     }
+
+
 
     public static function resetDailyProfit(){
         foreach(static::all() as $point){

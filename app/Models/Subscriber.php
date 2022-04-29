@@ -90,6 +90,28 @@ class Subscriber extends Model
         }
     }
 
+    public function payDays($days)
+    {
+        if ($this->days_to_end) {
+            $start = new Carbon($this->package_start);
+            $end = new Carbon($this->package_end);
+            $start = $start->addDays($days);
+            $end = $end->addDays($days);
+            $this->package_start = $start;
+            $this->package_end = $end;
+            $this->update();
+        } else {
+            $now = new Carbon(now());
+            $this->package_start = $now;
+            $end = clone ($now);
+            $end = $end->addDays($days);
+            $this->package_end = $end;
+
+            $this->status = 'active';
+            $this->update();
+        }
+    }
+
     public function cancelPayMonths($month)
     {
 

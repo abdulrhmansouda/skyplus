@@ -30,6 +30,7 @@ class SubscriberFactory extends Factory
             't_c' => $this->faker->numberBetween(10000000000,21474831641),
             'phone' => $this->faker->phoneNumber,
             'sub_id' => $this->faker->numberBetween(),
+            'sub_username' => $this->faker->unique()->userName."@icenet",
             'subscriber_number' => $this->faker->numberBetween(10000000000,21474831641),
             'mother' => $this->faker->name,
             'address' => $this->faker->address,

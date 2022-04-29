@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Exports\SubscribersExport;
 // use App\Helper\Script;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\TelegramController;
 use App\Http\Requests\Admin\StoreSubscriberRequest;
 use App\Http\Requests\Admin\UpdateSubscriberRrequest;
 use App\Imports\SubscribersImport;
@@ -43,7 +44,7 @@ class SubscriberController extends Controller
         return view('admin.pages.subscribers', [
             'subs' => $subs->paginate($pagination_number)
                 ->appends(['pagination_number' => $pagination_number, 'sort_by' => $sort_by, 's' => $s]),
-            'packages' => Package::all(),
+            'packages' => Package::where('status','active')->get(),
             'search' => $s,
             'page' => $page,
             'pagination_number' => $pagination_number,
@@ -81,6 +82,27 @@ class SubscriberController extends Controller
     {
         Excel::import(new SubscribersImport, $request->file('subscribers')->getRealPath());
         return redirect()->back()->with('success', ' تم الاستيراد بنجاح');
+    }
+
+    public function charge(Request $request, $id)
+    {
+        // dd(1);
+        $request->validate([
+            'days' => ['required', 'numeric',],
+        ]);
+
+        $days = $request->days;
+
+        $sub = Subscriber::findOrFail($id);
+
+        $sub->payDays($days);
+
+        $message = "تم تفعيل الباقة للمشترك $sub->name لمدة $days أيام عن كريق الsuperAdmin";
+
+        TelegramController::chargeMessage($message);
+
+
+        return redirect()->back();
     }
 
     /**
@@ -123,6 +145,7 @@ class SubscriberController extends Controller
      */
     public function update(UpdateSubscriberRrequest $request, $id)
     {
+        // dd($request->all());
         $sub = Subscriber::findOrFail($id);
 
         $sub->name = $request->name;

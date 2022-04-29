@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('package_id');
             $table->unsignedBigInteger('sub_id')->unique();
+            $table->string('sub_username')->unique();
             $table->string('name');
             $table->string('t_c');
             $table->string('phone');

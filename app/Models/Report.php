@@ -9,6 +9,8 @@ class Report extends Model
 {
     use HasFactory;
 
+    protected $with = ['point'];
+
     protected $guarded = ['id'];
 
     public function point()

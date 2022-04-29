@@ -66,6 +66,11 @@ Route::middleware(['auth', 'admin'])
                 Route::delete('/destroy/{subscriber}', [SubscriberController::class, 'destroy'])->name('destroy');
                 Route::get('/export', [SubscriberController::class, 'export'])->name('export');
                 Route::post('/import', [SubscriberController::class, 'import'])->name('import');
+
+                Route::middleware(['superadmin'])
+                ->put('/charge/{subscriber}', [SubscriberController::class, 'charge'])->name('charge');
+
+
             });
 
         Route::prefix('/packages')

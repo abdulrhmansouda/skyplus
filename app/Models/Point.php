@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Point extends Model
 {
     use HasFactory;
+
+    protected $with = ['user'];
+
     protected $fillable = [
         'user_id',
         'name',

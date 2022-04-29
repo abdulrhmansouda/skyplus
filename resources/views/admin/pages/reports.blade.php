@@ -91,7 +91,7 @@
                                     <td class="px-1 text-uppercase  text-xs font-weight-bolder">نوع البيان</td>
                                     <td class="px-1 text-uppercase  text-xs font-weight-bolder">البيان</td>
                                     <td class="px-1 text-uppercase  text-xs font-weight-bolder">ملاحظات</td>
-                                    <td class="px-1 text-uppercase  text-xs font-weight-bolder">عليه</td>
+                                    <td class="px-1 text-uppercase  text-xs font-weight-bolder">لنا</td>
                                     <td class="px-1 text-uppercase  text-xs font-weight-bolder">له</td>
                                     <td class="px-1 text-uppercase  text-xs font-weight-bolder">الرصيد</td>
                                 </tr>

@@ -21,8 +21,9 @@ class PointController extends Controller
     {
 
         $s = $request->s ?? '';
-
-        $points = Point::where('name', 'LIKE', "%$s%");
+        $points = Point::join('users', 'points.user_id', '=', 'users.id')
+            ->where('name', 'LIKE', "%$s%")
+            ->orWhere('users.username', 'LIKE', "%$s%");
 
         return view('admin.pages.points', [
             'points' => $points->paginate(10),

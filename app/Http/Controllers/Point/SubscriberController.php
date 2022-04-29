@@ -71,7 +71,16 @@ class SubscriberController extends Controller
             $sub->payMonths($month);
 
             $message = "تم شحن/تفعيل الباقة $package->name للمشترك رقم $sub->subscriber_number لمدة $month أشهر و تم اقطاع مبلغ $amount من الرصيد وأضافة مبلغ $profit .";
-
+            $telegram_message = "
+            تم تسديد فاتورة من نقطة البيع  {$point->user->username}
+            للمشترك $sub->sub_username
+            عدد الفواتير : $month
+            المبلغ المدفوع: $amount
+          ($package->name) + ($package->price)
+          
+          http://192.168.106.24/issmanager/paket_uzat&$sub->sub_id
+          
+          ✅✅✅✅✅✅✅✅✅✅✅✅";
             //make a report
             Report::create([
                 'point_id' => $point->id,
@@ -83,7 +92,7 @@ class SubscriberController extends Controller
             ]);
 
             //send a massege to telegram
-            TelegramController::chargeMessage($message);
+            TelegramController::chargeMessage($telegram_message);
 
             // make a invoice
 
@@ -120,6 +129,17 @@ class SubscriberController extends Controller
 
             $message = "تم ألغاء شحن/تفعيل الباقة $package->name للمشترك رقم $sub->subscriber_number لمدة $month أشهر و تم الغاء اقطاع مبلغ $amount من الرصيد و الغاء أضافة مبلغ $profit .";
 
+            $telegram_message = "
+            تم الغاء فاتورة من نقطة البيع  {$point->user->username}
+             للمشترك {$sub->sub_username}
+            عدد  الفواتير: -{$month}
+             المبلغ المرتجع : -{$amount}
+            ({$package->name}) - ({$package->price})
+
+            http://192.168.106.24/issmanager/paket_uzat&{$sub->sub_id}
+
+            ❌❌❌❌❌❌❌❌❌❌❌❌";
+
             //make a report
             Report::create([
                 'point_id' => $point->id,
@@ -131,7 +151,7 @@ class SubscriberController extends Controller
             ]);
 
             //send a massege to telegramلا
-            TelegramController::chargeMessage($message);
+            TelegramController::chargeMessage($telegram_message);
 
             // make a invoice
 

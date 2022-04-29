@@ -65,7 +65,7 @@
                                             <input class="" name="type" type="radio" value="switch"
                                                 id="maintOptionA" checked="">
                                             <label class="" for="maintOptionA">
-                                                قلب (نقل)</label>
+                                                قلب </label>
                                         </div>
                                     </div>
                                     <div class="col-6">

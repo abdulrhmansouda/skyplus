@@ -10,26 +10,40 @@
                 <div class="card">
                     <div class="p-3 pb-4 card-body">
                         <div class="row">
-                            <div class="mb-4 col-lg-6 mb-lg-0">
+                            <div class="mb-4 col-12 mb-lg-0">
                                 <div class="d-flex flex-column h-100">
-                                    <h6 class="font-weight-bolder"> نظرة عامة على الفواتير</h6>
                                     <form action="" method="GET">
                                         <div class="mb-3">
-                                            <input name="date" type="date" class="form-control" aria-label="name"
+                                            <input name="date" type="date" class="form-control daterange" aria-label="name"
                                                 aria-describedby="name-addon" required value='{{ $date }}' onchange="form.submit()">
                                         </div>
                                     </form>
                                     <span class="text-xs text-info">اختر تاريخ مختلف لعرض قيمه</span>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <ul class="p-0 mt-4 list-group">
+                            <div class="mt-3 col-md-6">
+                            <h6 class="font-weight-bolder"> نظرة عامة على الفواتير</h6>
+                                <ul class="p-0 list-group">
                                     <li class="pt-0 pb-0 text-sm border-0 list-group-item ps-0"><strong
                                             class="text-dark">عدد الفواتير
                                             :</strong>&nbsp; {{ $count }}</li>
                                     <li class="pb-0 text-sm border-0 list-group-item ps-0"><strong
                                             class="text-dark">مجموع قيمة الفواتير
                                             :</strong> &nbsp; {{ $sum }}</li>
+                                </ul>
+                            </div>
+                            <div class="mt-3 col-md-6">
+                            <h6 class="font-weight-bolder"> نظرة عامة على حركة الصندوق</h6>
+                                <ul class="p-0 list-group">
+                                    <li class="pt-0 pb-0 text-sm border-0 list-group-item ps-0"><strong
+                                            class="text-dark"> بنك
+                                            :</strong>&nbsp; 10000</li>
+                                    <li class="pb-0 text-sm border-0 list-group-item ps-0"><strong
+                                            class="text-dark">دين
+                                            :</strong> &nbsp; 12</li>
+                                    <li class="pb-0 text-sm border-0 list-group-item ps-0"><strong
+                                            class="text-dark">نقد
+                                            :</strong> &nbsp; 12</li>
                                 </ul>
                             </div>
                         </div>
@@ -80,5 +94,6 @@
         </div>
     </div>
 @endsection
+
 
 

@@ -173,15 +173,35 @@
                     </div>
                 </div>
             </div>
-        </form>
-        <!-- end add  -->
-        <div class="row">
-
-            <!-- start filter -->
-            <div class="col-md-6">
-                <form action="" method="GET">
-                    <input type="hidden" name="pagination_number" value="{{ $pagination_number }}">
-                    <input type="hidden" name="page" value="{{ $page }}">
+        </div>
+    </form>
+    <!-- end add  -->
+    <div class="row">
+      
+        <!-- start filter -->
+        <div class="col-md-6">
+            <form action="" method="GET">
+                <input type="hidden" name="pagination_number" value="{{ $pagination_number }}">
+                <input type="hidden" name="page" value="{{ $page }}">
+                <input type="hidden" name="s" value="{{ $search }}">
+                <div class="form-group form-row">
+                    <span>ترتيب حسب حقل</span>
+                    <select required class="form-select input-200" name="sort_by" onchange="form.submit()">
+                        <option value="">اختر احد الحقول</option>
+                        <option @if($sort_by === 'name') selected @endif value="name">اسم المشترك</option>
+                        <option @if($sort_by === 't_c') selected @endif value="t_c">T.C</option>
+                        <option @if($sort_by === 'package_start') selected @endif value="package_start">تاريخ البدء</option>
+                        <option @if($sort_by === 'status') selected @endif value="status">حالة المستخدم</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <!-- end filter -->
+          <!-- start pagination show  -->
+          <div class="col-md-6">
+            <form action="" method="GET">
+                <div class="flex-row-reverse form-group form-row">
+                    <button class="m-0 btn btn-secondary btn-sm">تغير</button>
                     <input type="hidden" name="s" value="{{ $search }}">
                     <div class="form-group form-row">
                         <span>ترتيب حسب حقل</span>
@@ -331,13 +351,15 @@
                                                                                         {{ $sub->name }}
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-lg-4 col-md-6">
-                                                                            <div class="form-group">
-                                                                                <h6>
-                                                                                    T.C
-                                                                                </h6>
-                                                                                {{ $sub->t_c }}
-                                                                            </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label>
+                                                                                T.C
+                                                                                <span class="text-danger"> *
+                                                                                </span>
+                                                                            </label>
+                                                                            <input name="t_c" type="number" class="form-control" required value="{{ $sub->t_c }}" pattern="\d{11}" />
                                                                         </div>
                                                                         <div class="col-lg-4 col-md-6">
                                                                             <div class="form-group">
@@ -432,6 +454,16 @@
                                                                                     {{ $sub->installation_address }}
                                                                                 </p>
                                                                             </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label>
+                                                                                 الملاحظات
+                                                                                <span class="text-danger"> 
+                                                                                </span>
+                                                                            </label>
+                                                                            <textarea name="" cols="30" rows="3"  class="form-control"></textarea>
                                                                         </div>
                                                                     </div>
                                                                 </div>

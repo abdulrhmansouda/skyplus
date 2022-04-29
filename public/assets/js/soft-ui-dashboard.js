@@ -1,5 +1,6 @@
 "use strict";
 (function() {
+ 
   var isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
 
   if (isWindows) {
@@ -24,6 +25,7 @@
       var ps3 = new PerfectScrollbar(fixedplugin);
     };
   };
+ 
 })();
 
 // Verify navbar blur on scroll
@@ -441,7 +443,7 @@ document.querySelectorAll(".date-now").forEach((date)=>{
   date.value = new Date().toDateInputValue();
 })
 function HideShowSelect(event){
-  if(event.target.value == 'false'){
+  if(event.target.value == 'upgrate'){
     event.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector(".form-packages").classList.toggle('d-none');
   }else{
     event.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector(".form-packages").classList.toggle('d-none');

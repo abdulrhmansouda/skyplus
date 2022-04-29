@@ -187,7 +187,7 @@
                     <select required class="form-select input-200" name="sort_by" onchange="form.submit()">
                         <option value="">اختر احد الحقول</option>
                         <option @if($sort_by === 'name') selected @endif value="name">اسم المشترك</option>
-                        <option @if($sort_by === 't_c') selected @endif value="t_c">T_C</option>
+                        <option @if($sort_by === 't_c') selected @endif value="t_c">T.C</option>
                         <option @if($sort_by === 'package_start') selected @endif value="package_start">تاريخ البدء</option>
                         <option @if($sort_by === 'status') selected @endif value="status">حالة المستخدم</option>
                     </select>
@@ -453,7 +453,7 @@
                                                                     <div class="col-lg-4 col-md-6">
                                                                         <div class="form-group">
                                                                             <label>
-                                                                                T_C
+                                                                                T.C
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
@@ -586,6 +586,16 @@
                                                                                 </span>
                                                                             </label>
                                                                             <textarea name="installation_address" cols="30" rows="3" required class="form-control"> {{ $sub->installation_address }}</textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label>
+                                                                                 الملاحظات
+                                                                                <span class="text-danger"> 
+                                                                                </span>
+                                                                            </label>
+                                                                            <textarea name="" cols="30" rows="3"  class="form-control"></textarea>
                                                                         </div>
                                                                     </div>
                                                                 </div>

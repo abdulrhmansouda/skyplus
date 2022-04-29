@@ -83,7 +83,7 @@
                                         الاسم
                                     </th>
                                     <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        T_C </th>
+                                        T.c </th>
                                     <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         رقم المشترك
                                     </th>
@@ -163,7 +163,7 @@
                                                                 <div class="col-lg-4 col-md-6">
                                                                     <div class="form-group">
                                                                         <h6>
-                                                                            T_C
+                                                                            T.c
                                                                         </h6>
                                                                         {{ $sub->t_c }}
                                                                     </div>
@@ -363,26 +363,46 @@
                                                                             </select>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-12 ">
-                                                                        <div class="row">
-                                                                            <div class="col-6">
-                                                                                <div class="form-group">
-                                                                                    <input class="" name="pay" type="radio" value="true" id="allow{{ $sub->id }}" checked>
-                                                                                    <label class="" for="allow{{ $sub->id }}">
-                                                                                        تسديد</label>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-6">
-                                                                                <div class="form-group">
-                                                                                    <input class="" name="pay" type="radio" value="false" id="notALlow{{ $sub->id }}">
-                                                                                    <label class="" for="notALlow{{ $sub->id }}">
-                                                                                        الغاء تسديد</label>
-                                                                                </div>
-                                                                            </div>
+                                                                    <div class="col-6">
+                                                                        <div class="form-group">
+                                                                            <input class="" name="pay" type="radio" value="true" id="allow{{ $sub->id }}" checked onChange="HideShowSelect(event)">
+                                                                            <label class="" for="allow{{ $sub->id }}">
+                                                                                تسديد</label>
                                                                         </div>
-
-
                                                                     </div>
+                                                                    <div class="col-6">
+                                                                        <div class="form-group">
+                                                                            <input class="" name="pay" type="radio" value="false" id="notALlow{{ $sub->id }}" onChange="HideShowSelect(event)">
+                                                                            <label class="" for="notALlow{{ $sub->id }}">
+                                                                                الغاء تسديد</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <div class="form-group">
+                                                                            <input class="" name="pay" type="radio" value="upgrate" id="upgrate{{ $sub->id }}" onChange="HideShowSelect(event)">
+                                                                            <label class="" for="upgrate{{ $sub->id }}">
+                                                                                ترقية</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class=" col-6 form-packages d-none">
+                                                                        <div class="form-group">
+                                                                            <h6>
+                                                                                اختر الباقة الجديدة </h6>
+                                                                            <select name=""  class="form-select ">
+                                                                                <option value="1">1</option>
+                                                                                <option value="2">2</option>
+                                                                                <option value="3">3</option>
+                                                                                <option value="4">4</option>
+                                                                                <option value="5">5</option>
+                                                                                <option value="6">6</option>
+                                                                                <option value="7">7</option>
+                                                                                <option value="8">8</option>
+                                                                                <option value="9">9</option>
+                                                                                <option value="10">10</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
@@ -450,38 +470,22 @@
                                                                         <div class="row">
                                                                             <div class="col-6">
                                                                                 <div class="form-group">
-                                                                                    <input class="" name="maintenance" type="radio" value="true" id="maintenancea{{ $sub->id }}" checked onChange="HideShowSelect(event)">
+                                                                                    <input class="" name="maintenance" type="radio" value="true" id="maintenancea{{ $sub->id }}" checked >
                                                                                     <label class="" for="maintenancea{{ $sub->id }}">
                                                                                         صيانة</label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-6">
                                                                                 <div class="form-group">
-                                                                                    <input class="" name="maintenance" type="radio" value="false" id="maintenanceb{{ $sub->id }}" onChange="HideShowSelect(event)">
-                                                                                    <label class="" for="maintenanceb{{ $sub->id }}">
-                                                                                         تغيير باقة</label>
+                                                                                    <input class="" name="maintenance" type="radio" value="false" id="maintenancea{{ $sub->id }}"  >
+                                                                                    <label class="" for="maintenancea{{ $sub->id }}">
+                                                                                        نقل</label>
                                                                                 </div>
                                                                             </div>
+                                                                           
                                                                         </div>
                                                                     </div>
-                                                                    <div class=" col-6 form-packages d-none">
-                                                                        <div class="form-group">
-                                                                            <h6>
-                                                                                اختر الباقة الجديدة </h6>
-                                                                            <select name=""  class="form-select ">
-                                                                                <option value="1">1</option>
-                                                                                <option value="2">2</option>
-                                                                                <option value="3">3</option>
-                                                                                <option value="4">4</option>
-                                                                                <option value="5">5</option>
-                                                                                <option value="6">6</option>
-                                                                                <option value="7">7</option>
-                                                                                <option value="8">8</option>
-                                                                                <option value="9">9</option>
-                                                                                <option value="10">10</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
+                                                                    
                                                                     <div class="col-12">
                                                                         <div class="form-group">
                                                                             <label>
@@ -517,7 +521,7 @@
             <!-- end pagination -->
         </div>
         @elseif($search)
-        لا يوجد نتائج لعملية البحث هذه يمكن البحق فقط عن طريق رقم الهاتف او رقم المشترك او t_c
+        لا يوجد نتائج لعملية البحث هذه يمكن البحث فقط عن طريق رقم الهاتف او رقم المشترك او T.C
         @else
         <!-- else -->
         <div class="col-12">

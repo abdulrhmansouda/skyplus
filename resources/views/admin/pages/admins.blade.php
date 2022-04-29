@@ -3,7 +3,7 @@
 @section('title', 'المشرفين')
 
 @section('content')
-<div class="container-fluid py-4">
+<div class="py-4 container-fluid">
     <!-- start add  -->
     <button type="button" class="btn bg-gradient-dark btn-sm" data-bs-toggle="modal" data-bs-target="#add">
         إنشاء
@@ -67,7 +67,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>
-                                        t_c
+                                        T.C
                                         <span class="text-danger"> * </span>
                                     </label>
                                     <input name="t_c" type="number" class="form-control" required>
@@ -89,8 +89,8 @@
     <!-- end add  -->
     <div class="row">
         <div class="col-12">
-            <div class="card mb-4">
-                <div class="card-body px-0 pt-0 pb-2">
+            <div class="mb-4 card">
+                <div class="px-0 pt-0 pb-2 card-body">
                     @if ($errors->any())
                     <div class="alert alert-danger">
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -101,21 +101,21 @@
                         </ul>
                     </div>
                     @endif
-                    <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0">
+                    <div class="p-0 table-responsive">
+                        <table class="table mb-0 align-items-center">
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3">
                                         اسم المشرف</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
+                                    <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         اسم المستخدم</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
+                                    <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         هاتف</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
-                                        t_c</th>
+                                    <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        T.C/th>
                                         <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         الحالة</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
+                                    <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                     </th>
                                 </tr>
                             </thead>
@@ -123,18 +123,18 @@
                                 @foreach ($admins as $admin)
                                 <tr>
                                     <td>
-                                        <div class="d-flex px-2 py-1">
+                                        <div class="px-2 py-1 d-flex">
                                             <h6 class="mb-0 text-sm">{{ $admin->name }}</h6>
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{ $admin->user->username }}</p>
+                                        <p class="mb-0 text-xs font-weight-bold">{{ $admin->user->username }}</p>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{ $admin->phone }}</p>
+                                        <p class="mb-0 text-xs font-weight-bold">{{ $admin->phone }}</p>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{ $admin->t_c }}</p>
+                                        <p class="mb-0 text-xs font-weight-bold">{{ $admin->t_c }}</p>
                                     </td>
                                     <td class="text-sm align-middle">
                                         @if ($admin->status === 'active')
@@ -145,7 +145,7 @@
                                     <td class="align-middle ">
                                         <!-- start view1 -->
                                         <div class="d-inline-block">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs px-1 " data-toggle="tooltip" data-original-title="view user" data-bs-toggle="modal" data-bs-target="#view{{ $admin->id }}">
+                                            <a href="javascript:;" class="px-1 text-xs text-secondary font-weight-bold " data-toggle="tooltip" data-original-title="view user" data-bs-toggle="modal" data-bs-target="#view{{ $admin->id }}">
                                                 <i class="fas fa-eye fs-6"></i>
                                             </a>
                                             <!-- satrt view1 Modal -->
@@ -185,7 +185,7 @@
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
                                                                         <h6>
-                                                                            t_c
+                                                                            T.C
                                                                         </h6>
                                                                         {{ $admin->t_c }}
                                                                     </div>
@@ -271,7 +271,7 @@
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
                                                                             <label>
-                                                                                t_c
+                                                                                T.C
                                                                                 <span class="text-danger"> * </span>
                                                                             </label>
                                                                             <input name="t_c" type="number" class="form-control" required value="{{ $admin->t_c }}">
@@ -305,14 +305,14 @@
                                         <!-- end edit  -->
                                         <!-- start delete 1 -->
                                         <div class="d-inline-block">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs px-1 " data-toggle="tooltip" data-original-title="Edit user" data-bs-toggle="modal" data-bs-target="#delete{{ $admin->id }}">
+                                            <a href="javascript:;" class="px-1 text-xs text-secondary font-weight-bold " data-toggle="tooltip" data-original-title="Edit user" data-bs-toggle="modal" data-bs-target="#delete{{ $admin->id }}">
                                                 <i class="fas fa-ban fs-6"></i>
                                             </a>
                                             <!--start delete Modal -->
                                             <div class="modal fade" id="delete{{ $admin->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                     <div class="modal-content">
-                                                        <div class="modal-header border-0 text-center pb-0">
+                                                        <div class="pb-0 text-center border-0 modal-header">
                                                             <h5 class="modal-title" id="deleteLabel ">هل
                                                                 تريد تأكيد ايقاف 
                                                                 <strong>المشرف {{ $admin->name }}
@@ -320,7 +320,7 @@
                                                             </h5>
                                                                 
                                                         </div>
-                                                        <div class="modal-footer border-0">
+                                                        <div class="border-0 modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
                                                             <form action="{{ route('admin.admins.destroy',$admin->id) }}" method="POST">
                                                                 @csrf

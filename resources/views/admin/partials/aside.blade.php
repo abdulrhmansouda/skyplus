@@ -170,7 +170,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <button data-bs-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#setting" aria-expanded="false" aria-controls="setting" class="nav-link @if (Route::currentRouteName() === 'admin.setting.binding-app.index' || Route::currentRouteName() === 'admin.setting.change-password.index') active @endif">
+                <button data-bs-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#setting" aria-expanded="false" aria-controls="setting" class="nav-link @if (Route::currentRouteName() === 'admin.setting.binding-telegram.index' || Route::currentRouteName() === 'admin.setting.change-password.index') active @endif">
                     <div class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>settings</title>
@@ -192,9 +192,17 @@
                     </div>
                     <span class="nav-link-text me-1">الاعدادات
                 </button>
-                <div class="collapse @if (Route::currentRouteName() === 'admin.setting.binding-app.index' || Route::currentRouteName() === 'admin.setting.change-password.index') show @endif" id="setting">
+                <div class="collapse @if (Route::currentRouteName() === 'admin.setting.binding-telegram.index' 
+                                        || Route::currentRouteName() === 'admin.setting.change-password.index'
+                                        || Route::currentRouteName() === 'admin.setting.social.index'
+                                        || Route::currentRouteName() === 'admin.setting.other.index'
+                                        ) show @endif" id="setting">
                     <ul class="ul-links">
     
+                        @if (Auth::user()->isSuperAdmin())
+                        <li class="mb-1 @if (Route::currentRouteName() === 'admin.setting.binding-telegram.index') active @endif"><a href="{{ route('admin.setting.binding-telegram.index') }}">الاعدادات الربط مع تيليجرام</a></li>
+                        @endif
+
                         <li class="mb-1 @if (Route::currentRouteName() === 'admin.setting.change-password.index') active @endif"><a href="{{ route('admin.setting.change-password.index') }}">تغير كلمة المرور</a></li>
 
                         <li class="mb-1 @if (Route::currentRouteName() === 'admin.setting.social.index') active @endif"><a href="{{ route('admin.setting.social.index') }}">معلومات التواصل</a></li>

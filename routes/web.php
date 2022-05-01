@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\BindingAppController;
+use App\Http\Controllers\Admin\BindingTelegramController;
 use App\Http\Controllers\Admin\ChangePasswordController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\PackageController;
@@ -16,7 +16,6 @@ use App\Http\Controllers\Point\ReportController as PointReportController;
 use App\Http\Controllers\Point\SocialController;
 use App\Http\Controllers\Point\SubscriberController as PointSubscriberController;
 use App\Http\Controllers\Point\SupportController as PointSupportController;
-// use App\Http\Controllers\Point\SupportController;
 use App\Http\Controllers\SettingSocialController;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
@@ -68,9 +67,7 @@ Route::middleware(['auth', 'admin'])
                 Route::post('/import', [SubscriberController::class, 'import'])->name('import');
 
                 Route::middleware(['superadmin'])
-                ->put('/charge/{subscriber}', [SubscriberController::class, 'charge'])->name('charge');
-
-
+                    ->put('/charge/{subscriber}', [SubscriberController::class, 'charge'])->name('charge');
             });
 
         Route::prefix('/packages')
@@ -110,15 +107,22 @@ Route::middleware(['auth', 'admin'])
             ->name('support.')
             ->group(function () {
                 Route::get('/', [SupportController::class, 'index'])->name('index');
-                Route::post('/accept-request',[ SupportController::class , 'accept_request'])->name('accept_request');
-                Route::post('/reject-request',[ SupportController::class , 'reject_request'])->name('reject_request');
-
+                Route::post('/accept-request', [SupportController::class, 'accept_request'])->name('accept_request');
+                Route::post('/reject-request', [SupportController::class, 'reject_request'])->name('reject_request');
             });
 
 
         Route::prefix('/sitting')
             ->name('setting.')
             ->group(function () {
+
+                Route::prefix('/binding-telegram')
+                    ->middleware(['superadmin'])
+                    ->name('binding-telegram.')
+                    ->group(function () {
+                        Route::get('/', [BindingTelegramController::class, 'index'])->name('index');
+                        Route::put('/update', [BindingTelegramController::class, 'update'])->name('update');
+                    });
 
                 Route::prefix('/change-password')
                     ->name('change-password.')
@@ -155,11 +159,11 @@ Route::middleware(['auth', 'point'])
                 Route::put('/charge/{subscriber}', [PointSubscriberController::class, 'charge'])->name('charge');
             });
 
-            Route::prefix('/support')
+        Route::prefix('/support')
             ->name('support.')
             ->group(function () {
                 Route::get('/', [PointSupportController::class, 'index'])->name('index');
-                Route::post('/support_request',[ PointSupportController::class, 'support_request'])->name('support_request');
+                Route::post('/support_request', [PointSupportController::class, 'support_request'])->name('support_request');
             });
 
         Route::prefix('/reports')

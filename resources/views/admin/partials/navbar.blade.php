@@ -37,6 +37,10 @@
                             المشرفين
                         @break
 
+                        @case('admin.setting.binding-telegram.index')
+                             الاعدادات / الربط مع تيليجرام
+                        @break
+
                         @case('admin.support.index')
                             الدعم الفني
                         @break

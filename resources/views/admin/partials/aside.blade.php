@@ -159,9 +159,10 @@
                 </a>
             </li>
             @endif
-            <li class="nav-item">
+            <li class="position-relative nav-item">
                 <a class="nav-link @if(Route::currentRouteName() === 'admin.support.index') active @endif" href="{{ route('admin.support.index') }}">
-                    <div class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
+                <span class="bg-danger red-point"></span>    
+                <div class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
                         </svg>
@@ -200,7 +201,7 @@
                     <ul class="ul-links">
     
                         @if (Auth::user()->isSuperAdmin())
-                        <li class="mb-1 @if (Route::currentRouteName() === 'admin.setting.binding-telegram.index') active @endif"><a href="{{ route('admin.setting.binding-telegram.index') }}">الاعدادات الربط مع تيليجرام</a></li>
+                        <li class="mb-1 @if (Route::currentRouteName() === 'admin.setting.binding-telegram.index') active @endif"><a href="{{ route('admin.setting.binding-telegram.index') }}">اعدادات ربط  تيليجرام</a></li>
                         @endif
 
                         <li class="mb-1 @if (Route::currentRouteName() === 'admin.setting.change-password.index') active @endif"><a href="{{ route('admin.setting.change-password.index') }}">تغير كلمة المرور</a></li>

@@ -25579,4 +25579,11 @@ width:25px;
 .text-nowrap{
   white-space:nowrap;
 }
+.red-point{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    top: 10px;
+}
 /*# sourceMappingURL=dashboard-free.css.map */

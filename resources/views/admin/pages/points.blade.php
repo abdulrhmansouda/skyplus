@@ -154,7 +154,11 @@
                                     <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         الرصيد</th>
                                     <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        العمولة</th>
+                                        عمولة التسديد</th>
+                                    <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        عمولة التركيب الجديد</th>
+                                    <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        عمولة القلب</th>
 
                                     <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         T.C</th>
@@ -185,6 +189,12 @@
                                     </td>
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold">{{ $point->commission }}%</p>
+                                    </td>
+                                    <td>
+                                        <p class="mb-0 text-xs font-weight-bold">12</p>
+                                    </td>
+                                    <td>
+                                        <p class="mb-0 text-xs font-weight-bold">13</p>
                                     </td>
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold">{{ $point->t_c }}</p>

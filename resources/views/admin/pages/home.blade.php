@@ -14,8 +14,10 @@
                                 <div class="d-flex flex-column h-100">
                                     <form action="" method="GET">
                                         <div class="mb-3">
-                                            <input name="date" type="date" class="form-control daterange" aria-label="name"
-                                                aria-describedby="name-addon" required value='{{ $date }}' onchange="form.submit()">
+                    <input name="daterange" type="text" class="form-control daterange" required value="05/03/2022 - 05/03/2022" onchange="form.submit()" />
+
+                                            <!-- <input name="date" type="date" class="form-control daterange" aria-label="name"
+                                                aria-describedby="name-addon" required value='{{ $date }}' onchange="form.submit()"> -->
                                         </div>
                                     </form>
                                     <span class="text-xs text-info">اختر تاريخ مختلف لعرض قيمه</span>
@@ -94,6 +96,29 @@
         </div>
     </div>
 @endsection
+@section('css')
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+@endsection
 
+@section('js')
+
+<!--   Core JS Files   -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script>
+    $(function() {
+        $('.daterange').daterangepicker({
+            opens: 'left'
+        }, function(start, end, label) {
+            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end
+                .format('YYYY-MM-DD'));
+        });
+    });
+</script>
+
+
+@endsection
 
 

@@ -11,6 +11,7 @@ use App\Models\Report;
 use App\Models\Subscriber;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SubscriberController extends Controller
 {
@@ -40,21 +41,149 @@ class SubscriberController extends Controller
     }
 
 
+    // public function charge(ChargeSubscriberRequest $request, $id)
+    // {
+    //     // TelegramController::updatedActivity();
+    //     // dd(2);
+
+    //     $month = $request->month;
+    //     $pay = $request->pay;
+
+
+    //     $sub = Subscriber::findOrFail($id);
+    //     $package = $sub->package;
+    //     $point = Auth::user()->point;
+
+    //     if ($pay === 'true') {
+    //         $amount = $month * $package->price;
+    //         // موضوع الدين
+    //         $maximum_amount_of_borrowing = ProjectSetting::firstOrFail()->maximum_amount_of_borrowing;
+    //         if (($amount > $point->account) && ($amount > $point->account + $maximum_amount_of_borrowing || !$point->borrowing_is_allowed)) {
+    //             session()->flash('error', 'لا يوجد رصيد كافي لتنفيذ عملية الشحن هذه');
+    //             return redirect()->back();
+    //         }
+    //         // انتهاء موضوع الدين
+
+    //         $pre_account = $point->account;
+    //         $profit = ($point->commission / 100) * $amount;
+    //         $point->takeFromAccount($amount);
+    //         $point->addProfitToAccount($profit);
+
+    //         $sub->payMonths($month);
+
+    //         $message = "تم شحن/تفعيل الباقة $package->name للمشترك رقم $sub->subscriber_number لمدة $month أشهر و تم اقطاع مبلغ $amount من الرصيد وأضافة مبلغ $profit .";
+    //         $telegram_message = "
+    //         تم تسديد فاتورة من نقطة البيع  {$point->user->username}
+    //         للمشترك $sub->sub_username
+    //         عدد الفواتير : $month
+    //         المبلغ المدفوع: $amount
+    //       ($package->name) + ($package->price)
+
+    //       http://192.168.106.24/issmanager/paket_uzat&$sub->sub_id
+
+    //       ✅✅✅✅✅✅✅✅✅✅✅✅";
+    //         //make a report
+    //         Report::create([
+    //             'point_id' => $point->id,
+    //             'report' => $message,
+    //             'on_him' => $amount,
+    //             'to_him' => $profit,
+    //             'pre_account' => $pre_account,
+    //             'type' => 'charge_subscriber',
+    //         ]);
+
+    //         //send a massege to telegram
+    //         TelegramController::chargeMessage($telegram_message);
+
+    //         // make a invoice
+
+    //         Invoice::create([
+    //             'point_id' => $point->id,
+    //             'subscriber_id' => $sub->id,
+    //             'amount' => $amount,
+
+    //             'month' => $month,
+    //         ]);
+
+
+    //         session()->flash('success', ' تم دفع الفاتورة بنجاح');
+    //     } else {
+    //         // الغاء التسديد
+    //         $invoice_month = Invoice::where('subscriber_id', $sub->id)
+    //             ->where('point_id', $point->id)
+    //             ->whereDate('created_at', now()->format('Y-m-d'))
+    //             ->sum('month') ?? 0;
+
+    //         if ($month > $invoice_month) {
+    //             session()->flash('error', 'انت لم تقم بدفع هذه الفاتور تأكد من المعلومات');
+    //             return redirect()->back();
+    //         }
+
+    //         $amount = $month * $package->price;
+    //         $pre_account = $point->account;
+    //         $profit = ($point->commission / 100) * $amount;
+
+    //         $point->addToAccount($amount);
+    //         $point->takeProfitFromAccount($profit);
+
+    //         $sub->cancelPayMonths($month);
+
+    //         $message = "تم ألغاء شحن/تفعيل الباقة $package->name للمشترك رقم $sub->subscriber_number لمدة $month أشهر و تم الغاء اقطاع مبلغ $amount من الرصيد و الغاء أضافة مبلغ $profit .";
+
+    //         $telegram_message = "
+    //         تم الغاء فاتورة من نقطة البيع  {$point->user->username}
+    //          للمشترك {$sub->sub_username}
+    //         عدد  الفواتير: -{$month}
+    //          المبلغ المرتجع : -{$amount}
+    //         ({$package->name}) - ({$package->price})
+
+    //         http://192.168.106.24/issmanager/paket_uzat&{$sub->sub_id}
+
+    //         ❌❌❌❌❌❌❌❌❌❌❌❌";
+
+    //         //make a report
+    //         Report::create([
+    //             'point_id' => $point->id,
+    //             'report' =>  $message,
+    //             'on_him' => -1 * $amount,
+    //             'to_him' => -1 * $profit,
+    //             'pre_account' => $pre_account,
+    //             'type' => 'charge_subscriber',
+    //         ]);
+
+    //         //send a massege to telegramلا
+    //         TelegramController::chargeMessage($telegram_message);
+
+    //         // make a invoice
+
+    //         Invoice::create([
+    //             'point_id' => $point->id,
+    //             'subscriber_id' => $sub->id,
+    //             'amount' => -1 * $amount,
+    //             'month' => -1 * $month,
+    //         ]);
+
+
+    //         session()->flash('success', ' تم الغاء دفع الفاتورة بنجاح');
+    //     }
+
+    //     return redirect()->back();
+    // }
+
     public function charge(ChargeSubscriberRequest $request, $id)
     {
-        // TelegramController::updatedActivity();
-        // dd(2);
-
-        $month = $request->month;
-        $pay = $request->pay;
-
 
         $sub = Subscriber::findOrFail($id);
         $package = $sub->package;
         $point = Auth::user()->point;
 
+        $month = $request->month;
+        $pay = $request->pay;
+        $amount = $month * $package->price;
+        $pre_account = $point->account;
+        $profit = ($point->commission / 100) * $amount;
+
         if ($pay === 'true') {
-            $amount = $month * $package->price;
             // موضوع الدين
             $maximum_amount_of_borrowing = ProjectSetting::firstOrFail()->maximum_amount_of_borrowing;
             if (($amount > $point->account) && ($amount > $point->account + $maximum_amount_of_borrowing || !$point->borrowing_is_allowed)) {
@@ -63,69 +192,62 @@ class SubscriberController extends Controller
             }
             // انتهاء موضوع الدين
 
-            $pre_account = $point->account;
-            $profit = ($point->commission / 100) * $amount;
-            $point->takeFromAccount($amount);
-            $point->addProfitToAccount($profit);
-
-            $sub->payMonths($month);
-
             $message = "تم شحن/تفعيل الباقة $package->name للمشترك رقم $sub->subscriber_number لمدة $month أشهر و تم اقطاع مبلغ $amount من الرصيد وأضافة مبلغ $profit .";
             $telegram_message = "
             تم تسديد فاتورة من نقطة البيع  {$point->user->username}
-            للمشترك $sub->sub_username
-            عدد الفواتير : $month
-            المبلغ المدفوع: $amount
-          ($package->name) + ($package->price)
+            للمشترك {$sub->sub_username}
+            عدد الفواتير : {$month}
+            المبلغ المدفوع: {$amount}
+          ({$package->name}) + ({$package->price})
           
-          http://192.168.106.24/issmanager/paket_uzat&$sub->sub_id
+          http://192.168.106.24/issmanager/paket_uzat&{$sub->sub_id}
           
           ✅✅✅✅✅✅✅✅✅✅✅✅";
-            //make a report
-            Report::create([
-                'point_id' => $point->id,
-                'report' => $message,
-                'on_him' => $amount,
-                'to_him' => $profit,
-                'pre_account' => $pre_account,
-                'type' => 'charge_subscriber',
-            ]);
 
-            //send a massege to telegram
-            TelegramController::chargeMessage($telegram_message);
+            // العمليات المهمة جداً
+            DB::transaction(function () use ($point, $amount, $profit, $sub, $month, $message, $telegram_message, $pre_account) {
+                $point->takeFromAccount($amount);
+                $point->addProfitToAccount($profit);
 
-            // make a invoice
+                $sub->payMonths($month);
 
-            Invoice::create([
-                'point_id' => $point->id,
-                'subscriber_id' => $sub->id,
-                'amount' => $amount,
+                //make a report
+                Report::create([
+                    'point_id' => $point->id,
+                    'report' => $message,
+                    'on_him' => $amount,
+                    'to_him' => $profit,
+                    'pre_account' => $pre_account,
+                    'type' => 'charge_subscriber',
+                ]);
 
-                'month' => $month,
-            ]);
+                // make a invoice
+                Invoice::create([
+                    'point_id' => $point->id,
+                    'subscriber_id' => $sub->id,
+                    'amount' => $amount,
+                    'month' => $month,
+                ]);
 
+                //send a massege to telegram
+                TelegramController::chargeMessage($telegram_message);
 
-            session()->flash('success', ' تم دفع الفاتورة بنجاح');
+                session()->flash('success', ' تم دفع الفاتورة بنجاح');
+            }, 5);
         } else {
             // الغاء التسديد
+
+            // عدد الفواتير التي تم دفعها للمشترك $sub->id من النقطة $point->id قبل انتهاء اليوم
             $invoice_month = Invoice::where('subscriber_id', $sub->id)
                 ->where('point_id', $point->id)
                 ->whereDate('created_at', now()->format('Y-m-d'))
                 ->sum('month') ?? 0;
 
+            // التأكد من ان الفواتير التي يريد الغاءها  أقل او تساوي الفواتير المدفوعة اليوم
             if ($month > $invoice_month) {
                 session()->flash('error', 'انت لم تقم بدفع هذه الفاتور تأكد من المعلومات');
                 return redirect()->back();
             }
-
-            $amount = $month * $package->price;
-            $pre_account = $point->account;
-            $profit = ($point->commission / 100) * $amount;
-
-            $point->addToAccount($amount);
-            $point->takeProfitFromAccount($profit);
-
-            $sub->cancelPayMonths($month);
 
             $message = "تم ألغاء شحن/تفعيل الباقة $package->name للمشترك رقم $sub->subscriber_number لمدة $month أشهر و تم الغاء اقطاع مبلغ $amount من الرصيد و الغاء أضافة مبلغ $profit .";
 
@@ -140,30 +262,37 @@ class SubscriberController extends Controller
 
             ❌❌❌❌❌❌❌❌❌❌❌❌";
 
-            //make a report
-            Report::create([
-                'point_id' => $point->id,
-                'report' =>  $message,
-                'on_him' => -1 * $amount,
-                'to_him' => -1 * $profit,
-                'pre_account' => $pre_account,
-                'type' => 'charge_subscriber',
-            ]);
+            //العمليات المهمة جداً
+            DB::transaction(function () use ($point, $sub, $amount, $profit, $month, $message, $telegram_message, $pre_account) {
 
-            //send a massege to telegramلا
-            TelegramController::chargeMessage($telegram_message);
+                $point->addToAccount($amount);
+                $point->takeProfitFromAccount($profit);
 
-            // make a invoice
+                $sub->cancelPayMonths($month);
 
-            Invoice::create([
-                'point_id' => $point->id,
-                'subscriber_id' => $sub->id,
-                'amount' => -1 * $amount,
-                'month' => -1 * $month,
-            ]);
+                //make a report
+                Report::create([
+                    'point_id' => $point->id,
+                    'report' =>  $message,
+                    'on_him' => -1 * $amount,
+                    'to_him' => -1 * $profit,
+                    'pre_account' => $pre_account,
+                    'type' => 'charge_subscriber',
+                ]);
 
+                // make a invoice
+                Invoice::create([
+                    'point_id' => $point->id,
+                    'subscriber_id' => $sub->id,
+                    'amount' => -1 * $amount,
+                    'month' => -1 * $month,
+                ]);
 
-            session()->flash('success', ' تم الغاء دفع الفاتورة بنجاح');
+                //send a massege to telegram
+                TelegramController::chargeMessage($telegram_message);
+
+                session()->flash('success', ' تم الغاء دفع الفاتورة بنجاح');
+            }, 5);
         }
 
         return redirect()->back();

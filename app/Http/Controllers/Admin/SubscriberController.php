@@ -86,7 +86,6 @@ class SubscriberController extends Controller
 
     public function charge(Request $request, $id)
     {
-        // dd(1);
         $request->validate([
             'days' => ['required', 'numeric',],
         ]);
@@ -97,9 +96,20 @@ class SubscriberController extends Controller
 
         $sub->payDays($days);
 
-        $message = "تم تفعيل الباقة للمشترك $sub->name لمدة $days أيام عن كريق الsuperAdmin";
+        $message_telegram = "
+        تم إضافة أيام من Super Admin
 
-        TelegramController::chargeMessage($message);
+        للمشترك: {$sub->sub_username}
+
+        عدد الأيام: {$days}
+  
+        http://192.168.106.24/issmanager/kullanici_detay&{$sub->sub_id}#tab2
+
+➕➕➕➕➕➕➕➕➕➕➕➕
+";
+
+
+        TelegramController::chargeMessage($message_telegram);
 
 
         return redirect()->back();

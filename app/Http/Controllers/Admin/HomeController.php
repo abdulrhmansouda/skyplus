@@ -25,7 +25,7 @@ class HomeController extends Controller
 
         $sum = clone $count;
 
-        $count = $count->count();
+        $count = $count->sum('month');
         $sum = $sum->sum('amount');
 
 

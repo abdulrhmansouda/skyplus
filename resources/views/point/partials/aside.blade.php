@@ -31,7 +31,8 @@
                     </div>
                     <span class="nav-link-text me-1">العمليات</span>
                 </button>
-                <div class="collapse @if (Route::currentRouteName() === 'admin.setting.binding-app.index' || Route::currentRouteName() === 'admin.setting.change-password.index') show @endif" id="actions">
+                <div class="collapse @if (Route::currentRouteName() === 'point.subscribers.index' 
+                || Route::currentRouteName() === 'point.support.index') show @endif" id="actions">
                     <ul class="ul-links">
                         <li class="mb-1 @if(Route::currentRouteName() === 'point.subscribers.index') active @endif"><a href="{{ route('point.subscribers.index') }}">تسديد-صيانة</a></li>
                         <li class="mb-1 @if(Route::currentRouteName() === 'point.support.index') active @endif" ><a href="{{ route('point.support.index') }}">طلبات الدعم</a></li>

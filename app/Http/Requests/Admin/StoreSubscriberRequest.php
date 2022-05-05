@@ -29,15 +29,16 @@ class StoreSubscriberRequest extends FormRequest
             't_c' => ['required' ,'string' , 'min:11' ,'max:11' ],
             'phone' => ['required' ,'string' , 'max:100' ],
             'sub_id' => ['required' ,'numeric' ,'unique:subscribers' ,],
+            'sub_username' => ['required' , 'string' , 'unique:subscribers' , ],
             'subscriber_number' => ['required' ,'numeric' ,'unique:subscribers' ,],
             'mother' => ['required' ,'string' ,'min:2' ,'max:100' ],
             'package_start' => ['required' ,'date' ,],
             'package_id' => ['required' ,'exists:packages,id' ,],
             'status' => ['required' , Rule::in(['active', 'deactive' , 'closed']) ],
-            'mission_executor' => ['required','string','max:1000'],
             'address' => ['required' ,'string' ,'max:1000' ],
             'installation_address' => ['required' ,'string' ,'max:1000' ],
-
+            'mission_executor' => ['required','string','max:1000'],
+            'note' => ['nullable' , 'string' , 'max:10000'],
         ];
     }
 }

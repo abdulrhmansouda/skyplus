@@ -103,16 +103,15 @@ class SubscriberController extends Controller
   
         http://192.168.106.24/issmanager/kullanici_detay&{$sub->sub_id}#tab2
 
-➕➕➕➕➕➕➕➕➕➕➕➕
-";
+        ➕➕➕➕➕➕➕➕➕➕➕➕";
 
         // العمليات المهمة جداً
-        DB::transaction(function () use ($sub,$days,$message_telegram) {
+        DB::transaction(function () use ($sub, $days, $message_telegram) {
             $sub->payDays($days);
             TelegramController::chargeMessage($message_telegram);
         }, 5);
 
-        session()->flash('success',"تم اضافة $days يوم من قبل الspueradmin بنجاح");
+        session()->flash('success', "تم اضافة $days يوم من قبل الspueradmin بنجاح");
 
         return redirect()->back();
     }
@@ -131,6 +130,7 @@ class SubscriberController extends Controller
         $sub->name = $request->name;
         $sub->t_c = $request->t_c;
         $sub->sub_id = $request->sub_id;
+        $sub->sub_username = $request->sub_username;
         $sub->subscriber_number = $request->subscriber_number;
         $sub->mother = $request->mother;
         $sub->phone = $request->phone;
@@ -138,9 +138,10 @@ class SubscriberController extends Controller
         $sub->package_end = $request->package_start;
         $sub->package_id = $request->package_id;
         $sub->status = $request->status;
-        $sub->mission_executor = $request->mission_executor;
         $sub->address = $request->address;
         $sub->installation_address = $request->installation_address;
+        $sub->mission_executor = $request->mission_executor;
+        $sub->note = $request->note;
         $sub->save();
 
         session()->flash('success', "تم اضافة المشترك $sub->name بنجاح");
@@ -163,6 +164,7 @@ class SubscriberController extends Controller
         $sub->name = $request->name;
         $sub->t_c = $request->t_c;
         $sub->sub_id = $request->sub_id;
+        $sub->sub_username = $request->sub_username;
         $sub->subscriber_number = $request->subscriber_number;
         $sub->mother = $request->mother;
         $sub->phone = $request->phone;
@@ -170,9 +172,10 @@ class SubscriberController extends Controller
         $sub->package_end = $request->package_start;
         $sub->package_id = $request->package_id;
         $sub->status = $request->status;
-        $sub->mission_executor = $request->mission_executor;
         $sub->address = $request->address;
         $sub->installation_address = $request->installation_address;
+        $sub->mission_executor = $request->mission_executor;
+        $sub->note = $request->note;
         $sub->update();
 
         session()->flash('success', "تم تعديل المشترك $sub->name بنجاح");

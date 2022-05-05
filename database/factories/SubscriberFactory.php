@@ -35,10 +35,11 @@ class SubscriberFactory extends Factory
             'mother' => $this->faker->name,
             'address' => $this->faker->address,
             'installation_address' => $this->faker->address,
-            'mission_executor' => $this->faker->name,
             'status' => 'deactive',
             'package_start' => $date,
             'package_end' => $date1,
+            'mission_executor' => $this->faker->name,
+            'note' => $this->faker->sentence,
         ];
 
 

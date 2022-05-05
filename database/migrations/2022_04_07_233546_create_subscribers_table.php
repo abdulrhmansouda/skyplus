@@ -29,6 +29,7 @@ return new class extends Migration
             $table->date('package_start');
             $table->date('package_end');
             $table->string('mission_executor');
+            $table->string('note')->nullable();
             $table->timestamps();
 
         });

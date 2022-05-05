@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Http\Controllers\SettingSocialController;
 use App\Models\Admin;
 use App\Models\Admin\Setting\Social;
+use App\Models\Notification;
 use App\Models\Package;
 use App\Models\Point;
 use App\Models\ProjectSetting;
@@ -82,6 +83,10 @@ class DatabaseSeeder extends Seeder
             'facebook_name' => 'skyplus',
             'facebook_url' => 'https://www.facebook.com/skyplus',
             'address' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero vitae voluptatum sequi deleniti itaque accusamus adipisci dolore atque tempora placeat error tempore distinctio similique sed deserunt, amet beatae cum ducimus.',
+        ]);
+
+        Notification::create([
+            'support_notification' => true,
         ]);
     }
 }

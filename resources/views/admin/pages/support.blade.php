@@ -5,14 +5,14 @@
 @section('content')
     <div class="container-fluid py-4">
         @if ($errors->any())
-        <div class="alert alert-danger">
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+            <div class="alert alert-danger">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
         @endif
         <div class="row">
             <div class="col-12">
@@ -24,9 +24,11 @@
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3">
                                             صاحب النقطة</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
                                             اسم النقطة</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
                                             اسم المشترك</th>
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
@@ -67,10 +69,12 @@
                                             </td>
                                             {{-- @dd($request->name) --}}
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0">{{ $request->subscriber_name }}</p>
+                                                <p class="text-xs font-weight-bold mb-0">{{ $request->subscriber_name }}
+                                                </p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0">{{ $request->subscriber_phone }}</p>
+                                                <p class="text-xs font-weight-bold mb-0">{{ $request->subscriber_phone }}
+                                                </p>
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0">
@@ -87,6 +91,10 @@
                                                             تحويل خط
                                                         @break
 
+                                                        @case('transfer')
+                                                            نقل العنوان
+                                                        @break
+
                                                         @default
                                                     @endswitch
                                                 </p>
@@ -101,7 +109,8 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0">{{ $request->subscriber_address }}</p>
+                                                <p class="text-xs font-weight-bold mb-0">
+                                                    {{ $request->subscriber_address }}</p>
                                             </td>
                                             <td class="align-middle ">
                                                 <!-- start support1 -->
@@ -161,7 +170,7 @@
                                                                         <div class=" col-md-6">
                                                                             <div class="form-group">
                                                                                 <h6>
-                                                                                     ID
+                                                                                    ID
                                                                                 </h6>
                                                                                 1222
                                                                             </div>
@@ -172,26 +181,26 @@
                                                                                     نوع الطلب
                                                                                 </h6>
                                                                                 @switch($request->type)
-                                                                                @case('maintenance')
-                                                                                    صيانة
-                                                                                @break
-                        
-                                                                                @case('new_installation')
-                                                                                    اشتراك جديد
-                                                                                @break
-                        
-                                                                                @case('switch')
-                                                                                    تحويل خط
-                                                                                @break
-                        
-                                                                                @default
-                                                                            @endswitch
+                                                                                    @case('maintenance')
+                                                                                        صيانة
+                                                                                    @break
+
+                                                                                    @case('new_installation')
+                                                                                        اشتراك جديد
+                                                                                    @break
+
+                                                                                    @case('switch')
+                                                                                        تحويل خط
+                                                                                    @break
+
+                                                                                    @default
+                                                                                @endswitch
                                                                             </div>
                                                                         </div>
                                                                         <div class=" col-md-6">
                                                                             <div class="form-group">
                                                                                 <h6>
-                                                                                     اسم الباقة الجديدة
+                                                                                    اسم الباقة الجديدة
                                                                                 </h6>
                                                                                 باقة 2
                                                                             </div>
@@ -215,16 +224,22 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <form action="{{ route('admin.support.accept_request') }}" method="POST">
+                                                                    <form
+                                                                        action="{{ route('admin.support.accept_request') }}"
+                                                                        method="POST">
                                                                         @csrf
-                                                                        <input name="request_id" type="hidden" value="{{ $request->id }}" >
+                                                                        <input name="request_id" type="hidden"
+                                                                            value="{{ $request->id }}">
 
                                                                         <button type="submit"
                                                                             class="btn btn-info">قبول</button>
                                                                     </form>
-                                                                    <form action="{{ route('admin.support.reject_request') }}" method="POST">
+                                                                    <form
+                                                                        action="{{ route('admin.support.reject_request') }}"
+                                                                        method="POST">
                                                                         @csrf
-                                                                        <input name="request_id" type="hidden" value="{{ $request->id }}" >
+                                                                        <input name="request_id" type="hidden"
+                                                                            value="{{ $request->id }}">
                                                                         <button type="submit"
                                                                             class="btn btn-secondary">رفض</button>
                                                                     </form>

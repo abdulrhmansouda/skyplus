@@ -19,8 +19,9 @@ return new class extends Migration
             $table->string('subscriber_name');
             $table->string('subscriber_phone');
             $table->string('subscriber_address');
-            $table->enum('type',['new_installation','switch','maintenance']);
+            $table->enum('type',['new_installation','switch','maintenance' , 'transfer']);
             $table->enum('status',['accepted' , 'rejected' , 'waiting']);
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }

@@ -19,15 +19,12 @@ class ReportController extends Controller
      */
     public function index(Request $request)
     {
-        // dd($request->all());
-        // dd($request->daterange);
-
         $daterange = $request->daterange ?? now()->format('m/d/Y') . " - " . now()->format('m/d/Y');
-        // dd($daterange);
+
         $all_date = $request->all_date ?? '';
 
         $points = (in_array("0", $request->points ?? ["0"])) ? ["0"] : $request->points;
-        // dd($points);
+
         $reports = Report::select('*');
         if (!in_array("0", $points)) {
             $reports = Report::whereIn('point_id', $points);
@@ -52,16 +49,16 @@ class ReportController extends Controller
         }
 
         $reports = $reports
-            // ->orderBy('point_id')
-            ->orderBy('created_at');
 
-        // foreach($points as 
+        ->orderBy('created_at');
 
+
+        
         return view('admin.pages.reports', [
             'points' => Point::select(['id', 'name'])->get(),
             '_points' => $points ?? [],
             'name_points' => $name_points ?? '',
-            // 'reports' => $reports->paginate(10)->appends($request->all()),
+
             'reports' => $reports->get(),
             'daterange' => $daterange,
             'all_date' => $all_date,

@@ -21,10 +21,12 @@ class PointController extends Controller
     {
 
         $s = $request->s ?? '';
-        $points = Point::join('users', 'points.user_id', '=', 'users.id')
+        $points = Point::join('users', 'users.id', '=', 'points.user_id')
+            ->select('points.*', 'users.username')
             ->where('name', 'LIKE', "%$s%")
             ->orWhere('users.username', 'LIKE', "%$s%");
 
+        // dd($points->get());
         return view('admin.pages.points', [
             'points' => $points->paginate(10),
             'search' => $s,
@@ -60,7 +62,11 @@ class PointController extends Controller
 
         $point->account = $request->account;
 
-        $point->commission = $request->commission;
+        $point->charge_commission = $request->charge_commission;
+
+        $point->new_commission = $request->new_commission;
+
+        $point->switch_commission = $request->switch_commission;
 
         $point->t_c = $request->t_c;
 
@@ -86,6 +92,7 @@ class PointController extends Controller
     public function update(UpdatePointRequest $request, $id)
     {
 
+        // dd($id);
         // dd($request->all());
         $point = Point::findOrFail($id);
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
@@ -103,11 +110,19 @@ class PointController extends Controller
             $point->borrowing_is_allowed = true;
         }
 
+        if ($request->borrowing_is_allowed === 'false') {
+            $point->borrowing_is_allowed = false;
+        }
+
         $point->name = $request->name;
 
         $point->account = $request->account;
 
-        $point->commission = $request->commission;
+        $point->charge_commission = $request->charge_commission;
+
+        $point->new_commission = $request->new_commission;
+
+        $point->switch_commission = $request->switch_commission;
 
         $point->t_c = $request->t_c;
 

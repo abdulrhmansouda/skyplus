@@ -20,7 +20,9 @@ return new class extends Migration
             $table->text('address')->nullable();
             $table->string('image')->nullable();
             $table->double('account',30,3);
-            $table->double('commission',30,3);
+            $table->double('charge_commission',30,3);
+            $table->double('new_commission',30,3);
+            $table->double('switch_commission',30,3);
             $table->double('daily_profit',30,3)->default(0);
             $table->string('t_c');
             $table->string('phone');

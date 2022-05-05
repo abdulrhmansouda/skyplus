@@ -1,7 +1,7 @@
 @extends('admin.dashboard')
 
 
-@section('title','الصفحة الرئيسية')
+@section('title', 'الصفحة الرئيسية')
 
 @section('content')
     <div class="py-4 container-fluid">
@@ -13,18 +13,19 @@
                             <div class="mb-4 col-12 mb-lg-0">
                                 <div class="d-flex flex-column h-100">
                                     <form action="" method="GET">
-                                        <div class="mb-3">
-                    <input name="daterange" type="text" class="form-control daterange" required value="05/03/2022 - 05/03/2022" onchange="form.submit()" />
-
-                                            <!-- <input name="date" type="date" class="form-control daterange" aria-label="name"
-                                                aria-describedby="name-addon" required value='{{ $date }}' onchange="form.submit()"> -->
+                                        <div class="gap-2 d-flex align-items-center">
+                                            <input name="daterange" type="text" class="form-control daterange" required
+                                                value="{{ $daterange }}"/>
+                                            <button type="submit"
+                                                class="mb-0 btn btn-secondary btn-sm ps-3 pe-3">بحث</button>
                                         </div>
+
                                     </form>
                                     <span class="text-xs text-info">اختر تاريخ مختلف لعرض قيمه</span>
                                 </div>
                             </div>
                             <div class="mt-3 col-md-6">
-                            <h6 class="font-weight-bolder"> نظرة عامة على الفواتير</h6>
+                                <h6 class="font-weight-bolder"> نظرة عامة على الفواتير</h6>
                                 <ul class="p-0 list-group">
                                     <li class="pt-0 pb-0 text-sm border-0 list-group-item ps-0"><strong
                                             class="text-dark">عدد الفواتير
@@ -35,7 +36,7 @@
                                 </ul>
                             </div>
                             <div class="mt-3 col-md-6">
-                            <h6 class="font-weight-bolder"> نظرة عامة على حركة الصندوق</h6>
+                                <h6 class="font-weight-bolder"> نظرة عامة على حركة الصندوق</h6>
                                 <ul class="p-0 list-group">
                                     <li class="pt-0 pb-0 text-sm border-0 list-group-item ps-0"><strong
                                             class="text-dark"> بنك
@@ -97,28 +98,26 @@
     </div>
 @endsection
 @section('css')
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 @endsection
 
 @section('js')
 
-<!--   Core JS Files   -->
+    <!--   Core JS Files   -->
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<script>
-    $(function() {
-        $('.daterange').daterangepicker({
-            opens: 'left'
-        }, function(start, end, label) {
-            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end
-                .format('YYYY-MM-DD'));
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script>
+        $(function() {
+            $('.daterange').daterangepicker({
+                opens: 'left'
+            }, function(start, end, label) {
+                console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end
+                    .format('YYYY-MM-DD'));
+            });
         });
-    });
-</script>
+    </script>
 
 
 @endsection
-
-

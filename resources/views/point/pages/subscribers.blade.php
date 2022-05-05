@@ -274,6 +274,7 @@
                                             <!-- end Modal view1  -->
                                         </div>
                                         <!-- end view1 -->
+
                                         <!-- start charge1 -->
                                         <div class="d-inline-block">
                                             <a href="javascript:;" class="px-1 text-xs text-secondary font-weight-bold " data-toggle="tooltip" data-original-title="charge{{ $sub->id }} user" data-bs-toggle="modal" data-bs-target="#charge{{ $sub->id }}">
@@ -433,14 +434,16 @@
                                             <!-- end Modal charge1  -->
                                         </div>
                                         <!-- end charge1 -->
-                                        <!-- end maintenance1 -->
+
                                         <!-- start maintenance1 -->
                                         <div class="d-inline-block">
                                             <a href="javascript:;" class="px-1 text-xs text-secondary font-weight-bold " data-toggle="tooltip" data-original-title="charge1 user" data-bs-toggle="modal" data-bs-target="#maintenance{{ $sub->id }}">
                                                 <i class="fas fa-wrench"></i>
                                             </a>
-                                            <!-- satrt charge1 Modal -->
-                                            <form action="">
+                                            <!-- satrt maintenance1 Modal -->
+                                            <form action="{{ route('point.subscribers.maintenance',$sub->id) }}" method="POST">
+                                                @csrf
+                                                @method('PUT')
                                                 <div class="modal fade" id="maintenance{{ $sub->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
@@ -470,14 +473,14 @@
                                                                         <div class="row">
                                                                             <div class="col-6">
                                                                                 <div class="form-group">
-                                                                                    <input class="" name="maintenance" type="radio" value="true" id="maintenancea{{ $sub->id }}" checked >
+                                                                                    <input class="" name="type" type="radio" value="maintenance" id="maintenancea{{ $sub->id }}" checked >
                                                                                     <label class="" for="maintenancea{{ $sub->id }}">
                                                                                         صيانة</label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-6">
                                                                                 <div class="form-group">
-                                                                                    <input class="" name="maintenance" type="radio" value="false" id="maintenancea{{ $sub->id }}"  >
+                                                                                    <input class="" name="type" type="radio" value="transfer" id="maintenancea{{ $sub->id }}"  >
                                                                                     <label class="" for="maintenancea{{ $sub->id }}">
                                                                                         نقل</label>
                                                                                 </div>
@@ -491,7 +494,7 @@
                                                                             <label>
                                                                                 ملاحظات
                                                                             </label>
-                                                                            <textarea cols="30" rows="3" class="form-control"></textarea>
+                                                                            <textarea name="note" cols="30" rows="3" class="form-control"></textarea>
                                                                         </div>
                                                                     </div>
                                                                 </div>

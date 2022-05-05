@@ -12,6 +12,7 @@ use App\Imports\SubscribersImport;
 use App\Models\Package;
 use App\Models\Subscriber;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 class SubscriberController extends Controller
@@ -44,7 +45,7 @@ class SubscriberController extends Controller
         return view('admin.pages.subscribers', [
             'subs' => $subs->paginate($pagination_number)
                 ->appends(['pagination_number' => $pagination_number, 'sort_by' => $sort_by, 's' => $s]),
-            'packages' => Package::where('status','active')->get(),
+            'packages' => Package::where('status', 'active')->get(),
             'search' => $s,
             'page' => $page,
             'pagination_number' => $pagination_number,
@@ -93,9 +94,6 @@ class SubscriberController extends Controller
         $days = $request->days;
 
         $sub = Subscriber::findOrFail($id);
-
-        $sub->payDays($days);
-
         $message_telegram = "
         تم إضافة أيام من Super Admin
 
@@ -108,9 +106,13 @@ class SubscriberController extends Controller
 ➕➕➕➕➕➕➕➕➕➕➕➕
 ";
 
+        // العمليات المهمة جداً
+        DB::transaction(function () use ($sub,$days,$message_telegram) {
+            $sub->payDays($days);
+            TelegramController::chargeMessage($message_telegram);
+        }, 5);
 
-        TelegramController::chargeMessage($message_telegram);
-
+        session()->flash('success',"تم اضافة $days يوم من قبل الspueradmin بنجاح");
 
         return redirect()->back();
     }

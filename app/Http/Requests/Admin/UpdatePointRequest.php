@@ -26,17 +26,19 @@ class UpdatePointRequest extends FormRequest
     {
         // dd($this->all());
         return [
-            'name' => ['required','string','min:2',],
-            'username' => ['required','string',"unique:users,username,$this->id"],
-            'password' => ['nullable','min:8'],
-            'account' => ['required','numeric',],
-            'commission' => ['required' ,'numeric' ,'min:0','max:100' ,],
-            't_c' => ['required' , 'string ','min:11' ,'max:11' ],
-            'phone' => ['required' , 'string ','max:100'],
-            'image' => ['nullable','image'],
-            'address' => ['nullable','string','max:1000',],
-            'borrowing_is_allowed' => ['nullable' ,Rule::in(['true',]) ],
-            'status' => ['required' , Rule::in(['active', 'deactive' , 'closed']) ],
+            'name' => ['required', 'string', 'min:2',],
+            'username' => ['required', 'string', "unique:users,username,$this->user_id"],
+            'password' => ['nullable', 'min:8'],
+            'account' => ['required', 'numeric',],
+            'charge_commission' => ['required', 'numeric', 'min:0', 'max:100',],
+            'new_commission' => ['required', 'numeric', 'min:0',],
+            'switch_commission' => ['required', 'numeric', 'min:0',],
+            't_c' => ['required', 'string ', 'min:11', 'max:11'],
+            'phone' => ['required', 'string ', 'max:100'],
+            'image' => ['nullable', 'image'],
+            'address' => ['nullable', 'string', 'max:1000',],
+            'borrowing_is_allowed' => ['nullable', Rule::in(['true',])],
+            'status' => ['required', Rule::in(['active', 'deactive', 'closed'])],
         ];
     }
 }

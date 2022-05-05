@@ -85,7 +85,7 @@
                                         عمولة التسديد
                                         <span class="text-danger"> * </span>
                                     </label>
-                                    <input type="number" class="form-control" required placeholder="الادخال بالنسبة المؤية مثلا 1" name="commission" step="0.01">
+                                    <input type="number" class="form-control" required placeholder="الادخال بالنسبة المؤية مثلا 1" name="charge_commission" step="0.01">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
@@ -94,7 +94,7 @@
                                         عمولة التركيب الجديد
                                         <span class="text-danger"> * </span>
                                     </label>
-                                    <input type="number" class="form-control" required placeholder="الادخال بقيمة ثابتة مثلا 10" name="" >
+                                    <input type="number" class="form-control" required placeholder="الادخال بقيمة ثابتة مثلا 10" name="new_commission" step="0.01">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
@@ -103,7 +103,7 @@
                                         عمولة القلب
                                         <span class="text-danger"> * </span>
                                     </label>
-                                    <input type="number" class="form-control" required placeholder="الادخال بقيمة ثابتة مثلا 10" name="" >
+                                    <input type="number" class="form-control" required placeholder="الادخال بقيمة ثابتة مثلا 10" name="switch_commission" step="0.01">
                                 </div>
                             </div>
                             <div class="col-md-8 col-sm-6">
@@ -188,13 +188,13 @@
                                         <p class="mb-0 text-xs font-weight-bold">{{ $point->account }}</p>
                                     </td>
                                     <td>
-                                        <p class="mb-0 text-xs font-weight-bold">{{ $point->commission }}%</p>
+                                        <p class="mb-0 text-xs font-weight-bold">{{ $point->charge_commission }}%</p>
                                     </td>
                                     <td>
-                                        <p class="mb-0 text-xs font-weight-bold">12</p>
+                                        <p class="mb-0 text-xs font-weight-bold">{{ $point->new_commission }}</p>
                                     </td>
                                     <td>
-                                        <p class="mb-0 text-xs font-weight-bold">13</p>
+                                        <p class="mb-0 text-xs font-weight-bold">{{ $point->switch_commission }}</p>
                                     </td>
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold">{{ $point->t_c }}</p>
@@ -205,7 +205,6 @@
                                         @else
                                         <span class="badge badge-sm bg-gradient-danger">مغلق</span>
                                         @endif                                    </td>
-
                                     <td class="align-middle ">
                                         <!-- start view1 -->
                                         <div class="d-inline-block">
@@ -276,7 +275,7 @@
                                                                         <h6>
                                                                             عمولة التسديد
                                                                         </h6>
-                                                                        {{ $point->commission }}
+                                                                        {{ $point->charge_commission }}
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4 col-sm-6">
@@ -284,7 +283,7 @@
                                                                         <h6>
                                                                             عمولة التركيب الجديد
                                                                         </h6>
-                                                                       10
+                                                                       {{ $point->new_commission }}
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4 col-sm-6">
@@ -292,7 +291,7 @@
                                                                         <h6>
                                                                             عمولة القلب
                                                                         </h6>
-                                                                       12
+                                                                       {{ $point->switch_commission }}
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4 col-sm-6">
@@ -327,10 +326,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- </div> -->
-                                        <!-- </div> -->
                                         <!-- end Modal view1  -->
                                         <!-- end view1 -->
+
                                         <!-- start edit 1 -->
                                         <div class="d-inline-block">
                                             <a href="javascript:;" class="px-1 text-xs text-secondary font-weight-bold " data-toggle="tooltip" data-original-title="Edit user" data-bs-toggle="modal" data-bs-target="#edit{{ $point->id }}">
@@ -340,7 +338,7 @@
                                             <form action="{{ route('admin.points.update', $point->id) }}" method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 @method('PUT')
-                                                <input type="hidden" name="id" value="{{ $point->user->id }}">
+                                                <input type="hidden" name="user_id" value="{{ $point->user->id }}">
                                                 <div class="modal fade" id="edit{{ $point->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                                                         <div class="modal-content">
@@ -422,7 +420,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <input type="number" class="form-control" required placeholder="الادخال بالنسبة المؤية مثلا 1" name="commission" value="{{ $point->commission }}" step="0.01">
+                                                                            <input type="number" class="form-control" required placeholder="الادخال بالنسبة المؤية مثلا 1" name="charge_commission" value="{{ $point->charge_commission }}" step="0.01">
 
                                                                         </div>
                                                                     </div>
@@ -433,7 +431,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <input type="number" class="form-control" required placeholder="الادخال بالنسبة المؤية مثلا 1" name="commission" value="{{ $point->commission }}" step="0.01">
+                                                                            <input type="number" class="form-control" required placeholder="الادخال قيمة ثابتة مثلا 10" name="new_commission" value="{{ $point->new_commission }}" step="0.01">
 
                                                                         </div>
                                                                     </div>
@@ -444,7 +442,7 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <input type="number" class="form-control" required placeholder="الادخال بالنسبة المؤية مثلا 1" name="commission" value="{{ $point->commission }}" step="0.01">
+                                                                            <input type="number" class="form-control" required placeholder="الادخال قيمة ثابتة مثلا 10" name="switch_commission" value="{{ $point->switch_commission }}" step="0.01">
 
                                                                         </div>
                                                                     </div>

@@ -157,6 +157,7 @@ Route::middleware(['auth', 'point'])
             ->group(function () {
                 Route::get('/', [PointSubscriberController::class, 'index'])->name('index');
                 Route::put('/charge/{subscriber}', [PointSubscriberController::class, 'charge'])->name('charge');
+                Route::put('/maintenance/{subscriber}' , [PointSubscriberController::class , 'maintenance' ])->name('maintenance');
             });
 
         Route::prefix('/support')

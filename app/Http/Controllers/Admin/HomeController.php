@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use App\Models\Subscriber;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -19,9 +20,20 @@ class HomeController extends Controller
         $active = Subscriber::where('status' , 'active')->count();
         $deactive = Subscriber::where('status' , 'deactive')->count();
         $closed = Subscriber::where('status' , 'closed')->count();
-        $date = $request->date ?? now()->format('Y-m-d');
+        // start daterange
+        $daterange = $request->daterange ?? now()->format('m/d/Y') . " - " . now()->format('m/d/Y');
 
-        $count = Invoice::whereDate('created_at',$date);
+        preg_match_all("/([^-]*) - (.*)/", $daterange, $date);
+        if ($date[1]) {
+            $from = new Carbon($date[1][0]);
+            // $pre = $from->addDays(-1);
+            $to = new Carbon($date[2][0]);
+        }
+
+        $count = Invoice::whereDate('created_at', '>=', $from)
+        ->whereDate('created_at', '<=', $to);
+        // end daterange
+
 
         $sum = clone $count;
 
@@ -33,7 +45,10 @@ class HomeController extends Controller
             'active' => $active,
             'deactive' => $deactive,
             'closed' => $closed,
-            'date' => $date,
+            // 'date' => $date,
+            // 'from' => $from,
+            // 'to' => $to,
+            'daterange' => $daterange,
             'count' => $count,
             'sum' => $sum,
         ]);

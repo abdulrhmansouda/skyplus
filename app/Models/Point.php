@@ -11,17 +11,21 @@ class Point extends Model
 
     protected $with = ['user'];
 
-    protected $fillable = [
-        'user_id',
-        'name',
-        'address',
-        'image',
-        'account',
-        'tc',
-        'note',
-        'borrowingIsAllowed',
-        'phone',
+    protected $guarded = [
+        'id',
     ];
+
+    // protected $fillable = [
+    //     'user_id',
+    //     'name',
+    //     'address',
+    //     'image',
+    //     'account',
+    //     'tc',
+    //     'note',
+    //     'borrowingIsAllowed',
+    //     'phone',
+    // ];
 
     public function user()
     {

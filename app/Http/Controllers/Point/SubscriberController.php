@@ -6,12 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\TelegramController;
 use App\Http\Requests\Point\ChargeSubscriberRequest;
 use App\Models\Invoice;
+use App\Models\Notification;
+use App\Models\Point;
 use App\Models\ProjectSetting;
 use App\Models\Report;
 use App\Models\Subscriber;
+use App\Models\SupportRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class SubscriberController extends Controller
 {
@@ -295,6 +299,39 @@ class SubscriberController extends Controller
             }, 5);
         }
 
+        return redirect()->back();
+    }
+
+    public function maintenance(Request $request, $id)
+    {
+
+        $request->validate([
+            'note' => ['nullable', 'string', 'between:2,1000'],
+            'type' => ['required', Rule::in(['maintenance', 'transfer'])],
+        ]);
+
+        $sub = Subscriber::findOrFail($id);
+        $point = Point::findOrFail(Auth::user()->point->id);
+
+        DB::transaction(function () use($point,$sub,$request){
+
+
+            SupportRequest::create([
+                'point_id' => $point->id,
+                'subscriber_name' => $sub->name,
+                'subscriber_phone' => $sub->phone,
+                'subscriber_address' => $sub->address,
+                'note' => $request->note,
+                'type' => $request->type,
+                'status' => 'waiting'
+            ]);
+
+            $support_notification = Notification::firstOrFail();
+            $support_notification->support_notification = true;
+            $support_notification->update();
+
+            session()->flash('success', 'تم تسجيل طلبكم بنجاح');
+        });
         return redirect()->back();
     }
 }

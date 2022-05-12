@@ -38,7 +38,7 @@
                         @break
 
                         @case('admin.setting.binding-telegram.index')
-                             الاعدادات / الربط مع تيليجرام
+                            الاعدادات / الربط مع تيليجرام
                         @break
 
                         @case('admin.support.index')
@@ -97,22 +97,13 @@
                                     </div>
                                 </form>
                             </div>
-                        @break
+                        </div>
+                    @break
 
-                    @endswitch
+                @endswitch
 
-                    {{-- <ul class="navbar-nav me-auto ms-0 justify-content-end">
-                        <li class="nav-item d-xl-none pe-3 d-flex align-items-center">
-                            <a href="javascript:;" class="p-0 nav-link text-body" id="iconNavbarSidenav">
-                                <div class="sidenav-toggler-inner">
-                                    <i class="sidenav-toggler-line"></i>
-                                    <i class="sidenav-toggler-line"></i>
-                                    <i class="sidenav-toggler-line"></i>
-                                </div>
-                            </a>
-                        </li>
-          
-                    </ul> --}}
-                </div>
+
             </div>
+        </div>
+    </div>
 </nav>

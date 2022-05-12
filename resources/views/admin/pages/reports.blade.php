@@ -16,7 +16,7 @@
                         <label class="form-check-label text-nowrap" for="all">كل المدة
                         </label>
                     </div>
-                    <select name="points[]" multiple id="select_point" class="form-select">
+                    <select name="points[]"  class="form-select">
                         <option value="0" @if(in_array("0",$_points)) selected @endif>الكل</option>
                         @foreach ($points as $point)
                         <option value="{{ $point->id }}" @if(in_array($point->id,$_points))selected @endif>{{ $point->name }}</option>

@@ -9,6 +9,9 @@ use App\Models\Report;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use Spatie\QueryBuilder\QueryBuilder;
+
+// use Spatie\QueryBuilder\QueryBuilder;
 
 class ReportController extends Controller
 {
@@ -69,6 +72,16 @@ class ReportController extends Controller
             'from' => isset($from) ? $from->format('d/m/Y') : 'all',
             'to' => isset($to) ? $to->format('d/m/Y') : 'all',
         ]);
+    }
+
+    public function test(){
+        // dd(1);
+        $users = QueryBuilder::for(Point::class)
+        ->allowedFilters('name')
+        ->take(5)->select('name','id')->get();
+        // dd($users);
+        return response()
+        ->json(['point' => $users]);
     }
 
 

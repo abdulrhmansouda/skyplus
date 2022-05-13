@@ -449,3 +449,9 @@ function HideShowSelect(event){
     event.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector(".form-packages").classList.add('d-none');
   }
 }
+
+function getPricePackage(event){
+  fetch( `/api/package?id=${event.target.value}`)
+  .then(response => response.json())
+  .then(data => {event.target.parentElement.parentElement.parentElement.querySelector(".price").innerHTML = data.package_price});
+}

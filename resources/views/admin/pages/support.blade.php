@@ -36,6 +36,9 @@
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
                                             نوع الطلب</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
+                                            التاريخ </th>
 
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
@@ -98,6 +101,9 @@
                                                         @default
                                                     @endswitch
                                                 </p>
+                                            </td>
+                                            <td class="text-sm align-middle">
+                                                *****
                                             </td>
                                             <td class="text-sm align-middle">
                                                 @if ($request->status === 'accepted')
@@ -241,8 +247,10 @@
                                                                         <input name="request_id" type="hidden"
                                                                             value="{{ $request->id }}">
                                                                         <button type="submit"
-                                                                            class="btn btn-secondary">رفض</button>
+                                                                            class="btn btn-danger">رفض</button>
                                                                     </form>
+                                                                    <button 
+                                                                            class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
                                                                 </div>
 
                                                             </div>

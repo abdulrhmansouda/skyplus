@@ -323,7 +323,9 @@
                                                                         <div class="form-group">
                                                                             <h6>
                                                                                 سعر الباقة </h6>
-                                                                            {{ $sub->package->price }}
+                                                                                <span class="price">
+                                                                                    {{ $sub->package->price }}
+                                                                                </span>
                                                                         </div>
                                                                     </div>
 
@@ -389,7 +391,7 @@
                                                                         <div class="form-group">
                                                                             <h6>
                                                                                 اختر الباقة الجديدة </h6>
-                                                                            <select name=""  class="form-select ">
+                                                                            <select name=""  class="form-select " onchange="getPricePackage(event)">
                                                                                 <option value="1">1</option>
                                                                                 <option value="2">2</option>
                                                                                 <option value="3">3</option>

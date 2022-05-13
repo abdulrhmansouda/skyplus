@@ -103,7 +103,7 @@
                                                 </p>
                                             </td>
                                             <td class="text-sm align-middle">
-                                                *****
+                                                {{ $request->created_at }}
                                             </td>
                                             <td class="text-sm align-middle">
                                                 @if ($request->status === 'accepted')
@@ -268,36 +268,6 @@
                     </div>
                 </div>
                 <!-- start pagination -->
-                {{-- <ul class="pagination pagination-info">
-                    <li class="page-item">
-                        <a class="page-link" href="#link" aria-label="Previous">
-                            <span aria-hidden="true"> <i class="fas fa-angle-right" aria-hidden="true"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#link">1</a>
-                    </li>
-                    <li class="page-item active">
-                        <a class="page-link" href="#link">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#link">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#link">4</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#link">5</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#link" aria-label="Next">
-                            <span aria-hidden="true">
-                                <i class="fas fa-angle-left" aria-hidden="true"></i>
-                            </span>
-                        </a>
-                    </li>
-                </ul> --}}
                 {{ $requests->links() }}
                 <!-- end pagination -->
             </div>

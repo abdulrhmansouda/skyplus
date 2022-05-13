@@ -18,7 +18,6 @@
                     </div>
                     <select name="points[]" class="js-data-example-ajax form-select" id="mySelect2" multiple>
                         <option value="0" @if(in_array("0",$_points)) selected @endif>الكل</option>
-                       
                     </select>
                     <button type="submit" class="mb-0 btn btn-secondary btn-sm ps-3 pe-3">بحث</button>
                 </div>

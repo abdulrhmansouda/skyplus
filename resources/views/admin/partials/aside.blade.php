@@ -222,17 +222,17 @@
                     </div>
                     <span class="nav-link-text me-1">الدعم الفني</span>
                 </button>
-                <div class="collapse @if (Route::currentRouteName() === 'admin.setting.binding-telegram.index' || Route::currentRouteName() === 'admin.setting.change-password.index' || Route::currentRouteName() === 'admin.setting.social.index' || Route::currentRouteName() === 'admin.setting.other.index') show @endif" id="support">
+                <div class="collapse @if (Route::currentRouteName() === 'admin.support.index' || Route::currentRouteName() === 'admin.support.index' || Route::currentRouteName() === 'admin.setting.social.index' || Route::currentRouteName() === 'admin.setting.other.index') show @endif" id="support">
                     <ul class="ul-links">
-                        <li class="mb-1 position-relative @if (Route::currentRouteName() === 'admin.setting.change-password.index') active @endif"><a
-                                href="{{ route('admin.setting.change-password.index') }}">لمشتركين أساسيين</a>
+                        <li class="mb-1 position-relative @if (Route::currentRouteName() === 'admin.support.index') active @endif"><a
+                                href="{{ route('admin.support.index') }}">لمشتركين أساسيين</a>
                                 <!-- if  -->
                         <span class="bg-danger red-point"></span>
                                 <!-- end if  -->
                             </li>
 
-                        <li class="mb-1 position-relative @if (Route::currentRouteName() === 'admin.setting.social.index') active @endif"><a
-                                href="{{ route('admin.setting.social.index') }}">لمشتركين جدد</a>
+                        <li class="mb-1 position-relative @if (Route::currentRouteName() === 'admin.support.index') active @endif"><a
+                                href="{{ route('admin.support.index') }}">لمشتركين جدد</a>
                                 <!-- if  -->
                         <span class="bg-danger red-point"></span>
                                 <!-- end if  -->

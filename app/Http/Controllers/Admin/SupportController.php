@@ -19,7 +19,7 @@ class SupportController extends Controller
         $support_notification->update();
         
         $requests = SupportRequest::latest();
-        return view('admin.pages.support',[
+        return view('admin.pages.support-requests',[
             'requests' => $requests->paginate(10),
         ]);
     }

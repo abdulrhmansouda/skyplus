@@ -204,7 +204,8 @@
                 </li>
             @endif
             <li class="position-relative nav-item">
-                <a class="nav-link @if (Route::currentRouteName() === 'admin.support.index') active @endif"
+                <button data-bs-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#support"
+                    aria-expanded="false" aria-controls="setting" class="nav-link @if (Route::currentRouteName() === 'admin.support.index') active @endif"
                     href="{{ route('admin.support.index') }}">
                    
                     @if (App\Models\Notification::isThereSupportNotification())
@@ -220,7 +221,25 @@
                         </svg>
                     </div>
                     <span class="nav-link-text me-1">الدعم الفني</span>
-                </a>
+                </button>
+                <div class="collapse @if (Route::currentRouteName() === 'admin.setting.binding-telegram.index' || Route::currentRouteName() === 'admin.setting.change-password.index' || Route::currentRouteName() === 'admin.setting.social.index' || Route::currentRouteName() === 'admin.setting.other.index') show @endif" id="support">
+                    <ul class="ul-links">
+                        <li class="mb-1 position-relative @if (Route::currentRouteName() === 'admin.setting.change-password.index') active @endif"><a
+                                href="{{ route('admin.setting.change-password.index') }}">لمشتركين أساسيين</a>
+                                <!-- if  -->
+                        <span class="bg-danger red-point"></span>
+                                <!-- end if  -->
+                            </li>
+
+                        <li class="mb-1 position-relative @if (Route::currentRouteName() === 'admin.setting.social.index') active @endif"><a
+                                href="{{ route('admin.setting.social.index') }}">لمشتركين جدد</a>
+                                <!-- if  -->
+                        <span class="bg-danger red-point"></span>
+                                <!-- end if  -->
+                            
+                            </li>
+                    </ul>
+                </div>
             </li>
             <li class="nav-item">
                 <button data-bs-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#setting"

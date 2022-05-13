@@ -29,6 +29,20 @@ class PackageController extends Controller
         ]);
     }
 
+    public function pricePackageApi()
+    {
+        $id = request()->id ?? '';
+
+        $package_price = Package::findOrFail($id)->price;
+        
+            // $packages = Package::where('name', 'LIKE', "%$s%");
+
+        return response()
+        ->json([
+            'package_price' => $package_price, 
+        ]);
+    }
+
 
     /**
      * Store a newly created resource in storage.

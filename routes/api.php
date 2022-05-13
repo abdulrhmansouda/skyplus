@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\PackageController;
+use App\Http\Controllers\Admin\PointController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Models\Point;
 use Illuminate\Http\Request;
@@ -21,4 +23,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/pointss',[ReportController::class,'test']);
+//http://localhost:8000/api/points?name=abd
+Route::get('/points',[PointController::class,'searchNameApi']);
+
+//http://localhost:8000/api/package?id=1
+Route::get('/package',[PackageController::class,'pricePackageApi']);

@@ -19,7 +19,6 @@ class PointController extends Controller
      */
     public function index(Request $request)
     {
-
         $s = $request->s ?? '';
         $points = Point::join('users', 'users.id', '=', 'points.user_id')
             ->select('points.*', 'users.username')
@@ -31,6 +30,15 @@ class PointController extends Controller
             'points' => $points->paginate(10),
             'search' => $s,
         ]);
+    }
+
+    public function searchNameApi(){
+
+        $search = request()->name ?? '';
+        $points = Point::select('id','name')->without('user')->where('name','LIKE',"%$search%")->take(10)->get();
+
+        return response()
+        ->json(['points' => $points]);
     }
 
     /**
@@ -92,8 +100,6 @@ class PointController extends Controller
     public function update(UpdatePointRequest $request, $id)
     {
 
-        // dd($id);
-        // dd($request->all());
         $point = Point::findOrFail($id);
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $image = $request->file('image');

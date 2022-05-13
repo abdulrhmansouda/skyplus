@@ -83,7 +83,7 @@
                                         الاسم
                                     </th>
                                     <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        T.c </th>
+                                        T.C </th>
                                     <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         رقم المشترك
                                     </th>

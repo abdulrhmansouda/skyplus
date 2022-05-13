@@ -74,21 +74,9 @@ class ReportController extends Controller
         ]);
     }
 
-    public function test(){
-        // dd(1);
-        $users = QueryBuilder::for(Point::class)
-        ->allowedFilters('name')
-        ->take(5)->select('name','id')->get();
-        // dd($users);
-        return response()
-        ->json(['point' => $users]);
-    }
-
-
     public function admin_export(Request $request)
     {
 
-        // dd($request->all());
         $daterange = $request->_daterange ?? now()->format('m/d/Y') . " - " . now()->format('m/d/Y');
 
         $all_date = $request->all_date ?? '';

@@ -444,8 +444,8 @@ document.querySelectorAll(".date-now").forEach((date)=>{
 })
 function HideShowSelect(event){
   if(event.target.value == 'upgrate'){
-    event.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector(".form-packages").classList.toggle('d-none');
+    event.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector(".form-packages").classList.remove('d-none');
   }else{
-    event.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector(".form-packages").classList.toggle('d-none');
+    event.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector(".form-packages").classList.add('d-none');
   }
 }

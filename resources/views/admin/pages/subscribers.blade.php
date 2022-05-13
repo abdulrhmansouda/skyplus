@@ -50,20 +50,20 @@
                                 <div class="col-lg-4 col-md-6">
                                     <div class="form-group">
                                         <label>
-                                            اسم المستخدم
+                                            الاسم 
                                             <span class="text-danger"> * </span>
                                         </label>
-                                        <input name="sub_username" type="text" placeholder="username@icenet"
+                                        <input name="name" type="text" 
                                             class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-6">
                                     <div class="form-group">
                                         <label>
-                                            الاسم
+                                            اسم المستخدم
                                             <span class="text-danger"> * </span>
                                         </label>
-                                        <input type="text" class="form-control" required name="name">
+                                        <input type="text" class="form-control" required name="sub_username" placeholder="username@icenet">
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-6">

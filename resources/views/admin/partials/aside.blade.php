@@ -3,7 +3,7 @@
     <div class="sidenav-header">
         <i class="top-0 p-3 cursor-pointer fas fa-times text-secondary opacity-5 position-absolute start-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
-        <a class="m-0 navbar-brand" href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html"
+        <a class="m-0 navbar-brand" href=""
             target="_blank">
             <img src="{{ asset('/assets/img/skyplus.png') }}" class="navbar-brand-img h-100" alt="main_logo">
             <span class="me-1 font-weight-bold">skyplus</span>

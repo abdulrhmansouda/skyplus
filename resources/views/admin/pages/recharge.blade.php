@@ -30,8 +30,7 @@
                                             اسم المستخدم</th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
                                                 الرصيد</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
-                                            العمولة</th>
+                                      
                                       
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
@@ -63,9 +62,7 @@
                                                 <p class="text-xs font-weight-bold mb-0">{{ $point->account }}</p>
                                             </td>
 
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0">{{ $point->commission }}%</p>
-                                            </td>
+                                          
                                          
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0">{{ $point->t_c }}</p>

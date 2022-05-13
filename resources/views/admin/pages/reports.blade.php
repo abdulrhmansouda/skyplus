@@ -16,11 +16,11 @@
                         <label class="form-check-label text-nowrap" for="all">كل المدة
                         </label>
                     </div>
-                    <select name="points[]"  class="form-select">
+                    <select name="points[]" class="js-data-example-ajax form-select" id="mySelect2" multiple>
                         <option value="0" @if(in_array("0",$_points)) selected @endif>الكل</option>
-                        @foreach ($points as $point)
+                        <!-- @foreach ($points as $point)
                         <option value="{{ $point->id }}" @if(in_array($point->id,$_points))selected @endif>{{ $point->name }}</option>
-                        @endforeach
+                        @endforeach -->
                     </select>
                     <button type="submit" class="mb-0 btn btn-secondary btn-sm ps-3 pe-3">بحث</button>
                 </div>
@@ -201,16 +201,40 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 <script>
     $(function() {
-        $("#select_point").select2({
-            placeholder: "اختر نقطة بيع أوأكثر"
-        });
+
         $('.daterange').daterangepicker({
             opens: 'left'
         }, function(start, end, label) {
             console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end
                 .format('YYYY-MM-DD'));
         });
-    });
+
+        $('#mySelect2').select2({
+            placeholder: "اختر نقطة بيع أوأكثر",
+            ajax: {
+                url: '/api/points',
+                dataType: 'json',
+                quietMillis: 100,
+                data: function(params) {
+                    var queryParameters = {
+                    name: params.term
+                    }
+                    
+                    return queryParameters;
+                },
+                processResults: function(data) {
+                    return {
+                        results: $.map(data.points, function(item) {
+                            return {
+                                text: item.name,
+                                id: item.id
+                            }
+                        })
+                    };
+                }
+            }
+        });
+    })
 </script>
 
 

@@ -57,20 +57,21 @@ class LoginRequest extends FormRequest
         // }
 
         // RateLimiter::clear($this->throttleKey());
-            
-        $user = User::where('username',$this->username)
-                    ->first();
 
-        if(!$user || !Hash::check($this->password,$user->password) ){
+        $user = User::where('username', $this->username)
+            ->first();
+
+
+        if (!$user || !Hash::check($this->password, $user->password)) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                        'username' => trans('auth.failed-login'),
-                    ]);
+                'username' => trans('auth.failed-login'),
+            ]);
         }
-        Auth::login($user,$this->boolean('remember'));
+        // dd($user);
+        Auth::login($user, $this->boolean('remember'));
         RateLimiter::clear($this->throttleKey());
-        
     }
 
     /**
@@ -82,7 +83,7 @@ class LoginRequest extends FormRequest
      */
     public function ensureIsNotRateLimited()
     {
-        if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
+        if (!RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
             return;
         }
 
@@ -105,6 +106,6 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey()
     {
-        return Str::lower($this->input('email')).'|'.$this->ip();
+        return Str::lower($this->input('email')) . '|' . $this->ip();
     }
 }

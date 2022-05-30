@@ -22,7 +22,7 @@ return new class extends Migration
             $table->enum('status',['accepted' , 'rejected' , 'waiting'])->default('waiting');
             $table->string('note')->nullable();
 
-            $table->foreignIdFor(Point::class)->constrained()->cascadeOnUpdate();
+            // $table->foreignIdFor(Point::class)->constrained()->cascadeOnUpdate();
 
             $table->timestamps();
         });

@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class Admin
+class Accountant
 {
     /**
      * Handle an incoming request.
@@ -16,9 +16,9 @@ class Admin
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function handle(Request $request, Closure $next)
-    {   
-        if(!(Auth::user()->isAdmin()||Auth::user()->isSuperAdmin())){
-            abort(403);
+    {
+        if(!Auth::user()->isAccountant()){
+            abort(404);
         }
         return $next($request);
     }

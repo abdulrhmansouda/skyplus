@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
@@ -28,14 +29,22 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        // dd($request->all());
-        // dd(1);
         $request->authenticate();
 
         $request->session()->regenerate();
 
+
+        if(Auth::user()->isSuperAdmin()){
+            return redirect( route('admin.home') );
+        }
+
         if(Auth::user()->isAdmin()){
             return redirect( route('admin.home') );
+        }
+
+        if(Auth::user()->isAccountant()){
+            // return redirect( route('admin.home') );
+            return 'Accountant login';
         }
 
         if(Auth::user()->isPoint()){

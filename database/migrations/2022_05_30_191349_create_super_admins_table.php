@@ -14,19 +14,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('admins', function (Blueprint $table) {
+        Schema::create('super_admins', function (Blueprint $table) {
             $table->id();
             // $table->foreignId('user_id');
             $table->string('name');
             $table->string('t_c');
             $table->string('phone');
-            $table->enum('status',['active','closed'])->default('active');
+            // $table->enum('status',['active','closed'])->default('active');
             $table->timestamps();
 
             //Relations
             $table->foreignIdFor(User::class)->constrained()->cascadeOnUpdate();
-
-
         });
     }
 
@@ -37,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('super_admins');
     }
 };

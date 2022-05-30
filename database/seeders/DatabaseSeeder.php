@@ -2,16 +2,14 @@
 
 namespace Database\Seeders;
 
-use App\Http\Controllers\SettingSocialController;
 use App\Models\Admin;
 use App\Models\Admin\Setting\Social;
 use App\Models\Notification;
 use App\Models\Package;
-use App\Models\Point;
 use App\Models\ProjectSetting;
 use App\Models\Report;
+use App\Models\SuperAdmin;
 use App\Models\TelegramBot;
-use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,30 +22,16 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        Admin::factory(1)->create([
-            'user_id' => User::factory(1)->create(['username' => 'skyplus', 'role' => 'admin'])->first()->id,
+        $this->call([
+            // UserSeeder::class,
+            SuperAdminSeeder::class,
+            AdminSeeder::class,
+            AccountantSeeder::class,
+            PointSeeder::class,
         ]);
-
-        Admin::factory(1)->create([
-            'user_id' => User::factory(1)->create(['username' => 'skyplus1', 'role' => 'admin'])->first()->id,
-        ]);
-
-        Point::factory(1)->create([
-            'user_id' => User::factory(1)->create(['username' => 'point', 'role' => 'point'])->first()->id,
-        ]);
-
-        User::factory()
-            ->count(10)
-            ->hasPoint(1)
-            // ->hasReports(10)
-            ->create(['role' => 'point']);
 
         Report::factory(10)->create();
 
-        User::factory()
-            ->count(10)
-            ->hasAdmin(1)
-            ->create(['role' => 'admin']);
 
         Package::factory()
             ->count(10)

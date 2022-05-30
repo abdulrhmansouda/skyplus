@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\UserRole;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -43,24 +44,37 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function super_admin(){
+        return $this->hasOne(SuperAdmin::class);
+    }
+
     public function admin(){
         return $this->hasOne(Admin::class);
+    }
+
+    public function accountant(){
+        return $this->hasOne(Accountant::class);
     }
 
     public function point(){
         return $this->hasOne(Point::class);
     }
 
+    public function isSuperAdmin(){
+        return $this->role === UserRole::SUPER_ADMIN->value;
+    }
+
     public function isAdmin(){
-        return $this->role === 'admin' ;
+        return $this->role === UserRole::ADMIN->value;
+    }
+    
+    public function isAccountant(){
+        return $this->role === UserRole::ACCOUNTANT->value;
     }
 
     public function isPoint(){
-        return $this->role === 'point' ;
+        return $this->role === UserRole::POINT->value;
     }
 
-    public function isSuperAdmin(){
-        return $this->id === 1 ;
-    }
 
 }

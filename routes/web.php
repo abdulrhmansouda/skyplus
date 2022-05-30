@@ -25,14 +25,14 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/test', function () {
+// Route::get('/test', function () {
 
-    $date = Carbon::now();
+//     $date = Carbon::now();
 
-    $date = new Carbon('1999-9-11');
+//     $date = new Carbon('1999-9-11');
 
-    dd($date->addMonth());
-});
+//     dd($date->addMonth());
+// });
 
 Route::get('/', function () {
     return redirect(route('login'));

@@ -23,12 +23,16 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                    if(Auth::user()->isAdmin()){
-                        return redirect(route('admin.home'));
-                    }
-                    else{
-                        return redirect(route('point.subscribers.index'));
-                    }
+                if (Auth::user()->isSuperAdmin()) {
+                    return redirect(route('admin.home'));
+                } elseif (Auth::user()->isAdmin()) {
+                    return redirect(route('admin.home'));
+                } elseif (Auth::user()->isAccountant()) {
+                    // return redirect(route('point.subscribers.index'));
+                    return "Accountant from guest middleware";
+                } elseif (Auth::user()->isPoint()) {
+                    return redirect(route('point.subscribers.index'));
+                }
                 // return redirect(RouteServiceProvider::HOME);
             }
         }

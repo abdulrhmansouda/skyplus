@@ -204,6 +204,36 @@
                 </li>
             @endif
             <li class="position-relative nav-item">
+                <button data-bs-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#box"
+                    aria-expanded="false" aria-controls="setting" class="nav-link @if (Route::currentRouteName() === 'admin.support.index') active @endif"
+                    href="{{ route('admin.support.index') }}">
+                   
+                    @if (App\Models\Notification::isThereSupportNotification())
+                        <span class="bg-danger red-point"></span>
+                    @endif
+                    <div
+                        class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="text-dark " width="20"
+                                viewBox="0 0 20 20" fill="currentColor">
+  <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+</svg>
+                    </div>
+                    <span class="nav-link-text me-1">الصندوق</span>
+                </button>
+                <div class="collapse @if (Route::currentRouteName() === 'admin.support.index' || Route::currentRouteName() === 'admin.support.index' || Route::currentRouteName() === 'admin.setting.social.index' || Route::currentRouteName() === 'admin.setting.other.index') show @endif" id="box">
+                    <ul class="ul-links">
+                        <li class="mb-1 position-relative @if (Route::currentRouteName() === 'admin.support.index') active @endif"><a
+                                href="{{ route('admin.support.index') }}">النقد </a>
+                               
+                            </li>
+
+                        <li class="mb-1 position-relative @if (Route::currentRouteName() === 'admin.support.index') active @endif"><a
+                                href="{{ route('admin.support.index') }}">البنك</a>
+                            </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="position-relative nav-item">
                 <button data-bs-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#support"
                     aria-expanded="false" aria-controls="setting" class="nav-link @if (Route::currentRouteName() === 'admin.support.index') active @endif"
                     href="{{ route('admin.support.index') }}">

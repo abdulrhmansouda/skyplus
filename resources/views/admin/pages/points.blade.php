@@ -81,6 +81,13 @@
                             </div>
                             <div class="col-md-4 col-sm-6">
                                 <div class="form-group">
+                                    <label>الحد الأعلى للدين
+                                    </label>
+                                    <input type="number" class="form-control" placeholder="ادخل الحد الأعلى للدين" name="*****"  value="0">
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-group">
                                     <label>
                                         عمولة التسديد
                                         <span class="text-danger"> * </span>
@@ -201,9 +208,16 @@
                                     </td>
                                     <td class="text-sm align-middle">
                                         @if ($point->status === 'active')
+                                        *****
+                                        <!-- positive  -->
                                         <span class="badge badge-sm bg-gradient-success">مفعل</span>
+                                        <!-- zero  -->
+                                        <!-- <span class="badge badge-sm bg-gradient-warning">مفعل</span> -->
+                                        <!-- negative -->
+                                        <!-- <span class="badge badge-sm bg-gradient-danger">مفعل</span> -->
+                                        
                                         @else
-                                        <span class="badge badge-sm bg-gradient-danger">مغلق</span>
+                                        <span class="badge badge-sm bg-gradient-secondary text-white">مغلق</span>
                                         @endif                                    </td>
                                     <td class="align-middle ">
                                         <!-- start view1 -->
@@ -410,7 +424,16 @@
                                                                                 <span class="text-danger"> *
                                                                                 </span>
                                                                             </label>
-                                                                            <input type="number" class="form-control" placeholder="ادخل الرصيد" name="account" value="{{ $point->account }}" required />
+                                                                            <input type="number" class="form-control" placeholder="ادخل الرصيد" name="account" value="{{ $point->account }}" required readonly />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4 col-sm-6 ">
+                                                                        <div class="form-group">
+                                                                            <label>الحد الأعلى للدين
+                                                                                <span class="text-danger"> *
+                                                                                </span>
+                                                                            </label>
+                                                                            <input type="number" class="form-control" placeholder="ادخل الحد الأعلى للدين" name="*****" value="*****" required />
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-4 col-sm-6 ">

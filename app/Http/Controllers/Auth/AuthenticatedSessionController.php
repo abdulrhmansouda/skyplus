@@ -43,8 +43,8 @@ class AuthenticatedSessionController extends Controller
         }
 
         if(Auth::user()->isAccountant()){
-            // return redirect( route('admin.home') );
-            return 'Accountant login';
+            return redirect( route('accountant.home') );
+            // return 'Accountant login';
         }
 
         if(Auth::user()->isPoint()){

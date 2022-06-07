@@ -1,5 +1,7 @@
 <?php
 
+// use App\Http\Controllers\Accountant\ChangePasswordController as AccountantChangePasswordController;
+use App\Http\Controllers\Accountant;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BindingTelegramController;
 use App\Http\Controllers\Admin\ChangePasswordController;
@@ -11,13 +13,13 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\SettingOtherController;
 use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Admin\SupportController;
+
 use App\Http\Controllers\Point\ChangePasswordController as PointChangePasswordController;
 use App\Http\Controllers\Point\ReportController as PointReportController;
 use App\Http\Controllers\Point\SocialController;
 use App\Http\Controllers\Point\SubscriberController as PointSubscriberController;
 use App\Http\Controllers\Point\SupportController as PointSupportController;
 use App\Http\Controllers\SettingSocialController;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 
 
@@ -157,7 +159,7 @@ Route::middleware(['auth', 'point'])
             ->group(function () {
                 Route::get('/', [PointSubscriberController::class, 'index'])->name('index');
                 Route::put('/charge/{subscriber}', [PointSubscriberController::class, 'charge'])->name('charge');
-                Route::put('/maintenance/{subscriber}' , [PointSubscriberController::class , 'maintenance' ])->name('maintenance');
+                Route::put('/maintenance/{subscriber}', [PointSubscriberController::class, 'maintenance'])->name('maintenance');
             });
 
         Route::prefix('/support')
@@ -192,6 +194,27 @@ Route::middleware(['auth', 'point'])
             });
     });
 
+Route::middleware(['auth', 'accountant'])
+    ->prefix('/accountant')
+    ->name('accountant.')
+    ->group(function () {
+
+        Route::controller(Accountant\HomeController::class)->group(function () {
+            Route::get('/home', 'index')->name('home');
+        });
+        
+        Route::prefix('/sitting')
+            ->name('setting.')
+            ->group(function () {
+                Route::controller(Accountant\ChangePasswordController::class)
+                    ->prefix('/change-password')
+                    ->name('change-password.')
+                    ->group(function () {
+                        Route::get('/', 'index')->name('index');
+                        Route::put('/update', 'update')->name('update');
+                    });
+            });
+    });
 
 Route::get('/dashboard', function () {
     return view('dashboard');

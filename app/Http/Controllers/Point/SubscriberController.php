@@ -302,7 +302,7 @@ class SubscriberController extends Controller
         return redirect()->back();
     }
 
-    public function maintenance(Request $request, $id)
+    public function maintenance(Request $request,Subscriber $subscriber)
     {
 
         $request->validate([
@@ -310,20 +310,21 @@ class SubscriberController extends Controller
             'type' => ['required', Rule::in(['maintenance', 'transfer'])],
         ]);
 
-        $sub = Subscriber::findOrFail($id);
+        // $sub = Subscriber::findOrFail($id);
         $point = Point::findOrFail(Auth::user()->point->id);
 
-        DB::transaction(function () use($point,$sub,$request){
+        DB::transaction(function () use($point,$subscriber,$request){
 
 
             SupportRequest::create([
-                'point_id' => $point->id,
-                'subscriber_name' => $sub->name,
-                'subscriber_phone' => $sub->phone,
-                'subscriber_address' => $sub->address,
-                'note' => $request->note,
-                'type' => $request->type,
-                'status' => 'waiting'
+                'point_id'              => $point->id,
+                'subscriber_id'         => $subscriber->id,
+                'subscriber_name'       => $subscriber->name,
+                'subscriber_phone'      => $subscriber->phone,
+                'subscriber_address'    => $subscriber->address,
+                'note'                  => $request->note,
+                'type'                  => $request->type,
+                'status'                => 'waiting'
             ]);
 
             $support_notification = Notification::firstOrFail();

@@ -12,7 +12,7 @@
                         @break
 
                         @case('point.support.index')
-                             طلبات الدعم
+                            طلبات الدعم
                         @break
 
                         @case('point.reports.index')
@@ -24,7 +24,7 @@
                         @break
 
                         @case('point.social.index')
-                            الاعدادات / تغيير كلمة المرور
+                            معلومات التواصل
                         @break
 
                         @default

@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\UserStatusEnum;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -27,8 +28,8 @@ return new class extends Migration
             $table->double('daily_profit', 30, 3)->default(0);
             $table->string('t_c');
             $table->string('phone');
-            $table->boolean('borrowing_is_allowed')->default(false);
-            $table->enum('status', ['active', 'closed'])->default('active');
+            $table->tinyInteger('status')->default(UserStatusEnum::ACTIVE->value);
+            $table->bigInteger('maximum_debt_limit');
             $table->timestamps();
 
             //Relations

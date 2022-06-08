@@ -1,40 +1,10 @@
 <?php
 
-// use App\Http\Controllers\Accountant\ChangePasswordController as AccountantChangePasswordController;
 use App\Http\Controllers\Accountant;
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\BindingTelegramController;
-use App\Http\Controllers\Admin\ChangePasswordController;
-use App\Http\Controllers\Admin\HomeController;
-use App\Http\Controllers\Admin\PackageController;
-use App\Http\Controllers\Admin\PointController;
-use App\Http\Controllers\Admin\RechargeController;
-use App\Http\Controllers\Admin\ReportController;
-use App\Http\Controllers\Admin\SettingOtherController;
-use App\Http\Controllers\Admin\SubscriberController;
-use App\Http\Controllers\Admin\SupportController;
+use App\Http\Controllers\Admin;
+use App\Http\Controllers\Point;
 
-use App\Http\Controllers\Point\ChangePasswordController as PointChangePasswordController;
-use App\Http\Controllers\Point\ReportController as PointReportController;
-use App\Http\Controllers\Point\SocialController;
-use App\Http\Controllers\Point\SubscriberController as PointSubscriberController;
-use App\Http\Controllers\Point\SupportController as PointSupportController;
-use App\Http\Controllers\SettingSocialController;
 use Illuminate\Support\Facades\Route;
-
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::get('/test', function () {
-
-//     $date = Carbon::now();
-
-//     $date = new Carbon('1999-9-11');
-
-//     dd($date->addMonth());
-// });
 
 Route::get('/', function () {
     return redirect(route('login'));
@@ -44,73 +14,81 @@ Route::middleware(['auth', 'admin'])
     ->prefix('/admin/dashboard')
     ->name('admin.')
     ->group(function () {
-        Route::prefix('/home')
+        Route::controller(Admin\HomeController::class)
+            ->prefix('/home')
             ->group(function () {
-                Route::get('/', [HomeController::class, 'index'])->name('home');
+                Route::get('/', 'index')->name('home');
             });
 
-        Route::prefix('/points')
+        Route::controller(Admin\PointController::class)
+            ->prefix('/points')
             ->name('points.')
             ->group(function () {
-                Route::get('/', [PointController::class, 'index'])->name('index');
-                Route::post('/store', [PointController::class, 'store'])->name('store');
-                Route::put('/update/{point}', [PointController::class, 'update'])->name('update');
-                Route::delete('/destroy/{point}', [PointController::class, 'destroy'])->name('destroy');
+                Route::get('/', 'index')->name('index');
+                Route::post('/store', 'store')->name('store');
+                Route::put('/update/{point}', 'update')->name('update');
+                Route::delete('/destroy/{point}', 'destroy')->name('destroy');
             });
 
-        Route::prefix('/subscribers')
+        Route::controller(Admin\SubscriberController::class)
+            ->prefix('/subscribers')
             ->name('subscribers.')
             ->group(function () {
-                Route::get('/', [SubscriberController::class, 'index'])->name('index');
-                Route::post('/store', [SubscriberController::class, 'store'])->name('store');
-                Route::put('/update/{subscriber}', [SubscriberController::class, 'update'])->name('update');
-                Route::delete('/destroy/{subscriber}', [SubscriberController::class, 'destroy'])->name('destroy');
-                Route::get('/export', [SubscriberController::class, 'export'])->name('export');
-                Route::post('/import', [SubscriberController::class, 'import'])->name('import');
+                Route::get('/', 'index')->name('index');
+                Route::post('/store', 'store')->name('store');
+                Route::put('/update/{subscriber}', 'update')->name('update');
+                Route::delete('/destroy/{subscriber}', 'destroy')->name('destroy');
+                Route::get('/export', 'export')->name('export');
+                Route::post('/import', 'import')->name('import');
 
                 Route::middleware(['superadmin'])
-                    ->put('/charge/{subscriber}', [SubscriberController::class, 'charge'])->name('charge');
+                    ->put('/charge/{subscriber}', 'charge')->name('charge');
             });
 
-        Route::prefix('/packages')
+        Route::controller(Admin\PackageController::class)
+            ->prefix('/packages')
             ->name('packages.')
             ->group(function () {
-                Route::get('/', [PackageController::class, 'index'])->name('index');
-                Route::post('/store', [PackageController::class, 'store'])->name('store');
-                Route::put('/update/{package}', [PackageController::class, 'update'])->name('update');
-                Route::delete('/destroy/{package}', [PackageController::class, 'destroy'])->name('destroy');
+                Route::get('/', 'index')->name('index');
+                Route::post('/store', 'store')->name('store');
+                Route::put('/update/{package}', 'update')->name('update');
+                Route::delete('/destroy/{package}', 'destroy')->name('destroy');
             });
 
-        Route::prefix('/recharge')
+        Route::controller(Admin\RechargeController::class)
+            ->prefix('/recharge')
             ->name('recharge.')
             ->group(function () {
-                Route::get('/', [RechargeController::class, 'index'])->name('index');
-                Route::put('/charge/{point}', [RechargeController::class, 'charge'])->name('charge');
+                Route::get('/', 'index')->name('index');
+                Route::put('/charge/{point}', 'charge')->name('charge');
             });
 
-        Route::prefix('/admins')
+        Route::controller(Admin\AdminController::class)
+            ->prefix('/admins')
             ->name('admins.')
             ->middleware(['superadmin'])
             ->group(function () {
-                Route::get('/', [AdminController::class, 'index'])->name('index');
-                Route::post('/store', [AdminController::class, 'store'])->name('store');
-                Route::put('/update/{admin}', [AdminController::class, 'update'])->name('update');
-                Route::delete('/destroy/{admin}', [AdminController::class, 'destroy'])->name('destroy');
+                Route::get('/', 'index')->name('index');
+                Route::post('/store', 'store')->name('store');
+                Route::put('/update/{admin}', 'update')->name('update');
+                Route::delete('/destroy/{admin}', 'destroy')->name('destroy');
             });
 
-        Route::prefix('/reports')
+        Route::controller(Admin\ReportController::class)
+            ->prefix('/reports')
             ->name('reports.')
             ->group(function () {
-                Route::get('/', [ReportController::class, 'index'])->name('index');
-                Route::post('/export', [ReportController::class, 'admin_export'])->name('export');
+                Route::get('/', 'index')->name('index');
+                Route::post('/export', 'admin_export')->name('export');
             });
 
-        Route::prefix('/support')
+        Route::controller(Admin\SupportController::class)
+            ->prefix('/support')
             ->name('support.')
             ->group(function () {
-                Route::get('/', [SupportController::class, 'index'])->name('index');
-                Route::post('/accept-request', [SupportController::class, 'accept_request'])->name('accept_request');
-                Route::post('/reject-request', [SupportController::class, 'reject_request'])->name('reject_request');
+                Route::get('/', 'index')->name('index');
+                Route::post('/accept-request/{request}', 'accept_request')->name('accept_request');
+                Route::post('/reject-request/{request}', 'reject_request')->name('reject_request');
             });
 
 
@@ -118,33 +96,38 @@ Route::middleware(['auth', 'admin'])
             ->name('setting.')
             ->group(function () {
 
-                Route::prefix('/binding-telegram')
+                Route::controller(Admin\BindingTelegramController::class)
+                    ->prefix('/binding-telegram')
                     ->middleware(['superadmin'])
                     ->name('binding-telegram.')
                     ->group(function () {
-                        Route::get('/', [BindingTelegramController::class, 'index'])->name('index');
-                        Route::put('/update', [BindingTelegramController::class, 'update'])->name('update');
+                        Route::get('/', 'index')->name('index');
+                        Route::put('/charge-update', 'chargeUpdate')->name('charge-update');
+                        Route::put('/maintenance-update', 'maintenanceUpdate')->name('maintenance-update');
                     });
 
-                Route::prefix('/change-password')
+                Route::controller(Admin\ChangePasswordController::class)
+                    ->prefix('/change-password')
                     ->name('change-password.')
                     ->group(function () {
-                        Route::get('/', [ChangePasswordController::class, 'index'])->name('index');
-                        Route::put('/update', [ChangePasswordController::class, 'update'])->name('update');
+                        Route::get('/', 'index')->name('index');
+                        Route::put('/update', 'update')->name('update');
                     });
 
-                Route::prefix('/social')
+                Route::controller(Admin\SettingSocialController::class)
+                    ->prefix('/social')
                     ->name('social.')
                     ->group(function () {
-                        Route::get('/', [SettingSocialController::class, 'index'])->name('index');
-                        Route::put('/update', [SettingSocialController::class, 'update'])->name('update');
+                        Route::get('/', 'index')->name('index');
+                        Route::put('/update', 'update')->name('update');
                     });
 
-                Route::prefix('/other-settings')
+                Route::controller(Admin\SettingOtherController::class)
+                    ->prefix('/other-settings')
                     ->name('other.')
                     ->group(function () {
-                        Route::get('/', [SettingOtherController::class, 'index'])->name('index');
-                        Route::post('/update', [SettingOtherController::class, 'update_maximum_amount_of_borrowing'])->name('update');
+                        Route::get('/', 'index')->name('index');
+                        Route::post('/update', 'update_maximum_amount_of_borrowing')->name('update');
                     });
             });
     });
@@ -154,42 +137,47 @@ Route::middleware(['auth', 'point'])
     ->name('point.')
     ->group(function () {
 
-        Route::prefix('/subscribers')
+        Route::controller(Point\SubscriberController::class)
+            ->prefix('/subscribers')
             ->name('subscribers.')
             ->group(function () {
-                Route::get('/', [PointSubscriberController::class, 'index'])->name('index');
-                Route::put('/charge/{subscriber}', [PointSubscriberController::class, 'charge'])->name('charge');
-                Route::put('/maintenance/{subscriber}', [PointSubscriberController::class, 'maintenance'])->name('maintenance');
+                Route::get('/', 'index')->name('index');
+                Route::put('/charge/{subscriber}', 'charge')->name('charge');
+                Route::put('/maintenance/{subscriber}', 'maintenance')->name('maintenance');
             });
 
-        Route::prefix('/support')
+        Route::controller(Point\SupportController::class)
+            ->prefix('/support')
             ->name('support.')
             ->group(function () {
-                Route::get('/', [PointSupportController::class, 'index'])->name('index');
-                Route::post('/support_request', [PointSupportController::class, 'support_request'])->name('support_request');
+                Route::get('/', 'index')->name('index');
+                Route::post('/support_request', 'support_request')->name('support_request');
             });
 
-        Route::prefix('/reports')
+        Route::controller(Point\ReportController::class)
+            ->prefix('/reports')
             ->name('reports.')
             ->group(function () {
-                Route::get('/', [PointReportController::class, 'index'])->name('index');
-                Route::post('/export', [PointReportController::class, 'export'])->name('export');
+                Route::get('/', 'index')->name('index');
+                Route::post('/export', 'export')->name('export');
             });
 
-        Route::prefix('/social')
+        Route::controller(Point\SocialController::class)
+            ->prefix('/social')
             ->name('social.')
             ->group(function () {
-                Route::get('/', [SocialController::class, 'index'])->name('index');
+                Route::get('/', 'index')->name('index');
             });
 
-        Route::prefix('/sitting')
+        Route::controller(Point\ChangePasswordController::class)
+            ->prefix('/sitting')
             ->name('setting.')
             ->group(function () {
                 Route::prefix('/change-password')
                     ->name('change-password.')
                     ->group(function () {
-                        Route::get('/', [PointChangePasswordController::class, 'index'])->name('index');
-                        Route::put('/update', [PointChangePasswordController::class, 'update'])->name('update');
+                        Route::get('/', 'index')->name('index');
+                        Route::put('/update', 'update')->name('update');
                     });
             });
     });
@@ -199,10 +187,26 @@ Route::middleware(['auth', 'accountant'])
     ->name('accountant.')
     ->group(function () {
 
-        Route::controller(Accountant\HomeController::class)->group(function () {
-            Route::get('/home', 'index')->name('home');
-        });
-        
+        Route::controller(Accountant\HomeController::class)
+            ->group(function () {
+                Route::get('/home', 'index')->name('home');
+            });
+
+        Route::controller(Accountant\BoxCashController::class)
+            ->prefix('/box-cash')
+            ->name('box-cash.')
+            ->group(function () {
+                Route::get('/','index')->name('index');
+                Route::post('/store','store')->name('store');
+            });
+
+        Route::controller(Accountant\BoxBankController::class)
+            ->prefix('/box-bank')
+            ->name('box-bank.')
+            ->group(function () {
+                Route::get('/','index')->name('index');
+            });
+
         Route::prefix('/sitting')
             ->name('setting.')
             ->group(function () {

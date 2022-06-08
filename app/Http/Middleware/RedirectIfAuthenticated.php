@@ -28,8 +28,7 @@ class RedirectIfAuthenticated
                 } elseif (Auth::user()->isAdmin()) {
                     return redirect(route('admin.home'));
                 } elseif (Auth::user()->isAccountant()) {
-                    // return redirect(route('point.subscribers.index'));
-                    return "Accountant from guest middleware";
+                    return redirect(route('accountant.home'));
                 } elseif (Auth::user()->isPoint()) {
                     return redirect(route('point.subscribers.index'));
                 }

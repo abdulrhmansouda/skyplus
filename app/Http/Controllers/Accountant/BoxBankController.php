@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Accountant;
 
+use App\Http\Controllers\Controller;
 use App\Models\BoxBank;
 use Illuminate\Http\Request;
 

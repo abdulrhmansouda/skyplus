@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\UserRole;
+use App\Enums\UserRoleEnum;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -18,12 +18,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'username',
-    ];
+    protected $guarded = ['id'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -44,37 +39,43 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function super_admin(){
+    public function super_admin()
+    {
         return $this->hasOne(SuperAdmin::class);
     }
 
-    public function admin(){
+    public function admin()
+    {
         return $this->hasOne(Admin::class);
     }
 
-    public function accountant(){
+    public function accountant()
+    {
         return $this->hasOne(Accountant::class);
     }
 
-    public function point(){
+    public function point()
+    {
         return $this->hasOne(Point::class);
     }
 
-    public function isSuperAdmin(){
-        return $this->role === UserRole::SUPER_ADMIN->value;
+    public function isSuperAdmin()
+    {
+        return $this->role === UserRoleEnum::SUPER_ADMIN->value;
     }
 
-    public function isAdmin(){
-        return $this->role === UserRole::ADMIN->value;
-    }
-    
-    public function isAccountant(){
-        return $this->role === UserRole::ACCOUNTANT->value;
+    public function isAdmin()
+    {
+        return $this->role === UserRoleEnum::ADMIN->value;
     }
 
-    public function isPoint(){
-        return $this->role === UserRole::POINT->value;
+    public function isAccountant()
+    {
+        return $this->role === UserRoleEnum::ACCOUNTANT->value;
     }
 
-
+    public function isPoint()
+    {
+        return $this->role === UserRoleEnum::POINT->value;
+    }
 }

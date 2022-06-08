@@ -18,12 +18,14 @@ return new class extends Migration
         Schema::create('support_requests', function (Blueprint $table) {
             $table->id();
 
-            $table->enum('type',['new_installation','switch_package','maintenance' , 'transfer']);
-            $table->enum('status',['accepted' , 'rejected' , 'waiting'])->default('waiting');
+            $table->string('subscriber_name');
+            $table->string('subscriber_phone');
+            $table->tinyInteger('type');
+            $table->tinyInteger('status');
             $table->string('note')->nullable();
 
             $table->foreignIdFor(Point::class)->constrained()->cascadeOnUpdate();
-            $table->foreignIdFor(Subscriber::class)->constrained()->cascadeOnUpdate();
+            $table->foreignIdFor(Subscriber::class)->nullable()->constrained()->cascadeOnUpdate();
             
             $table->timestamps();
         });

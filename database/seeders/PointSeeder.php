@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Enums\UserRole;
+use App\Enums\UserRoleEnum;
 use App\Models\Point;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -18,13 +18,13 @@ class PointSeeder extends Seeder
     public function run()
     {
         Point::factory(1)->create([
-            'user_id' => User::factory(1)->create(['username' => 'point', 'role' => UserRole::POINT->value])->first()->id,
+            'user_id' => User::factory(1)->create(['username' => 'point', 'role' => UserRoleEnum::POINT->value])->first()->id,
         ]);
 
         User::factory()
             ->count(10)
             ->hasPoint(1)
             // ->hasReports(10)
-            ->create(['role' => UserRole::POINT->value]);
+            ->create(['role' => UserRoleEnum::POINT->value]);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Enums\UserRole;
+use App\Enums\UserRoleEnum;
 use App\Models\Accountant;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -18,7 +18,7 @@ class AccountantSeeder extends Seeder
     public function run()
     {
         Accountant::factory(1)->create([
-            'user_id' => User::factory(1)->create(['username' => 'accountant', 'role' => UserRole::ACCOUNTANT->value])->first()->id,
+            'user_id' => User::factory(1)->create(['username' => 'accountant', 'role' => UserRoleEnum::ACCOUNTANT->value])->first()->id,
         ]);
     }
 }

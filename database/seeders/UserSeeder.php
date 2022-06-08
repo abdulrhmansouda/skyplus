@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Enums\UserRole;
+use App\Enums\UserRoleEnum;
 use App\Models\Accountant;
 use App\Models\Admin;
 use App\Models\Point;

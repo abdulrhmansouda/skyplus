@@ -106,9 +106,10 @@
                                                 {{ $request->created_at }}
                                             </td>
                                             <td class="text-sm align-middle">
-                                                @if ($request->status === 'accepted')
+                                                {{-- @if ($request->status === 'accepted') --}}
+                                                @if ($request->status === App\Enums\RequestStatusEnum::ACCEPTED->value)
                                                     <span class="badge badge-sm bg-gradient-success">مقبول</span>
-                                                @elseif($request->status === 'waiting')
+                                                @elseif($request->status === App\Enums\RequestStatusEnum::WAINTING->value)
                                                     <span class="badge badge-sm bg-gradient-warning">انتظار</span>
                                                 @else
                                                     <span class="badge badge-sm bg-gradient-danger">مرفوض</span>

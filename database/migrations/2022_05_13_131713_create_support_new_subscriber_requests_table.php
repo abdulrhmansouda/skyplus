@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('support_new_subscriber_requests', function (Blueprint $table) {
             $table->id();
-            $table->string('subscriber_name');
-            $table->string('subscriber_phone');
-            $table->string('subscriber_address');
-            $table->enum('type',['new_installation','switch_company']);
-            $table->enum('status',['accepted' , 'rejected' , 'waiting'])->default('waiting');
-            $table->string('note')->nullable();
+            // $table->string('subscriber_name');
+            // $table->string('subscriber_phone');
+            // $table->string('subscriber_address');
+            // $table->enum('type',['new_installation','switch_company']);
+            // $table->enum('status',['accepted' , 'rejected' , 'waiting'])->default('waiting');
+            // $table->string('note')->nullable();
 
             // $table->foreignIdFor(Point::class)->constrained()->cascadeOnUpdate();
 

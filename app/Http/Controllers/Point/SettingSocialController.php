@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Point;
 
+use App\Http\Controllers\Controller;
 use App\Models\Admin\Setting\Social;
 use Illuminate\Http\Request;
 

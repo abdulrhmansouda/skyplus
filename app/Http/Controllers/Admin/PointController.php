@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\UserRoleEnum;
+use App\Enums\UserStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StorePointRequest;
 use App\Http\Requests\Admin\UpdatePointRequest;
@@ -25,20 +27,19 @@ class PointController extends Controller
             ->where('name', 'LIKE', "%$s%")
             ->orWhere('users.username', 'LIKE', "%$s%");
 
-        // dd($points->get());
         return view('admin.pages.points', [
             'points' => $points->paginate(10),
             'search' => $s,
         ]);
     }
 
-    public function searchNameApi(){
-
+    public function searchNameApi()
+    {
         $search = request()->name ?? '';
-        $points = Point::select('id','name')->without('user')->where('name','LIKE',"%$search%")->take(10)->get();
+        $points = Point::select('id', 'name')->without('user')->where('name', 'LIKE', "%$search%")->take(10)->get();
 
         return response()
-        ->json(['points' => $points]);
+            ->json(['points' => $points]);
     }
 
     /**
@@ -49,39 +50,25 @@ class PointController extends Controller
      */
     public function store(StorePointRequest $request)
     {
-        // dd($request->all());
         $point = new Point;
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $image = $request->file('image');
             $point->image = $image->store('points', 'images');
         }
-
         $point->user_id = User::create([
-            'username' => $request->username,
-            'role' => 'point',
-            'password' => Hash::make($request->password),
+            'username'  => $request->username,
+            'role'      => UserRoleEnum::POINT->value,
+            'password'  => Hash::make($request->password),
         ])->id;
-
-        if ($request->borrowing_is_allowed === 'ture') {
-            $point->borrowing_is_allowed = true;
-        }
-
         $point->name = $request->name;
-
         $point->account = $request->account;
-
         $point->charge_commission = $request->charge_commission;
-
         $point->new_commission = $request->new_commission;
-
         $point->switch_commission = $request->switch_commission;
-
         $point->t_c = $request->t_c;
-
         $point->phone = $request->phone;
-
         $point->address = $request->address;
-
+        $point->maximum_debt_limit = $request->maximum_debt_limit;
         $point->save();
 
         session()->flash('success', 'تم أنشاء النقطة الجديدة بنجاح');
@@ -108,36 +95,20 @@ class PointController extends Controller
 
         $point->user->update([
             'username' => $request->username,
-            'role' => 'point',
+            'role' => UserRoleEnum::POINT->value,
             'password' => is_null($request->password) ? $point->user->password : Hash::make($request->password),
         ]);
 
-        if ($request->borrowing_is_allowed === 'true') {
-            $point->borrowing_is_allowed = true;
-        }
-
-        if ($request->borrowing_is_allowed === 'false') {
-            $point->borrowing_is_allowed = false;
-        }
-
         $point->name = $request->name;
-
         $point->account = $request->account;
-
         $point->charge_commission = $request->charge_commission;
-
         $point->new_commission = $request->new_commission;
-
         $point->switch_commission = $request->switch_commission;
-
         $point->t_c = $request->t_c;
-
         $point->phone = $request->phone;
-
         $point->address = $request->address;
-
-        $point->status = $request->status;
-
+        // $point->status = $request->status;
+        $point->maximum_debt_limit = $request->maximum_debt_limit;
 
         $point->update();
 
@@ -154,13 +125,9 @@ class PointController extends Controller
      */
     public function destroy(Point $point)
     {
-        if ($point->status !== 'closed') {
-            $point->status = 'closed';
-            $point->update();
-            session()->flash('success', "تم اغلاق النقطة $point->name بنجاح");
-        } else {
-            session()->flash('error', "النقطة $point->name مغلق بالفعل!");
-        }
+        $point->status = UserStatusEnum::CLOSED->value;
+        $point->update();
+        session()->flash('success', "تم اغلاق النقطة $point->name بنجاح");
         return redirect()->back();
     }
 }

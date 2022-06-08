@@ -159,7 +159,7 @@
                 </a>
             </li>
             @endif
-            <li class="position-relative nav-item">
+            {{-- <li class="position-relative nav-item">
                 <button data-bs-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#box" aria-expanded="false" aria-controls="setting" class="nav-link @if (Route::currentRouteName() === 'admin.support.index') active @endif" href="{{ route('admin.support.index') }}">
 
                     @if (App\Models\Notification::isThereSupportNotification())
@@ -182,7 +182,7 @@
                         </li>
                     </ul>
                 </div>
-            </li>
+            </li> --}}
             <li class="position-relative nav-item">
                 <button data-bs-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#support" aria-expanded="false" aria-controls="setting" class="nav-link @if (Route::currentRouteName() === 'admin.support.index') active @endif" href="{{ route('admin.support.index') }}">
 

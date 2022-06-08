@@ -68,8 +68,7 @@
                                     <td class="text-xs text-uppercase font-weight-bolder ps-3">
                                         اعتبارا من {{ $from }} الى تاريخ {{ $to }}
                                     </td>
-                                    <td class="px-1 text-xs text-uppercase font-weight-bolder ">الرصيد السابق
-                                        {{ $pre }}
+                                    <td class="px-1 text-xs text-uppercase font-weight-bolder ">الرصيد السابق{{ $pre }}
                                     </td>
                                     <td class="px-1 text-xs text-uppercase font-weight-bolder ">{{ $pre_account }}
                                     </td>

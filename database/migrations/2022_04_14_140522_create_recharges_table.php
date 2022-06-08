@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('point_id');
             $table->bigInteger('amount');
-            $table->enum('payment_method',['cash','bank','borrow']);
+            $table->tinyInteger('payment_type');
             $table->text('note')->nullable();
             $table->timestamps();
         });

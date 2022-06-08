@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\MoneyTransactionTypeEnum;
+use App\Enums\PaymentTypeEnum;
 use App\Http\Controllers\Controller;
+use App\Models\BoxCash;
 use App\Models\Point;
 use App\Models\Recharge;
 use App\Models\Report;
@@ -26,22 +29,21 @@ class RechargeController extends Controller
 
     public function charge(Request $request, $id)
     {
-        // dd($request);
         $request->validate([
             'amount' => ['required', 'numeric'],
-            'payment_method' => ['required', Rule::in(['cash', 'borrow', 'bank'])],
+            'payment_type' => ['required', Rule::in([PaymentTypeEnum::CASH->value, PaymentTypeEnum::BANK->value])],
             'note' => ['nullable', 'string', 'max:1000'],
         ]);
 
-        // dd($request->all());
+
         $amount = $request->amount;
 
-        $recharge = new Recharge;
         $point = Point::findOrFail($id);
 
+        $recharge = new Recharge;
         $recharge->point_id = $id;
         $recharge->amount = $amount;
-        $recharge->payment_method = $request->payment_method;
+        $recharge->payment_type = $request->payment_type;
         $recharge->note = $request->note;
 
         $recharge->save();
@@ -49,16 +51,31 @@ class RechargeController extends Controller
         $point->account = $point->account + $amount;
         $point->update();
 
-        //make a report
-        $report_message = "تم شحن الرصيد بقيمة $amount للنقطة $point->name طرقة الدفع : $request->payment_method.";
-            $report = Report::create([
-                'point_id' => $point->id,
-                'report' => $report_message,
-                'on_him' => 0,
-                'to_him' => $amount,
-                'pre_account' => $pre_account,
-                'type' => 'charge_point',
+        //make a reports
+        $report_message = "تم شحن الرصيد بقيمة $amount للنقطة $point->name طرقة الدفع : $request->payment_type.";
+        $report = Report::create([
+            'point_id' => $point->id,
+            'report' => $report_message,
+            'on_him' => 0,
+            'to_him' => $amount,
+            'pre_account' => $pre_account,
+            'type' => 'charge_point',
+        ]);
+        // dd(1);
+        if ($request->payment_type == PaymentTypeEnum::CASH->value) {
+            $last_box_cash = BoxCash::orderBy('created_at')->get()->last();
+            $pre_account   = $last_box_cash?->account ?? 0;
+            $account       = $pre_account + $amount;
+            BoxCash::create([
+                'transaction_type'   => MoneyTransactionTypeEnum::PUT_MONEY->value,
+                'account'            => $account,
+                'pre_account'        => $pre_account,
+                'report'             => $report_message,
+                'note'               => $request->note,
             ]);
+        } elseif ($request->payment_type == PaymentTypeEnum::BANK->value) {
+            dd('rechargecontroller_bank');
+        }
 
         session()->flash('success', "تم شحن المبلغ $amount الى النقطة $point->name بنجاح");
         return redirect()->back();

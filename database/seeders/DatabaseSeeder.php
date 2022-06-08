@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Admin;
 use App\Models\Admin\Setting\Social;
+use App\Models\BoxCash;
 use App\Models\Notification;
 use App\Models\Package;
 use App\Models\ProjectSetting;
@@ -30,7 +31,8 @@ class DatabaseSeeder extends Seeder
             PointSeeder::class,
         ]);
 
-        Report::factory(10)->create();
+        Report::factory(100)->create();
+        // BoxCash::factory(100)->create();
 
 
         Package::factory()
@@ -48,7 +50,6 @@ class DatabaseSeeder extends Seeder
             'bot_token' => '5108071797:AAG6GINlNe8O7115o-GfvJQgt06-BzbqreM',
             'chat_id' => '-1001686278067',
         ]);
-
         TelegramBot::create([
             // 'bot_username' => 'grouupp_bot',
             'type' => 'support',

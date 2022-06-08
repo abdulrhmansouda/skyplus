@@ -82,21 +82,20 @@
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0">
                                                     @switch($request->type)
-                                                        @case('maintenance')
+                                                        {{-- @case('maintenance')
                                                             صيانة
-                                                        @break
-
-                                                        @case('new_installation')
+                                                        @break --}}
+                                                        @case(App\Enums\SupportRequestTypeEnum::NEW_SUBSCRIBER->value)
                                                             اشتراك جديد
                                                         @break
 
-                                                        @case('switch')
+                                                        @case(App\Enums\SupportRequestTypeEnum::SWITCH_COMPANY->value)
                                                             تحويل خط
                                                         @break
 
-                                                        @case('transfer')
+                                                        {{-- @case('transfer')
                                                             نقل العنوان
-                                                        @break
+                                                        @break --}}
 
                                                         @default
                                                     @endswitch
@@ -106,9 +105,10 @@
                                                 {{ $request->created_at }}
                                             </td>
                                             <td class="text-sm align-middle">
-                                                @if ($request->status === 'accepted')
+                                                {{-- @if ($request->status === 'accepted') --}}
+                                                @if ($request->status === App\Enums\RequestStatusEnum::ACCEPTED->value)
                                                     <span class="badge badge-sm bg-gradient-success">مقبول</span>
-                                                @elseif($request->status === 'waiting')
+                                                @elseif($request->status === App\Enums\RequestStatusEnum::WAINTING->value)
                                                     <span class="badge badge-sm bg-gradient-warning">انتظار</span>
                                                 @else
                                                     <span class="badge badge-sm bg-gradient-danger">مرفوض</span>
@@ -173,21 +173,29 @@
                                                                                 {{ $request->subscriber_phone }}
                                                                             </div>
                                                                         </div>
-                                                                        <div class=" col-md-6">
+                                                                        {{-- <div class=" col-md-6">
                                                                             <div class="form-group">
                                                                                 <h6>
                                                                                     ID
                                                                                 </h6>
                                                                                 1222
                                                                             </div>
-                                                                        </div>
+                                                                        </div> --}}
                                                                         <div class=" col-md-6">
                                                                             <div class="form-group">
                                                                                 <h6>
                                                                                     نوع الطلب
                                                                                 </h6>
                                                                                 @switch($request->type)
-                                                                                    @case('maintenance')
+                                                                                    @case(App\Enums\SupportRequestTypeEnum::NEW_SUBSCRIBER->value)
+                                                                                        اشتراك جديد
+                                                                                    @break
+
+                                                                                    @case(App\Enums\SupportRequestTypeEnum::SWITCH_COMPANY->value)
+                                                                                        تحويل خط
+                                                                                    @break
+
+                                                                                    {{-- @case('maintenance')
                                                                                         صيانة
                                                                                     @break
 
@@ -199,18 +207,18 @@
                                                                                         تحويل خط
                                                                                     @break
 
-                                                                                    @default
+                                                                                    @default --}}
                                                                                 @endswitch
                                                                             </div>
                                                                         </div>
-                                                                        <div class=" col-md-6">
+                                                                        {{-- <div class=" col-md-6">
                                                                             <div class="form-group">
                                                                                 <h6>
                                                                                     اسم الباقة الجديدة
                                                                                 </h6>
                                                                                 باقة 2
                                                                             </div>
-                                                                        </div>
+                                                                        </div> --}}
                                                                         <div class=" col-12">
                                                                             <div class="form-group">
                                                                                 <h6>
@@ -231,7 +239,7 @@
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <form
-                                                                        action="{{ route('admin.support.accept_request') }}"
+                                                                        action="{{ route('admin.support.accept_request',$request->id) }}"
                                                                         method="POST">
                                                                         @csrf
                                                                         <input name="request_id" type="hidden"
@@ -241,7 +249,7 @@
                                                                             class="btn btn-info">قبول</button>
                                                                     </form>
                                                                     <form
-                                                                        action="{{ route('admin.support.reject_request') }}"
+                                                                        action="{{ route('admin.support.reject_request',$request->id) }}"
                                                                         method="POST">
                                                                         @csrf
                                                                         <input name="request_id" type="hidden"
@@ -249,8 +257,8 @@
                                                                         <button type="submit"
                                                                             class="btn btn-danger">رفض</button>
                                                                     </form>
-                                                                    <button 
-                                                                            class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+                                                                    <button class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">الغاء</button>
                                                                 </div>
 
                                                             </div>

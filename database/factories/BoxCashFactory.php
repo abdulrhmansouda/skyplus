@@ -17,7 +17,12 @@ class BoxCashFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'report' => $this->faker->sentence,
+            'note' => $this->faker->sentence,
+            'account' => $this->faker->numberBetween(0,100000),
+            'pre_account' => $this->faker->numberBetween(0,100000),
+            'transaction_type'  => rand(0,1),
+            'created_at' => $this->faker->date(),
         ];
     }
 }

@@ -5,14 +5,14 @@
 @section('content')
     <div class="py-4 container-fluid">
         @if ($errors->any())
-        <div class="alert alert-danger">
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+            <div class="alert alert-danger">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
         @endif
         <form action="{{ route('point.support.support_request') }}" method="POST">
             @csrf
@@ -62,7 +62,8 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <input class="" name="type" type="radio" value="switch"
+                                            <input class="" name="type" type="radio"
+                                                value="{{ App\Enums\SupportRequestTypeEnum::SWITCH_COMPANY->value }}"
                                                 id="maintOptionA" checked="">
                                             <label class="" for="maintOptionA">
                                                 قلب </label>
@@ -70,7 +71,8 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <input class="" name="type" type="radio" value="new_installation"
+                                            <input class="" name="type" type="radio"
+                                                value="{{ App\Enums\SupportRequestTypeEnum::NEW_SUBSCRIBER->value }}"
                                                 id="maintOptionB">
                                             <label class="" for="maintOptionB">
                                                 تركيب جديد</label>

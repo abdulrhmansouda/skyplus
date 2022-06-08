@@ -7,8 +7,8 @@
                         التحكم</a></li>
                 <li class="text-sm breadcrumb-item text-dark active" aria-current="page">
                     @switch(Route::currentRouteName())
-                        @case('accountant.subscribers.index')
-                            تسديد الفواتير
+                        @case('accountant.home')
+                        الرئيسية
                         @break
 
                         @case('accountant.support.index')

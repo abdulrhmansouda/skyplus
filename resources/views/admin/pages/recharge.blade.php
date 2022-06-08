@@ -10,28 +10,30 @@
                 <div class="card mb-4">
                     <div class="card-body px-0 pt-0 pb-2">
                         @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                aria-label="Close"></button>
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                            <div class="alert alert-danger">
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3">
                                             الاسم</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
                                             اسم المستخدم</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
-                                                الرصيد</th>
-                                      
-                                      
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
+                                            الرصيد</th>
+
+
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
                                             T.C</th>
@@ -62,8 +64,8 @@
                                                 <p class="text-xs font-weight-bold mb-0">{{ $point->account }}</p>
                                             </td>
 
-                                          
-                                         
+
+
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0">{{ $point->t_c }}</p>
                                             </td>
@@ -78,7 +80,8 @@
                                                         <i class="fas fa-money-bill-wave-alt"></i>
                                                     </a>
                                                     <!-- satrt charge1 Modal -->
-                                                    <form action="{{ route('admin.recharge.charge',$point->id) }}" method="POST">
+                                                    <form action="{{ route('admin.recharge.charge', $point->id) }}"
+                                                        method="POST">
                                                         @csrf
                                                         @method('PUT')
                                                         <div class="modal fade" id="charge{{ $point->id }}"
@@ -102,7 +105,8 @@
                                                                                         </span>
                                                                                     </label>
                                                                                     <input name="name" type="text"
-                                                                                        class="form-control" readonly required
+                                                                                        class="form-control" readonly
+                                                                                        required
                                                                                         value="{{ $point->name }}">
                                                                                 </div>
                                                                             </div>
@@ -124,11 +128,12 @@
                                                                                         <span class="text-danger"> *
                                                                                         </span>
                                                                                     </label>
-                                                                                    <select name="payment_method" id=""
+                                                                                    <select name="payment_type" id=""
                                                                                         class="form-select">
-                                                                                        <option value="cash">نقد</option>
-                                                                                        <option value="borrow">دين</option>
-                                                                                        <option value="bank">بنك</option>
+                                                                                        <option
+                                                                                            value="{{ App\Enums\PaymentTypeEnum::CASH->value }}">
+                                                                                            نقد</option>
+                                                                                        <option value="{{ App\Enums\PaymentTypeEnum::BANK->value }}">بنك</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>

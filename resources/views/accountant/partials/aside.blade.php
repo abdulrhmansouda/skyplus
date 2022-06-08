@@ -44,11 +44,11 @@
                 </button>
                 <div class="collapse @if (Route::currentRouteName() === 'admin.support.index' || Route::currentRouteName() === 'admin.support.index' || Route::currentRouteName() === 'admin.setting.social.index' || Route::currentRouteName() === 'admin.setting.other.index') show @endif" id="box">
                     <ul class="ul-links">
-                        <li class="mb-1 position-relative @if (Route::currentRouteName() === 'admin.support.index') active @endif"><a href="{{ route('admin.support.index') }}">النقد </a>
+                        <li class="mb-1 position-relative @if (Route::currentRouteName() === 'admin.support.index') active @endif"><a href="{{ route('accountant.box-cash.index') }}">النقد </a>
 
                         </li>
 
-                        <li class="mb-1 position-relative @if (Route::currentRouteName() === 'admin.support.index') active @endif"><a href="{{ route('admin.support.index') }}">البنك</a>
+                        <li class="mb-1 position-relative @if (Route::currentRouteName() === 'admin.support.index') active @endif"><a href="{{ route('accountant.box-bank.index') }}">البنك</a>
                         </li>
                     </ul>
                 </div>

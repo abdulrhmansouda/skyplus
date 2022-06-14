@@ -450,6 +450,14 @@ function HideShowSelect(event){
   }
 }
 
+function HideShowSelectmaintenance(event){
+  if(event.target.value == 'maintenance'){
+    event.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector(".form-maintenance").classList.remove('d-none');
+  }else{
+    event.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector(".form-maintenance").classList.add('d-none');
+  }
+}
+
 function getPricePackage(event){
   fetch( `/api/package?id=${event.target.value}`)
   .then(response => response.json())

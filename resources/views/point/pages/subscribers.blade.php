@@ -323,9 +323,9 @@
                                                                         <div class="form-group">
                                                                             <h6>
                                                                                 سعر الباقة </h6>
-                                                                                <span class="price">
-                                                                                    {{ $sub->package->price }}
-                                                                                </span>
+                                                                            <span class="price">
+                                                                                {{ $sub->package->price }}
+                                                                            </span>
                                                                         </div>
                                                                     </div>
 
@@ -388,14 +388,28 @@
                                                                         <div class="form-group">
                                                                             <h6>
                                                                                 اختر الباقة الجديدة </h6>
+<<<<<<< HEAD
                                                                             <select name=""  class="form-select " onchange="getPricePackage(event)">
                                                                                 @foreach ($packages as $package)
                                                                                 <option value="{{ $package->id }}">{{ $package->name }}</option>
                                                                                 @endforeach
+=======
+                                                                            <select name="" class="form-select " onchange="getPricePackage(event)">
+                                                                                <option value="1">1</option>
+                                                                                <option value="2">2</option>
+                                                                                <option value="3">3</option>
+                                                                                <option value="4">4</option>
+                                                                                <option value="5">5</option>
+                                                                                <option value="6">6</option>
+                                                                                <option value="7">7</option>
+                                                                                <option value="8">8</option>
+                                                                                <option value="9">9</option>
+                                                                                <option value="10">10</option>
+>>>>>>> 246c87906eef15ef0177999b9bc5612fc1fbbd0e
                                                                             </select>
                                                                         </div>
                                                                     </div>
-                                                                    
+
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
@@ -465,22 +479,51 @@
                                                                         <div class="row">
                                                                             <div class="col-6">
                                                                                 <div class="form-group">
+<<<<<<< HEAD
                                                                                     <input class="" name="type" type="radio" value="{{App\Enums\SupportRequestTypeEnum::MAINTENANCE->value}}" id="maintenancea{{ $sub->id }}" checked >
-                                                                                    <label class="" for="maintenancea{{ $sub->id }}">
-                                                                                        صيانة</label>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-6">
-                                                                                <div class="form-group">
-                                                                                    <input class="" name="type" type="radio" value="{{App\Enums\SupportRequestTypeEnum::TRANSFER->value}}" id="maintenancea{{ $sub->id }}"  >
+=======
+                                                                                    <input class="" name="type" type="radio" value="transfer" id="maintenancea{{ $sub->id }}" checked onchange="HideShowSelectmaintenance(event)">
+>>>>>>> 246c87906eef15ef0177999b9bc5612fc1fbbd0e
                                                                                     <label class="" for="maintenancea{{ $sub->id }}">
                                                                                         نقل</label>
                                                                                 </div>
                                                                             </div>
-                                                                           
+                                                                            <div class="col-6">
+                                                                                <div class="form-group">
+<<<<<<< HEAD
+                                                                                    <input class="" name="type" type="radio" value="{{App\Enums\SupportRequestTypeEnum::TRANSFER->value}}" id="maintenancea{{ $sub->id }}"  >
+                                                                                    <label class="" for="maintenancea{{ $sub->id }}">
+                                                                                        نقل</label>
+=======
+                                                                                    <input class="" name="type" type="radio" value="maintenance" id="maintenanceb{{ $sub->id }}" onchange="HideShowSelectmaintenance(event)">
+                                                                                    <label class="" for="maintenanceb{{ $sub->id }}">
+                                                                                        صيانة</label>
+>>>>>>> 246c87906eef15ef0177999b9bc5612fc1fbbd0e
+                                                                                </div>
+                                                                            </div>
+
+
                                                                         </div>
                                                                     </div>
-                                                                    
+                                                                    *****
+                                                                    <div class=" col-6 form-maintenance d-none">
+                                                                        <div class="form-group">
+                                                                            <h6>
+                                                                                اختر سبب الصيانة </h6>
+                                                                            <select name="" class="form-select "  >
+
+                                                                                <option value="1">انترنت ضعيف</option>
+                                                                                <option value="2">انترنت مقطوع</option>
+                                                                                <option value="3">فصل ووصل في الانترنت</option>
+                                                                                <option value="4">تغيير كلمة المرور للراوتر</option>
+                                                                                <option value="5">نقل اللايت من مكان لآخر</option>
+                                                                                <option value="6">تغيير مكان الراوتر</option>
+                                                                                <option value="7">تبديل راوتر </option>
+                                                                                <option value="8">تبديل لايت</option>
+                                                                                <option value="9">تبديل كبل</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
                                                                     <div class="col-12">
                                                                         <div class="form-group">
                                                                             <label>

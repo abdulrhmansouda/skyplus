@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Accountant;
 
+use App\Enums\BoxTransactionTypeEnum;
 use App\Enums\MoneyTransactionTypeEnum;
 use App\Models\BoxCash;
 use Illuminate\Foundation\Http\FormRequest;
@@ -41,11 +42,14 @@ class StoreBoxCashRequest extends FormRequest
         $pre_account   = $last_box_cash?->account ?? 0;
         if ($this->transaction_type == MoneyTransactionTypeEnum::PUT_MONEY->value) {
             $account       = $pre_account + $this->amount;
+            $box_transaction_type = BoxTransactionTypeEnum::SELL->value;
         } elseif ($this->transaction_type == MoneyTransactionTypeEnum::TAKE_MONEY->value) {
             $account       = $pre_account - $this->amount;
+            $box_transaction_type = BoxTransactionTypeEnum::PAY->value;
         }
         return [
             'transaction_type'   => $this->transaction_type,
+            'box_transaction_type' => $box_transaction_type,
             'account'            => $account,
             'pre_account'        => $pre_account,
             'report'             => $this->report,

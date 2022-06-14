@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('point_id');
             $table->foreignId('subscriber_id');
-            $table->tinyInteger('month');
+            $table->tinyInteger('months');
             $table->double('amount',30,3);
             $table->timestamps();
         });

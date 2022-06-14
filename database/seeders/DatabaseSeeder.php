@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Report::factory(100)->create();
-        BoxCash::factory(100)->create();
+        // BoxCash::factory(100)->create();
 
 
         Package::factory()

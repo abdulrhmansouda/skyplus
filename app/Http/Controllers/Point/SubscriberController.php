@@ -54,14 +54,14 @@ class SubscriberController extends Controller
 
     public function charge(ChargeSubscriberRequest $request, $id)
     {
-
+        // dd($request->all());
         $sub = Subscriber::findOrFail($id);
         $package = $sub->package;
         $point = Auth::user()->point;
 
-        $month = $request->month;
-        $pay = $request->pay;
-        $amount = $month * $package->price;
+        $months = $request->months;
+        $pay = $request->type;
+        $amount = $months * $package->price;
         $pre_account = $point->account;
         $profit = ($point->commission / 100) * $amount;
 
@@ -74,11 +74,11 @@ class SubscriberController extends Controller
             }
             // انتهاء موضوع الدين
 
-            $message = "تم شحن/تفعيل الباقة $package->name للمشترك رقم $sub->subscriber_number لمدة $month أشهر و تم اقطاع مبلغ $amount من الرصيد وأضافة مبلغ $profit .";
+            $message = "تم شحن/تفعيل الباقة $package->name للمشترك رقم $sub->subscriber_number لمدة $months أشهر و تم اقطاع مبلغ $amount من الرصيد وأضافة مبلغ $profit .";
             $telegram_message = "
             تم تسديد فاتورة من نقطة البيع  {$point->user->username}
             للمشترك {$sub->sub_username}
-            عدد الفواتير : {$month}
+            عدد الفواتير : {$months}
             المبلغ المدفوع: {$amount}
           ({$package->name}) + ({$package->price})
           
@@ -87,11 +87,11 @@ class SubscriberController extends Controller
           ✅✅✅✅✅✅✅✅✅✅✅✅";
 
             // العمليات المهمة جداً
-            DB::transaction(function () use ($point, $amount, $profit, $sub, $month, $message, $telegram_message, $pre_account) {
+            DB::transaction(function () use ($point, $amount, $profit, $sub, $months, $message, $telegram_message, $pre_account) {
                 $point->takeFromAccount($amount);
                 $point->addProfitToAccount($profit);
 
-                $sub->payMonths($month);
+                $sub->payMonths($months);
 
                 //make a report
                 Report::create([
@@ -108,7 +108,7 @@ class SubscriberController extends Controller
                     'point_id' => $point->id,
                     'subscriber_id' => $sub->id,
                     'amount' => $amount,
-                    'month' => $month,
+                    'months' => $months,
                 ]);
 
                 //send a massege to telegram
@@ -116,27 +116,27 @@ class SubscriberController extends Controller
 
                 session()->flash('success', ' تم دفع الفاتورة بنجاح');
             }, 5);
-        } else {
+        } elseif($pay === 'false') {
             // الغاء التسديد
 
             // عدد الفواتير التي تم دفعها للمشترك $sub->id من النقطة $point->id قبل انتهاء اليوم
             $invoice_month = Invoice::where('subscriber_id', $sub->id)
                 ->where('point_id', $point->id)
                 ->whereDate('created_at', now()->format('Y-m-d'))
-                ->sum('month') ?? 0;
+                ->sum('months') ?? 0;
 
             // التأكد من ان الفواتير التي يريد الغاءها  أقل او تساوي الفواتير المدفوعة اليوم
-            if ($month > $invoice_month) {
+            if ($months > $invoice_month) {
                 session()->flash('error', 'انت لم تقم بدفع هذه الفاتور تأكد من المعلومات');
                 return redirect()->back();
             }
 
-            $message = "تم ألغاء شحن/تفعيل الباقة $package->name للمشترك رقم $sub->subscriber_number لمدة $month أشهر و تم الغاء اقطاع مبلغ $amount من الرصيد و الغاء أضافة مبلغ $profit .";
+            $message = "تم ألغاء شحن/تفعيل الباقة $package->name للمشترك رقم $sub->subscriber_number لمدة $months أشهر و تم الغاء اقطاع مبلغ $amount من الرصيد و الغاء أضافة مبلغ $profit .";
 
             $telegram_message = "
             تم الغاء فاتورة من نقطة البيع  {$point->user->username}
              للمشترك {$sub->sub_username}
-            عدد  الفواتير: -{$month}
+            عدد  الفواتير: -{$months}
              المبلغ المرتجع : -{$amount}
             ({$package->name}) - ({$package->price})
 
@@ -145,12 +145,12 @@ class SubscriberController extends Controller
             ❌❌❌❌❌❌❌❌❌❌❌❌";
 
             //العمليات المهمة جداً
-            DB::transaction(function () use ($point, $sub, $amount, $profit, $month, $message, $telegram_message, $pre_account) {
+            DB::transaction(function () use ($point, $sub, $amount, $profit, $months, $message, $telegram_message, $pre_account) {
 
                 $point->addToAccount($amount);
                 $point->takeProfitFromAccount($profit);
 
-                $sub->cancelPayMonths($month);
+                $sub->cancelPayMonths($months);
 
                 //make a report
                 Report::create([
@@ -167,7 +167,7 @@ class SubscriberController extends Controller
                     'point_id' => $point->id,
                     'subscriber_id' => $sub->id,
                     'amount' => -1 * $amount,
-                    'month' => -1 * $month,
+                    'months' => -1 * $months,
                 ]);
 
                 //send a massege to telegram
@@ -175,6 +175,8 @@ class SubscriberController extends Controller
 
                 session()->flash('success', ' تم الغاء دفع الفاتورة بنجاح');
             }, 5);
+        }elseif($pay === 'upgrete'){
+            ///
         }
 
         return redirect()->back();
@@ -182,10 +184,11 @@ class SubscriberController extends Controller
 
     public function maintenance(Request $request, Subscriber $subscriber)
     {
-
+        dd($request->all());
         $request->validate([
             'note' => ['nullable', 'string', 'between:2,1000'],
             'type' => ['required', Rule::in([SupportRequestTypeEnum::MAINTENANCE->value, SupportRequestTypeEnum::TRANSFER->value])],
+
         ]);
 
         $point = Point::findOrFail(Auth::user()->point->id);

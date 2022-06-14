@@ -4,41 +4,10 @@
 @section('title', 'الصفحة الرئيسية')
 
 @section('content')
-<<<<<<< HEAD
-    <div class="py-4 container-fluid">
-        <!-- start add -->
-        <button type="button" class="btn bg-gradient-dark btn-sm" data-bs-toggle="modal" data-bs-target="#add">
-            إضافة حركة
-        </button>
-        <!-- add Modal -->
-        <form action="{{ route('accountant.box-cash.store') }}" method="POST">
-            @csrf
-            <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">إضافة فاتورة للصندوق</h5>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class=" col-12">
-                                    <div class="form-group">
-                                        <label>
-                                            نوع الحركة
-                                            <span class="text-danger"> * </span>
-                                        </label>
-                                        <select name="transaction_type" required class="form-control">
-                                            <option value="">اختر النوع</option>
-                                            <option value="{{ App\Enums\MoneyTransactionTypeEnum::TAKE_MONEY->value }}">سحب</option>
-                                            <option value="{{ App\Enums\MoneyTransactionTypeEnum::PUT_MONEY->value }}">ايداع</option>
-                                        </select>
-                                    </div>
-=======
 <div class="py-4 container-fluid">
     <!-- start add -->
     <button type="button" class="btn bg-gradient-dark btn-sm" data-bs-toggle="modal" data-bs-target="#add">
-        إضافة حركة
+        إضافة فاتورة
     </button>
     <!-- add Modal -->
     <form action="{{ route('accountant.box-cash.store') }}" method="POST">
@@ -47,22 +16,21 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">إضافة حركة للصندوق</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">إضافة فاتورة للصندوق</h5>
                     </div>
                     <div class="modal-body">
                         <div class="row">
                             <div class=" col-12">
                                 <div class="form-group">
                                     <label>
-                                        نوع الحركة
+                                        نوع نوع الفاتورة
                                         <span class="text-danger"> * </span>
                                     </label>
                                     <select name="transaction_type" required class="form-control">
                                         <option value="">اختر النوع</option>
-                                        <option value="{{ App\Enums\MoneyTransactionTypeEnum::TAKE_MONEY->value }}">سحب</option>
-                                        <option value="{{ App\Enums\MoneyTransactionTypeEnum::PUT_MONEY->value }}">ايداع</option>
+                                        <option value="{{ App\Enums\MoneyTransactionTypeEnum::TAKE_MONEY->value }}"> سحب مال</option>
+                                        <option value="{{ App\Enums\MoneyTransactionTypeEnum::PUT_MONEY->value }}">اضافة مال</option>
                                     </select>
->>>>>>> 246c87906eef15ef0177999b9bc5612fc1fbbd0e
                                 </div>
                             </div>
                             <div class="col-12">
@@ -124,11 +92,11 @@
                         <label class="form-check-label text-nowrap" for="all">كل المدة
                         </label>
                     </div>
-                    *****
-                    <select name="" class="form-select">
-                        <option value="">شحن رصيد</option>
-                        <option value="">بيع</option>
-                        <option value="">دفع</option>
+                    <select name="box_transaction_type" class="form-select">
+                        <option value="">الكل</option>
+                        <option value="{{ App\Enums\BoxTransactionTypeEnum::CHARGE_POINT->value }}" @if($box_transaction_type == App\Enums\BoxTransactionTypeEnum::CHARGE_POINT->value) selected @endif>شحن رصيد</option>
+                        <option value="{{ App\Enums\BoxTransactionTypeEnum::SELL->value }}" @if($box_transaction_type == App\Enums\BoxTransactionTypeEnum::SELL->value) selected @endif>بيع</option>
+                        <option value="{{ App\Enums\BoxTransactionTypeEnum::PAY->value }}" @if($box_transaction_type == App\Enums\BoxTransactionTypeEnum::PAY->value) selected @endif>دفع</option>
                     </select>
                     <button type="submit" class="mb-0 btn btn-secondary btn-sm ps-3 pe-3">بحث</button>
                 </div>
@@ -192,8 +160,8 @@
                                     {{-- <td class="text-uppercase  text-xs font-weight-bolder ps-3">اسم النقطة</td> --}}
                                     <td class="px-1 text-uppercase  text-xs font-weight-bolder">البيان</td>
                                     <td class="px-1 text-uppercase  text-xs font-weight-bolder">ملاحظات</td>
-                                    <td class="px-1 text-uppercase  text-xs font-weight-bolder">نوع الحركة</td>
-                                    <td class="px-1 text-uppercase  text-xs font-weight-bolder">قيمة الحركة</td>
+                                    <td class="px-1 text-uppercase  text-xs font-weight-bolder">نوع الفاتورة</td>
+                                    <td class="px-1 text-uppercase  text-xs font-weight-bolder">قيمة الفاتورة</td>
                                     <td class="px-1 text-uppercase  text-xs font-weight-bolder">الرصيد</td>
                                 </tr>
                                 <tr>

@@ -21,7 +21,8 @@ class BoxCashFactory extends Factory
             'note' => $this->faker->sentence,
             'account' => $this->faker->numberBetween(0,100000),
             'pre_account' => $this->faker->numberBetween(0,100000),
-            'transaction_type'  => rand(0,1),
+            'transaction_type'  => rand(1,2),
+            'box_transaction_type' => rand(1,3),
             'created_at' => $this->faker->date(),
         ];
     }

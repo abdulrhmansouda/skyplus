@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('subscriber_name');
             $table->string('subscriber_phone');
             $table->tinyInteger('type');
+            $table->string('report')->nullable();
             $table->tinyInteger('status');
             $table->string('note')->nullable();
 

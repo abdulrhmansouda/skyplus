@@ -347,7 +347,7 @@
                                                                         <div class="form-group">
                                                                             <h6>
                                                                                 الأشهر </h6>
-                                                                            <select name="month" id="" class="form-select">
+                                                                            <select name="months" id="" class="form-select">
                                                                                 <option value="1">1</option>
                                                                                 <option value="2">2</option>
                                                                                 <option value="3">3</option>
@@ -365,21 +365,21 @@
                                                                     </div>
                                                                     <div class="col-6">
                                                                         <div class="form-group">
-                                                                            <input class="" name="pay" type="radio" value="true" id="allow{{ $sub->id }}" checked onChange="HideShowSelect(event)">
+                                                                            <input class="" name="type" type="radio" value="true" id="allow{{ $sub->id }}" checked onChange="HideShowSelect(event)">
                                                                             <label class="" for="allow{{ $sub->id }}">
                                                                                 تسديد</label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-6">
                                                                         <div class="form-group">
-                                                                            <input class="" name="pay" type="radio" value="false" id="notALlow{{ $sub->id }}" onChange="HideShowSelect(event)">
+                                                                            <input class="" name="type" type="radio" value="false" id="notALlow{{ $sub->id }}" onChange="HideShowSelect(event)">
                                                                             <label class="" for="notALlow{{ $sub->id }}">
                                                                                 الغاء تسديد</label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-6">
                                                                         <div class="form-group">
-                                                                            <input class="" name="pay" type="radio" value="upgrate" id="upgrate{{ $sub->id }}" onChange="HideShowSelect(event)">
+                                                                            <input class="" name="type" type="radio" value="upgrate" id="upgrate{{ $sub->id }}" onChange="HideShowSelect(event)">
                                                                             <label class="" for="upgrate{{ $sub->id }}">
                                                                                 ترقية</label>
                                                                         </div>
@@ -388,24 +388,10 @@
                                                                         <div class="form-group">
                                                                             <h6>
                                                                                 اختر الباقة الجديدة </h6>
-<<<<<<< HEAD
-                                                                            <select name=""  class="form-select " onchange="getPricePackage(event)">
+                                                                            <select name="package_id"  class="form-select " onchange="getPricePackage(event)">
                                                                                 @foreach ($packages as $package)
                                                                                 <option value="{{ $package->id }}">{{ $package->name }}</option>
                                                                                 @endforeach
-=======
-                                                                            <select name="" class="form-select " onchange="getPricePackage(event)">
-                                                                                <option value="1">1</option>
-                                                                                <option value="2">2</option>
-                                                                                <option value="3">3</option>
-                                                                                <option value="4">4</option>
-                                                                                <option value="5">5</option>
-                                                                                <option value="6">6</option>
-                                                                                <option value="7">7</option>
-                                                                                <option value="8">8</option>
-                                                                                <option value="9">9</option>
-                                                                                <option value="10">10</option>
->>>>>>> 246c87906eef15ef0177999b9bc5612fc1fbbd0e
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -479,39 +465,27 @@
                                                                         <div class="row">
                                                                             <div class="col-6">
                                                                                 <div class="form-group">
-<<<<<<< HEAD
-                                                                                    <input class="" name="type" type="radio" value="{{App\Enums\SupportRequestTypeEnum::MAINTENANCE->value}}" id="maintenancea{{ $sub->id }}" checked >
-=======
                                                                                     <input class="" name="type" type="radio" value="transfer" id="maintenancea{{ $sub->id }}" checked onchange="HideShowSelectmaintenance(event)">
->>>>>>> 246c87906eef15ef0177999b9bc5612fc1fbbd0e
                                                                                     <label class="" for="maintenancea{{ $sub->id }}">
                                                                                         نقل</label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-6">
                                                                                 <div class="form-group">
-<<<<<<< HEAD
-                                                                                    <input class="" name="type" type="radio" value="{{App\Enums\SupportRequestTypeEnum::TRANSFER->value}}" id="maintenancea{{ $sub->id }}"  >
-                                                                                    <label class="" for="maintenancea{{ $sub->id }}">
-                                                                                        نقل</label>
-=======
                                                                                     <input class="" name="type" type="radio" value="maintenance" id="maintenanceb{{ $sub->id }}" onchange="HideShowSelectmaintenance(event)">
                                                                                     <label class="" for="maintenanceb{{ $sub->id }}">
                                                                                         صيانة</label>
->>>>>>> 246c87906eef15ef0177999b9bc5612fc1fbbd0e
                                                                                 </div>
                                                                             </div>
 
 
                                                                         </div>
                                                                     </div>
-                                                                    *****
                                                                     <div class=" col-6 form-maintenance d-none">
                                                                         <div class="form-group">
                                                                             <h6>
                                                                                 اختر سبب الصيانة </h6>
-                                                                            <select name="" class="form-select "  >
-
+                                                                            <select name="report" class="form-select "  >
                                                                                 <option value="1">انترنت ضعيف</option>
                                                                                 <option value="2">انترنت مقطوع</option>
                                                                                 <option value="3">فصل ووصل في الانترنت</option>

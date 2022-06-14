@@ -21,9 +21,8 @@ class BoxCashController extends Controller
         // dd(1);
         $daterange = $request->daterange ?? now()->format('m/d/Y') . " - " . now()->format('m/d/Y');
         $all_date = $request->all_date ?? '';
-        // $point = Auth::user()->point;
+        $box_transaction_type = $request->box_transaction_type ?? null;
 
-        // $reports = Report::where('point_id', $point->id);
         $boxCashs = new BoxCash;
 
         if ($all_date !== "true") {
@@ -35,32 +34,27 @@ class BoxCashController extends Controller
                 $boxCashs = $boxCashs->whereDate('created_at', '>=', $from)
                     ->whereDate('created_at', '<=', $to);
             }
-            // dd(1);
         }
-
-
+        if(!is_null($box_transaction_type)){
+            // dd($box_transaction_type);
+            $boxCashs = $boxCashs->where('box_transaction_type',$box_transaction_type);
+        }
 
         $boxCashs = $boxCashs
             ->orderBy('created_at');
 
         $pre_account = (clone $boxCashs)?->first()?->pre_account ?? 0;
-        // $pre_account = $first_report->first() ? $first_report->first()->pre_account : 0;
         return view('accountant.pages.box-cash', [
-            // 'name_points' => '************',
             'pre_account' => $pre_account,
-
             'boxCashs' => $boxCashs->get(),
-
             'daterange' => $daterange,
             'all_date' => $all_date,
-
-
+            'box_transaction_type' => $box_transaction_type,
             'pre' => isset($pre) ? $pre->format('d/m/Y') : 'all',
             'from' => isset($from) ? $from->format('d/m/Y') : 'all',
             'to' => isset($to) ? $to->format('d/m/Y') : 'all',
         ]);
 
-        // return view('accountant.pages.box-cash');
     }
 
     /**
@@ -71,6 +65,7 @@ class BoxCashController extends Controller
      */
     public function store(StoreBoxCashRequest $request)
     {
+        dd($request->validated()['account']);
         if ($request->validated()['account'] < 0) {
             session()->flash('error', ' المبلغ الذي في الصندوق لا يكفي للسحب');
             return redirect()->back();

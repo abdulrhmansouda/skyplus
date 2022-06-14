@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\MoneyTransactionTypeEnum;
 use App\Enums\PaymentTypeEnum;
+use App\Enums\UserStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\BoxCash;
 use App\Models\Point;
@@ -19,7 +20,7 @@ class RechargeController extends Controller
 
         $s = $request->s ?? '';
 
-        $points = Point::where('status', 'active')->where('name', 'LIKE', "%$s%");
+        $points = Point::where('status', UserStatusEnum::ACTIVE->value)->where('name', 'LIKE', "%$s%");
 
         return view('admin.pages.recharge', [
             'points' => $points->paginate(10),

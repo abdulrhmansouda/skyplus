@@ -29,10 +29,11 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             AccountantSeeder::class,
             PointSeeder::class,
+            TelegramSeeder::class,
         ]);
 
         Report::factory(100)->create();
-        // BoxCash::factory(100)->create();
+        BoxCash::factory(100)->create();
 
 
         Package::factory()
@@ -44,18 +45,6 @@ class DatabaseSeeder extends Seeder
             'maximum_amount_of_borrowing' => 0,
         ]);
 
-        TelegramBot::create([
-            // 'bot_username' => 'grouupp_bot',
-            'type' => 'charge',
-            'bot_token' => '5108071797:AAG6GINlNe8O7115o-GfvJQgt06-BzbqreM',
-            'chat_id' => '-1001686278067',
-        ]);
-        TelegramBot::create([
-            // 'bot_username' => 'grouupp_bot',
-            'type' => 'support',
-            'bot_token' => '5356853807:AAFB7eoGMlHrHf475OroELKItScAd-bzEFg',
-            'chat_id' => '-1001509295078',
-        ]);
 
         Social::create([
             'website' => 'https://www.skyplus.com',

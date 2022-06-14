@@ -3,8 +3,10 @@
 use App\Http\Controllers\Accountant;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\Point;
-
+use App\Http\Controllers\TelegramController;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/getUpdateTelegram',[TelegramController::class,'updatedActivity']);
 
 Route::get('/', function () {
     return redirect(route('login'));

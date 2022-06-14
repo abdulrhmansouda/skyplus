@@ -53,7 +53,7 @@
     </div>
     <div class="row">
         <!-- if search  -->
-        @if ($search && $subs->first())
+        @if ($search && $sub)
 
         <div class="col-12">
             <div class="mb-4 card">
@@ -102,7 +102,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($subs as $sub)
+                                {{-- @foreach ($subs as $sub) --}}
                                 <tr>
                                     <td>
                                         <h6 class="mb-0 text-sm">{{ $sub->name }}</h6>
@@ -357,12 +357,9 @@
                                                                                 <option value="7">7</option>
                                                                                 <option value="8">8</option>
                                                                                 <option value="9">9</option>
-                                                                                <option value="10">10
-                                                                                </option>
-                                                                                <option value="11">11
-                                                                                </option>
-                                                                                <option value="12">12
-                                                                                </option>
+                                                                                <option value="10">10</option>
+                                                                                <option value="11">11</option>
+                                                                                <option value="12">12</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -392,16 +389,9 @@
                                                                             <h6>
                                                                                 اختر الباقة الجديدة </h6>
                                                                             <select name=""  class="form-select " onchange="getPricePackage(event)">
-                                                                                <option value="1">1</option>
-                                                                                <option value="2">2</option>
-                                                                                <option value="3">3</option>
-                                                                                <option value="4">4</option>
-                                                                                <option value="5">5</option>
-                                                                                <option value="6">6</option>
-                                                                                <option value="7">7</option>
-                                                                                <option value="8">8</option>
-                                                                                <option value="9">9</option>
-                                                                                <option value="10">10</option>
+                                                                                @foreach ($packages as $package)
+                                                                                <option value="{{ $package->id }}">{{ $package->name }}</option>
+                                                                                @endforeach
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -475,14 +465,14 @@
                                                                         <div class="row">
                                                                             <div class="col-6">
                                                                                 <div class="form-group">
-                                                                                    <input class="" name="type" type="radio" value="maintenance" id="maintenancea{{ $sub->id }}" checked >
+                                                                                    <input class="" name="type" type="radio" value="{{App\Enums\SupportRequestTypeEnum::MAINTENANCE->value}}" id="maintenancea{{ $sub->id }}" checked >
                                                                                     <label class="" for="maintenancea{{ $sub->id }}">
                                                                                         صيانة</label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-6">
                                                                                 <div class="form-group">
-                                                                                    <input class="" name="type" type="radio" value="transfer" id="maintenancea{{ $sub->id }}"  >
+                                                                                    <input class="" name="type" type="radio" value="{{App\Enums\SupportRequestTypeEnum::TRANSFER->value}}" id="maintenancea{{ $sub->id }}"  >
                                                                                     <label class="" for="maintenancea{{ $sub->id }}">
                                                                                         نقل</label>
                                                                                 </div>
@@ -515,7 +505,7 @@
                                         <!-- end maintenance1 -->
                                     </td>
                                 </tr>
-                                @endforeach
+                                {{-- @endforeach --}}
                             </tbody>
                         </table>
                     </div>

@@ -25,7 +25,7 @@
                                 </div>
                             </div>
                             <div class=" col-md-6">
-                                <h6 class="font-weight-bolder"> نظرة عامة على الفواتير</h6>
+                                <h6 class="font-weight-bolder"> نظرة عامة على فواتير شحن المشتركين</h6>
                                 <ul class="p-0 list-group">
                                     <li class="pt-0 pb-0 text-sm border-0 list-group-item ps-0"><strong
                                             class="text-dark">عدد الفواتير

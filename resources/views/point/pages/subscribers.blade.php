@@ -281,148 +281,312 @@
                                                 <i class="fas fa-money-bill-wave-alt"></i>
                                             </a>
                                             <!-- satrt charge1 Modal -->
-                                            <form action="{{ route('point.subscribers.charge', $sub->id) }}" method="POST">
+                                            <!-- <form action="{{ route('point.subscribers.charge', $sub->id) }}" method="POST">
                                                 @csrf
-                                                @method('PUT')
-                                                {{-- <input type="text"> --}}
-                                                <div class="modal fade" id="charge{{ $sub->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            @if ($sub->status !== 'closed')
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">
-                                                                    دفع
-                                                                    فاتورة للمشترك </h5>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="row">
-                                                                    <div class=" col-6">
-                                                                        <div class="form-group">
-                                                                            <h6>
-                                                                                الاسم
-                                                                            </h6>
-                                                                            {{ $sub->name }}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class=" col-6">
-                                                                        <div class="form-group">
-                                                                            <h6>
-                                                                                الأيام المتبقية
-                                                                            </h6>
-                                                                            {{ $sub->days_to_end }}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class=" col-6">
-                                                                        <div class="form-group">
-                                                                            <h6>
-                                                                                اسم الباقة </h6>
-                                                                            {{ $sub->package->name }}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class=" col-6">
-                                                                        <div class="form-group">
-                                                                            <h6>
-                                                                                سعر الباقة </h6>
-                                                                            <span class="price">
-                                                                                {{ $sub->package->price }}
-                                                                            </span>
-                                                                        </div>
-                                                                    </div>
+                                                @method('PUT') -->
+                                            {{-- <input type="text"> --}}
+                                            <div class="modal fade" id="charge{{ $sub->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        @if ($sub->status !== 'closed')
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">
+                                                                دفع
+                                                                فاتورة للمشترك </h5>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <!-- tabs -->
+                                                            <ul class="nav nav-tabs mb-3">
+                                                                <li class="nav-item">
+                                                                    <button type="button" class="nav-link active" data-tab="tab1" onclick="openTab(event)">تسديد</button>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <button type="button" class="nav-link" data-tab="tab2" onclick="openTab(event)">الغاء تسديد</button>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <button type="button" class="nav-link" data-tab="tab3" onclick="openTab(event)">ترقية</button>
+                                                                </li>
+                                                            </ul>
+                                                            <div class="tab-content">
+                                                                <div class="tab-pane   active" id="tab1">
+                                                                    <!-- start tab 1 -->
+                                                                    <form>
+                                                                        <div class="row">
+                                                                            <div class=" col-6">
+                                                                                <div class="form-group">
+                                                                                    <h6>
+                                                                                        الاسم
+                                                                                    </h6>
+                                                                                    {{ $sub->name }}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class=" col-6">
+                                                                                <div class="form-group">
+                                                                                    <h6>
+                                                                                        الأيام المتبقية
+                                                                                    </h6>
+                                                                                    {{ $sub->days_to_end }}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class=" col-6">
+                                                                                <div class="form-group">
+                                                                                    <h6>
+                                                                                        اسم الباقة </h6>
+                                                                                    {{ $sub->package->name }}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class=" col-6">
+                                                                                <div class="form-group">
+                                                                                    <h6>
+                                                                                        سعر الباقة </h6>
+                                                                                    <span class="price">
+                                                                                        {{ $sub->package->price }}
+                                                                                    </span>
+                                                                                </div>
+                                                                            </div>
 
-                                                                    <div class=" col-6">
-                                                                        <div class="form-group">
-                                                                            <h6>
-                                                                                حالة المشترك </h6>
-                                                                            @if ($sub->status === 'active')
-                                                                            <span class="badge badge-sm bg-gradient-success">مفعل</span>
-                                                                            @elseif($sub->status === 'deactive')
-                                                                            <span class="badge badge-sm bg-gradient-danger">غير
-                                                                                مفعل</span>
-                                                                            @else
-                                                                            <span class="badge badge-sm bg-gradient-danger">مغلق</span>
-                                                                            @endif
+                                                                            <div class=" col-6">
+                                                                                <div class="form-group">
+                                                                                    <h6>
+                                                                                        حالة المشترك </h6>
+                                                                                    @if ($sub->status === 'active')
+                                                                                    <span class="badge badge-sm bg-gradient-success">مفعل</span>
+                                                                                    @elseif($sub->status === 'deactive')
+                                                                                    <span class="badge badge-sm bg-gradient-danger">غير
+                                                                                        مفعل</span>
+                                                                                    @else
+                                                                                    <span class="badge badge-sm bg-gradient-danger">مغلق</span>
+                                                                                    @endif
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class=" col-6">
+                                                                                <div class="form-group">
+                                                                                    <h6>
+                                                                                        الأشهر </h6>
+                                                                                    <select name="months" id="" class="form-select">
+                                                                                        <option value="1">1</option>
+                                                                                        <option value="2">2</option>
+                                                                                        <option value="3">3</option>
+                                                                                        <option value="4">4</option>
+                                                                                        <option value="5">5</option>
+                                                                                        <option value="6">6</option>
+                                                                                        <option value="7">7</option>
+                                                                                        <option value="8">8</option>
+                                                                                        <option value="9">9</option>
+                                                                                        <option value="10">10</option>
+                                                                                        <option value="11">11</option>
+                                                                                        <option value="12">12</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                          
+                                                                           
                                                                         </div>
-                                                                    </div>
-                                                                    <div class=" col-6">
-                                                                        <div class="form-group">
-                                                                            <h6>
-                                                                                الأشهر </h6>
-                                                                            <select name="months" id="" class="form-select">
-                                                                                <option value="1">1</option>
-                                                                                <option value="2">2</option>
-                                                                                <option value="3">3</option>
-                                                                                <option value="4">4</option>
-                                                                                <option value="5">5</option>
-                                                                                <option value="6">6</option>
-                                                                                <option value="7">7</option>
-                                                                                <option value="8">8</option>
-                                                                                <option value="9">9</option>
-                                                                                <option value="10">10</option>
-                                                                                <option value="11">11</option>
-                                                                                <option value="12">12</option>
-                                                                            </select>
+                                                                        <div class="modal-footer">
+                                                                            <button type="submit" class="btn btn-info">حفظ</button>
+                                                                            <span type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</span>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="col-6">
-                                                                        <div class="form-group">
-                                                                            <input class="" name="type" type="radio" value="true" id="allow{{ $sub->id }}" checked onChange="HideShowSelect(event)">
-                                                                            <label class="" for="allow{{ $sub->id }}">
-                                                                                تسديد</label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-6">
-                                                                        <div class="form-group">
-                                                                            <input class="" name="type" type="radio" value="false" id="notALlow{{ $sub->id }}" onChange="HideShowSelect(event)">
-                                                                            <label class="" for="notALlow{{ $sub->id }}">
-                                                                                الغاء تسديد</label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-6">
-                                                                        <div class="form-group">
-                                                                            <input class="" name="type" type="radio" value="upgrate" id="upgrate{{ $sub->id }}" onChange="HideShowSelect(event)">
-                                                                            <label class="" for="upgrate{{ $sub->id }}">
-                                                                                ترقية</label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class=" col-6 form-packages d-none">
-                                                                        <div class="form-group">
-                                                                            <h6>
-                                                                                اختر الباقة الجديدة </h6>
-                                                                            <select name="package_id"  class="form-select " onchange="getPricePackage(event)">
-                                                                                @foreach ($packages as $package)
-                                                                                <option value="{{ $package->id }}">{{ $package->name }}</option>
-                                                                                @endforeach
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
+                                                                    </form>
+                                                                    <!-- end tab 1 -->
+                                                                </div>
+                                                                <div class="tab-pane   " id="tab2">
+                                                                    <form>
+                                                                        <!-- start tab 2 -->
+                                                                        <div class="row">
+                                                                            <div class=" col-6">
+                                                                                <div class="form-group">
+                                                                                    <h6>
+                                                                                        الاسم
+                                                                                    </h6>
+                                                                                    {{ $sub->name }}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class=" col-6">
+                                                                                <div class="form-group">
+                                                                                    <h6>
+                                                                                        الأيام المتبقية
+                                                                                    </h6>
+                                                                                    {{ $sub->days_to_end }}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class=" col-6">
+                                                                                <div class="form-group">
+                                                                                    <h6>
+                                                                                        اسم الباقة </h6>
+                                                                                    {{ $sub->package->name }}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class=" col-6">
+                                                                                <div class="form-group">
+                                                                                    <h6>
+                                                                                        سعر الباقة </h6>
+                                                                                    <span class="price">
+                                                                                        {{ $sub->package->price }}
+                                                                                    </span>
+                                                                                </div>
+                                                                            </div>
 
+                                                                            <div class=" col-6">
+                                                                                <div class="form-group">
+                                                                                    <h6>
+                                                                                        حالة المشترك </h6>
+                                                                                    @if ($sub->status === 'active')
+                                                                                    <span class="badge badge-sm bg-gradient-success">مفعل</span>
+                                                                                    @elseif($sub->status === 'deactive')
+                                                                                    <span class="badge badge-sm bg-gradient-danger">غير
+                                                                                        مفعل</span>
+                                                                                    @else
+                                                                                    <span class="badge badge-sm bg-gradient-danger">مغلق</span>
+                                                                                    @endif
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class=" col-6">
+                                                                                <div class="form-group">
+                                                                                    <h6>
+                                                                                        الأشهر </h6>
+                                                                                    <select name="months" id="" class="form-select">
+                                                                                        <option value="1">1</option>
+                                                                                        <option value="2">2</option>
+                                                                                        <option value="3">3</option>
+                                                                                        <option value="4">4</option>
+                                                                                        <option value="5">5</option>
+                                                                                        <option value="6">6</option>
+                                                                                        <option value="7">7</option>
+                                                                                        <option value="8">8</option>
+                                                                                        <option value="9">9</option>
+                                                                                        <option value="10">10</option>
+                                                                                        <option value="11">11</option>
+                                                                                        <option value="12">12</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                          
+
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="submit" class="btn btn-info">حفظ</button>
+                                                                            <span type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</span>
+                                                                        </div>
+                                                                        <!-- end tab 2 -->
+                                                                    </form>
+                                                                </div>
+                                                                <div class="tab-pane " id="tab3">
+                                                                    <!-- start tab3 -->
+                                                                    <form>
+                                                                        <div class="row">
+                                                                            <div class=" col-6">
+                                                                                <div class="form-group">
+                                                                                    <h6>
+                                                                                        الاسم
+                                                                                    </h6>
+                                                                                    {{ $sub->name }}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class=" col-6">
+                                                                                <div class="form-group">
+                                                                                    <h6>
+                                                                                        الأيام المتبقية
+                                                                                    </h6>
+                                                                                    {{ $sub->days_to_end }}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class=" col-6">
+                                                                                <div class="form-group">
+                                                                                    <h6>
+                                                                                        اسم الباقة </h6>
+                                                                                    {{ $sub->package->name }}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class=" col-6">
+                                                                                <div class="form-group">
+                                                                                    <h6>
+                                                                                        سعر الباقة </h6>
+                                                                                    <span class="price">
+                                                                                        {{ $sub->package->price }}
+                                                                                    </span>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class=" col-6">
+                                                                                <div class="form-group">
+                                                                                    <h6>
+                                                                                        حالة المشترك </h6>
+                                                                                    @if ($sub->status === 'active')
+                                                                                    <span class="badge badge-sm bg-gradient-success">مفعل</span>
+                                                                                    @elseif($sub->status === 'deactive')
+                                                                                    <span class="badge badge-sm bg-gradient-danger">غير
+                                                                                        مفعل</span>
+                                                                                    @else
+                                                                                    <span class="badge badge-sm bg-gradient-danger">مغلق</span>
+                                                                                    @endif
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class=" col-6">
+                                                                                <div class="form-group">
+                                                                                    <h6>
+                                                                                        الأشهر </h6>
+                                                                                    <select name="months" id="" class="form-select">
+                                                                                        <option value="1">1</option>
+                                                                                        <option value="2">2</option>
+                                                                                        <option value="3">3</option>
+                                                                                        <option value="4">4</option>
+                                                                                        <option value="5">5</option>
+                                                                                        <option value="6">6</option>
+                                                                                        <option value="7">7</option>
+                                                                                        <option value="8">8</option>
+                                                                                        <option value="9">9</option>
+                                                                                        <option value="10">10</option>
+                                                                                        <option value="11">11</option>
+                                                                                        <option value="12">12</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                         
+                                                                            <div class=" col-6 ">
+                                                                                <div class="form-group">
+                                                                                    <h6>
+                                                                                        اختر الباقة الجديدة </h6>
+                                                                                    <select name="package_id" class="form-select " onchange="getPricePackage(event)">
+                                                                                        @foreach ($packages as $package)
+                                                                                        <option value="{{ $package->id }}">{{ $package->name }}</option>
+                                                                                        @endforeach
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="submit" class="btn btn-info">حفظ</button>
+                                                                            <span type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</span>
+                                                                        </div>
+                                                                    </form>
+                                                                    <!-- end tab3 -->
                                                                 </div>
                                                             </div>
-                                                            <div class="modal-footer">
-                                                                <button type="submit" class="btn btn-info">حفظ</button>
-                                                                <span type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</span>
-                                                            </div>
-                                                            @else
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title">
-                                                                    عذرا المشترك مغلق
-                                                                </h5>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                هذا المشترك مغلق الرجاء التواصل مع مركز الخدمة
-                                                                لأعادة تفعيل
-                                                                المشترك
-                                                            </div>
-                                                            <div class="modal-footer">
-
-                                                                <span type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</span>
-                                                            </div>
-                                                            @endif
 
                                                         </div>
+
+                                                        @else
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">
+                                                                عذرا المشترك مغلق
+                                                            </h5>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            هذا المشترك مغلق الرجاء التواصل مع مركز الخدمة
+                                                            لأعادة تفعيل
+                                                            المشترك
+                                                        </div>
+                                                        <div class="modal-footer">
+
+                                                            <span type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</span>
+                                                        </div>
+                                                        @endif
+
                                                     </div>
                                                 </div>
-                                            </form>
+                                            </div>
+                                            <!-- </form> -->
                                             <!-- end Modal charge1  -->
                                         </div>
                                         <!-- end charge1 -->
@@ -485,7 +649,7 @@
                                                                         <div class="form-group">
                                                                             <h6>
                                                                                 اختر سبب الصيانة </h6>
-                                                                            <select name="report" class="form-select "  >
+                                                                            <select name="report" class="form-select ">
                                                                                 <option value="1">انترنت ضعيف</option>
                                                                                 <option value="2">انترنت مقطوع</option>
                                                                                 <option value="3">فصل ووصل في الانترنت</option>

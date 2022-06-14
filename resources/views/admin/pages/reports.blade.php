@@ -88,6 +88,8 @@
                                 <tr class="bg-aliceblue">
                                     <td class="text-xs text-uppercase font-weight-bolder ps-3">التاريخ</td>
                                     <td class="text-xs text-uppercase font-weight-bolder ps-3">اسم النقطة</td>
+                                    <td class="text-xs text-uppercase font-weight-bolder ps-3">اسم  الادمن</td>
+                                    <td class="text-xs text-uppercase font-weight-bolder ps-3">اسم  العميل</td>
                                     <td class="px-1 text-xs text-uppercase font-weight-bolder">نوع البيان</td>
                                     <td class="px-1 text-xs text-uppercase font-weight-bolder">البيان</td>
                                     <td class="px-1 text-xs text-uppercase font-weight-bolder">ملاحظات</td>
@@ -97,6 +99,8 @@
                                 </tr>
                                 <tr>
                                     <td class="text-xs text-uppercase text-secondary font-weight-bolder ps-3"></td>
+                                    <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
+                                    <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
                                     <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
                                     <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
                                     <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder">الكل</td>
@@ -120,6 +124,14 @@
                                         <p class="mb-0 text-xs font-weight-bold">{{ $report->point->name }}</p>
                                     </td>
 
+                                    <td>
+                                        <p class="mb-0 text-xs font-weight-bold">*****
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p class="mb-0 text-xs font-weight-bold">*****
+                                        </p>
+                                    </td>
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold">{{ $report->type_report }}
                                         </p>
@@ -150,6 +162,10 @@
                                     </td>
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold">الرصيد</p>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
                                     </td>
                                     <td>
                                     </td>

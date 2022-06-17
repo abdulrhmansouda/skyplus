@@ -465,8 +465,8 @@ function getPricePackage(event){
 }
 
 function openTab(event) {
-  document.querySelectorAll(`.nav-link`).forEach((nav => nav.classList.remove("active")))
+  event.target.parentElement.parentElement.querySelectorAll(`.nav-link`).forEach((nav => nav.classList.remove("active")))
   event.target.classList.add("active");
-  document.querySelectorAll(`.tab-pane`).forEach((tab => { tab.classList.remove("active"); }))
+  event.target.parentElement.parentElement.querySelectorAll(`.tab-pane`).forEach((tab => { tab.classList.remove("active"); }))
   document.querySelector(`#${event.target.dataset.tab}`).classList.add("active")
 }

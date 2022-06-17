@@ -93,6 +93,15 @@ Route::middleware(['auth', 'admin'])
                 Route::post('/reject-request/{request}', 'rejectRequest')->name('rejectRequest');
             });
 
+        Route::controller(Admin\SupportNewSubscriberController::class)
+            ->prefix('/support-new-subscriber')
+            ->name('supportNewSubscriber.')
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::post('/accept-request/{request}', 'acceptRequest')->name('acceptRequest');
+                Route::post('/reject-request/{request}', 'rejectRequest')->name('rejectRequest');
+            });
+
 
         Route::prefix('/sitting')
             ->name('setting.')
@@ -156,7 +165,8 @@ Route::middleware(['auth', 'point'])
             ->name('support.')
             ->group(function () {
                 Route::get('/', 'index')->name('index');
-                Route::post('/support_request', 'support_request')->name('support_request');
+                Route::post('/new-subscriber-request', 'newSubscriberRequest')->name('newSubscriberRequest');
+                Route::post('/switch-company-request', 'switchCompanyRequest')->name('switchCompanyRequest');
             });
 
         Route::controller(Point\ReportController::class)

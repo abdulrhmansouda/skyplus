@@ -44,9 +44,9 @@
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
                                             حالة الطلب</th>
 
-                                        <th
+                                        {{-- <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
-                                            العنوان</th>
+                                            العنوان</th> --}}
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
                                             قبول او رفض</th>
@@ -70,7 +70,6 @@
                                                 <p class="text-xs font-weight-bold mb-0">
                                                     {{ $request->point->user->username }}</p>
                                             </td>
-                                            {{-- @dd($request->name) --}}
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0">{{ $request->subscriber_name }}
                                                 </p>
@@ -81,44 +80,19 @@
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0">
-                                                    @switch($request->type)
-                                                        @case('maintenance')
-                                                            صيانة
-                                                        @break
-
-                                                        @case('new_installation')
-                                                            اشتراك جديد
-                                                        @break
-
-                                                        @case('switch')
-                                                            تحويل خط
-                                                        @break
-
-                                                        @case('transfer')
-                                                            نقل العنوان
-                                                        @break
-
-                                                        @default
-                                                    @endswitch
+                                                    {{ $request->request_type_arabic() }}
                                                 </p>
                                             </td>
                                             <td class="text-sm align-middle">
                                                 {{ $request->created_at }}
                                             </td>
                                             <td class="text-sm align-middle">
-                                                {{-- @if ($request->status === 'accepted') --}}
-                                                @if ($request->status === App\Enums\RequestStatusEnum::ACCEPTED->value)
-                                                    <span class="badge badge-sm bg-gradient-success">مقبول</span>
-                                                @elseif($request->status === App\Enums\RequestStatusEnum::WAINTING->value)
-                                                    <span class="badge badge-sm bg-gradient-warning">انتظار</span>
-                                                @else
-                                                    <span class="badge badge-sm bg-gradient-danger">مرفوض</span>
-                                                @endif
+                                                {!! $request->request_state_arabic_html() !!}
                                             </td>
-                                            <td>
+                                            {{-- <td>
                                                 <p class="text-xs font-weight-bold mb-0">
                                                     {{ $request->subscriber_address }}</p>
-                                            </td>
+                                            </td> --}}
                                             <td class="align-middle ">
                                                 <!-- start support1 -->
                                                 <div class="d-inline-block">
@@ -174,44 +148,32 @@
                                                                                 {{ $request->subscriber_phone }}
                                                                             </div>
                                                                         </div>
-                                                                        <div class=" col-md-6">
+                                                                        {{-- <div class=" col-md-6">
                                                                             <div class="form-group">
                                                                                 <h6>
-                                                                                    ID
+                                                                                    رقم المشترك
                                                                                 </h6>
-                                                                                1222
+
+                                                                                <a target="_blank"
+                                                                                    href="{{ route('admin.subscribers.index') . "?s={$request->subscriber->sub_id}" }}">{{ $request->subscriber->sub_id }}</a>
                                                                             </div>
-                                                                        </div>
+                                                                        </div> --}}
                                                                         <div class=" col-md-6">
                                                                             <div class="form-group">
                                                                                 <h6>
                                                                                     نوع الطلب
                                                                                 </h6>
-                                                                                @switch($request->type)
-                                                                                    @case('maintenance')
-                                                                                        صيانة
-                                                                                    @break
-
-                                                                                    @case('new_installation')
-                                                                                        اشتراك جديد
-                                                                                    @break
-
-                                                                                    @case('switch')
-                                                                                        تحويل خط
-                                                                                    @break
-
-                                                                                    @default
-                                                                                @endswitch
+                                                                                {{ $request->request_type_arabic() }}
                                                                             </div>
                                                                         </div>
-                                                                        <div class=" col-md-6">
+                                                                        {{-- <div class=" col-md-6">
                                                                             <div class="form-group">
                                                                                 <h6>
                                                                                     اسم الباقة الجديدة
                                                                                 </h6>
                                                                                 باقة 2
                                                                             </div>
-                                                                        </div>
+                                                                        </div> --}}
                                                                         <div class=" col-12">
                                                                             <div class="form-group">
                                                                                 <h6>
@@ -220,19 +182,21 @@
                                                                                 {{ $request->subscriber_address }}
                                                                             </div>
                                                                         </div>
-                                                                        <div class=" col-12">
-                                                                            <div class="form-group">
-                                                                                <h6>
-                                                                                    الملاحظات
-                                                                                </h6>
-                                                                                {{ $request->note }}
+                                                                        @if (!is_null($request->note))
+                                                                            <div class=" col-12">
+                                                                                <div class="form-group">
+                                                                                    <h6>
+                                                                                        الملاحظات
+                                                                                    </h6>
+                                                                                    {{ $request->note }}
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
+                                                                        @endif
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <form
-                                                                        action="{{ route('admin.support.accept_request') }}"
+                                                                        action="{{ route('admin.support.acceptRequest', $request->id) }}"
                                                                         method="POST">
                                                                         @csrf
                                                                         <input name="request_id" type="hidden"
@@ -242,7 +206,7 @@
                                                                             class="btn btn-info">قبول</button>
                                                                     </form>
                                                                     <form
-                                                                        action="{{ route('admin.support.reject_request') }}"
+                                                                        action="{{ route('admin.support.rejectRequest', $request->id) }}"
                                                                         method="POST">
                                                                         @csrf
                                                                         <input name="request_id" type="hidden"
@@ -250,8 +214,8 @@
                                                                         <button type="submit"
                                                                             class="btn btn-danger">رفض</button>
                                                                     </form>
-                                                                    <button 
-                                                                            class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+                                                                    <button class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">الغاء</button>
                                                                 </div>
 
                                                             </div>

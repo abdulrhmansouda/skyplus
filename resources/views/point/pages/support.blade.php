@@ -14,8 +14,8 @@
         </ul>
     </div>
     @endif
-    <!-- <form action="{{ route('point.support.support_request') }}" method="POST"> -->
-        <!-- @csrf -->
+    {{-- <!-- <form action="{{ route('point.support.support_request') }}" method="POST"> -->
+        <!-- @csrf --> --}}
         <div class="row">
             <div class="mt-3 card col-md-7">
                 <div class="p-3 pb-0 card-header">
@@ -32,7 +32,8 @@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane   active" id="tab1">
-                            <form action="">
+                            <form action="{{ route('point.support.switchCompanyRequest') }}" method="POST">
+                                @csrf
                                 <div class="row">
                                     <div class=" col-md-6">
                                         <div class="form-group">
@@ -80,7 +81,8 @@
                             </form>
                         </div>
                         <div class="tab-pane" id="tab2">
-                            <form action="">
+                            <form  action="{{ route('point.support.newSubscriberRequest') }}" method="POST">
+                                @csrf
                                 <div class="row">
                                     <div class=" col-md-6">
                                         <div class="form-group">

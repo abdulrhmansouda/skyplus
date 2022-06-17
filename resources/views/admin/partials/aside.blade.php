@@ -232,8 +232,8 @@
             <li class="position-relative nav-item">
                 <button data-bs-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#support"
                     aria-expanded="false" aria-controls="setting"
-                    class="nav-link @if (Route::currentRouteName() === 'admin.support.index') active @endif"
-                    href="{{ route('admin.support.index') }}">
+                    class="nav-link @if (Route::currentRouteName() === 'admin.support.index' || Route::currentRouteName() === 'admin.supportNewSubscriber.index') active @endif"
+                    >
 
                     @if (App\Models\Notification::isThereSupportNotification()||App\Models\Notification::isThereSupportNewSubscriberNotification())
                         <span class="bg-danger red-point"></span>
@@ -249,7 +249,7 @@
                     </div>
                     <span class="nav-link-text me-1">الدعم الفني</span>
                 </button>
-                <div class="collapse @if (Route::currentRouteName() === 'admin.support.index' || Route::currentRouteName() === 'admin.support.index' || Route::currentRouteName() === 'admin.setting.social.index' || Route::currentRouteName() === 'admin.setting.other.index') show @endif" id="support">
+                <div class="collapse @if (Route::currentRouteName() === 'admin.support.index' || Route::currentRouteName() === 'admin.supportNewSubscriber.index') show @endif" id="support">
                     <ul class="ul-links">
                         <li class="mb-1 position-relative @if (Route::currentRouteName() === 'admin.support.index') active @endif"><a
                                 href="{{ route('admin.support.index') }}">لمشتركين أساسيين</a>
@@ -261,8 +261,8 @@
                             <!-- end if  -->
                         </li>
 
-                        <li class="mb-1 position-relative @if (Route::currentRouteName() === 'admin.support.index') active @endif"><a
-                                href="{{ route('admin.support.index') }}">لمشتركين جدد</a>
+                        <li class="mb-1 position-relative @if (Route::currentRouteName() === 'admin.supportNewSubscriber.index') active @endif"><a
+                                href="{{ route('admin.supportNewSubscriber.index') }}">لمشتركين جدد</a>
                             <!-- if  -->
                             @if (App\Models\Notification::isThereSupportNewSubscriberNotification())
                                 <span class="bg-danger red-point"></span>

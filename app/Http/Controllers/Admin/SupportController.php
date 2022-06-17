@@ -104,8 +104,6 @@ class SupportController extends Controller
         //send a massege to telegram
         TelegramController::chargeMessage($telegram_message);
 
-        session()->flash('success', ' تم دفع الفاتورة بنجاح');
-
         $support_request->status = RequestStatusEnum::ACCEPTED->value;
         $support_request->update();
     }
@@ -127,7 +125,7 @@ class SupportController extends Controller
         تم رفض طلب تغير الباقة للمشترك رقم {$sub->subscriber_number}
          من الباقة {$pre_package->name}
           ال الباقة {$new_package->name}.";
-        
+
         // العمليات المهمة جداً
         $point->takeFromAccount($profit);
         $point->addProfitToAccount($amount);
@@ -147,6 +145,65 @@ class SupportController extends Controller
     }
 
 
+    public function acceptMaintenance(SupportRequest $support_request)
+    {
+        $attributes = json_decode($support_request->attributes);
+        $subscriber = Subscriber::findOrFail($attributes->subscriber_id);
+        $point = Point::findOrFail($attributes->point_id);
+
+        $telegram_message = "
+        طلب صيانة من نقطة البيع  {$point->user->username}
+
+        للمشترك {$subscriber->sub_username}
+
+        نوع الصيانة :  {$attributes->maintenance_request_type}
+
+        http://192.168.106.24/issmanager/kullanici_detay&{$subscriber->sub_id}
+
+        🛠️⚙️🛠️⚙️🛠️🛠️⚙️🛠️⚙️🛠️🛠️⚙️🛠️⚙️🛠️";
+
+        //send a massege to telegram
+        TelegramController::maintenanceMessage($telegram_message);
+
+        $support_request->status = RequestStatusEnum::ACCEPTED->value;
+        $support_request->update();
+    }
+
+    public function rejectMaintenance(SupportRequest $support_request)
+    {
+        $support_request->status = RequestStatusEnum::REJECTED->value;
+        $support_request->update();
+    }
+
+    public function acceptTransfer(SupportRequest $support_request)
+    {
+        $attributes = json_decode($support_request->attributes);
+        $subscriber = Subscriber::findOrFail($attributes->subscriber_id);
+        $point = Point::findOrFail($attributes->point_id);
+
+        $telegram_message = "
+        طلب صيانة من نقطة البيع  {$point->user->username}
+
+        للمشترك {$subscriber->sub_username}
+
+        نوع الصيانة :  {$attributes->maintenance_request_type}
+
+        http://192.168.106.24/issmanager/kullanici_detay&{$subscriber->sub_id}
+
+        🛠️⚙️🛠️⚙️🛠️🛠️⚙️🛠️⚙️🛠️🛠️⚙️🛠️⚙️🛠️";
+
+        //send a massege to telegram
+        TelegramController::transferMessage($telegram_message);
+
+        $support_request->status = RequestStatusEnum::ACCEPTED->value;
+        $support_request->update();
+    }
+
+    public function rejectTransfer(SupportRequest $support_request)
+    {
+        $support_request->status = RequestStatusEnum::REJECTED->value;
+        $support_request->update();
+    }
 
     public function acceptRequest($support_request_id)
     {
@@ -156,6 +213,12 @@ class SupportController extends Controller
             switch ($support_request->type) {
                 case (SupportRequestTypeEnum::SWITCH_PACKAGE->value):
                     $this->acceptSwitchPackgeAndCharge($support_request);
+                    break;
+                case (SupportRequestTypeEnum::MAINTENANCE->value):
+                    $this->acceptMaintenance($support_request);
+                    break;
+                case (SupportRequestTypeEnum::TRANSFER->value):
+                    $this->acceptTransfer($support_request);
                     break;
             }
             DB::commit();
@@ -177,6 +240,12 @@ class SupportController extends Controller
                 case (SupportRequestTypeEnum::SWITCH_PACKAGE->value):
                     $this->rejectSwitchPackgeAndCharge($support_request);
                     break;
+                case (SupportRequestTypeEnum::MAINTENANCE->value):
+                    $this->rejectMaintenance($support_request);
+                    break;
+                case (SupportRequestTypeEnum::TRANSFER->value):
+                    $this->rejectTransfer($support_request);
+                    break;
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -184,12 +253,7 @@ class SupportController extends Controller
             session()->flash('error', $e->getMessage());
             return redirect()->back();
         }
-        session()->flash('success', 'تم قبول طلب الدعم بنجاح');
-        return redirect()->back();
 
-        dd('reject');
-        $support_request->status = RequestStatusEnum::REJECTED->value;
-        $support_request->update();
         session()->flash('success', 'تم رفض الطلب بنجاح');
 
         return redirect()->back();

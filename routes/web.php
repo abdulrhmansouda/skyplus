@@ -147,7 +147,8 @@ Route::middleware(['auth', 'point'])
                 Route::post('/charge/{subscriber}', 'charge')->name('charge');
                 Route::post('/uncharge/{subscriber}', 'uncharge')->name('uncharge');
                 Route::post('/switch-package-and-charge-request/{subscriber}', 'switchPackageAndChargeRequest')->name('switchPackageAndChargeRequest');
-                Route::put('/maintenance/{subscriber}', 'maintenance')->name('maintenance');
+                Route::post('/maintenance/{subscriber}', 'maintenance')->name('maintenance');
+                Route::post('/transfer/{subscriber}', 'transfer')->name('transfer');
             });
 
         Route::controller(Point\SupportController::class)

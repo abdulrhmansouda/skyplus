@@ -100,6 +100,19 @@
                                             <input name="phone" type="tel" class="form-control" required>
                                         </div>
                                     </div>
+                                     <div class=" col-6 ">
+                                                                                <div class="form-group">
+                                                                                    <h6>
+                                                                                        اختر نوع الاشتراك </h6>
+                                                                                    <select name="maintenance_request_type" class="form-select ">
+                                                                                        <option>2G
+                                                                                        </option>
+                                                                                        <option>3G
+                                                                                        </option>
+                                                                                       
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>

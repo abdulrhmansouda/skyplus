@@ -267,43 +267,60 @@ class SubscriberController extends Controller
 
     public function maintenance(Request $request, Subscriber $subscriber)
     {
-        dd($request->all());
         $request->validate([
-            'type' => ['required', Rule::in([SupportRequestTypeEnum::MAINTENANCE->value, SupportRequestTypeEnum::TRANSFER->value])],
-            'maintenance_request_type' => [Rule::requiredIf($request->type === SupportRequestTypeEnum::MAINTENANCE->value), 'string'],
+            'type' => ['required', Rule::in([SupportRequestTypeEnum::MAINTENANCE->value])],
+            'maintenance_request_type' => ['required', 'string'],
             'note' => ['nullable', 'string', 'between:2,1000'],
         ]);
-
-        if ($request->type === SupportRequestTypeEnum::MAINTENANCE->value) {
-            $attributes['maintenance_request_type'] = $request->maintenance_request_type;
-            $attributes = json_encode($attributes);
-        }
-
         $point = Point::findOrFail(Auth::user()->point->id);
 
+            $attributes['maintenance_request_type'] = $request->maintenance_request_type;
+            $attributes['point_id'] = $point->id;
+            $attributes['subscriber_id'] = $subscriber->id;
 
-        DB::transaction(function () use ($point, $subscriber, $attributes) {
+
+
+        DB::transaction(function () use ($point, $subscriber, $attributes,$request) {
             SupportRequest::create([
                 'point_id'              => $point->id,
                 'subscriber_id'         => $subscriber->id,
-                'type'                  => SupportRequestTypeEnum::SWITCH_PACKAGE,
+                'type'                  => $request->type,
                 'status'                => RequestStatusEnum::WAINTING->value,
-                'attributes'            => $attributes,
+                'attributes'            => json_encode($attributes),
             ]);
 
-            $message = "
-            طلب صيانة من نقطة البيع  {$point->user->username}
- 
-        للمشترك {$subscriber->sub_username}
+            $support_notification = Notification::firstOrFail();
+            $support_notification->support_notification = true;
+            $support_notification->update();
 
-        نوع الصيانة : انترنت ضعيف
+            session()->flash('success', 'تم تسجيل طلبكم بنجاح');
+        });
+        return redirect()->back();
+    }
 
-        http://192.168.106.24/issmanager/kullanici_detay&{$subscriber->sub_id}
+    public function transfer(Request $request, Subscriber $subscriber)
+    {
+        $request->validate([
+            'type' => ['required', Rule::in([SupportRequestTypeEnum::MAINTENANCE->value, SupportRequestTypeEnum::TRANSFER->value])],
+            'note' => ['nullable', 'string', 'between:2,1000'],
+        ]);
+        $point = Point::findOrFail(Auth::user()->point->id);
 
-        🛠️⚙️🛠️⚙️🛠️🛠️⚙️🛠️⚙️🛠️🛠️⚙️🛠️⚙️🛠️
-            ";
+            $attributes['maintenance_request_type'] = 'نقل المنزل';
+            $attributes['point_id'] = $point->id;
+            $attributes['subscriber_id'] = $subscriber->id;
 
-            TelegramController::maintenanceMessage($message);
+
+
+        DB::transaction(function () use ($point, $subscriber, $attributes,$request) {
+            SupportRequest::create([
+                'point_id'              => $point->id,
+                'subscriber_id'         => $subscriber->id,
+                'type'                  => $request->type,
+                'status'                => RequestStatusEnum::WAINTING->value,
+                'attributes'            => json_encode($attributes),
+            ]);
+
             $support_notification = Notification::firstOrFail();
             $support_notification->support_notification = true;
             $support_notification->update();

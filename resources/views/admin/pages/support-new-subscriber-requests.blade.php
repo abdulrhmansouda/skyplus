@@ -22,7 +22,8 @@
                             <table class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3">
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3">
                                             صاحب النقطة</th>
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-1">
@@ -105,8 +106,8 @@
                                                         <i class="fas fa-clipboard-check"></i>
                                                     </a>
                                                     <!-- satrt support1 Modal -->
-                                                    <div class="modal fade" id="support{{ $request->id }}"
-                                                        tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                    <div class="modal fade" id="support{{ $request->id }}" tabindex="-1"
+                                                        role="dialog" aria-labelledby="exampleModalLabel"
                                                         aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                                             <div class="modal-content">
@@ -166,14 +167,16 @@
                                                                                 {{ $request->request_type_arabic() }}
                                                                             </div>
                                                                         </div>
-                                                                        {{-- <div class=" col-md-6">
-                                                                            <div class="form-group">
-                                                                                <h6>
-                                                                                    اسم الباقة الجديدة
-                                                                                </h6>
-                                                                                باقة 2
+                                                                        @if ($request->type === App\Enums\SupportRequestTypeEnum::NEW_SUBSCRIBER->value)
+                                                                            <div class=" col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <h6>
+                                                                                        نوع الاشتراك
+                                                                                    </h6>
+                                                                                    {{ json_decode($request->attributes)->subscription_type }}
+                                                                                </div>
                                                                             </div>
-                                                                        </div> --}}
+                                                                        @endif
                                                                         <div class=" col-12">
                                                                             <div class="form-group">
                                                                                 <h6>
@@ -195,25 +198,27 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <form
-                                                                        action="{{ route('admin.support.acceptRequest', $request->id) }}"
-                                                                        method="POST">
-                                                                        @csrf
-                                                                        <input name="request_id" type="hidden"
-                                                                            value="{{ $request->id }}">
+                                                                    @if ($request->status === App\Enums\RequestStatusEnum::WAINTING->value)
+                                                                        <form
+                                                                            action="{{ route('admin.supportNewSubscriber.acceptRequest', $request->id) }}"
+                                                                            method="POST">
+                                                                            @csrf
+                                                                            <input name="request_id" type="hidden"
+                                                                                value="{{ $request->id }}">
 
-                                                                        <button type="submit"
-                                                                            class="btn btn-info">قبول</button>
-                                                                    </form>
-                                                                    <form
-                                                                        action="{{ route('admin.support.rejectRequest', $request->id) }}"
-                                                                        method="POST">
-                                                                        @csrf
-                                                                        <input name="request_id" type="hidden"
-                                                                            value="{{ $request->id }}">
-                                                                        <button type="submit"
-                                                                            class="btn btn-danger">رفض</button>
-                                                                    </form>
+                                                                            <button type="submit"
+                                                                                class="btn btn-info">قبول</button>
+                                                                        </form>
+                                                                        <form
+                                                                            action="{{ route('admin.supportNewSubscriber.rejectRequest', $request->id) }}"
+                                                                            method="POST">
+                                                                            @csrf
+                                                                            <input name="request_id" type="hidden"
+                                                                                value="{{ $request->id }}">
+                                                                            <button type="submit"
+                                                                                class="btn btn-danger">رفض</button>
+                                                                        </form>
+                                                                    @endif
                                                                     <button class="btn btn-secondary"
                                                                         data-bs-dismiss="modal">الغاء</button>
                                                                 </div>

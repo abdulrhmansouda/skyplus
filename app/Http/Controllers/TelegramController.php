@@ -35,7 +35,6 @@ class TelegramController extends Controller
 
     public static function chargeMessage($message)
     {
-        // dd(1);
         $bot = TelegramBot::findOrFail(1);
         $telegram = new Api($bot->bot_token, true);
 
@@ -47,7 +46,6 @@ class TelegramController extends Controller
     }
     public static function maintenanceMessage($message)
     {
-        // dd(1);
         $bot = TelegramBot::findOrFail(2);
         $telegram = new Api($bot->bot_token, true);
 
@@ -60,7 +58,6 @@ class TelegramController extends Controller
 
     public static function transferMessage($message)
     {
-        // dd(1);
         $bot = TelegramBot::findOrFail(3);
         $telegram = new Api($bot->bot_token, true);
 

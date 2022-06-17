@@ -5,7 +5,7 @@ namespace App\Enums;
 use ArchTech\Enums\Values;
 use ArchTech\Enums\Names;
 use ArchTech\Enums\Options;
-
+// App\Enums\RequestStatusEnum::WAINTING->value
 enum RequestStatusEnum: int
 {
     use Values, Names, Options;

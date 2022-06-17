@@ -22,7 +22,7 @@ return new class extends Migration
             $table->tinyInteger('type');
             $table->tinyInteger('status');
             $table->string('note')->nullable();
-            // $table->json('attributes')->nullable();
+            $table->json('attributes')->nullable();
             $table->timestamps();
             //Relations
             $table->foreignIdFor(Point::class)->constrained()->cascadeOnUpdate();

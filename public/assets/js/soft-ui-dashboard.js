@@ -451,7 +451,7 @@ function HideShowSelect(event){
 }
 
 function HideShowSelectmaintenance(event){
-  if(event.target.value == 'maintenance'){
+  if(event.target.value == 4){
     event.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector(".form-maintenance").classList.remove('d-none');
   }else{
     event.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector(".form-maintenance").classList.add('d-none');

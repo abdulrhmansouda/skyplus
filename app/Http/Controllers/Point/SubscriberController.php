@@ -269,25 +269,28 @@ class SubscriberController extends Controller
     {
         dd($request->all());
         $request->validate([
-            'note' => ['nullable', 'string', 'between:2,1000'],
             'type' => ['required', Rule::in([SupportRequestTypeEnum::MAINTENANCE->value, SupportRequestTypeEnum::TRANSFER->value])],
-
+            'maintenance_request_type' => [Rule::requiredIf($request->type === SupportRequestTypeEnum::MAINTENANCE->value), 'string'],
+            'note' => ['nullable', 'string', 'between:2,1000'],
         ]);
+
+        if ($request->type === SupportRequestTypeEnum::MAINTENANCE->value) {
+            $attributes['maintenance_request_type'] = $request->maintenance_request_type;
+            $attributes = json_encode($attributes);
+        }
 
         $point = Point::findOrFail(Auth::user()->point->id);
 
 
-        DB::transaction(function () use ($point, $subscriber, $request) {
+        DB::transaction(function () use ($point, $subscriber, $attributes) {
             SupportRequest::create([
                 'point_id'              => $point->id,
                 'subscriber_id'         => $subscriber->id,
-                'subscriber_name'       => $subscriber->name,
-                'subscriber_phone'      => $subscriber->phone,
-                'subscriber_address'    => $subscriber->address,
-                'note'                  => $request->note,
-                'type'                  => $request->type,
-                'status'                => RequestStatusEnum::WAINTING->value
+                'type'                  => SupportRequestTypeEnum::SWITCH_PACKAGE,
+                'status'                => RequestStatusEnum::WAINTING->value,
+                'attributes'            => $attributes,
             ]);
+
             $message = "
             طلب صيانة من نقطة البيع  {$point->user->username}
  

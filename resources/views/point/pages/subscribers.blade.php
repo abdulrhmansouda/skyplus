@@ -745,7 +745,7 @@
                                                                                         <div class="form-group">
                                                                                             <input class=""
                                                                                                 name="type" type="radio"
-                                                                                                value="transfer"
+                                                                                                value="{{ App\Enums\SupportRequestTypeEnum::TRANSFER->value }}"
                                                                                                 id="maintenancea{{ $sub->id }}"
                                                                                                 checked
                                                                                                 onchange="HideShowSelectmaintenance(event)">
@@ -758,7 +758,7 @@
                                                                                         <div class="form-group">
                                                                                             <input class=""
                                                                                                 name="type" type="radio"
-                                                                                                value="maintenance"
+                                                                                                value="{{ App\Enums\SupportRequestTypeEnum::MAINTENANCE->value }}"
                                                                                                 id="maintenanceb{{ $sub->id }}"
                                                                                                 onchange="HideShowSelectmaintenance(event)">
                                                                                             <label class=""
@@ -774,25 +774,25 @@
                                                                                 <div class="form-group">
                                                                                     <h6>
                                                                                         اختر سبب الصيانة </h6>
-                                                                                    <select name="report"
+                                                                                    <select name="maintenance_request_type"
                                                                                         class="form-select ">
-                                                                                        <option value="1">انترنت ضعيف
+                                                                                        <option>انترنت ضعيف
                                                                                         </option>
-                                                                                        <option value="2">انترنت مقطوع
+                                                                                        <option>انترنت مقطوع
                                                                                         </option>
-                                                                                        <option value="3">فصل ووصل في
+                                                                                        <option>فصل ووصل في
                                                                                             الانترنت</option>
-                                                                                        <option value="4">تغيير كلمة المرور
+                                                                                        <option>تغيير كلمة المرور
                                                                                             للراوتر</option>
-                                                                                        <option value="5">نقل اللايت من مكان
+                                                                                        <option>نقل اللايت من مكان
                                                                                             لآخر</option>
-                                                                                        <option value="6">تغيير مكان الراوتر
+                                                                                        <option>تغيير مكان الراوتر
                                                                                         </option>
-                                                                                        <option value="7">تبديل راوتر
+                                                                                        <option>تبديل راوتر
                                                                                         </option>
-                                                                                        <option value="8">تبديل لايت
+                                                                                        <option>تبديل لايت
                                                                                         </option>
-                                                                                        <option value="9">تبديل كبل</option>
+                                                                                        <option>تبديل كبل</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>

@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->boolean('support_notification')->default(false);
+            $table->boolean('support_new_subscriber_notification')->default(false);
             $table->timestamps();
         });
     }

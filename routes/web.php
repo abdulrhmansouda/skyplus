@@ -6,7 +6,7 @@ use App\Http\Controllers\Point;
 use App\Http\Controllers\TelegramController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/getUpdateTelegram',[TelegramController::class,'updatedActivity']);
+Route::get('/getUpdateTelegram', [TelegramController::class, 'updatedActivity']);
 
 Route::get('/', function () {
     return redirect(route('login'));
@@ -89,8 +89,8 @@ Route::middleware(['auth', 'admin'])
             ->name('support.')
             ->group(function () {
                 Route::get('/', 'index')->name('index');
-                Route::post('/accept-request/{request}', 'accept_request')->name('accept_request');
-                Route::post('/reject-request/{request}', 'reject_request')->name('reject_request');
+                Route::post('/accept-request/{request}', 'acceptRequest')->name('acceptRequest');
+                Route::post('/reject-request/{request}', 'rejectRequest')->name('rejectRequest');
             });
 
 
@@ -144,7 +144,9 @@ Route::middleware(['auth', 'point'])
             ->name('subscribers.')
             ->group(function () {
                 Route::get('/', 'index')->name('index');
-                Route::put('/charge/{subscriber}', 'charge')->name('charge');
+                Route::post('/charge/{subscriber}', 'charge')->name('charge');
+                Route::post('/uncharge/{subscriber}', 'uncharge')->name('uncharge');
+                Route::post('/switch-package-and-charge-request/{subscriber}', 'switchPackageAndChargeRequest')->name('switchPackageAndChargeRequest');
                 Route::put('/maintenance/{subscriber}', 'maintenance')->name('maintenance');
             });
 
@@ -198,15 +200,15 @@ Route::middleware(['auth', 'accountant'])
             ->prefix('/box-cash')
             ->name('box-cash.')
             ->group(function () {
-                Route::get('/','index')->name('index');
-                Route::post('/store','store')->name('store');
+                Route::get('/', 'index')->name('index');
+                Route::post('/store', 'store')->name('store');
             });
 
         Route::controller(Accountant\BoxBankController::class)
             ->prefix('/box-bank')
             ->name('box-bank.')
             ->group(function () {
-                Route::get('/','index')->name('index');
+                Route::get('/', 'index')->name('index');
             });
 
         Route::prefix('/sitting')

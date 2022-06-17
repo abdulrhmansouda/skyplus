@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\BoxTransactionTypeEnum;
 use App\Enums\MoneyTransactionTypeEnum;
 use App\Enums\PaymentTypeEnum;
+use App\Enums\ReportTypeEnum;
 use App\Enums\UserStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\BoxCash;
@@ -63,7 +64,7 @@ class RechargeController extends Controller
                 'on_him' => 0,
                 'to_him' => $amount,
                 'pre_account' => $pre_account,
-                'type' => 'charge_point',
+                'type' => ReportTypeEnum::CHARGE_POINT->value,
             ]);
             // dd(1);
             if ($request->payment_type == PaymentTypeEnum::CASH->value) {

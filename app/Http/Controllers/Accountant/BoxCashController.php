@@ -65,7 +65,7 @@ class BoxCashController extends Controller
      */
     public function store(StoreBoxCashRequest $request)
     {
-        dd($request->validated()['account']);
+        // dd($request->validated()['account']);
         if ($request->validated()['account'] < 0) {
             session()->flash('error', ' المبلغ الذي في الصندوق لا يكفي للسحب');
             return redirect()->back();

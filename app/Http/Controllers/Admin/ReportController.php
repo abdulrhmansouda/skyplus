@@ -22,13 +22,14 @@ class ReportController extends Controller
      */
     public function index(Request $request)
     {
-        $daterange = $request->daterange ?? now()->format('m/d/Y') . " - " . now()->format('m/d/Y');
-
+        
         $all_date = $request->all_date ?? '';
-
+        
         $points = (in_array("0", $request->points ?? ["0"])) ? ["0"] : $request->points;
 
-        $reports = Report::select('*');
+        $daterange = $request->daterange ?? now()->format('m/d/Y') . " - " . now()->format('m/d/Y');
+
+        $reports = new Report;
         if (!in_array("0", $points)) {
             $reports = Report::whereIn('point_id', $points);
 
@@ -44,7 +45,6 @@ class ReportController extends Controller
             preg_match_all("/([^-]*) - (.*)/", $daterange, $date);
             if ($date[1]) {
                 $from = new Carbon($date[1][0]);
-                $pre = $from->addDays(-1);
                 $to = new Carbon($date[2][0]);
                 $reports = $reports->whereDate('created_at', '>=', $from)
                     ->whereDate('created_at', '<=', $to);
@@ -52,11 +52,11 @@ class ReportController extends Controller
         }
 
         $reports = $reports
+            ->orderBy('created_at');
 
-        ->orderBy('created_at');
+        $from = isset($from) ? $from->format('d/m/Y') : (clone $reports)->get()->first()->created_at->format('d/m/Y');
+        $to   = isset($to) ? $to->format('d/m/Y') : (clone $reports)->get()->last()->created_at->format('d/m/Y');
 
-
-        
         return view('admin.pages.reports', [
             'points' => Point::select(['id', 'name'])->get(),
             '_points' => $points ?? [],
@@ -68,9 +68,8 @@ class ReportController extends Controller
 
             'pre_account' => 0,
 
-            'pre' => isset($pre) ? $pre->format('d/m/Y') : 'all',
-            'from' => isset($from) ? $from->format('d/m/Y') : 'all',
-            'to' => isset($to) ? $to->format('d/m/Y') : 'all',
+            'from' => $from,
+            'to' => $to,
         ]);
     }
 
@@ -115,7 +114,7 @@ class ReportController extends Controller
         $from = isset($from) ? $from->format('d/m/Y') : 'all';
         $to = isset($to) ? $to->format('d/m/Y') : 'all';
 
-        $export = new ReportsExport($reports->get(), $name_points ?? '', $pre, $from, $to,0);
+        $export = new ReportsExport($reports->get(), $name_points ?? '', $pre, $from, $to, 0);
         return Excel::download($export, "reports.xlsx");
     }
 }

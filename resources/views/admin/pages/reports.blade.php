@@ -18,9 +18,9 @@
                     </div>
                     <select name="points[]" class="js-data-example-ajax form-select" id="mySelect2" multiple>
                         <option value="0" @if(in_array("0",$_points)) selected @endif>الكل</option>
-                        <!-- @foreach ($points as $point)
+                         @foreach ($points as $point)
                         <option value="{{ $point->id }}" @if(in_array($point->id,$_points))selected @endif>{{ $point->name }}</option>
-                        @endforeach -->
+                        @endforeach
                     </select>
                     <button type="submit" class="mb-0 btn btn-secondary btn-sm ps-3 pe-3">بحث</button>
                 </div>
@@ -75,10 +75,12 @@
                                     <td class="text-xs text-uppercase font-weight-bolder ps-3">
                                         اعتبارا من {{ $from }} الى تاريخ {{ $to }}
                                     </td>
-                                    <td class="px-1 text-xs text-uppercase font-weight-bolder ">الرصيد السابق
-                                        {{ $pre }}
+                                    <td class="px-1 text-xs text-uppercase font-weight-bolder ">
+                                        {{-- الرصيد السابق
+                                        {{ $pre }} --}}
                                     </td>
-                                    <td class="px-1 text-xs text-uppercase font-weight-bolder ">{{ $pre_account }}
+                                    <td class="px-1 text-xs text-uppercase font-weight-bolder ">
+                                        {{-- {{ $pre_account }} --}}
                                     </td>
                                     <td class="px-1 text-xs text-uppercase font-weight-bolder "></td>
                                     <td class="px-1 text-xs text-uppercase font-weight-bolder "></td>

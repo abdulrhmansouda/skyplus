@@ -38,8 +38,9 @@ class StoreBoxCashRequest extends FormRequest
 
     public function validated($key = null, $default = null)
     {
-        $last_box_cash = BoxCash::orderBy('created_at', 'DESC')->get()->last();
+        $last_box_cash = BoxCash::all()->last();
         $pre_account   = $last_box_cash?->account ?? 0;
+        // dd($pre_account);
         if ($this->transaction_type == MoneyTransactionTypeEnum::PUT_MONEY->value) {
             $account       = $pre_account + $this->amount;
             $box_transaction_type = BoxTransactionTypeEnum::SELL->value;

@@ -20,7 +20,7 @@ class PointFactory extends Factory
         return [
             'name'                    => $this->faker->name,
             'address'                 => $this->faker->address,
-            'account'                 => $this->faker->numberBetween(0, 101010),
+            'account'                 => $this->faker->numberBetween(-101010, 101010),
             't_c'                     => $this->faker->numberBetween(10000000000, 21474831641),
             'charge_commission'       => $this->faker->randomFloat(null, 0, 30),
             'new_commission'          => $this->faker->randomFloat(3, 0, 100),

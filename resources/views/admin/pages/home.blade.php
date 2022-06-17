@@ -15,7 +15,7 @@
                                     <form action="" method="GET">
                                         <div class="gap-2 d-flex align-items-center">
                                             <input name="daterange" type="text" class="form-control daterange" required
-                                                value="{{ $daterange }}"/>
+                                                value="{{ $daterange }}" />
                                             <button type="submit"
                                                 class="mb-0 btn btn-secondary btn-sm ps-3 pe-3">بحث</button>
                                         </div>
@@ -38,15 +38,16 @@
                             <div class="mt-3 col-md-6">
                                 <h6 class="font-weight-bolder"> نظرة عامة على حركة الصندوق *****</h6>
                                 <ul class="p-0 list-group">
-                                    <li class="pt-0 pb-0 text-sm border-0 list-group-item ps-0"><a href=""><strong
-                                            class="text-dark"> بنك
-                                            :</strong>&nbsp; 10000</a></li>
+                                    <li class="pb-0 text-sm border-0 list-group-item ps-0"><strong class="text-dark"><a
+                                                target="_blank" href="{{ route('accountant.box-cash.index') }}">نقد</a>
+                                            :</strong> &nbsp; {{ $current_box_cash }}</li>
+                                    <li class="pt-0 pb-0 text-sm border-0 list-group-item ps-0"><strong
+                                            class="text-dark"> <a target="_blank"
+                                                href="{{ route('accountant.box-bank.index') }}">بنك</a>
+                                            :</strong>&nbsp; {{ $current_box_bank }}</li>
                                     <li class="pb-0 text-sm border-0 list-group-item ps-0"><strong
                                             class="text-dark">دين
-                                            :</strong> &nbsp; 12</li>
-                                    <li class="pb-0 text-sm border-0 list-group-item ps-0"><a href=""><strong
-                                            class="text-dark">نقد
-                                            :</a></strong> &nbsp; 12</li>
+                                            :</strong> &nbsp; {{ $current_debts }}</li>
                                 </ul>
                             </div>
                         </div>

@@ -3,9 +3,8 @@
 namespace App\Http\Requests\Point;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class ChargeSubscriberRequest extends FormRequest
+class SwitchPackageAndChargeSubscriberRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +25,7 @@ class ChargeSubscriberRequest extends FormRequest
     {
         return [
             'months' => ['required', 'numeric', 'between:1,12'],
-            // 'type' => ['required', Rule::in(['true', 'false', 'upgrate'])],
-            // 'package_id' => [Rule::requiredIf($this->type === 'upgrate'),'exists:packages,id'],
+            'package_id' => ['required', 'exists:packages,id'],
         ];
     }
 }

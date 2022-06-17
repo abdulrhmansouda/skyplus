@@ -13,4 +13,9 @@ class Notification extends Model
         $support_notification = Notification::firstOrFail();
         return $support_notification->support_notification == true;
     }
+
+    public static function isThereSupportNewSubscriberNotification(){
+        $support_notification = Notification::firstOrFail();
+        return $support_notification->support_new_subscriber_notification == true;
+    }
 }

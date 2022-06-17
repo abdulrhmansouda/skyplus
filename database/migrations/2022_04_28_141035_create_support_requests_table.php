@@ -18,11 +18,13 @@ return new class extends Migration
         Schema::create('support_requests', function (Blueprint $table) {
             $table->id();
 
-            $table->string('subscriber_name');
-            $table->string('subscriber_phone');
+            // $table->string('subscriber_name');
+            // $table->string('subscriber_phone');
             $table->tinyInteger('type');
-            $table->string('report')->nullable();
+            // $table->string('report')->nullable();
             $table->tinyInteger('status');
+            $table->json('attributes')->nullable();
+            // $table->string('attributes')->nullable();
             $table->string('note')->nullable();
 
             $table->foreignIdFor(Point::class)->constrained()->cascadeOnUpdate();

@@ -25,7 +25,7 @@ class ReportFactory extends Factory
             'to_him' => $this->faker->numberBetween(0,100),
             'pre_account' => $this->faker->numberBetween(0,100000),
             'created_at' => $this->faker->date(),
-            // 'updated_at'
+            'type'      => rand(1,4),
         ];
     }
 }

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Accountant;
 
 use App\Http\Controllers\Controller;
+use App\Models\BoxBank;
+use App\Models\BoxCash;
 use App\Models\Invoice;
+use App\Models\Point;
 use App\Models\Subscriber;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -32,14 +35,22 @@ class HomeController extends Controller
 
         $sum = clone $count;
 
-        $count = $count->sum('month');
+        $count = $count->sum('months');
         $sum = $sum->sum('amount');
+
+        $current_box_cash = BoxCash::all()?->last()?->account ?? 0;
+        $current_box_bank = BoxBank::all()?->last()?->account ?? 0;
+        $current_debts    = Point::where('account','<',0)->get()->sum('account');
 
 
         return view('accountant.pages.home',[
             'active' => $active,
             'deactive' => $deactive,
             'closed' => $closed,
+
+            'current_box_cash' => $current_box_cash,
+            'current_box_bank' => $current_box_bank,
+            'current_debts'    => $current_debts,
             // 'date' => $date,
             // 'from' => $from,
             // 'to' => $to,

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\BoxBank;
+use App\Models\BoxCash;
 use App\Models\Invoice;
+use App\Models\Point;
 use App\Models\Subscriber;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -17,9 +20,9 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $active = Subscriber::where('status' , 'active')->count();
-        $deactive = Subscriber::where('status' , 'deactive')->count();
-        $closed = Subscriber::where('status' , 'closed')->count();
+        $active = Subscriber::where('status', 'active')->count();
+        $deactive = Subscriber::where('status', 'deactive')->count();
+        $closed = Subscriber::where('status', 'closed')->count();
         // start daterange
         $daterange = $request->daterange ?? now()->format('m/d/Y') . " - " . now()->format('m/d/Y');
 
@@ -31,20 +34,27 @@ class HomeController extends Controller
         }
 
         $count = Invoice::whereDate('created_at', '>=', $from)
-        ->whereDate('created_at', '<=', $to);
+            ->whereDate('created_at', '<=', $to);
         // end daterange
 
 
         $sum = clone $count;
 
-        $count = $count->sum('month');
+        $count = $count->sum('months');
         $sum = $sum->sum('amount');
 
+        $current_box_cash = BoxCash::all()?->last()?->account ?? 0;
+        $current_box_bank = BoxBank::all()?->last()?->account ?? 0;
+        $current_debts    = Point::where('account', '<', 0)->get()->sum('account');
 
-        return view('admin.pages.home',[
+
+        return view('admin.pages.home', [
             'active' => $active,
             'deactive' => $deactive,
             'closed' => $closed,
+            'current_box_cash' => $current_box_cash,
+            'current_box_bank' => $current_box_bank,
+            'current_debts'    => $current_debts,
             // 'date' => $date,
             // 'from' => $from,
             // 'to' => $to,

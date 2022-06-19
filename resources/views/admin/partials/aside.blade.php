@@ -318,8 +318,8 @@
 
                         <li class="mb-1 @if (Route::currentRouteName() === 'admin.setting.social.index') active @endif"><a
                                 href="{{ route('admin.setting.social.index') }}">معلومات التواصل</a></li>
-                        <li class="mb-1 @if (Route::currentRouteName() === 'admin.setting.other.index') active @endif"><a
-                                href="{{ route('admin.setting.other.index') }}">اعدادات أٌخرى</a></li>
+                        {{-- <li class="mb-1 @if (Route::currentRouteName() === 'admin.setting.other.index') active @endif"><a
+                                href="{{ route('admin.setting.other.index') }}">اعدادات أٌخرى</a></li> --}}
                     </ul>
                 </div>
             </li>

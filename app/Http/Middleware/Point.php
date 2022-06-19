@@ -21,6 +21,7 @@ class Point
         if(!Auth::user()->isPoint()){
             abort(403);
         }
+        // dd(Auth::user());
         // dd(!Auth::user()->point->status != UserStatusEnum::ACTIVE->value);
         if(Auth::user()->point->status !== UserStatusEnum::ACTIVE->value){
             abort(403,'تم تعطيل الحساب الرجاء الاتصال بفريق الدعم');

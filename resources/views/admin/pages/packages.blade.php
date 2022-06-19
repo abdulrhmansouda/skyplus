@@ -82,12 +82,7 @@
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold">{{ $package->price }}</p>
                                     </td>
-                                    <td class="text-sm align-middle">
-                                        @if ($package->status === 'active')
-                                        <span class="badge badge-sm bg-gradient-success">مفعل</span>
-                                        @else
-                                        <span class="badge badge-sm bg-gradient-danger">مغلق</span>
-                                        @endif                                     </td>
+                                    <td class="text-sm align-middle">{!! $package->status() !!}</td>
 
                                     <td class="align-middle ">
 
@@ -130,8 +125,8 @@
                                                                         </span>
                                                                     </label>
                                                                     <select required="" class="form-select" name="status">
-                                                                        <option value="active" @if($package->status === 'active') selected @endif> مفعل</option>
-                                                                        <option value="closed" @if($package->status === 'closed') selected @endif>مفلق</option>
+                                                                        <option value="{{ App\Enums\UserStatusEnum::ACTIVE->value }}" @if($package->status === App\Enums\UserStatusEnum::ACTIVE->value) selected @endif> مفعل</option>
+                                                                        <option value="{{ App\Enums\UserStatusEnum::CLOSED->value }}" @if($package->status === App\Enums\UserStatusEnum::CLOSED->value) selected @endif>مفلق</option>
                                                                     </select>
                                                                 </div>
                                                             </div>

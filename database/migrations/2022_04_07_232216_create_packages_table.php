@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('price');
-            $table->enum('status',['active','closed'])->default('active');
+            $table->tinyInteger('status');
             $table->timestamps();
         });
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Point;
 use App\Enums\ReportTypeEnum;
 use App\Enums\RequestStatusEnum;
 use App\Enums\SupportRequestTypeEnum;
+use App\Enums\UserStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\TelegramController;
 use App\Http\Requests\Point\ChargeSubscriberRequest;
@@ -41,7 +42,7 @@ class SubscriberController extends Controller
         $reports = Report::where('point_id', Auth::user()->point->id)
             ->whereDate('created_at', now()->format('Y-m-d'))->get();
 
-        $packages = Package::where('id', '<>', $sub?->package_id)->get();
+        $packages = Package::active()->where('id', '<>', $sub?->package_id)->get();
 
         return view('point.pages.subscribers', [
             'sub' => $sub,
@@ -56,6 +57,12 @@ class SubscriberController extends Controller
     {
         $sub = Subscriber::findOrFail($id);
         $package = $sub->package;
+
+        if ($package->status === UserStatusEnum::CLOSED->value) {
+            session()->flash('error', 'هذه الباقة لم تعد متاحة الرجاء ترقية الباقة');
+            return redirect()->back();
+        }
+
         $point = Auth::user()->point;
 
         $months = $request->months;

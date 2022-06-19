@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\UserStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StorePackageRequest;
 use App\Http\Requests\Admin\UpdatePackageRequest;
@@ -21,6 +22,7 @@ class PackageController extends Controller
     {
         $s = $request->s ?? '';
         
+        // User::withoutGlobalScope('ancient')->get();
             $packages = Package::where('name', 'LIKE', "%$s%");
 
         return view('admin.pages.packages', [
@@ -56,6 +58,7 @@ class PackageController extends Controller
         $package = new Package;
         $package->name = $request->name;
         $package->price = $request->price;
+        $package->status = UserStatusEnum::ACTIVE->vlaue;
 
         $package->save();
 
@@ -94,13 +97,13 @@ class PackageController extends Controller
      */
     public function destroy(Package $package)
     {
-        if ($package->status !== 'closed') {
-            $package->status = 'closed';
+        // if ($package->status !== 'closed') {
+            $package->status = UserStatusEnum::CLOSED->value;
             $package->update();
             session()->flash('success', "تم اغلاق الباقة $package->name بنجاح");
-        } else {
-            session()->flash('error', "الباقة $package->name مغلق بالفعل!");
-        }
+        // } else {
+        //     session()->flash('error', "الباقة $package->name مغلق بالفعل!");
+        // }
         return redirect()->back();
     }
 }

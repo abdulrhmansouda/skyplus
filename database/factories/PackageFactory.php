@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Collection;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Package>
@@ -22,10 +23,9 @@ class PackageFactory extends Factory
         // $carbon1 = new Carbon ($date);
         // $carbon1 = $carbon1->addMonths($this->faker->numberBetween(1,12));
         return [
-            'name' => $this->faker->name,
-            'price' => $this->faker->numberBetween(1,100),
-            // 'start' => $carbon0,
-            // 'end' => $carbon1,
+            'name'      => $this->faker->name,
+            'price'     => $this->faker->numberBetween(1,100),
+            'status'    => Collection::make([1,3])->random(),
         ];
     }
 }

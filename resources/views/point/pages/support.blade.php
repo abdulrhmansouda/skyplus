@@ -111,7 +111,7 @@
                                             <select name="subscription_type" class="form-select ">
                                                 <option>2G
                                                 </option>
-                                                <option>3G
+                                                <option>5G
                                                 </option>
                                             </select>
                                         </div>

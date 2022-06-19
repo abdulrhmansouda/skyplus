@@ -107,7 +107,7 @@ class PointController extends Controller
         $point->t_c = $request->t_c;
         $point->phone = $request->phone;
         $point->address = $request->address;
-        // $point->status = $request->status;
+        $point->status = $request->status;
         $point->maximum_debt_limit = $request->maximum_debt_limit;
 
         $point->update();

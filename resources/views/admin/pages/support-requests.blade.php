@@ -167,6 +167,16 @@
                                                                                 {{ $request->request_type_arabic() }}
                                                                             </div>
                                                                         </div>
+                                                                        @if ($request->type === App\Enums\SupportRequestTypeEnum::MAINTENANCE->value)
+                                                                        <div class=" col-md-6">
+                                                                            <div class="form-group">
+                                                                                <h6>
+                                                                                     نوع طلب الصيانة
+                                                                                </h6>
+                                                                                {{ json_decode($request->attributes)->maintenance_request_type}}
+                                                                            </div>
+                                                                        </div>
+                                                                        @endif
                                                                         @if ($request->type === App\Enums\SupportRequestTypeEnum::SWITCH_PACKAGE->value)
                                                                             <div class=" col-md-6">
                                                                                 <div class="form-group">

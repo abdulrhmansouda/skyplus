@@ -112,7 +112,7 @@
                                     <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         هاتف</th>
                                     <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        T.C/th>
+                                        T.C </th>
                                         <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         الحالة</th>
                                     <th class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">

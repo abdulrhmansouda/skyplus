@@ -113,8 +113,8 @@ Route::middleware(['auth', 'admin'])
                     ->name('binding-telegram.')
                     ->group(function () {
                         Route::get('/', 'index')->name('index');
-                        Route::put('/charge-update', 'chargeUpdate')->name('charge-update');
-                        Route::put('/maintenance-update', 'maintenanceUpdate')->name('maintenance-update');
+                        Route::put('/bot/{bot}/update', 'botUpdate')->name('bot-update');
+                        // Route::put('/maintenance-update', 'maintenanceUpdaste')->name('maintenance-update');
                     });
 
                 Route::controller(Admin\ChangePasswordController::class)

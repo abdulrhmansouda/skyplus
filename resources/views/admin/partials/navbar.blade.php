@@ -42,7 +42,11 @@
                         @break
 
                         @case('admin.support.index')
-                            الدعم الفني
+                            الدعم الفني للمشتركين الاساسين
+                        @break
+
+                        @case('admin.supportNewSubscriber.index')
+                            الدعم الفني للمشتركين الجدد
                         @break
 
                         @case('admin.setting.binding-app.index')

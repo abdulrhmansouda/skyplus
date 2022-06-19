@@ -219,7 +219,15 @@
                                                 <p class="mb-0 text-xs font-weight-bold">{{ $point->user->username }}</p>
                                             </td>
                                             <td>
-                                                <p class="mb-0 text-xs font-weight-bold">{{ $point->account }}</p>
+                                                <p class="mb-0 text-xs font-weight-bold
+                                                @if($point->account>0)
+                                                bg-success text-white
+                                                @elseif($point->account<0)
+                                                bg-danger text-white
+                                                @else
+                                                bg-warning text-white
+                                                @endif
+                                                " >{{ $point->account }}</p>
                                             </td>
                                             <td>
                                                 <p class="mb-0 text-xs font-weight-bold">{{ $point->charge_commission }}%
@@ -235,7 +243,7 @@
                                             <td>
                                                 <p class="mb-0 text-xs font-weight-bold">{{ $point->t_c }}</p>
                                             </td>
-                                            *****
+                                            {{-- ***** --}}
 
                                             <td class="text-sm align-middle">
                                                 {!! $point->status() !!}
@@ -578,7 +586,7 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            {{-- <div class="col-md-4 col-sm-6 ">
+                                                                            <div class="col-md-4 col-sm-6 ">
                                                                                 <div class="form-group">
                                                                                     <label>
                                                                                         حالة المستخدم
@@ -588,15 +596,15 @@
                                                                                     <select required=""
                                                                                         class="form-select"
                                                                                         name="status">
-                                                                                        <option value="active"
-                                                                                            @if ($point->status === 'active') selected @endif>
+                                                                                        <option value={{ App\Enums\UserStatusEnum::ACTIVE->value }}
+                                                                                            @if ($point->status === App\Enums\UserStatusEnum::ACTIVE->value) selected @endif>
                                                                                             مفعل</option>
-                                                                                        <option value="closed"
-                                                                                            @if ($point->status === 'closed') selected @endif>
+                                                                                        <option value={{ $point->status === App\Enums\UserStatusEnum::CLOSED->value }}
+                                                                                            @if ($point->status === App\Enums\UserStatusEnum::CLOSED->value) selected @endif>
                                                                                             مفلق</option>
                                                                                     </select>
                                                                                 </div>
-                                                                            </div> --}}
+                                                                            </div>
 
                                                                             <div class="col-md-4 col-sm-6">
                                                                                 <div class="form-group">

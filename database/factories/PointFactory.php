@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Enums\UserStatusEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Collection;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Point>
@@ -26,7 +27,7 @@ class PointFactory extends Factory
             'new_commission'          => $this->faker->randomFloat(3, 0, 100),
             'switch_commission'       => $this->faker->randomFloat(3, 0, 100),
             // 'borrowing_is_allowed' => $this->faker->boolean,
-            'status'                  => rand(1,3),
+            'status'                  => Collection::make([1,3])->random(),
             'phone'                   => $this->faker->phoneNumber,
             'daily_profit'            => $this->faker->numberBetween(0, 1000),
             'maximum_debt_limit'      => $this->faker->numberBetween(0, 1000),

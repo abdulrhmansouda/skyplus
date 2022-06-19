@@ -93,6 +93,15 @@ Route::middleware(['auth', 'admin'])
                 Route::post('/reject-request/{request}', 'rejectRequest')->name('rejectRequest');
             });
 
+        Route::controller(Admin\SupportNewSubscriberController::class)
+            ->prefix('/support-new-subscriber')
+            ->name('supportNewSubscriber.')
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::post('/accept-request/{request}', 'acceptRequest')->name('acceptRequest');
+                Route::post('/reject-request/{request}', 'rejectRequest')->name('rejectRequest');
+            });
+
 
         Route::prefix('/sitting')
             ->name('setting.')
@@ -104,8 +113,8 @@ Route::middleware(['auth', 'admin'])
                     ->name('binding-telegram.')
                     ->group(function () {
                         Route::get('/', 'index')->name('index');
-                        Route::put('/charge-update', 'chargeUpdate')->name('charge-update');
-                        Route::put('/maintenance-update', 'maintenanceUpdate')->name('maintenance-update');
+                        Route::put('/bot/{bot}/update', 'botUpdate')->name('bot-update');
+                        // Route::put('/maintenance-update', 'maintenanceUpdaste')->name('maintenance-update');
                     });
 
                 Route::controller(Admin\ChangePasswordController::class)
@@ -156,7 +165,8 @@ Route::middleware(['auth', 'point'])
             ->name('support.')
             ->group(function () {
                 Route::get('/', 'index')->name('index');
-                Route::post('/support_request', 'support_request')->name('support_request');
+                Route::post('/new-subscriber-request', 'newSubscriberRequest')->name('newSubscriberRequest');
+                Route::post('/switch-company-request', 'switchCompanyRequest')->name('switchCompanyRequest');
             });
 
         Route::controller(Point\ReportController::class)

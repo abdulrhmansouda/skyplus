@@ -87,7 +87,7 @@ class SubscriberController extends Controller
         DB::transaction(function () use ($point, $amount, $profit, $sub, $months, $message, $message_profit, $telegram_message) {
             $point->takeFromAccount($amount);
             $point->addProfitToAccount($profit);
-
+            
             $sub->payMonths($months);
 
             //make a report
@@ -287,6 +287,7 @@ class SubscriberController extends Controller
                 'type'                  => $request->type,
                 'status'                => RequestStatusEnum::WAINTING->value,
                 'attributes'            => json_encode($attributes),
+                'note'                  => $request->note,
             ]);
 
             $support_notification = Notification::firstOrFail();
@@ -319,6 +320,7 @@ class SubscriberController extends Controller
                 'type'                  => $request->type,
                 'status'                => RequestStatusEnum::WAINTING->value,
                 'attributes'            => json_encode($attributes),
+                'note'                  => $request->note,
             ]);
 
             $support_notification = Notification::firstOrFail();

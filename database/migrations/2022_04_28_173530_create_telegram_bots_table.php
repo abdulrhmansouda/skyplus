@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('telegram_bots', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
+            $table->string('name');
             $table->string('bot_token');
             $table->string('chat_id');
             $table->timestamps();

@@ -5,7 +5,7 @@ namespace App\Enums;
 use ArchTech\Enums\Values;
 use ArchTech\Enums\Names;
 use ArchTech\Enums\Options;
-
+// App\Enums\SupportRequestTypeEnum::NEW_SUBSCRIBER->value
 enum SupportRequestTypeEnum: int
 {
     use Values, Names, Options;

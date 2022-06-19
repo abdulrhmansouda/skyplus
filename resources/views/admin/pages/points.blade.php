@@ -225,7 +225,7 @@
                                                 @elseif($point->account<0)
                                                 bg-danger text-white
                                                 @else
-                                                bg-warning text-white
+                                                bg-warning text-dark
                                                 @endif
                                                 " >{{ $point->account }}</p>
                                             </td>

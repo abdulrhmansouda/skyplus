@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Enums\UserStatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules;
-
 
 class UpdateAdminRequest extends FormRequest
 {
@@ -26,13 +25,14 @@ class UpdateAdminRequest extends FormRequest
      */
     public function rules()
     {
+        // dd($this->all());
         return [
             'name' => ['required', 'string', 'min:2',],
             'username' => ['required', 'string', "unique:users,username,$this->id"],
-            'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
+            'password' => ['nullable',],
             't_c' => ['required', 'string ', 'min:11', 'max:11'],
             'phone' => ['required', 'string ', 'max:100'],
-            'status' => ['required' , Rule::in(['active', 'closed']) ],
+            'status' => ['required' ,'numeric', Rule::in([UserStatusEnum::ACTIVE->value,UserStatusEnum::CLOSED->value]) ],
         ];
     }
 }

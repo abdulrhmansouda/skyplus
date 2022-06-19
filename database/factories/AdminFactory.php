@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\UserStatusEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,6 +21,7 @@ class AdminFactory extends Factory
             'name' => $this->faker->name,
             't_c' => $this->faker->numberBetween(10000000000,33333333333),  
             'phone' => $this->faker->phoneNumber,
+            'status' => UserStatusEnum::ACTIVE->value,
         ];
     }
 }

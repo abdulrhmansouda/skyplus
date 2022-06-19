@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\UserStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreAdminRequest;
 use App\Http\Requests\Admin\UpdateAdminRequest;
@@ -23,9 +24,9 @@ class AdminController extends Controller
 
         $s = $request->s ?? '';
 
-            $admins = Admin::where('name', 'LIKE', "%$s%")
-                ->orWhere('t_c', 'LIKE', "%$s%")
-                ->orWhere('phone', 'LIKE', "%$s%");
+        $admins = Admin::where('name', 'LIKE', "%$s%")
+            ->orWhere('t_c', 'LIKE', "%$s%")
+            ->orWhere('phone', 'LIKE', "%$s%");
 
         return view('admin.pages.admins', [
             'admins' => $admins->paginate(10),
@@ -42,22 +43,9 @@ class AdminController extends Controller
     public function store(StoreAdminRequest $request)
     {
 
-        $user = new User;
-            $user->username = $request->username;
-            $user->role = 'admin';
-            $user->password = Hash::make($request->password);
+        $user = User::create($request->validated()['user']);
 
-            $user->save();
-
-            $admin = new Admin;
-
-            $admin->name = $request->name;
-            $admin->user_id = $user->id;
-            $admin->t_c = $request->t_c;
-            $admin->phone = $request->phone;
-            // $admin->status = $request->status;
-
-            $admin->save();
+        $admin = Admin::create(array_merge($request->validated()['admin'], ['user_id' => $user->id]));
 
         session()->flash('success', 'تم انشاء المشرف بنجاح');
 
@@ -74,28 +62,23 @@ class AdminController extends Controller
      */
     public function update(UpdateAdminRequest $request, $id)
     {
-        // dd($request->all());
         $user = User::findOrFail($id);
+        $user->username = $request->username;
+        $user->password = $request->password ? Hash::make($request->password) : $user->password;
+        $user->update();
         $admin = $user->admin;
 
-        $user->username = $request->username;
-        // $user->role = 'admin';
-        $user->password = $request->password ? Hash::make($request->password) : $user->password;
-
-        $user->update();
-
-        // $admin = new Admin;
-
-        $admin->name = $request->name;
+        $admin->name    = $request->name;
         $admin->user_id = $user->id;
-        $admin->t_c = $request->t_c;
-        $admin->phone = $request->phone;
-        $admin->status = $request->status;
+        $admin->t_c     = $request->t_c;
+        $admin->phone   = $request->phone;
+        $admin->status  = $request->status;
+
         $admin->update();
 
-    session()->flash('success', 'تم تعديل المشرف بنجاح');
+        session()->flash('success', 'تم تعديل المشرف بنجاح');
 
-    return redirect()->back();
+        return redirect()->back();
     }
 
     /**
@@ -106,13 +89,9 @@ class AdminController extends Controller
      */
     public function destroy(Admin $admin)
     {
-        if ($admin->status !== 'closed') {
-            $admin->status = 'closed';
-            $admin->update();
-            session()->flash('success', "تم اغلاق المشرف $admin->name بنجاح");
-        } else {
-            session()->flash('error', "المشرف $admin->name مغلق بالفعل!");
-        }
+        $admin->status = UserStatusEnum::CLOSED->value;
+        $admin->update();
+        session()->flash('success', "تم اغلاق المشرف $admin->name بنجاح");
         return redirect()->back();
     }
 }

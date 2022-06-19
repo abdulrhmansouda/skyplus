@@ -20,6 +20,11 @@ class Admin
         if(!(Auth::user()->isAdmin()||Auth::user()->isSuperAdmin())){
             abort(403);
         }
+        // dd(Auth::user());
+        // if(Auth::user()->admin->status !== UserStatusEnum::ACTIVE->value){
+        //     abort(403,'تم تعطيل الحساب الرجاء الاتصال بفريق الدعم');
+        //     return view('point.pages.point-inactive');
+        // }
         return $next($request);
     }
 }

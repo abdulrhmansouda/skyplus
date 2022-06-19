@@ -7,7 +7,7 @@
 @section('content')
 <div class="py-4 container-fluid">
     <div class="mb-3 row">
-        <div class="col-md-10 ">
+        <div class="col-md-12 ">
             <form action="" method="GET">
                 <div class="gap-2 d-flex align-items-center">
                     <input name="daterange" type="text" class="form-control w-50 daterange" value="{{ $daterange ?? '' }}" />
@@ -18,7 +18,7 @@
                     </div>
                     <select name="points[]" class="js-data-example-ajax form-select" id="mySelect2" multiple>
                         <option value="0" @if(in_array("0",$_points)) selected @endif>الكل</option>
-                         @foreach ($points as $point)
+                        @foreach ($points as $point)
                         <option value="{{ $point->id }}" @if(in_array($point->id,$_points))selected @endif>{{ $point->name }}</option>
                         @endforeach
                     </select>
@@ -27,6 +27,19 @@
             </form>
         </div>
 
+
+    </div>
+    <div class="mb-3 row justify-content-between">
+        <div class="col-md-5 ">
+            <form action="" method="GET">
+                <select name="box_transaction_type" class="form-select">
+                    <option value="">الكل</option>
+                    <option>شحن </option>
+                    <option>تسديد</option>
+                    <option>عمولة</option>
+                </select>
+            </form>
+        </div>
         <div class="col-md-2">
             <form action="{{ route('admin.reports.export') }}" method="POST">
                 @csrf
@@ -35,14 +48,13 @@
 
                 <?php $value = base64_encode(serialize($_points)); ?>
                 <input name="points" type="hidden" value="{{ $value }}">
-                <button class="m-2 btn btn-white ps-3 pe-3 m-md-0">
+                <button class="m-2 btn btn-white ps-3 pe-3 m-md-0 w-100">
                     تصدير الى excel
                     <i class="mx-1 fas fa-file-export"></i>
                 </button>
             </form>
         </div>
     </div>
-
     <div class="row">
         <div class="col-12">
             <div class="mb-4 card">
@@ -90,8 +102,8 @@
                                 <tr class="bg-aliceblue">
                                     <td class="text-xs text-uppercase font-weight-bolder ps-3">التاريخ</td>
                                     <td class="text-xs text-uppercase font-weight-bolder ps-3">اسم النقطة</td>
-                                    <td class="text-xs text-uppercase font-weight-bolder ps-3">اسم  الادمن</td>
-                                    <td class="text-xs text-uppercase font-weight-bolder ps-3">اسم  العميل</td>
+                                    <td class="text-xs text-uppercase font-weight-bolder ps-3">اسم الادمن</td>
+                                    <td class="text-xs text-uppercase font-weight-bolder ps-3">اسم العميل</td>
                                     <td class="px-1 text-xs text-uppercase font-weight-bolder">نوع البيان</td>
                                     <td class="px-1 text-xs text-uppercase font-weight-bolder">البيان</td>
                                     <td class="px-1 text-xs text-uppercase font-weight-bolder">ملاحظات</td>
@@ -162,23 +174,26 @@
                                 <tr>
                                     <td>
                                     </td>
-                                    <td>
-                                        <p class="mb-0 text-xs font-weight-bold">الرصيد</p>
+                                    <td class="bg-success text-white">
+                                        <p class="mb-0 text-xs font-weight-bold">مجموع شحن الأرصدة</p>
+                                    </td>
+                                   <td class="bg-success text-white">
+                                    <p class="mb-0 text-xs font-weight-bold">*****</p>
+                                    </td>
+                                     <td class="bg-warning text-white">
+                                        <p class="mb-0 text-xs font-weight-bold">مجموع  تسديد الفواتير</p>
+                                    </td>
+                                   <td class="bg-warning text-white">
+                                    <p class="mb-0 text-xs font-weight-bold">*****</p>
+                                    </td>
+                                    <td class="bg-danger text-white">
+                                        <p class="mb-0 text-xs font-weight-bold">مجموع العمولات</p>
+                                    </td>
+                                    
+                                    <td class="bg-danger text-white">
+                                        <p class="mb-0 text-xs font-weight-bold">*****</p>
                                     </td>
                                     <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td class="bg-info text-dark">
-                                        <p class="mb-0 text-xs font-weight-bold">{{ $pre_account }}</p>
                                     </td>
                                     <td>
                                     </td>
@@ -235,9 +250,9 @@
                 quietMillis: 100,
                 data: function(params) {
                     var queryParameters = {
-                    name: params.term
+                        name: params.term
                     }
-                    
+
                     return queryParameters;
                 },
                 processResults: function(data) {

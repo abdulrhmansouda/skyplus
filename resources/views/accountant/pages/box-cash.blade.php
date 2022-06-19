@@ -211,24 +211,32 @@
                                 @endforeach
                                 <!-- end foreach -->
                                 <tr>
-                                    <td>
+                                  
+                                    <td class="bg-success text-white">
+                                    <p class="mb-0 text-xs font-weight-bold">مجموع شحن الأرصدة</p>
+
                                     </td>
-                                    <td>
-                                        <p class="mb-0 text-xs font-weight-bold">الرصيد</p>
+                                    <td class="bg-success text-white">
+                                    <p class="mb-0 text-xs font-weight-bold">*****</p>
                                     </td>
-                                    <td>
+                                    
+                                    <td class="bg-warning text-white">
+                                    <p class="mb-0 text-xs font-weight-bold">مجموع  تسديد الفواتير</p>
                                     </td>
-                                    <td>
+                                    <td class="bg-warning text-white">
+                                    <p class="mb-0 text-xs font-weight-bold">*****</p>
                                     </td>
-                                    <td>
+                                    <td class="bg-danger text-white">
+                                        <p class="mb-0 text-xs font-weight-bold">مجموع العمولات</p>
                                     </td>
-                                    {{-- <td>
-                                        </td> --}}
-                                    <td class="bg-info text-dark">
+                                    
+                                    <td class="bg-danger text-white">
+                                        <p class="mb-0 text-xs font-weight-bold">*****</p>
+                                    </td>
+                                    <!-- <td class="bg-info text-dark">
                                         <p class="mb-0 text-xs font-weight-bold">{{ $boxCashs?->last()?->account ?? 0 }}</p>
-                                    </td>
-                                    <td>
-                                    </td>
+                                    </td> -->
+                                  
                                 </tr>
 
                             </tbody>

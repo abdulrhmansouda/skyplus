@@ -137,11 +137,12 @@
                                         <p class="mb-0 text-xs font-weight-bold">{{ $admin->t_c }}</p>
                                     </td>
                                     <td class="text-sm align-middle">
-                                        @if ($admin->status === 'active')
+                                        {{-- @if ($admin->status === 'active')
                                         <span class="badge badge-sm bg-gradient-success">مفعل</span>
                                         @else
                                         <span class="badge badge-sm bg-gradient-danger">مغلق</span>
-                                        @endif                                    </td>
+                                        @endif                                    </td> --}}
+                                        {!! $admin->status() !!}
                                     <td class="align-middle ">
                                         <!-- start view1 -->
                                         <div class="d-inline-block">
@@ -195,11 +196,12 @@
                                                                         <h6>
                                                                             حالة المستخدم
                                                                         </h6>
-                                                                        @if ($admin->status === 'active')
+                                                                        {{-- @if ($admin->status === 'active')
                                                                         <span class="badge badge-sm bg-gradient-success">مفعل</span>
                                                                         @else
                                                                         <span class="badge badge-sm bg-gradient-danger">مغلق</span>
-                                                                        @endif                                                                            </div>
+                                                                        @endif                                                                            </div> --}}
+                                                                        {!! $admin->status() !!}
                                                                 </div>
 
                                                             </div>
@@ -219,7 +221,7 @@
                                                 <i class="fas fa-edit fs-6" aria-hidden="true"></i>
                                             </a>
                                             <!-- satrt edit Modal -->
-                                            <form action="{{ route('admin.admins.update',$admin->id)}}" method="POST">
+                                            <form action="{{ route('admin.admins.update',$admin->user->id)}}" method="POST">
                                                 @csrf
                                                 @method('PUT')
                                                 <input type="hidden" name="id" value="{{ $admin->user->id }}">
@@ -285,8 +287,8 @@
                                                                                 </span>
                                                                             </label>
                                                                             <select required class="form-select" name="status">
-                                                                                <option value="active" @if($admin->status === 'active') selected @endif> مفعل</option>
-                                                                                <option value="closed" @if($admin->status === 'closed') selected @endif>مفلق</option>
+                                                                                <option value="{{ App\Enums\UserStatusEnum::ACTIVE->value }}" @if($admin->status === App\Enums\UserStatusEnum::ACTIVE->value) selected @endif> مفعل</option>
+                                                                                <option value="{{ App\Enums\UserStatusEnum::CLOSED->value }}" @if($admin->status === App\Enums\UserStatusEnum::CLOSED->value) selected @endif>مفلق</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>

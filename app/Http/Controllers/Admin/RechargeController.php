@@ -34,9 +34,9 @@ class RechargeController extends Controller
     public function charge(Request $request, $id)
     {
         $request->validate([
-            'amount'            => ['required', 'numeric'],
-            'payment_type'  => ['required', Rule::in([PaymentTypeEnum::CASH->value, PaymentTypeEnum::BANK->value])],
-            'note'          => ['nullable', 'string', 'max:1000'],
+            'amount'            => ['required', 'numeric','min:0'],
+            'payment_type'      => ['required', Rule::in([PaymentTypeEnum::CASH->value, PaymentTypeEnum::BANK->value])],
+            'note'              => ['nullable', 'string', 'max:1000'],
         ]);
 
         DB::transaction(function () use ($request, $id) {
@@ -57,7 +57,9 @@ class RechargeController extends Controller
             $point->update();
 
             //make a reports
-            $report_message = "تم شحن الرصيد بقيمة $amount للنقطة $point->name طرقة الدفع : $request->payment_type.";
+            // dd($request->payment_type);
+            $payment_type_report = ($request->payment_type == PaymentTypeEnum::CASH->value) ? 'نقد' : 'بنك';
+            $report_message = "تم شحن الرصيد بقيمة $amount للنقطة $point->name طرقة الدفع : {$payment_type_report}.";
             $report = Report::create([
                 'point_id' => $point->id,
                 'report' => $report_message,

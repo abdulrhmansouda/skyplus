@@ -130,9 +130,7 @@
                                                                                     </label>
                                                                                     <select name="payment_type" id=""
                                                                                         class="form-select">
-                                                                                        <option
-                                                                                            value="{{ App\Enums\PaymentTypeEnum::CASH->value }}">
-                                                                                            نقد</option>
+                                                                                        <option value="{{ App\Enums\PaymentTypeEnum::CASH->value }}">نقد</option>
                                                                                         <option value="{{ App\Enums\PaymentTypeEnum::BANK->value }}">بنك</option>
                                                                                     </select>
                                                                                 </div>

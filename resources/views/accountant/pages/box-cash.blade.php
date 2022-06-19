@@ -195,11 +195,20 @@
                                     </td>
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold">
-                                            {{ $boxCash->transaction_type() }}
+                                            {{-- {{ $boxCash->transaction_type() }} --}}
+                                            {{ $boxCash->boxTransactionType() }}
                                         </p>
                                     </td>
                                     <td>
-                                        <p class="mb-0 text-xs font-weight-bold">
+                                        <p class="mb-0 text-xs font-weight-bold
+                                        @if($boxCash->account - $boxCash->pre_account>0)
+                                        bg-success text-white
+                                        @elseif($boxCash->account - $boxCash->pre_account<0)
+                                        bg-danger text-white
+                                        @else
+                                        bg-warning text-dark
+                                        @endif
+                                        ">
                                             {{ $boxCash->account - $boxCash->pre_account }}
                                         </p>
                                     </td>

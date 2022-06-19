@@ -18,7 +18,6 @@ class BoxCashController extends Controller
      */
     public function index(Request $request)
     {
-        // dd(1);
         $daterange = $request->daterange ?? now()->format('m/d/Y') . " - " . now()->format('m/d/Y');
         $all_date = $request->all_date ?? '';
         $box_transaction_type = $request->box_transaction_type ?? null;
@@ -35,9 +34,8 @@ class BoxCashController extends Controller
                     ->whereDate('created_at', '<=', $to);
             }
         }
-        if(!is_null($box_transaction_type)){
-            // dd($box_transaction_type);
-            $boxCashs = $boxCashs->where('box_transaction_type',$box_transaction_type);
+        if (!is_null($box_transaction_type)) {
+            $boxCashs = $boxCashs->where('box_transaction_type', $box_transaction_type);
         }
 
         $boxCashs = $boxCashs
@@ -54,7 +52,6 @@ class BoxCashController extends Controller
             'from' => isset($from) ? $from->format('d/m/Y') : 'all',
             'to' => isset($to) ? $to->format('d/m/Y') : 'all',
         ]);
-
     }
 
     /**

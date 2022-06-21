@@ -22,7 +22,7 @@
                     <h4 class="mb-0">طلبات الدعم</h4>
                 </div>
                 <div class="p-3 card-body">
-                    <ul class="nav nav-tabs mb-3">
+                    <ul class="mb-3 nav nav-tabs">
                         <li class="nav-item">
                             <button type="button" class="nav-link active" data-tab="tab1"
                                 onclick="openTab(event)">قلب</button>
@@ -33,11 +33,11 @@
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane   active" id="tab1">
+                        <div class="tab-pane active" id="tab1">
                             <form action="{{ route('point.support.switchCompanyRequest') }}" method="POST">
                                 @csrf
                                 <div class="row">
-                                    <div class=" col-md-6">
+                                    <div class=" col-md-12">
                                         <div class="form-group">
                                             <label>
                                                 الاسم
@@ -47,7 +47,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label>
                                             رقم الهاتف
@@ -87,7 +87,7 @@
                             <form action="{{ route('point.support.newSubscriberRequest') }}" method="POST">
                                 @csrf
                                 <div class="row">
-                                    <div class=" col-md-6">
+                                    <div class=" col-12">
                                         <div class="form-group">
                                             <label>
                                                 الاسم
@@ -97,7 +97,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-12">
                                     <div class="form-group">
                                         <label>
                                             رقم الهاتف
@@ -105,7 +105,7 @@
                                         </label>
                                         <input name="phone" type="tel" class="form-control" required>
                                     </div>
-                                    <div class=" col-6 ">
+                                    <div class=" col-12">
                                         <div class="form-group">
                                             <h6>
                                                 اختر نوع الاشتراك </h6>

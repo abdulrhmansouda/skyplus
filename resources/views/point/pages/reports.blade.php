@@ -122,11 +122,11 @@
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold
                                         @if($report->amount>0)
-                                        bg-success text-white
+                                        bg-success text-white p-2
                                         @elseif($report->amount<0)
-                                        bg-danger text-white
+                                        bg-danger text-white p-2
                                         @else
-                                        bg-warning text-dark
+                                        bg-warning text-white p-2
                                         @endif
                                         ">{{ $report->amount }}</p>
                                     </td>
@@ -160,23 +160,23 @@
                                 <tr>
                                     {{-- <td>
                                     </td> --}}
-                                    <td class="bg-success text-white">
+                                    <td class="text-white bg-success">
                                         <p class="mb-0 text-xs font-weight-bold">مجموع شحوناتي للرصيد</p>
                                     </td>
-                                   <td class="bg-success text-white">
+                                   <td class="text-white bg-success">
                                     <p class="mb-0 text-xs font-weight-bold">{{ $final_charge_point }}</p>
                                     </td>
-                                     <td class="bg-warning text-white">
+                                     <td class="text-white bg-warning">
                                         <p class="mb-0 text-xs font-weight-bold">مجموع  تسديد الفواتير</p>
                                     </td>
-                                   <td class="bg-warning text-white">
+                                   <td class="text-white bg-warning">
                                     <p class="mb-0 text-xs font-weight-bold">{{ $final_charge_subscriber }}</p>
                                     </td>
-                                    <td class="bg-danger text-white">
+                                    <td class="text-white bg-danger">
                                         <p class="mb-0 text-xs font-weight-bold">مجموع العمولات</p>
                                     </td>
                                     
-                                    <td class="bg-danger text-white">
+                                    <td class="text-white bg-danger">
                                         <p class="mb-0 text-xs font-weight-bold">{{ $final_commission }}</p>
                                     </td>
                                     <td>

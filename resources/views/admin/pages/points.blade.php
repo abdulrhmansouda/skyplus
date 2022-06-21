@@ -221,11 +221,11 @@
                                             <td>
                                                 <p class="mb-0 text-xs font-weight-bold
                                                 @if($point->account>0)
-                                                bg-success text-white
+                                                bg-success text-white p-2
                                                 @elseif($point->account<0)
-                                                bg-danger text-white
+                                                bg-danger text-white p-2
                                                 @else
-                                                bg-warning text-dark
+                                                bg-warning text-white p-2
                                                 @endif
                                                 " >{{ $point->account }}</p>
                                             </td>
@@ -256,7 +256,7 @@
                                         <!-- <span class="badge badge-sm bg-gradient-danger">مفعل</span> -->
                                         
                                         @else
-                                        <span class="badge badge-sm bg-gradient-secondary text-white">مغلق</span>
+                                        <span class="text-white badge badge-sm bg-gradient-secondary">مغلق</span>
                                         @endif --}}</td>
                                             <td class="align-middle ">
                                                 <!-- start view1 -->

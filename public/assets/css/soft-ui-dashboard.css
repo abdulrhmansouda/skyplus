@@ -9867,7 +9867,7 @@ fieldset:disabled .btn {
 }
 
 .text-success {
-  color: #82d616 !important;
+  color: #105c20 !important;
 }
 
 .text-info {
@@ -9923,7 +9923,7 @@ fieldset:disabled .btn {
 }
 
 .bg-success {
-  background-color: #82d616 !important;
+  background-color: #105c20 !important;
 }
 
 .bg-info {
@@ -9931,7 +9931,7 @@ fieldset:disabled .btn {
 }
 
 .bg-warning {
-  background-color: #fbcf33 !important;
+  background-color: #c19600  !important;
 }
 
 .bg-danger {
@@ -20484,11 +20484,11 @@ svg.text-danger .color-background {
 }
 
 svg.text-success .color-foreground {
-  fill: #17ad37;
+  fill: #105c20;
 }
 
 svg.text-success .color-background {
-  fill: #98ec2d;
+  fill: #105c20;
 }
 
 svg.text-dark .color-foreground {
@@ -25585,5 +25585,11 @@ width:25px;
     height: 10px;
     border-radius: 50%;
     top: 10px;
+}
+tr{
+transition:hover 0.3s;
+}
+tr:hover{
+  background:#eee;
 }
 /*# sourceMappingURL=dashboard-free.css.map */

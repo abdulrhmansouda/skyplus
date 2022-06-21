@@ -110,7 +110,7 @@ class SubscriberController extends Controller
 
             Report::create([
                 'point_id' => $point->id,
-                'subscriber_id' => $sub->id,
+                // 'subscriber_id' => $sub->id,
                 'report' => $commission_message,
                 // 'on_him' => 0,
                 // 'to_him' => $profit,
@@ -302,7 +302,7 @@ class SubscriberController extends Controller
             //make a report
             Report::create([
                 'point_id' => $point->id,
-                'user_id'  => Auth::user()->id,
+                // 'user_id'  => Auth::user()->id,
                 'subscriber_id' => $sub->id,
                 'report' => $support_message,
                 // 'on_him' => 0,
@@ -315,7 +315,7 @@ class SubscriberController extends Controller
 
             Report::create([
                 'point_id' => $point->id,
-                'user_id'  => Auth::user()->id,
+                // 'user_id'  => Auth::user()->id,
                 'subscriber_id' => $sub->id,
                 'report' => $charge_message,
                 // 'on_him' => $amount,
@@ -330,7 +330,7 @@ class SubscriberController extends Controller
 
             Report::create([
                 'point_id' => $point->id,
-                'user_id'  => Auth::user()->id,
+                // 'user_id'  => Auth::user()->id,
                 'subscriber_id' => $sub->id,
                 'report' => $commission_message,
                 // 'on_him' => 0,

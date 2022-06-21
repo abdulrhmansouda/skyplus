@@ -52,7 +52,7 @@
                             <thead>
                                 <tr>
                                     {{-- @foreach() --}}
-                                    <th class="text-xs text-uppercase font-weight-bolder ps-3 bg-info text-dark">
+                                    <th class="text-xs text-uppercase font-weight-bolder ps-3 bg-info text-white">
                                         الحساب : {{ $name_point }}
                                     </th>
                                     <th class="px-1 text-xs text-uppercase font-weight-bolder "></th>
@@ -160,10 +160,10 @@
                                 <tr>
                                     {{-- <td>
                                     </td> --}}
-                                    <td class="bg-success text-white">
+                                    <td class="bg-dark text-white">
                                         <p class="mb-0 text-xs font-weight-bold">مجموع شحوناتي للرصيد</p>
                                     </td>
-                                   <td class="bg-success text-white">
+                                   <td class="bg-dark text-white">
                                     <p class="mb-0 text-xs font-weight-bold">{{ $final_charge_point }}</p>
                                     </td>
                                      <td class="bg-warning text-white">
@@ -172,11 +172,11 @@
                                    <td class="bg-warning text-white">
                                     <p class="mb-0 text-xs font-weight-bold">{{ $final_charge_subscriber }}</p>
                                     </td>
-                                    <td class="bg-danger text-white">
+                                    <td class="bg-success text-white">
                                         <p class="mb-0 text-xs font-weight-bold">مجموع العمولات</p>
                                     </td>
                                     
-                                    <td class="bg-danger text-white">
+                                    <td class="bg-success text-white">
                                         <p class="mb-0 text-xs font-weight-bold">{{ $final_commission }}</p>
                                     </td>
                                     <td>

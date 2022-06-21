@@ -79,7 +79,7 @@
                             <thead>
                                 <tr>
                                     {{-- @foreach() --}}
-                                    <th class="text-xs text-uppercase font-weight-bolder ps-3 bg-info text-dark">
+                                    <th class="text-xs text-uppercase font-weight-bolder ps-3 bg-info text-white">
                                         الحساب : {{ $name_points === '' ? 'الكل' : $name_points }}
                                     </th>
                                     <th class="px-1 text-xs text-uppercase font-weight-bolder "></th>
@@ -115,8 +115,9 @@
                                     <td class="px-1 text-xs text-uppercase font-weight-bolder">نوع البيان</td>
                                     <td class="px-1 text-xs text-uppercase font-weight-bolder">البيان</td>
                                     <td class="px-1 text-xs text-uppercase font-weight-bolder">ملاحظات</td>
-                                    <td class="px-1 text-xs text-uppercase font-weight-bolder">لنا</td>
-                                    <td class="px-1 text-xs text-uppercase font-weight-bolder">له</td>
+                                    {{-- <td class="px-1 text-xs text-uppercase font-weight-bolder">لنا</td> --}}
+                                    {{-- <td class="px-1 text-xs text-uppercase font-weight-bolder">له</td> --}}
+                                    <td class="px-1 text-xs text-uppercase font-weight-bolder">المبلغ</td>
                                     <td class="px-1 text-xs text-uppercase font-weight-bolder">الرصيد</td>
                                 </tr>
                                 <tr>
@@ -127,7 +128,7 @@
                                     <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
                                     <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder">الكل</td>
                                     <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
-                                    <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
+                                    {{-- <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td> --}}
                                     <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
                                     <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder">
                                         {{ $reports?->first()?->pre_account ?? 0 }}
@@ -166,11 +167,21 @@
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold">{{ $report->note }}</p>
                                     </td>
-                                    <td>
+                                    {{-- <td>
                                         <p class="mb-0 text-xs font-weight-bold">{{ $report->on_him }}</p>
                                     </td>
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold">{{ $report->to_him }}</p>
+                                    </td> --}}
+                                    <td>
+                                        <p class="mb-0 text-xs font-weight-bold
+                                        @if($report->amount>0)
+                                        bg-success text-white p-2
+                                        @elseif($report->amount<0)
+                                        bg-danger text-white p-2
+                                        @else
+                                        bg-warning text-white p-2
+                                        @endif">{{ $report->amount }}</p>
                                     </td>
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold">{{ $report->account }}</p>
@@ -186,20 +197,20 @@
                                         <p class="mb-0 text-xs font-weight-bold">مجموع شحن الأرصدة</p>
                                     </td>
                                    <td class="bg-success text-white">
-                                    <p class="mb-0 text-xs font-weight-bold">*****</p>
+                                    <p class="mb-0 text-xs font-weight-bold">{{ $final_charge_point }}</p>
                                     </td>
                                      <td class="bg-warning text-white">
                                         <p class="mb-0 text-xs font-weight-bold">مجموع  تسديد الفواتير</p>
                                     </td>
                                    <td class="bg-warning text-white">
-                                    <p class="mb-0 text-xs font-weight-bold">*****</p>
+                                    <p class="mb-0 text-xs font-weight-bold">{{ $final_charge_subscriber }}</p>
                                     </td>
                                     <td class="bg-danger text-white">
                                         <p class="mb-0 text-xs font-weight-bold">مجموع العمولات</p>
                                     </td>
                                     
                                     <td class="bg-danger text-white">
-                                        <p class="mb-0 text-xs font-weight-bold">*****</p>
+                                        <p class="mb-0 text-xs font-weight-bold">{{ $final_commission }}</p>
                                     </td>
                                     <td>
                                     </td>

@@ -157,7 +157,7 @@
 
                                 <tr class="bg-aliceblue">
                                     <td class="text-uppercase  text-xs font-weight-bolder ps-3">التاريخ</td>
-                                    {{-- <td class="text-uppercase  text-xs font-weight-bolder ps-3">اسم النقطة</td> --}}
+                                    <td class="text-uppercase  text-xs font-weight-bolder ps-3">مشرف العملية</td>
                                     <td class="px-1 text-uppercase  text-xs font-weight-bolder">البيان</td>
                                     <td class="px-1 text-uppercase  text-xs font-weight-bolder">ملاحظات</td>
                                     <td class="px-1 text-uppercase  text-xs font-weight-bolder">نوع الفاتورة</td>
@@ -166,7 +166,7 @@
                                 </tr>
                                 <tr>
                                     <td class="text-uppercase text-secondary text-xs font-weight-bolder ps-3"></td>
-                                    {{-- <td class="px-1 text-uppercase text-secondary text-xs font-weight-bolder"></td> --}}
+                                    <td class="px-1 text-uppercase text-secondary text-xs font-weight-bolder"></td>
                                     <td class="px-1 text-uppercase text-secondary text-xs font-weight-bolder">الكل</td>
                                     <td class="px-1 text-uppercase text-secondary text-xs font-weight-bolder"></td>
                                     <td class="px-1 text-uppercase text-secondary text-xs font-weight-bolder"></td>
@@ -184,9 +184,9 @@
                                             </p>
                                         </div>
                                     </td>
-                                    {{-- <td>
-                                    <p class="mb-0 text-xs font-weight-bold">نقطة 1</p>
-                                </td> --}}
+                                    <td>
+                                    <p class="mb-0 text-xs font-weight-bold">{{ $boxCash->operationSupervisor() }}</p>
+                                </td>
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold">{{ $boxCash->report }}</p>
                                     </td>

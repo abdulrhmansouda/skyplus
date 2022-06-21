@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\ReportTypeEnum;
 use App\Exports\ReportsExport;
 use App\Http\Controllers\Controller;
 use App\Models\Point;
@@ -24,15 +25,15 @@ class ReportController extends Controller
     {
         // dd($request->all());
         $all_date = $request->all_date ?? '';
-        
+
         $points = (in_array("0", $request->points ?? ["0"])) ? ["0"] : $request->points;
 
         $daterange = $request->daterange ?? now()->format('m/d/Y') . " - " . now()->format('m/d/Y');
 
         $report_type = $request->report_type;
-        
+
         $reports = new Report;
-        
+
         if (!in_array("0", $points)) {
             $reports = $reports->whereIn('point_id', $points);
 
@@ -44,8 +45,8 @@ class ReportController extends Controller
             }
         }
 
-        if(isset($report_type)){
-            $reports = $reports->where('type',intval($report_type));
+        if (isset($report_type)) {
+            $reports = $reports->where('type', intval($report_type));
             // dd($reports->toSql());
         }
 
@@ -66,6 +67,10 @@ class ReportController extends Controller
         $from = isset($from) ? $from->format('d/m/Y') : (clone $reports)->get()->first()->created_at->format('d/m/Y');
         $to   = isset($to) ? $to->format('d/m/Y') : (clone $reports)->get()->last()->created_at->format('d/m/Y');
 
+        $final_commission = (clone $reports)->where('type', ReportTypeEnum::COMMISSION)->pluck('amount')?->sum() ?? 0;
+        $final_charge_subscriber = -1 * (clone $reports)->where('type', ReportTypeEnum::CHARGE_SUBSCRIBER)->pluck('amount')?->sum() ?? 0;
+        $final_charge_point = (clone $reports)->where('type', ReportTypeEnum::CHARGE_POINT)->pluck('amount')?->sum() ?? 0;
+
         return view('admin.pages.reports', [
             'points' => Point::select(['id', 'name'])->get(),
             '_points' => $points ?? [],
@@ -80,6 +85,9 @@ class ReportController extends Controller
 
             'from' => $from,
             'to' => $to,
+            'final_commission' => $final_commission,
+            'final_charge_subscriber' => $final_charge_subscriber,
+            'final_charge_point' => $final_charge_point,
         ]);
     }
 

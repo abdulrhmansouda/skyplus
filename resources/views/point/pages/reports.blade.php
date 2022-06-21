@@ -52,7 +52,7 @@
                             <thead>
                                 <tr>
                                     {{-- @foreach() --}}
-                                    <th class="text-xs text-uppercase font-weight-bolder ps-3 bg-info text-dark">
+                                    <th class="text-xs text-uppercase font-weight-bolder ps-3 bg-info text-white">
                                         الحساب : {{ $name_point }}
                                     </th>
                                     <th class="px-1 text-xs text-uppercase font-weight-bolder "></th>
@@ -160,10 +160,17 @@
                                 <tr>
                                     {{-- <td>
                                     </td> --}}
+<<<<<<< HEAD
                                     <td class="text-white bg-success">
                                         <p class="mb-0 text-xs font-weight-bold">مجموع شحوناتي للرصيد</p>
                                     </td>
                                    <td class="text-white bg-success">
+=======
+                                    <td class="bg-dark text-white">
+                                        <p class="mb-0 text-xs font-weight-bold">مجموع شحوناتي للرصيد</p>
+                                    </td>
+                                   <td class="bg-dark text-white">
+>>>>>>> 2c09b82c1aa1cdee12df5c8abd36367f491f7a67
                                     <p class="mb-0 text-xs font-weight-bold">{{ $final_charge_point }}</p>
                                     </td>
                                      <td class="text-white bg-warning">
@@ -172,11 +179,19 @@
                                    <td class="text-white bg-warning">
                                     <p class="mb-0 text-xs font-weight-bold">{{ $final_charge_subscriber }}</p>
                                     </td>
+<<<<<<< HEAD
                                     <td class="text-white bg-danger">
                                         <p class="mb-0 text-xs font-weight-bold">مجموع العمولات</p>
                                     </td>
                                     
                                     <td class="text-white bg-danger">
+=======
+                                    <td class="bg-success text-white">
+                                        <p class="mb-0 text-xs font-weight-bold">مجموع العمولات</p>
+                                    </td>
+                                    
+                                    <td class="bg-success text-white">
+>>>>>>> 2c09b82c1aa1cdee12df5c8abd36367f491f7a67
                                         <p class="mb-0 text-xs font-weight-bold">{{ $final_commission }}</p>
                                     </td>
                                     <td>

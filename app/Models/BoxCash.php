@@ -11,7 +11,6 @@ class BoxCash extends Model
 {
     use HasFactory;
     public $guarded = ['id'];
-    //helpers
     // public function transaction_type()
     // {
     //     switch ($this->transaction_type) {
@@ -21,6 +20,15 @@ class BoxCash extends Model
     //             return "أيداع";
     //     }
     // }
+
+        //helpers
+        public function operationSupervisor()
+        {
+            if(isset($this->user))
+            return $this->user->roleText() . "\\" . $this->user->username;
+            return '_';
+        }
+
     public function boxTransactionType()
     {
         switch ($this->box_transaction_type) {
@@ -31,5 +39,10 @@ class BoxCash extends Model
             case (BoxTransactionTypeEnum::PAY->value):
                 return "دفع";
         }
+    }
+
+    // Relations
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

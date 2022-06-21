@@ -81,6 +81,7 @@ class RechargeController extends Controller
                     'account'            => $pre_account + $amount,
                     'report'             => $report_message,
                     'note'               => $request->note,
+                    'user_id'            => Auth::user()->id,
                 ]);
             } elseif ($request->payment_type == PaymentTypeEnum::BANK->value) {
                 dd('rechargecontroller_bank');

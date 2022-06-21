@@ -40,44 +40,14 @@ class Point extends Model
 
     public function addToAccount($amount)
     {
-        if ($amount > 0) {
             $this->account = $this->account + $amount;
             $this->update();
-            return true;
-        }
-        return false;
     }
 
     public function takeFromAccount($amount)
     {
-        if ($amount > 0) {
             $this->account = $this->account - $amount;
             $this->update();
-            return true;
-        }
-        return false;
-    }
-
-    public function addProfitToAccount($amount)
-    {
-        if ($amount > 0) {
-            $this->account = $this->account + $amount;
-            $this->daily_profit = $this->daily_profit + $amount;
-            $this->update();
-            return true;
-        }
-        return false;
-    }
-
-    public function takeProfitFromAccount($amount)
-    {
-        if ($amount > 0) {
-            $this->account = $this->account - $amount;
-            $this->daily_profit = $this->daily_profit - $amount;
-            $this->update();
-            return true;
-        }
-        return false;
     }
 
     public static function resetDailyProfit(){

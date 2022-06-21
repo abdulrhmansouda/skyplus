@@ -115,7 +115,7 @@
                                     <div class="text-center shadow icon icon-shape icon-sm border-radius-sm bg-gradient-success ms-2 d-flex align-items-center justify-content-center">
                                         <i class="cursor-pointer fa fa-user fs-6" aria-hidden="true"></i>
                                     </div>
-                                    <p class="mt-1 mb-0 text-sm font-weight-bold">نشط</p>
+                                    <p class="mt-1 mb-0 text-sm font-weight-bold">مفعل</p>
                                 </div>
                                 <h4 class="font-weight-bolder">{{ $active }}</h4>
                             </div>
@@ -124,7 +124,7 @@
                                     <div class="text-center shadow icon icon-shape icon-sm border-radius-sm bg-gradient-info ms-2 d-flex align-items-center justify-content-center">
                                         <i class="cursor-pointer fa fa-user fs-6" aria-hidden="true"></i>
                                     </div>
-                                    <p class="mt-1 mb-0 text-sm font-weight-bold">غير نشط</p>
+                                    <p class="mt-1 mb-0 text-sm font-weight-bold">غير مفعل</p>
                                 </div>
                                 <h4 class="font-weight-bolder">{{ $deactive }}</h4>
                             </div>

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('whatsapp')->nullable();
             $table->string('telegram_name')->nullable();
-            $table->string('telegram_url');
+            $table->string('telegram_url')->nullable();
             $table->string('facebook_name')->nullable();
             $table->string('facebook_url')->nullable();
             $table->string('address')->nullable();

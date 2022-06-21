@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
             TelegramSeeder::class,
         ]);
 
-        Report::factory(100)->create();
+        // Report::factory(100)->create();
         // BoxCash::factory(100)->create();
 
 
@@ -41,9 +41,9 @@ class DatabaseSeeder extends Seeder
             ->hasSubscribers(10)
             ->create();
 
-        ProjectSetting::create([
-            'maximum_amount_of_borrowing' => 0,
-        ]);
+        // ProjectSetting::create([
+        //     'maximum_amount_of_borrowing' => 0,
+        // ]);
 
 
         Social::create([

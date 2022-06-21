@@ -22,16 +22,19 @@ class ReportController extends Controller
      */
     public function index(Request $request)
     {
-        
+        // dd($request->all());
         $all_date = $request->all_date ?? '';
         
         $points = (in_array("0", $request->points ?? ["0"])) ? ["0"] : $request->points;
 
         $daterange = $request->daterange ?? now()->format('m/d/Y') . " - " . now()->format('m/d/Y');
 
+        $report_type = $request->report_type;
+        
         $reports = new Report;
+        
         if (!in_array("0", $points)) {
-            $reports = Report::whereIn('point_id', $points);
+            $reports = $reports->whereIn('point_id', $points);
 
             // collect the name of whole points
             $name_points = '';
@@ -40,6 +43,12 @@ class ReportController extends Controller
                 $name_points = "$name_points , $point->name";
             }
         }
+
+        if(isset($report_type)){
+            $reports = $reports->where('type',intval($report_type));
+            // dd($reports->toSql());
+        }
+
 
         if ($all_date !== "true") {
             preg_match_all("/([^-]*) - (.*)/", $daterange, $date);
@@ -63,10 +72,11 @@ class ReportController extends Controller
             'name_points' => $name_points ?? '',
 
             'reports' => $reports->get(),
+            'report_type' => $report_type,
             'daterange' => $daterange,
             'all_date' => $all_date,
 
-            'pre_account' => 0,
+            // 'pre_account' => 0,
 
             'from' => $from,
             'to' => $to,

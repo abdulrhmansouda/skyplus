@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('mother');
             $table->text('address')->nullable();
             $table->text('installation_address')->nullable();
-            $table->enum('status',['active','deactive','closed'])->default('active');
+            $table->tinyInteger('status');
             $table->date('package_start');
             $table->date('package_end');
             $table->string('mission_executor');

@@ -141,9 +141,9 @@
                                             <span class="text-danger"> * </span>
                                         </label>
                                         <select class="form-select" required name="status">
-                                            <option value="active" selected> نشط</option>
-                                            <option value="deactive"> غير نشط</option>
-                                            <option value="closed">مغلق</option>
+                                            <option value="{{ App\Enums\UserStatusEnum::ACTIVE->value }}" selected> مفعل</option>
+                                            <option value="{{ App\Enums\UserStatusEnum::INACTIVE->value }}"> غير مفعل</option>
+                                            <option value="{{ App\Enums\UserStatusEnum::CLOSED->value }}">مغلق</option>
                                         </select>
                                     </div>
                                 </div>
@@ -319,13 +319,14 @@
                                                 </p>
                                             </td>
                                             <td class="text-sm align-middle">
-                                                @if ($sub->status === 'active')
+                                                {{-- @if ($sub->status === 'active')
                                                     <span class="badge badge-sm bg-gradient-success">مفعل</span>
                                                 @elseif($sub->status === 'deactive')
                                                     <span class="badge badge-sm bg-gradient-danger">غير مفعل</span>
                                                 @else
                                                     <span class="badge badge-sm bg-gradient-danger">مغلق</span>
-                                                @endif
+                                                @endif --}}
+                                                {!! $sub->status() !!}
                                             </td>
                                             <td class="align-middle ">
                                                 <!-- start view1 -->
@@ -428,7 +429,7 @@
                                                                                 <h6>
                                                                                     حالة المستخدم
                                                                                 </h6>
-                                                                                @if ($sub->status === 'active')
+                                                                                {{-- @if ($sub->status === 'active')
                                                                                     <span
                                                                                         class="badge badge-sm bg-gradient-success">مفعل</span>
                                                                                 @elseif($sub->status === 'deactive')
@@ -438,7 +439,8 @@
                                                                                 @else
                                                                                     <span
                                                                                         class="badge badge-sm bg-gradient-danger">مغلق</span>
-                                                                                @endif
+                                                                                @endif --}}
+                                                                                {!! $sub->status() !!}
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-lg-4 col-md-6">
@@ -647,33 +649,33 @@
                                                                                     </label>
                                                                                     <select required class="form-select"
                                                                                         name="status">
-                                                                                        @switch($sub->status)
-                                                                                            @case('active')
-                                                                                                <option value="active" selected> نشط
+                                                                                        {{-- @switch($sub->status)
+                                                                                            @case('active') --}}
+                                                                                                <option value="{{ App\Enums\UserStatusEnum::ACTIVE->value }}" @if($sub->status === App\Enums\UserStatusEnum::ACTIVE->value) selected @endif> مفعل
                                                                                                 </option>
-                                                                                                <option value="deactive"> غير نشط
+                                                                                                <option value="{{ App\Enums\UserStatusEnum::INACTIVE->value }}" @if($sub->status === App\Enums\UserStatusEnum::INACTIVE->value) selected @endif> غير مفعل
                                                                                                 </option>
-                                                                                                <option value="closed">مغلق</option>
-                                                                                            @break
+                                                                                                <option value="{{ App\Enums\UserStatusEnum::CLOSED->value }}" @if($sub->status === App\Enums\UserStatusEnum::CLOSED->value) selected @endif>مغلق</option>
+                                                                                            {{-- @break --}}
 
-                                                                                            @case('deactive')
-                                                                                                <option value="active"> نشط</option>
+                                                                                            {{-- @case('deactive')
+                                                                                                <option value="active"> مفعل</option>
                                                                                                 <option value="deactive" selected>
-                                                                                                    غير نشط</option>
+                                                                                                    غير مفعل</option>
                                                                                                 <option value="closed">مغلق</option>
                                                                                             @break
 
                                                                                             @case('closed')
-                                                                                                <option value="active"> نشط</option>
-                                                                                                <option value="deactive"> غير نشط
+                                                                                                <option value="active"> مفعل</option>
+                                                                                                <option value="deactive"> غير مفعل
                                                                                                 </option>
                                                                                                 <option value="closed" selected>مغلق
                                                                                                 </option>
-                                                                                            @break
+                                                                                            @break --}}
 
-                                                                                            @default
+                                                                                            {{-- @default
                                                                                         
-                                                                                        @endswitch
+                                                                                        @endswitch --}}
 
                                                                                     </select>
                                                                                 </div>
@@ -840,7 +842,7 @@
                                                                                         <div class="form-group">
                                                                                             <h6>
                                                                                                 حالة المشترك </h6>
-                                                                                            @if ($sub->status === 'active')
+                                                                                            {{-- @if ($sub->status === 'active')
                                                                                                 <span
                                                                                                     class="badge badge-sm bg-gradient-success">مفعل</span>
                                                                                             @elseif($sub->status === 'deactive')
@@ -850,7 +852,8 @@
                                                                                             @else
                                                                                                 <span
                                                                                                     class="badge badge-sm bg-gradient-danger">مغلق</span>
-                                                                                            @endif
+                                                                                            @endif --}}
+                                                                                            {!! $sub->status() !!}
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class=" col-6">

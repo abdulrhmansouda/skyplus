@@ -7,6 +7,7 @@ namespace Database\Factories;
 use DateTime;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Admin\Subscriber>
@@ -35,7 +36,7 @@ class SubscriberFactory extends Factory
             'mother' => $this->faker->name,
             'address' => $this->faker->address,
             'installation_address' => $this->faker->address,
-            'status' => 'deactive',
+            'status' => Collection::make([1,2,3])->random(),
             'package_start' => $date,
             'package_end' => $date1,
             'mission_executor' => $this->faker->name,

@@ -105,7 +105,7 @@
                                         </label>
                                         <input type="number" class="form-control" required
                                             placeholder="الادخال بالنسبة المؤية مثلا 1" name="charge_commission"
-                                            step="0.01">
+                                            step="0.001">
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-6">
@@ -115,7 +115,7 @@
                                             <span class="text-danger"> * </span>
                                         </label>
                                         <input type="number" class="form-control" required
-                                            placeholder="الادخال بقيمة ثابتة مثلا 10" name="new_commission" step="0.01">
+                                            placeholder="الادخال بقيمة ثابتة مثلا 10" name="new_commission" step="0.001">
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-6">
@@ -125,7 +125,7 @@
                                             <span class="text-danger"> * </span>
                                         </label>
                                         <input type="number" class="form-control" required
-                                            placeholder="الادخال بقيمة ثابتة مثلا 10" name="switch_commission" step="0.01">
+                                            placeholder="الادخال بقيمة ثابتة مثلا 10" name="switch_commission" step="0.001">
                                     </div>
                                 </div>
                                 <div class="col-md-8 col-sm-6">
@@ -549,7 +549,7 @@
                                                                                         placeholder="الادخال بالنسبة المؤية مثلا 1"
                                                                                         name="charge_commission"
                                                                                         value="{{ $point->charge_commission }}"
-                                                                                        step="0.01">
+                                                                                        step="0.001">
 
                                                                                 </div>
                                                                             </div>
@@ -565,7 +565,7 @@
                                                                                         placeholder="الادخال قيمة ثابتة مثلا 10"
                                                                                         name="new_commission"
                                                                                         value="{{ $point->new_commission }}"
-                                                                                        step="0.01">
+                                                                                        step="0.001">
 
                                                                                 </div>
                                                                             </div>
@@ -581,7 +581,7 @@
                                                                                         placeholder="الادخال قيمة ثابتة مثلا 10"
                                                                                         name="switch_commission"
                                                                                         value="{{ $point->switch_commission }}"
-                                                                                        step="0.01">
+                                                                                        step="0.001">
 
                                                                                 </div>
                                                                             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Point;
 
+use App\Enums\ReportTypeEnum;
 use App\Exports\ReportsExport;
 use App\Http\Controllers\Controller;
 use App\Models\Report;
@@ -19,7 +20,6 @@ class ReportController extends Controller
      */
     public function index(Request $request)
     {
-
         $daterange = $request->daterange ?? now()->format('m/d/Y') . " - " . now()->format('m/d/Y');
 
         $all_date = $request->all_date ?? '';
@@ -33,35 +33,32 @@ class ReportController extends Controller
             preg_match_all("/([^-]*) - (.*)/", $daterange, $date);
             if ($date[1]) {
                 $from = new Carbon($date[1][0]);
-                $pre = $from->addDays(-1);
                 $to = new Carbon($date[2][0]);
                 $reports = $reports->whereDate('created_at', '>=', $from)
                     ->whereDate('created_at', '<=', $to);
             }
         }
-
-
-
-        $reports = $reports
-            ->orderBy('created_at');
-
-        $first_report = clone ($reports);
-        $first_report->first();
-        $pre_account = $first_report->first() ? $first_report->first()->pre_account : 0;
+        // dd((clone $reports)->pluck('to_him'));
+        // $final_commission = (clone $reports)->where('type',ReportTypeEnum::COMMISSION)->pluck('to_him')?->sum() ?? 0;
+        // $final_charge_subscriber = (clone $reports)->where('type',ReportTypeEnum::CHARGE_SUBSCRIBER)->pluck('on_him')?->sum() ?? 0;
+        // $final_charge_point = (clone $reports)->where('type',ReportTypeEnum::CHARGE_POINT)->pluck('to_him')?->sum() ?? 0;
+        $final_commission = (clone $reports)->where('type',ReportTypeEnum::COMMISSION)->pluck('amount')?->sum() ?? 0;
+        $final_charge_subscriber = (clone $reports)->where('type',ReportTypeEnum::CHARGE_SUBSCRIBER)->pluck('amount')?->sum() ?? 0;
+        $final_charge_point = (clone $reports)->where('type',ReportTypeEnum::CHARGE_POINT)->pluck('amount')?->sum() ?? 0;
 
         return view('point.pages.reports', [
-            'name_points' => $point->name,
-            'pre_account' => $pre_account,
+            'name_point' => $point->name,
 
             'reports' => $reports->get(),
 
             'daterange' => $daterange,
             'all_date' => $all_date,
 
-
-            'pre' => isset($pre) ? $pre->format('d/m/Y') : 'all',
             'from' => isset($from) ? $from->format('d/m/Y') : 'all',
             'to' => isset($to) ? $to->format('d/m/Y') : 'all',
+            'final_commission' => $final_commission,
+            'final_charge_subscriber' => $final_charge_subscriber,
+            'final_charge_point' => $final_charge_point,
         ]);
     }
 
@@ -98,44 +95,6 @@ class ReportController extends Controller
         $first_report = clone ($reports);
         $first_report->first();
         $pre_account = $first_report->first() ? $first_report->first()->pre_account : 0;
-
-
-        //////////////////////
-
-        // // dd($request->all());
-        // $daterange = $request->_daterange ?? now()->format('m/d/Y') . " - " . now()->format('m/d/Y');
-
-        // $all_date = $request->all_date ?? '';
-
-        // $points = $request->points;
-        // $points = unserialize(base64_decode($points));
-        // $points = (in_array("0", $points ?? ["0"])) ? ["0"] : $points;
-
-        // $reports = Report::select('*');
-        // if (!in_array("0", $points)) {
-        //     $reports = Report::whereIn('point_id', $points);
-
-        //     // collect the name of whole points
-        //     $name_points = '';
-        //     $_points = Point::whereIn('id', $points)->get();
-        //     foreach ($_points as $point) {
-        //         $name_points = "$name_points , $point->name";
-        //     }
-        // }
-
-        // if ($all_date !== "true") {
-        //     preg_match_all("/([^-]*) - (.*)/", $daterange, $date);
-        //     if ($date[1]) {
-        //         $from = new Carbon($date[1][0]);
-        //         $pre = $from->addDays(-1);
-        //         $to = new Carbon($date[2][0]);
-        //         $reports = $reports->whereDate('created_at', '>=', $from)
-        //             ->whereDate('created_at', '<=', $to);
-        //     }
-        // }
-
-        // $reports = $reports
-        //     ->orderBy('created_at');
 
         $pre = isset($pre) ? $pre->format('d/m/Y') : 'all';
         $from = isset($from) ? $from->format('d/m/Y') : 'all';

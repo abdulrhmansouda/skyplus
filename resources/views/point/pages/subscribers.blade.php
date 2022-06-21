@@ -13,7 +13,7 @@
                         <div class=" row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="mb-0 text-sm text-capitalize font-weight-bold">الرصيد + الربح</p>
+                                    <p class="mb-0 text-sm text-capitalize font-weight-bold">الرصيد الحالي</p>
                                     <h5 class="mb-0 font-weight-bolder">
                                         {{ Auth::user()->point->account }}
                                     </h5>
@@ -29,7 +29,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-sm-6">
+            {{-- <div class="col-lg-3 col-sm-6">
                 <div class="card">
                     <div class="p-3 card-body">
                         <div class="row">
@@ -49,7 +49,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <div class="row">
             <!-- if search  -->
@@ -137,13 +137,7 @@
                                                 <p class="mb-0 text-xs font-weight-bold">{{ $sub->package->name }}</p>
                                             </td>
                                             <td class="text-sm align-middle">
-                                                @if ($sub->status === 'active')
-                                                    <span class="badge badge-sm bg-gradient-success">مفعل</span>
-                                                @elseif($sub->status === 'deactive')
-                                                    <span class="badge badge-sm bg-gradient-danger">غير مفعل</span>
-                                                @else
-                                                    <span class="badge badge-sm bg-gradient-danger">مغلق</span>
-                                                @endif
+                                                {!! $sub->status() !!}
                                             </td>
                                             <td class="align-middle ">
                                                 <!-- start view1 -->
@@ -246,7 +240,7 @@
                                                                                 <h6>
                                                                                     حالة المستخدم
                                                                                 </h6>
-                                                                                @if ($sub->status === 'active')
+                                                                                {{-- @if ($sub->status === 'active')
                                                                                     <span
                                                                                         class="badge badge-sm bg-gradient-success">مفعل</span>
                                                                                 @elseif($sub->status === 'deactive')
@@ -256,7 +250,8 @@
                                                                                 @else
                                                                                     <span
                                                                                         class="badge badge-sm bg-gradient-danger">مغلق</span>
-                                                                                @endif
+                                                                                @endif --}}
+                                                                                {!! $sub->status() !!}
                                                                             </div>
                                                                         </div>
 
@@ -387,7 +382,7 @@
                                                                                             <div class="form-group">
                                                                                                 <h6>
                                                                                                     حالة المشترك </h6>
-                                                                                                @if ($sub->status === 'active')
+                                                                                                {{-- @if ($sub->status === 'active')
                                                                                                     <span
                                                                                                         class="badge badge-sm bg-gradient-success">مفعل</span>
                                                                                                 @elseif($sub->status === 'deactive')
@@ -397,7 +392,8 @@
                                                                                                 @else
                                                                                                     <span
                                                                                                         class="badge badge-sm bg-gradient-danger">مغلق</span>
-                                                                                                @endif
+                                                                                                @endif --}}
+                                                                                                {!! $sub->status() !!}
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class=" col-6">
@@ -504,7 +500,7 @@
                                                                                             <div class="form-group">
                                                                                                 <h6>
                                                                                                     حالة المشترك </h6>
-                                                                                                @if ($sub->status === 'active')
+                                                                                                {{-- @if ($sub->status === 'active')
                                                                                                     <span
                                                                                                         class="badge badge-sm bg-gradient-success">مفعل</span>
                                                                                                 @elseif($sub->status === 'deactive')
@@ -514,7 +510,8 @@
                                                                                                 @else
                                                                                                     <span
                                                                                                         class="badge badge-sm bg-gradient-danger">مغلق</span>
-                                                                                                @endif
+                                                                                                @endif --}}
+                                                                                                {!! $sub->status() !!}
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class=" col-6">
@@ -620,7 +617,7 @@
                                                                                             <div class="form-group">
                                                                                                 <h6>
                                                                                                     حالة المشترك </h6>
-                                                                                                @if ($sub->status === 'active')
+                                                                                                {{-- @if ($sub->status === 'active')
                                                                                                     <span
                                                                                                         class="badge badge-sm bg-gradient-success">مفعل</span>
                                                                                                 @elseif($sub->status === 'deactive')
@@ -630,7 +627,8 @@
                                                                                                 @else
                                                                                                     <span
                                                                                                         class="badge badge-sm bg-gradient-danger">مغلق</span>
-                                                                                                @endif
+                                                                                                @endif --}}
+                                                                                                {!! $sub->status() !!}
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class=" col-6">

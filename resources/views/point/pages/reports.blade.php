@@ -53,13 +53,13 @@
                                 <tr>
                                     {{-- @foreach() --}}
                                     <th class="text-xs text-uppercase font-weight-bolder ps-3 bg-info text-dark">
-                                        الحساب : {{ $name_points === '' ? 'الكل' : $name_points }}
+                                        الحساب : {{ $name_point }}
                                     </th>
                                     <th class="px-1 text-xs text-uppercase font-weight-bolder "></th>
                                     <th class="px-1 text-xs text-uppercase font-weight-bolder "></th>
                                     <th class="px-1 text-xs text-uppercase font-weight-bolder "></th>
                                     <th class="px-1 text-xs text-uppercase font-weight-bolder "></th>
-                                    <th class="px-1 text-xs text-uppercase font-weight-bolder "></th>
+                                    {{-- <th class="px-1 text-xs text-uppercase font-weight-bolder "></th> --}}
                                     <th class="px-1 text-xs text-uppercase font-weight-bolder "></th>
                                 </tr>
                             </thead>
@@ -68,12 +68,11 @@
                                     <td class="text-xs text-uppercase font-weight-bolder ps-3">
                                         اعتبارا من {{ $from }} الى تاريخ {{ $to }}
                                     </td>
-                                    <td class="px-1 text-xs text-uppercase font-weight-bolder ">الرصيد السابق{{ $pre }}
-                                    </td>
-                                    <td class="px-1 text-xs text-uppercase font-weight-bolder ">{{ $pre_account }}
-                                    </td>
                                     <td class="px-1 text-xs text-uppercase font-weight-bolder "></td>
                                     <td class="px-1 text-xs text-uppercase font-weight-bolder "></td>
+                                    <td class="px-1 text-xs text-uppercase font-weight-bolder "></td>
+                                    <td class="px-1 text-xs text-uppercase font-weight-bolder "></td>
+                                    {{-- <td class="px-1 text-xs text-uppercase font-weight-bolder "></td> --}}
                                     <td class="px-1 text-xs text-uppercase font-weight-bolder "></td>
                                 </tr>
 
@@ -82,25 +81,22 @@
                                     <td class="text-xs text-uppercase font-weight-bolder ps-3">اسم النقطة</td>
                                     <td class="px-1 text-xs text-uppercase font-weight-bolder">البيان</td>
                                     <td class="px-1 text-xs text-uppercase font-weight-bolder">ملاحظات</td>
-                                    <td class="px-1 text-xs text-uppercase font-weight-bolder">لي</td>
-                                    <td class="px-1 text-xs text-uppercase font-weight-bolder">علي</td>
+                                    {{-- <td class="px-1 text-xs text-uppercase font-weight-bolder">لي</td>
+                                    <td class="px-1 text-xs text-uppercase font-weight-bolder">علي</td> --}}
+                                    <td class="px-1 text-xs text-uppercase font-weight-bolder">المبلغ</td>
                                     <td class="px-1 text-xs text-uppercase font-weight-bolder">الرصيد</td>
                                 </tr>
                                 <tr>
                                     <td class="text-xs text-uppercase text-secondary font-weight-bolder ps-3"></td>
                                     <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
-                                    <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder">الكل</td>
+                                    <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
+                                    {{-- <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td> --}}
                                     <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
                                     <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
-                                    <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
-                                    <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder">
-                                        {{ $pre_account }}
-                                    </td>
+                                    <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder">{{ $reports?->first()?->pre_account }}</td>
                                 </tr>
                                 <!-- start foreach -->
-                                {{-- @dd($reports) --}}
                                 @foreach ($reports as $report)
-                                <?php $pre_account = $pre_account - $report->to_him + $report->on_him; ?>
                                 <tr>
                                     <td>
                                         <div class="px-2 py-1 d-flex">
@@ -117,20 +113,31 @@
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold">{{ $report->note }}</p>
                                     </td>
-                                    <td>
+                                    {{-- <td>
                                         <p class="mb-0 text-xs font-weight-bold">{{ $report->to_him }}</p>
                                     </td>
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold">{{ $report->on_him }}</p>
+                                    </td> --}}
+                                    <td>
+                                        <p class="mb-0 text-xs font-weight-bold
+                                        @if($report->amount>0)
+                                        bg-success text-white
+                                        @elseif($report->amount<0)
+                                        bg-danger text-white
+                                        @else
+                                        bg-warning text-dark
+                                        @endif
+                                        ">{{ $report->amount }}</p>
                                     </td>
                                     <td>
-                                        <p class="mb-0 text-xs font-weight-bold">{{ $pre_account }}</p>
+                                        <p class="mb-0 text-xs font-weight-bold">{{ $report->account }}</p>
                                     </td>
 
                                 </tr>
                                 @endforeach
                                 <!-- end foreach -->
-                                <tr>
+                                {{-- <tr>
                                     <td>
                                     </td>
                                     <td>
@@ -145,12 +152,38 @@
                                     <td>
                                     </td>
                                     <td class="bg-info text-dark">
-                                        <p class="mb-0 text-xs font-weight-bold">{{ $pre_account }}</p>
+                                        <p class="mb-0 text-xs font-weight-bold">{{ $report?->account ?? 0 }}</p>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr> --}}
+                                <tr>
+                                    {{-- <td>
+                                    </td> --}}
+                                    <td class="bg-success text-white">
+                                        <p class="mb-0 text-xs font-weight-bold">مجموع شحوناتي للرصيد</p>
+                                    </td>
+                                   <td class="bg-success text-white">
+                                    <p class="mb-0 text-xs font-weight-bold">{{ $final_charge_point }}</p>
+                                    </td>
+                                     <td class="bg-warning text-white">
+                                        <p class="mb-0 text-xs font-weight-bold">مجموع  تسديد الفواتير</p>
+                                    </td>
+                                   <td class="bg-warning text-white">
+                                    <p class="mb-0 text-xs font-weight-bold">{{ $final_charge_subscriber }}</p>
+                                    </td>
+                                    <td class="bg-danger text-white">
+                                        <p class="mb-0 text-xs font-weight-bold">مجموع العمولات</p>
+                                    </td>
+                                    
+                                    <td class="bg-danger text-white">
+                                        <p class="mb-0 text-xs font-weight-bold">{{ $final_commission }}</p>
+                                    </td>
+                                    <td>
                                     </td>
                                     <td>
                                     </td>
                                 </tr>
-
                             </tbody>
                         </table>
                     </div>

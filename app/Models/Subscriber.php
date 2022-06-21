@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\UserStatusEnum;
 use App\Models\Package;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,6 +19,16 @@ class Subscriber extends Model
         'package',
     ];
 
+    // helpers
+    public function status(){
+        switch($this->status){
+            case(UserStatusEnum::ACTIVE->value):    return '<span class="badge badge-sm bg-gradient-success">مفعل</span>';
+            case(UserStatusEnum::INACTIVE->value):  return '<span class="badge badge-sm bg-gradient-warning">غير مفعل</span>';
+            case(UserStatusEnum::CLOSED->value):    return '<span class="badge badge-sm bg-gradient-danger">مغلق</span>';
+        }
+        //        <span class="badge badge-sm bg-gradient-secondary text-white">مغلق</span>
+    }
+
     public function package()
     {
         return $this->belongsTo(Package::class);
@@ -28,17 +39,17 @@ class Subscriber extends Model
         return $this->package->name;
     }
 
-    public function getStateAttribute()
-    {
-        switch ($this->status) {
-            case 'active':
-                return 'نشط';
-            case 'deactive':
-                return 'غير نشط';
-            case 'closed':
-                return 'مغلق';
-        }
-    }
+    // public function getStateAttribute()
+    // {
+    //     switch ($this->status) {
+    //         case 'active':
+    //             return 'مفعل';
+    //         case 'deactive':
+    //             return 'غير مفعل';
+    //         case 'closed':
+    //             return 'مغلق';
+    //     }
+    // }
 
     public function getStartPackageAttribute()
     {
@@ -59,10 +70,10 @@ class Subscriber extends Model
 
     public static function convertToDeactive()
     {
-        $subs = static::where('status', 'active')->get();
+        $subs = static::where('status', UserStatusEnum::ACTIVE->value)->get();
         foreach ($subs as $sub) {
             if ($sub->days_to_end == 0) {
-                $sub->status = 'deactive';
+                $sub->status = UserStatusEnum::INACTIVE->value;
                 $sub->update();
             }
         }
@@ -85,7 +96,7 @@ class Subscriber extends Model
             $end = $end->addDays(30 * $month);
             $this->package_end = $end;
 
-            $this->status = 'active';
+            $this->status = UserStatusEnum::ACTIVE->value;
             $this->update();
         }
     }
@@ -107,7 +118,7 @@ class Subscriber extends Model
             $end = $end->addDays($days);
             $this->package_end = $end;
 
-            $this->status = 'active';
+            $this->status = UserStatusEnum::ACTIVE->value;
             $this->update();
         }
     }
@@ -124,7 +135,7 @@ class Subscriber extends Model
             $this->update();
             // dd($this->days_to_end);
             if(!$this->days_to_end){
-            $this->status = 'deactive';
+            $this->status = UserStatusEnum::INACTIVE->value;
             $this->update();
         }
 

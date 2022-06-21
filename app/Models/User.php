@@ -39,6 +39,37 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    //helpers
+    public function roleText(){
+        switch($this->role){
+            case (UserRoleEnum::SUPER_ADMIN->value): return "SuperAdmin";
+            case (UserRoleEnum::ADMIN->value): return "Admin";
+            case (UserRoleEnum::ACCOUNTANT->value): return "Accounatant";
+            case (UserRoleEnum::POINT->value): return "Point";
+        }
+    }
+    public function isSuperAdmin()
+    {
+        return $this->role === UserRoleEnum::SUPER_ADMIN->value;
+    }
+
+    public function isAdmin()
+    {
+        return $this->role === UserRoleEnum::ADMIN->value;
+    }
+
+    public function isAccountant()
+    {
+        return $this->role === UserRoleEnum::ACCOUNTANT->value;
+    }
+
+    public function isPoint()
+    {
+        return $this->role === UserRoleEnum::POINT->value;
+    }
+
+    //Relations
+
     public function super_admin()
     {
         return $this->hasOne(SuperAdmin::class);
@@ -59,23 +90,4 @@ class User extends Authenticatable
         return $this->hasOne(Point::class);
     }
 
-    public function isSuperAdmin()
-    {
-        return $this->role === UserRoleEnum::SUPER_ADMIN->value;
-    }
-
-    public function isAdmin()
-    {
-        return $this->role === UserRoleEnum::ADMIN->value;
-    }
-
-    public function isAccountant()
-    {
-        return $this->role === UserRoleEnum::ACCOUNTANT->value;
-    }
-
-    public function isPoint()
-    {
-        return $this->role === UserRoleEnum::POINT->value;
-    }
 }

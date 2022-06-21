@@ -13,6 +13,7 @@ use App\Models\Point;
 use App\Models\Recharge;
 use App\Models\Report;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
@@ -34,7 +35,7 @@ class RechargeController extends Controller
     public function charge(Request $request, $id)
     {
         $request->validate([
-            'amount'            => ['required', 'numeric','min:0'],
+            'amount'            => ['required', 'numeric', 'min:0'],
             'payment_type'      => ['required', Rule::in([PaymentTypeEnum::CASH->value, PaymentTypeEnum::BANK->value])],
             'note'              => ['nullable', 'string', 'max:1000'],
         ]);
@@ -52,39 +53,41 @@ class RechargeController extends Controller
             $recharge->note = $request->note;
 
             $recharge->save();
-            $pre_account = $point->account;
-            $point->account = $point->account + $amount;
-            $point->update();
-
+            
             //make a reports
-            // dd($request->payment_type);
             $payment_type_report = ($request->payment_type == PaymentTypeEnum::CASH->value) ? 'نقد' : 'بنك';
             $report_message = "تم شحن الرصيد بقيمة $amount للنقطة $point->name طرقة الدفع : {$payment_type_report}.";
+
             $report = Report::create([
                 'point_id' => $point->id,
+                'user_id'  => Auth::user()->id,
                 'report' => $report_message,
-                'on_him' => 0,
-                'to_him' => $amount,
-                'pre_account' => $pre_account,
+                // 'on_him' => 0,
+                // 'to_him' => $amount,
+                'amount'    => $amount,
+                'pre_account' => $point->account,
+                'account' => $point->account + $amount,
                 'type' => ReportTypeEnum::CHARGE_POINT->value,
             ]);
             // dd(1);
             if ($request->payment_type == PaymentTypeEnum::CASH->value) {
-                $last_box_cash = BoxCash::orderBy('created_at')->get()->last();
+                $last_box_cash = BoxCash::all()->last();
                 $pre_account   = $last_box_cash?->account ?? 0;
-                $account       = $pre_account + $amount;
+                // $account       = ;
                 BoxCash::create([
                     'transaction_type'   => MoneyTransactionTypeEnum::PUT_MONEY->value,
                     'box_transaction_type' => BoxTransactionTypeEnum::CHARGE_POINT->value,
-                    'account'            => $account,
                     'pre_account'        => $pre_account,
+                    'account'            => $pre_account + $amount,
                     'report'             => $report_message,
                     'note'               => $request->note,
                 ]);
             } elseif ($request->payment_type == PaymentTypeEnum::BANK->value) {
                 dd('rechargecontroller_bank');
             }
-
+            
+            $point->addToAccount($amount);
+            
             session()->flash('success', "تم شحن المبلغ $amount الى النقطة $point->name بنجاح");
         });
         return redirect()->back();

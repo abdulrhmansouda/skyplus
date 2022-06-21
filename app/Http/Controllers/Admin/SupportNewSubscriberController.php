@@ -12,6 +12,7 @@ use App\Models\Point;
 use App\Models\Report;
 use App\Models\SupportNewSubscriberRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class SupportNewSubscriberController extends Controller
@@ -39,7 +40,11 @@ class SupportNewSubscriberController extends Controller
         $point = $support_new_subscriber_request->point;
         $subscription_type = $attributes->subscription_type;
 
-        $report_message = "تم اضافة المبلغ {$point->new_commission}
+        $support_message = "
+        تم قبول طلب اشتراك جديد للمشترك صاحب الرقم {$support_new_subscriber_request->subscriber_phone}
+          المرسل من النقطة{$point->user->username}.";
+
+        $commission_message = "تم اضافة المبلغ {$point->new_commission}
          لرصيد النقطة {$point->user->username}
            عمولة على المشترك  الجديد صاحب الرقم{$support_new_subscriber_request->subscriber_phone} .";
 
@@ -51,25 +56,40 @@ class SupportNewSubscriberController extends Controller
         للمشترك : {$support_new_subscriber_request->subscriber_name}
 
         رقم التلفون : {$support_new_subscriber_request->subscriber_phone}
-
+        
         مكان التركيب :  {$support_new_subscriber_request->subscriber_address}
-
+        
         🆕🆕🆕🆕🆕🆕🆕🆕🆕🆕🆕🆕";
 
-        // important bussnis
-        $point->addProfitToAccount($point->new_commission);
-
+        
         //make a report
         Report::create([
             'point_id' => $point->id,
-            'report' => $report_message,
-            'on_him' => 0,
-            'to_him' => $point->new_commission,
+            'user_id'  => Auth::user()->id,
+            'report' => $support_message,
+            // 'on_him' => 0,
+            // 'to_him' => 0,
+            'amount'    => 0,
             'pre_account' => $point->account,
+            'account' => $point->account,
+            'type' => ReportTypeEnum::SUPPORT->value,
+        ]);
+        
+        Report::create([
+            'point_id' => $point->id,
+            'user_id'  => Auth::user()->id,
+            'report' => $commission_message,
+            // 'on_him' => 0,
+            // 'to_him' => $point->new_commission,
+            'amount' => $point->new_commission,
+            'pre_account' => $point->account,
+            'account' => $point->account + $point->new_commission,
             'type' => ReportTypeEnum::COMMISSION->value,
         ]);
-
-
+        
+        // important business
+        $point->addToAccount($point->new_commission);
+        
         //send a massege to telegram
         TelegramController::newOrSwitchSubscriberMessage($telegram_message);
 
@@ -77,11 +97,41 @@ class SupportNewSubscriberController extends Controller
         $support_new_subscriber_request->update();
     }
 
+    public function rejectNewSubscriber(SupportNewSubscriberRequest $support_new_subscriber_request)
+    {
+        $attributes = json_decode($support_new_subscriber_request->attributes);
+        $point = $support_new_subscriber_request->point;
+        $subscription_type = $attributes->subscription_type;
+
+        $support_message = "
+        تم رفض طلب اشتراك جديد للمشترك صاحب الرقم {$support_new_subscriber_request->subscriber_phone}
+          المرسل من النقطة{$point->user->username}.";
+
+        Report::create([
+            'point_id' => $point->id,
+            'user_id'  => Auth::user()->id,
+            'report' => $support_message,
+            // 'on_him' => 0,
+            // 'to_him' => 0,
+            'amount' => 0,
+            'pre_account' => $point->account,
+            'account' => $point->account,
+            'type' => ReportTypeEnum::SUPPORT->value,
+        ]);
+
+        $support_new_subscriber_request->status = RequestStatusEnum::REJECTED->value;
+        $support_new_subscriber_request->update();
+    }
+
     public function acceptSwitchCompany(SupportNewSubscriberRequest $support_new_subscriber_request)
     {
         $point = $support_new_subscriber_request->point;
 
-        $report_message = "تم اضافة المبلغ {$point->switch_commission}
+        $support_message = "
+        تم قبول طلب قلب اشتراك للمشترك صاحب الرقم {$support_new_subscriber_request->subscriber_phone}
+          المرسل من النقطة{$point->user->username}.";
+
+        $commission_message = "تم اضافة المبلغ {$point->switch_commission}
          لرصيد النقطة {$point->user->username}
            عمولة على المشترك  الجديد صاحب الرقم{$support_new_subscriber_request->subscriber_phone} .";
 
@@ -98,35 +148,62 @@ class SupportNewSubscriberController extends Controller
 
         🆕🆕🆕🆕🆕🆕🆕🆕🆕🆕🆕🆕";
 
-        // important bussnis
-        $point->addProfitToAccount($point->switch_commission);
-
+        
         //make a report
         Report::create([
             'point_id' => $point->id,
-            'report' => $report_message,
-            'on_him' => 0,
-            'to_him' => $point->switch_commission,
+            'user_id'  => Auth::user()->id,
+            'report' => $support_message,
+            // 'on_him' => 0,
+            // 'to_him' => 0,
+            'amount' => 0,
             'pre_account' => $point->account,
+            'account' => $point->account,
+            'type' => ReportTypeEnum::SUPPORT->value,
+        ]);
+        
+        Report::create([
+            'point_id' => $point->id,
+            'user_id'  => Auth::user()->id,
+            'report' => $commission_message,
+            // 'on_him' => 0,
+            // 'to_him' => $point->switch_commission,
+            'amount' => $point->switch_commission,
+            'pre_account' => $point->account,
+            'account' => $point->account + $point->switch_commission,
             'type' => ReportTypeEnum::COMMISSION->value,
         ]);
-
-
+        
+        // important business
+        $point->addToAccount($point->switch_commission);
+        
         //send a massege to telegram
         TelegramController::newOrSwitchSubscriberMessage($telegram_message);
-
+        
         $support_new_subscriber_request->status = RequestStatusEnum::ACCEPTED->value;
-        $support_new_subscriber_request->update();
-    }
-
-    public function rejectNewSubscriber(SupportNewSubscriberRequest $support_new_subscriber_request)
-    {
-        $support_new_subscriber_request->status = RequestStatusEnum::REJECTED->value;
         $support_new_subscriber_request->update();
     }
 
     public function rejectSwitchCompany(SupportNewSubscriberRequest $support_new_subscriber_request)
     {
+        $point = $support_new_subscriber_request->point;
+
+        $support_message = "
+        تم رفض طلب قلب اشتراك للمشترك صاحب الرقم {$support_new_subscriber_request->subscriber_phone}
+          المرسل من النقطة{$point->user->username}.";
+
+        Report::create([
+            'point_id' => $point->id,
+            'user_id'  => Auth::user()->id,
+            'report' => $support_message,
+            // 'on_him' => 0,
+            // 'to_him' => 0,
+            'amount' => 0,
+            'pre_account' => $point->account,
+            'account' => $point->account,
+            'type' => ReportTypeEnum::SUPPORT->value,
+        ]);
+
         $support_new_subscriber_request->status = RequestStatusEnum::REJECTED->value;
         $support_new_subscriber_request->update();
     }

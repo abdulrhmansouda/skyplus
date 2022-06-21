@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('address')->nullable();
             $table->string('image')->nullable();
-            $table->double('account', 30, 3);
+            $table->double('account', 30, 5);
             $table->double('charge_commission', 30, 3);
             $table->double('new_commission', 30, 3);
             $table->double('switch_commission', 30, 3);

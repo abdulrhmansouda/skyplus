@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\UserStatusEnum;
 use App\Exports\SubscribersExport;
 // use App\Helper\Script;
 use App\Http\Controllers\Controller;
@@ -45,7 +46,7 @@ class SubscriberController extends Controller
         return view('admin.pages.subscribers', [
             'subs' => $subs->paginate($pagination_number)
                 ->appends(['pagination_number' => $pagination_number, 'sort_by' => $sort_by, 's' => $s]),
-            'packages' => Package::where('status', 'active')->get(),
+            'packages' => Package::all(),
             'search' => $s,
             'page' => $page,
             'pagination_number' => $pagination_number,
@@ -125,24 +126,25 @@ class SubscriberController extends Controller
     public function store(StoreSubscriberRequest $request)
     {
         // dd($request->all());
-        $sub = new Subscriber;
+        // $sub = new Subscriber;
 
-        $sub->name = $request->name;
-        $sub->t_c = $request->t_c;
-        $sub->sub_id = $request->sub_id;
-        $sub->sub_username = $request->sub_username;
-        $sub->subscriber_number = $request->subscriber_number;
-        $sub->mother = $request->mother;
-        $sub->phone = $request->phone;
-        $sub->package_start = $request->package_start;
-        $sub->package_end = $request->package_start;
-        $sub->package_id = $request->package_id;
-        $sub->status = $request->status;
-        $sub->address = $request->address;
-        $sub->installation_address = $request->installation_address;
-        $sub->mission_executor = $request->mission_executor;
-        $sub->note = $request->note;
-        $sub->save();
+        // $sub->name = $request->name;
+        // $sub->t_c = $request->t_c;
+        // $sub->sub_id = $request->sub_id;
+        // $sub->sub_username = $request->sub_username;
+        // $sub->subscriber_number = $request->subscriber_number;
+        // $sub->mother = $request->mother;
+        // $sub->phone = $request->phone;
+        // $sub->package_start = $request->package_start;
+        // $sub->package_end = $request->package_start;
+        // $sub->package_id = $request->package_id;
+        // $sub->status = $request->status;
+        // $sub->address = $request->address;
+        // $sub->installation_address = $request->installation_address;
+        // $sub->mission_executor = $request->mission_executor;
+        // $sub->note = $request->note;
+        // $sub->save();
+        $sub = Subscriber::create($request->validated());
 
         session()->flash('success', "تم اضافة المشترك $sub->name بنجاح");
 
@@ -161,22 +163,23 @@ class SubscriberController extends Controller
         // dd($request->all());
         $sub = Subscriber::findOrFail($id);
 
-        $sub->name = $request->name;
-        $sub->t_c = $request->t_c;
-        $sub->sub_id = $request->sub_id;
-        $sub->sub_username = $request->sub_username;
-        $sub->subscriber_number = $request->subscriber_number;
-        $sub->mother = $request->mother;
-        $sub->phone = $request->phone;
-        $sub->package_start = $request->package_start;
-        $sub->package_end = $request->package_start;
-        $sub->package_id = $request->package_id;
-        $sub->status = $request->status;
-        $sub->address = $request->address;
-        $sub->installation_address = $request->installation_address;
-        $sub->mission_executor = $request->mission_executor;
-        $sub->note = $request->note;
-        $sub->update();
+        // $sub->name = $request->name;
+        // $sub->t_c = $request->t_c;
+        // $sub->sub_id = $request->sub_id;
+        // $sub->sub_username = $request->sub_username;
+        // $sub->subscriber_number = $request->subscriber_number;
+        // $sub->mother = $request->mother;
+        // $sub->phone = $request->phone;
+        // $sub->package_start = $request->package_start;
+        // $sub->package_end = $request->package_start;
+        // $sub->package_id = $request->package_id;
+        // $sub->status = $request->status;
+        // $sub->address = $request->address;
+        // $sub->installation_address = $request->installation_address;
+        // $sub->mission_executor = $request->mission_executor;
+        // $sub->note = $request->note;
+        // $sub->update();
+        $sub->update($request->validated());
 
         session()->flash('success', "تم تعديل المشترك $sub->name بنجاح");
 
@@ -191,13 +194,13 @@ class SubscriberController extends Controller
      */
     public function destroy(Subscriber $subscriber)
     {
-        if ($subscriber->status !== 'closed') {
-            $subscriber->status = 'closed';
+        // if ($subscriber->status !== 'closed') {
+            $subscriber->status = UserStatusEnum::CLOSED->value;
             $subscriber->update();
             session()->flash('success', "تم اغلاق المشترك $subscriber->name بنجاح");
-        } else {
-            session()->flash('error', "المشترك $subscriber->name مغلق بالفعل!");
-        }
+        // } else {
+        //     session()->flash('error', "المشترك $subscriber->name مغلق بالفعل!");
+        // }
         return redirect()->back();
     }
 }

@@ -78,7 +78,7 @@ class SubscriberController extends Controller
         // انتهاء موضوع الدين
 
         $message = "تم شحن/تفعيل الباقة $package->name للمشترك رقم $sub->subscriber_number لمدة $months أشهر و تم اقطاع مبلغ $amount من الرصيد.";
-        $message_profit = "تم اضافة المبلغ $profit لرصيد النقطة {$point->user->username} عمولة شحن رصيد للمشترك {$sub->subscriber_number} .";
+        $commission_message = "تم اضافة المبلغ $profit لرصيد النقطة {$point->user->username} عمولة شحن رصيد للمشترك {$sub->subscriber_number} .";
         $telegram_message = "
             تم تسديد فاتورة من نقطة البيع  {$point->user->username}
             للمشترك {$sub->sub_username}
@@ -91,30 +91,37 @@ class SubscriberController extends Controller
           ✅✅✅✅✅✅✅✅✅✅✅✅";
 
         // العمليات المهمة جداً
-        DB::transaction(function () use ($point, $amount, $profit, $sub, $months, $message, $message_profit, $telegram_message) {
-            $point->takeFromAccount($amount);
-            $point->addProfitToAccount($profit);
-            
-            $sub->payMonths($months);
+        DB::transaction(function () use ($point, $amount, $profit, $sub, $months, $message, $commission_message, $telegram_message) {
 
             //make a report
             Report::create([
                 'point_id' => $point->id,
+                'subscriber_id' => $sub->id,
                 'report' => $message,
-                'on_him' => $amount,
-                'to_him' => 0,
+                // 'on_him' => $amount,
+                // 'to_him' => 0,
+                'amount' => -1 * $amount,
                 'pre_account' => $point->account,
+                'account' => $point->account - $amount,
                 'type' => ReportTypeEnum::CHARGE_SUBSCRIBER->value,
             ]);
 
+            $point->takeFromAccount($amount);
+
             Report::create([
                 'point_id' => $point->id,
-                'report' => $message_profit,
-                'on_him' => 0,
-                'to_him' => $profit,
-                'pre_account' => $point->account - $amount,
+                'subscriber_id' => $sub->id,
+                'report' => $commission_message,
+                // 'on_him' => 0,
+                // 'to_him' => $profit,
+                'amount' => $profit,
+                'pre_account' => $point->account,
+                'account' => $point->account + $profit,
                 'type' => ReportTypeEnum::COMMISSION->value,
             ]);
+            $point->addToAccount($profit);
+
+            $sub->payMonths($months);
 
             // make a invoice
             Invoice::create([
@@ -158,8 +165,10 @@ class SubscriberController extends Controller
             return redirect()->back();
         }
 
-        $message = "تم ألغاء شحن/تفعيل الباقة $package->name للمشترك رقم $sub->subscriber_number لمدة $months أشهر و تم الغاء اقطاع مبلغ $amount من الرصيد و الغاء أضافة مبلغ $profit .";
-        $message_profit = "تم الغاء اضافة المبلغ $profit لرصيد النقطة {$point->user->username} عمولة شحن رصيد للمشترك {$sub->subscriber_number} .";
+        $message = "تم ألغاء شحن/تفعيل الباقة {$package->name}
+         للمشترك رقم {$sub->subscriber_number}
+          لمدة $months أشهر و تم الغاء اقطاع مبلغ $amount من الرصيد و الغاء أضافة مبلغ $profit .";
+        $commission_message = "تم الغاء اضافة المبلغ $profit لرصيد النقطة {$point->user->username} عمولة شحن رصيد للمشترك {$sub->subscriber_number} .";
 
 
         $telegram_message = "
@@ -174,31 +183,40 @@ class SubscriberController extends Controller
             ❌❌❌❌❌❌❌❌❌❌❌❌";
 
         //العمليات المهمة جداً
-        DB::transaction(function () use ($point, $sub, $amount, $profit, $months, $message, $message_profit, $telegram_message) {
+        DB::transaction(function () use ($point, $sub, $amount, $profit, $months, $message, $commission_message, $telegram_message) {
 
-            $point->addToAccount($amount);
-            $point->takeProfitFromAccount($profit);
-
-            $sub->cancelPayMonths($months);
 
             //make a report
             Report::create([
                 'point_id' => $point->id,
-                'report' =>  $message,
-                'on_him' => -1 * $amount,
-                'to_him' => 0,
+                'subscriber_id' => $sub->id,
+                'report' =>  $commission_message,
+                // 'on_him' => 0,
+                // 'to_him' => -1 * $profit,
+                'amount' => -1 * $profit,
                 'pre_account' => $point->account,
-                'type' => ReportTypeEnum::CHARGE_SUBSCRIBER->value,
+                'account' => $point->account  - $profit,
+                'type' => ReportTypeEnum::COMMISSION->value,
             ]);
+
+            $point->takeFromAccount($profit);
 
             Report::create([
                 'point_id' => $point->id,
-                'report' =>  $message_profit,
-                'on_him' => 0,
-                'to_him' => -1 * $profit,
-                'pre_account' => $point->account - 1 * $amount,
-                'type' => ReportTypeEnum::COMMISSION->value,
+                'subscriber_id' => $sub->id,
+                'report' =>  $message,
+                // 'on_him' => -1 * $amount,
+                // 'to_him' => 0,
+                'amount' => $amount,
+                'pre_account' => $point->account,
+                'account' => $point->account + $amount,
+                'type' => ReportTypeEnum::CHARGE_SUBSCRIBER->value,
             ]);
+
+            $point->addToAccount($amount);
+
+
+            $sub->cancelPayMonths($months);
 
             // make a invoice
             Invoice::create([
@@ -222,21 +240,22 @@ class SubscriberController extends Controller
     {
         $sub = Subscriber::findOrFail($id);
         $attributes['subscriber_id'] = $id;
-        $package = $sub->package;
-        $attributes['pre_package_id'] = $package->id;
-        if ($package->id === $request->package_id) {
+        $pre_package = $sub->package;
+        $attributes['pre_package_id'] = $pre_package->id;
+        if ($pre_package->id === $request->package_id) {
             session()->flash('error', 'هذه هي نفس باقة المشترك بالفعل');
             return redirect()->back();
         }
-        $attributes['pre_package_id'] = $package->id;
-        $package = Package::findOrFail($request->package_id);
-        $attributes['new_package_id'] = $package->id;
+
+        $attributes['pre_package_id'] = $pre_package->id;
+        $new_package = Package::findOrFail($request->package_id);
+        $attributes['new_package_id'] = $new_package->id;
         $point = Auth::user()->point;
         $attributes['point_id'] = $point->id;
 
         $months = $request->months;
         $attributes['months'] = $months;
-        $amount = $months * $package->price;
+        $amount = $months * $new_package->price;
         $attributes['amount'] = $amount;
         $profit = ($point->charge_commission / 100) * $amount;
         $attributes['profit'] = $profit;
@@ -248,11 +267,29 @@ class SubscriberController extends Controller
             return redirect()->back();
         }
         // انتهاء موضوع الدين
+        //
+        $support_message = "
+تم تسجيل طلب تغير الباقة للمشترك رقم {$sub->subscriber_number}
+ من الباقة {$pre_package->name}
+  ال الباقة {$new_package->name}
+  المرسل من النقطة{$point->user->username}.";
 
+        $charge_message = "تم تسجيل طلب شحن/تفعيل الباقة {$new_package->name}
+ للمشترك رقم {$sub->subscriber_number}
+  لمدة {$months}
+   أشهر و تم اقطاع مبلغ {$amount}
+    من الرصيد
+    على انه سيتم اعادة المبلغ في حال رفض الطلب.";
+
+        $commission_message = "تم اضافة المبلغ {$profit}
+ لرصيد النقطة {$point->user->username}
+  عمولة شحن رصيد للمشترك {$sub->subscriber_number}
+   على انه سيتم استرداد العمولة في حال رفض الطلب.";
+
+
+        //
         // العمليات المهمة جداً
-        DB::transaction(function () use ($point, $amount, $profit, $sub, $attributes) {
-            $point->takeFromAccount($amount);
-            $point->addProfitToAccount($profit);
+        DB::transaction(function () use ($point, $amount, $profit, $sub, $attributes, $support_message, $charge_message, $commission_message) {
 
             SupportRequest::create([
                 'point_id'              => $point->id,
@@ -261,6 +298,50 @@ class SubscriberController extends Controller
                 'status'                => RequestStatusEnum::WAINTING->value,
                 'attributes'            => json_encode($attributes),
             ]);
+
+            //make a report
+            Report::create([
+                'point_id' => $point->id,
+                'user_id'  => Auth::user()->id,
+                'subscriber_id' => $sub->id,
+                'report' => $support_message,
+                // 'on_him' => 0,
+                // 'to_him' => 0,
+                'amount' => 0,
+                'pre_account' => $point->account,
+                'account' => $point->account,
+                'type' => ReportTypeEnum::SUPPORT->value,
+            ]);
+
+            Report::create([
+                'point_id' => $point->id,
+                'user_id'  => Auth::user()->id,
+                'subscriber_id' => $sub->id,
+                'report' => $charge_message,
+                // 'on_him' => $amount,
+                // 'to_him' => 0,
+                'amount' => -1 * $amount,
+                'pre_account' => $point->account,
+                'account' => $point->account - $amount,
+                'type' => ReportTypeEnum::CHARGE_SUBSCRIBER->value,
+            ]);
+
+            $point->takeFromAccount($amount);
+
+            Report::create([
+                'point_id' => $point->id,
+                'user_id'  => Auth::user()->id,
+                'subscriber_id' => $sub->id,
+                'report' => $commission_message,
+                // 'on_him' => 0,
+                // 'to_him' => $profit,
+                'amount' => $profit,
+                'pre_account' => $point->account,
+                'account' => $point->account + $profit,
+                'type' => ReportTypeEnum::COMMISSION->value,
+            ]);
+            $point->addToAccount($profit);
+
 
             $support_notification = Notification::first();
             $support_notification->support_notification = true;
@@ -281,13 +362,13 @@ class SubscriberController extends Controller
         ]);
         $point = Point::findOrFail(Auth::user()->point->id);
 
-            $attributes['maintenance_request_type'] = $request->maintenance_request_type;
-            $attributes['point_id'] = $point->id;
-            $attributes['subscriber_id'] = $subscriber->id;
+        $attributes['maintenance_request_type'] = $request->maintenance_request_type;
+        $attributes['point_id'] = $point->id;
+        $attributes['subscriber_id'] = $subscriber->id;
 
 
 
-        DB::transaction(function () use ($point, $subscriber, $attributes,$request) {
+        DB::transaction(function () use ($point, $subscriber, $attributes, $request) {
             SupportRequest::create([
                 'point_id'              => $point->id,
                 'subscriber_id'         => $subscriber->id,
@@ -314,13 +395,13 @@ class SubscriberController extends Controller
         ]);
         $point = Point::findOrFail(Auth::user()->point->id);
 
-            $attributes['maintenance_request_type'] = 'نقل المنزل';
-            $attributes['point_id'] = $point->id;
-            $attributes['subscriber_id'] = $subscriber->id;
+        $attributes['maintenance_request_type'] = 'نقل المنزل';
+        $attributes['point_id'] = $point->id;
+        $attributes['subscriber_id'] = $subscriber->id;
 
 
 
-        DB::transaction(function () use ($point, $subscriber, $attributes,$request) {
+        DB::transaction(function () use ($point, $subscriber, $attributes, $request) {
             SupportRequest::create([
                 'point_id'              => $point->id,
                 'subscriber_id'         => $subscriber->id,

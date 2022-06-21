@@ -22,6 +22,13 @@
                         <option value="{{ $point->id }}" @if(in_array($point->id,$_points))selected @endif>{{ $point->name }}</option>
                         @endforeach
                     </select>
+                    <select name="report_type" class="form-select">
+                        <option value="">الكل</option>
+                        <option value="{{ App\Enums\ReportTypeEnum::CHARGE_POINT->value }}" @if($report_type == App\Enums\ReportTypeEnum::CHARGE_POINT->value) selected @endif>شحن لنقطة</option>
+                        <option value="{{ App\Enums\ReportTypeEnum::CHARGE_SUBSCRIBER->value }}" @if($report_type == App\Enums\ReportTypeEnum::CHARGE_SUBSCRIBER->value) selected @endif>تسديد لمشترك</option>
+                        <option value="{{ App\Enums\ReportTypeEnum::COMMISSION->value }}" @if($report_type == App\Enums\ReportTypeEnum::COMMISSION->value) selected @endif>عمولات</option>
+                        <option value="{{ App\Enums\ReportTypeEnum::SUPPORT->value }}" @if($report_type == App\Enums\ReportTypeEnum::SUPPORT    ->value) selected @endif>تقارير الدعم</option>
+                    </select>
                     <button type="submit" class="mb-0 btn btn-secondary btn-sm ps-3 pe-3">بحث</button>
                 </div>
             </form>
@@ -30,16 +37,17 @@
 
     </div>
     <div class="mb-3 row justify-content-between">
-        <div class="col-md-5 ">
+        {{-- <div class="col-md-5 ">
             <form action="" method="GET">
                 <select name="box_transaction_type" class="form-select">
-                    <option value="">الكل</option>
-                    <option>شحن </option>
-                    <option>تسديد</option>
-                    <option>عمولة</option>
+                    <option>الكل</option>
+                    <option value="{{ App\Enums\ReportTypeEnum::CHARGE_POINT->value }}">شحن لنقطة</option>
+                    <option value="{{ App\Enums\ReportTypeEnum::CHARGE_SUBSCRIBER->value }}">تسديد لمشترك</option>
+                    <option value="{{ App\Enums\ReportTypeEnum::COMMISSION->value }}">عمولات</option>
+                    <option value="{{ App\Enums\ReportTypeEnum::SUPPORT->value }}">تقارير الدعم</option>
                 </select>
             </form>
-        </div>
+        </div> --}}
         <div class="col-md-2">
             <form action="{{ route('admin.reports.export') }}" method="POST">
                 @csrf
@@ -102,8 +110,8 @@
                                 <tr class="bg-aliceblue">
                                     <td class="text-xs text-uppercase font-weight-bolder ps-3">التاريخ</td>
                                     <td class="text-xs text-uppercase font-weight-bolder ps-3">اسم النقطة</td>
-                                    <td class="text-xs text-uppercase font-weight-bolder ps-3">اسم الادمن</td>
-                                    <td class="text-xs text-uppercase font-weight-bolder ps-3">اسم العميل</td>
+                                    <td class="text-xs text-uppercase font-weight-bolder ps-3">مشرف العملية</td>
+                                    <td class="text-xs text-uppercase font-weight-bolder ps-3">اسم المشترك</td>
                                     <td class="px-1 text-xs text-uppercase font-weight-bolder">نوع البيان</td>
                                     <td class="px-1 text-xs text-uppercase font-weight-bolder">البيان</td>
                                     <td class="px-1 text-xs text-uppercase font-weight-bolder">ملاحظات</td>
@@ -122,12 +130,12 @@
                                     <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
                                     <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
                                     <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder">
-                                        {{ $pre_account }}
+                                        {{ $reports?->first()?->pre_account ?? 0 }}
                                     </td>
                                 </tr>
                                 <!-- start foreach -->
                                 @foreach ($reports as $report)
-                                <?php $pre_account = $pre_account - $report->to_him + $report->on_him; ?>
+                            {{-- {{$pre_account = $pre_account - $report->to_him + $report->on_him}} --}}
                                 <tr>
                                     <td>
                                         <div class="px-2 py-1 d-flex">
@@ -139,15 +147,15 @@
                                     </td>
 
                                     <td>
-                                        <p class="mb-0 text-xs font-weight-bold">*****
+                                        <p class="mb-0 text-xs font-weight-bold">{{ $report?->operationSupervisor() }}
                                         </p>
                                     </td>
                                     <td>
-                                        <p class="mb-0 text-xs font-weight-bold">*****
+                                        <p class="mb-0 text-xs font-weight-bold">{{ $report?->subscriber?->sub_username ?? '_' }}
                                         </p>
                                     </td>
                                     <td>
-                                        <p class="mb-0 text-xs font-weight-bold">{{ $report->type_report }}
+                                        <p class="mb-0 text-xs font-weight-bold">{{ $report->reportType() }}
                                         </p>
                                     </td>
 
@@ -165,15 +173,15 @@
                                         <p class="mb-0 text-xs font-weight-bold">{{ $report->to_him }}</p>
                                     </td>
                                     <td>
-                                        <p class="mb-0 text-xs font-weight-bold">{{ $pre_account }}</p>
+                                        <p class="mb-0 text-xs font-weight-bold">{{ $report->account }}</p>
                                     </td>
 
                                 </tr>
                                 @endforeach
                                 <!-- end foreach -->
                                 <tr>
-                                    <td>
-                                    </td>
+                                    {{-- <td>
+                                    </td> --}}
                                     <td class="bg-success text-white">
                                         <p class="mb-0 text-xs font-weight-bold">مجموع شحن الأرصدة</p>
                                     </td>

@@ -22,7 +22,7 @@
                         <option value="{{ $point->id }}" @if(in_array($point->id,$_points))selected @endif>{{ $point->name }}</option>
                         @endforeach
                     </select>
-                    <select name="report_type" class="form-select">
+                    <select name="report_type" class="form-select" style="width:200px">
                         <option value="">الكل</option>
                         <option value="{{ App\Enums\ReportTypeEnum::CHARGE_POINT->value }}" @if($report_type == App\Enums\ReportTypeEnum::CHARGE_POINT->value) selected @endif>شحن لنقطة</option>
                         <option value="{{ App\Enums\ReportTypeEnum::CHARGE_SUBSCRIBER->value }}" @if($report_type == App\Enums\ReportTypeEnum::CHARGE_SUBSCRIBER->value) selected @endif>تسديد لمشترك</option>
@@ -79,7 +79,7 @@
                             <thead>
                                 <tr>
                                     {{-- @foreach() --}}
-                                    <th class="text-xs text-uppercase font-weight-bolder ps-3 bg-info text-white">
+                                    <th class="text-xs text-white text-uppercase font-weight-bolder ps-3 bg-info">
                                         الحساب : {{ $name_points === '' ? 'الكل' : $name_points }}
                                     </th>
                                     <th class="px-1 text-xs text-uppercase font-weight-bolder "></th>
@@ -92,19 +92,11 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="text-xs text-uppercase font-weight-bolder ps-3">
+                                    <td class="text-xs text-uppercase font-weight-bolder ps-3" colspan="9" >
                                         اعتبارا من {{ $from }} الى تاريخ {{ $to }}
                                     </td>
-                                    <td class="px-1 text-xs text-uppercase font-weight-bolder ">
-                                        {{-- الرصيد السابق
-                                        {{ $pre }} --}}
-                                    </td>
-                                    <td class="px-1 text-xs text-uppercase font-weight-bolder ">
-                                        {{-- {{ $pre_account }} --}}
-                                    </td>
-                                    <td class="px-1 text-xs text-uppercase font-weight-bolder "></td>
-                                    <td class="px-1 text-xs text-uppercase font-weight-bolder "></td>
-                                    <td class="px-1 text-xs text-uppercase font-weight-bolder "></td>
+                                   
+                                   
                                 </tr>
 
                                 <tr class="bg-aliceblue">
@@ -160,12 +152,12 @@
                                         </p>
                                     </td>
 
-                                    <td>
-                                        <p class="mb-0 text-xs font-weight-bold">{{ $report->report }}
+                                    <td title='{{ $report->report }}'>
+                                        <p class="mb-0 text-xs font-weight-bold ellipsis">{{ $report->report }}
                                         </p>
                                     </td>
-                                    <td>
-                                        <p class="mb-0 text-xs font-weight-bold">{{ $report->note }}</p>
+                                    <td title='{{ $report->note }}'>
+                                        <p class="mb-0 text-xs font-weight-bold ellipsis">{{ $report->note }}</p>
                                     </td>
                                     {{-- <td>
                                         <p class="mb-0 text-xs font-weight-bold">{{ $report->on_him }}</p>
@@ -193,23 +185,23 @@
                                 <tr>
                                     {{-- <td>
                                     </td> --}}
-                                    <td class="bg-success text-white">
+                                    <td class="text-white bg-success">
                                         <p class="mb-0 text-xs font-weight-bold">مجموع شحن الأرصدة</p>
                                     </td>
-                                   <td class="bg-success text-white">
+                                   <td class="text-white bg-success">
                                     <p class="mb-0 text-xs font-weight-bold">{{ $final_charge_point }}</p>
                                     </td>
-                                     <td class="bg-warning text-white">
+                                     <td class="text-white bg-warning">
                                         <p class="mb-0 text-xs font-weight-bold">مجموع  تسديد الفواتير</p>
                                     </td>
-                                   <td class="bg-warning text-white">
+                                   <td class="text-white bg-warning">
                                     <p class="mb-0 text-xs font-weight-bold">{{ $final_charge_subscriber }}</p>
                                     </td>
-                                    <td class="bg-danger text-white">
+                                    <td class="text-white bg-danger">
                                         <p class="mb-0 text-xs font-weight-bold">مجموع العمولات</p>
                                     </td>
                                     
-                                    <td class="bg-danger text-white">
+                                    <td class="text-white bg-danger">
                                         <p class="mb-0 text-xs font-weight-bold">{{ $final_commission }}</p>
                                     </td>
                                     <td>

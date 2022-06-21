@@ -72,13 +72,13 @@
     </form>
     <!-- end add  -->
     <!-- end add -->
-    <div class="row mb-3">
+    <div class="mb-3 row">
         {{-- <div class="col-md-10 ">
             <form action="">
-                <div class="d-flex gap-3">
+                <div class="gap-3 d-flex">
                     <input name="daterange" type="text" class="form-control w-50 daterange"  />
 
-                    <button class="btn btn-secondary mb-0  btn-sm ps-3 pe-3">بحث</button>
+                    <button class="mb-0 btn btn-secondary btn-sm ps-3 pe-3">بحث</button>
                 </div>
             </form>
         </div> --}}
@@ -105,9 +105,9 @@
 
         <div class="col-md-2">
             <form action="">
-                <button class="btn btn-white  ps-3 pe-3 m-md-0 m-2">
+                <button class="m-2 btn btn-white ps-3 pe-3 m-md-0">
                     تصدير الى excel
-                    <i class="fas fa-file-export mx-1"></i>
+                    <i class="mx-1 fas fa-file-export"></i>
                 </button>
             </form>
         </div>
@@ -117,7 +117,7 @@
         <div class="col-12">
             <div class="mb-4 card">
                 <div class="px-0 pt-0 pb-2 card-body">
-                    <div class="card-header pb-0">
+                    <div class="pb-0 card-header">
                         <div class="row">
                             <div class="col-12">
                                 <h6>الصندوق</h6>
@@ -128,50 +128,43 @@
                         <table class="table mb-0 align-items-center">
                             <thead>
                                 {{-- <tr>
-                                    <th class="text-xs text-uppercase font-weight-bolder ps-3 bg-info  text-dark">
+                                    <th class="text-xs text-uppercase font-weight-bolder ps-3 bg-info text-dark">
                                         الحساب : الكل
                                     </th>
-                                    <th class="px-1 text-uppercase text-xs font-weight-bolder "></th>
-                                    <th class="px-1 text-uppercase text-xs font-weight-bolder "></th>
-                                    <th class="px-1 text-uppercase text-xs font-weight-bolder "></th>
-                                    <th class="px-1 text-uppercase text-xs font-weight-bolder "></th>
-                                    <th class="px-1 text-uppercase text-xs font-weight-bolder "></th>
-                                    <th class="px-1 text-uppercase text-xs font-weight-bolder "></th>
+                                    <th class="px-1 text-xs text-uppercase font-weight-bolder "></th>
+                                    <th class="px-1 text-xs text-uppercase font-weight-bolder "></th>
+                                    <th class="px-1 text-xs text-uppercase font-weight-bolder "></th>
+                                    <th class="px-1 text-xs text-uppercase font-weight-bolder "></th>
+                                    <th class="px-1 text-xs text-uppercase font-weight-bolder "></th>
+                                    <th class="px-1 text-xs text-uppercase font-weight-bolder "></th>
                                 </tr> --}}
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="text-xs text-uppercase font-weight-bolder ps-3">
+                                    <td class="text-xs text-uppercase font-weight-bolder ps-3" colspan="7">
                                         اعتبارا من {{ $from }} الى تاريخ {{ $to }}
                                     </td>
-                                    <td class="px-1 text-xs text-uppercase font-weight-bolder ">
-                                        {{-- الرصيد
-                                            السابق{{ $pre }} --}}
-                                    </td>
-                                    <td class="px-1 text-xs text-uppercase font-weight-bolder ">
-                                        {{-- {{ $pre_account }} --}}
-                                    </td>
-                                    <td class="px-1 text-uppercase text-xs font-weight-bolder "></td>
-                                    <td class="px-1 text-uppercase text-xs font-weight-bolder "></td>
+                                   
+                                 
                                 </tr>
 
                                 <tr class="bg-aliceblue">
-                                    <td class="text-uppercase  text-xs font-weight-bolder ps-3">التاريخ</td>
-                                    <td class="text-uppercase  text-xs font-weight-bolder ps-3">مشرف العملية</td>
-                                    <td class="px-1 text-uppercase  text-xs font-weight-bolder">البيان</td>
-                                    <td class="px-1 text-uppercase  text-xs font-weight-bolder">ملاحظات</td>
-                                    <td class="px-1 text-uppercase  text-xs font-weight-bolder">نوع الفاتورة</td>
-                                    <td class="px-1 text-uppercase  text-xs font-weight-bolder">قيمة الفاتورة</td>
-                                    <td class="px-1 text-uppercase  text-xs font-weight-bolder">الرصيد</td>
+                                    <td class="text-xs text-uppercase font-weight-bolder ps-3">التاريخ</td>
+                                    <td class="text-xs text-uppercase font-weight-bolder ps-3">مشرف العملية</td>
+                                    <td class="px-1 text-xs text-uppercase font-weight-bolder">البيان</td>
+                                    <td class="px-1 text-xs text-uppercase font-weight-bolder">ملاحظات</td>
+                                    <td class="px-1 text-xs text-uppercase font-weight-bolder">نوع الفاتورة</td>
+                                    <td class="px-1 text-xs text-uppercase font-weight-bolder">قيمة الفاتورة</td>
+                                    <td class="px-1 text-xs text-uppercase font-weight-bolder">الرصيد</td>
                                 </tr>
                                 <tr>
-                                    <td class="text-uppercase text-secondary text-xs font-weight-bolder ps-3"></td>
-                                    <td class="px-1 text-uppercase text-secondary text-xs font-weight-bolder"></td>
-                                    <td class="px-1 text-uppercase text-secondary text-xs font-weight-bolder">الكل</td>
-                                    <td class="px-1 text-uppercase text-secondary text-xs font-weight-bolder"></td>
-                                    <td class="px-1 text-uppercase text-secondary text-xs font-weight-bolder"></td>
-                                    <td class="px-1 text-uppercase text-secondary text-xs font-weight-bolder"></td>
-                                    <td class="px-1 text-uppercase text-secondary text-xs font-weight-bolder">
+                                    <td class="text-xs text-uppercase text-secondary font-weight-bolder ps-3"></td>
+                                    <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
+                                    <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder">الكل</td>
+                                    <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
+                                    <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
+                                    <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
+                                    <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder">
                                         {{ $pre_account }}
                                     </td>
                                 </tr>
@@ -187,11 +180,11 @@
                                     <td>
                                     <p class="mb-0 text-xs font-weight-bold">{{ $boxCash->operationSupervisor() }}</p>
                                 </td>
-                                    <td>
-                                        <p class="mb-0 text-xs font-weight-bold">{{ $boxCash->report }}</p>
+                                    <td title='{{ $boxCash->report }}'>
+                                        <p class="mb-0 text-xs font-weight-bold ellipsis">{{ $boxCash->report }}</p>
                                     </td>
-                                    <td>
-                                        <p class="mb-0 text-xs font-weight-bold">{{ $boxCash->note }}</p>
+                                    <td title='{{ $boxCash->note }}'>
+                                        <p class="mb-0 text-xs font-weight-bold ellipsis">{{ $boxCash->note }}</p>
                                     </td>
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold">
@@ -221,25 +214,25 @@
                                 <!-- end foreach -->
                                 <tr>
                                   
-                                    <td class="bg-success text-white">
+                                    <td class="text-white bg-success">
                                     <p class="mb-0 text-xs font-weight-bold">مجموع شحن الأرصدة</p>
 
                                     </td>
-                                    <td class="bg-success text-white">
+                                    <td class="text-white bg-success">
                                     <p class="mb-0 text-xs font-weight-bold">*****</p>
                                     </td>
                                     
-                                    <td class="bg-warning text-white">
+                                    <td class="text-white bg-warning">
                                     <p class="mb-0 text-xs font-weight-bold">مجموع  تسديد الفواتير</p>
                                     </td>
-                                    <td class="bg-warning text-white">
+                                    <td class="text-white bg-warning">
                                     <p class="mb-0 text-xs font-weight-bold">*****</p>
                                     </td>
-                                    <td class="bg-danger text-white">
+                                    <td class="text-white bg-danger">
                                         <p class="mb-0 text-xs font-weight-bold">مجموع العمولات</p>
                                     </td>
                                     
-                                    <td class="bg-danger text-white">
+                                    <td class="text-white bg-danger">
                                         <p class="mb-0 text-xs font-weight-bold">*****</p>
                                     </td>
                                     <!-- <td class="bg-info text-dark">

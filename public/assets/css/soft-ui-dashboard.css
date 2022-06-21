@@ -25592,4 +25592,11 @@ transition:hover 0.3s;
 tr:hover{
   background:#eee;
 }
+.ellipsis{
+  width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: nowrap;
+}
 /*# sourceMappingURL=dashboard-free.css.map */

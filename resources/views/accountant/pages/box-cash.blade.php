@@ -165,7 +165,7 @@
                                     <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
                                     <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
                                     <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder">
-                                        {{ $pre_account }}
+                                        {{ $boxCashs?->last()?->pre_acount ?? 0 }}
                                     </td>
                                 </tr>
                                 <!-- start foreach -->
@@ -194,15 +194,15 @@
                                     </td>
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold
-                                        @if($boxCash->account - $boxCash->pre_account>0)
+                                        @if($boxCash->amount>0)
                                         bg-success text-white
-                                        @elseif($boxCash->account - $boxCash->pre_account<0)
+                                        @elseif($boxCash->amount<0)
                                         bg-danger text-white
                                         @else
                                         bg-warning text-dark
                                         @endif
                                         ">
-                                            {{ $boxCash->account - $boxCash->pre_account }}
+                                            {{ $boxCash->amount}}
                                         </p>
                                     </td>
                                     <td>
@@ -219,25 +219,25 @@
 
                                     </td>
                                     <td class="text-white bg-success">
-                                    <p class="mb-0 text-xs font-weight-bold">*****</p>
+                                    <p class="mb-0 text-xs font-weight-bold">{{ $final_charge_subscriber }}</p>
                                     </td>
                                     
                                     <td class="text-white bg-warning">
-                                    <p class="mb-0 text-xs font-weight-bold">مجموع  تسديد الفواتير</p>
+                                    <p class="mb-0 text-xs font-weight-bold">مجموع المبيعات</p>
                                     </td>
                                     <td class="text-white bg-warning">
-                                    <p class="mb-0 text-xs font-weight-bold">*****</p>
+                                    <p class="mb-0 text-xs font-weight-bold">{{ $final_sell }}</p>
                                     </td>
                                     <td class="text-white bg-danger">
-                                        <p class="mb-0 text-xs font-weight-bold">مجموع العمولات</p>
+                                        <p class="mb-0 text-xs font-weight-bold">مجموع المدفوعات</p>
                                     </td>
                                     
                                     <td class="text-white bg-danger">
-                                        <p class="mb-0 text-xs font-weight-bold">*****</p>
+                                        <p class="mb-0 text-xs font-weight-bold">{{ $final_pay }}</p>
                                     </td>
-                                    <!-- <td class="bg-info text-dark">
+                                    {{-- <!-- <td class="bg-info text-dark">
                                         <p class="mb-0 text-xs font-weight-bold">{{ $boxCashs?->last()?->account ?? 0 }}</p>
-                                    </td> -->
+                                    </td> --> --}}
                                   
                                 </tr>
 

@@ -6,6 +6,7 @@ use App\Enums\BoxTransactionTypeEnum;
 use App\Enums\MoneyTransactionTypeEnum;
 use App\Models\BoxCash;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 
@@ -49,10 +50,12 @@ class StoreBoxCashRequest extends FormRequest
             $box_transaction_type = BoxTransactionTypeEnum::PAY->value;
         }
         return [
+            'user_id'   => Auth::user()->id,
             'transaction_type'   => $this->transaction_type,
             'box_transaction_type' => $box_transaction_type,
-            'account'            => $account,
+            'amount'             => $this->amount,
             'pre_account'        => $pre_account,
+            'account'            => $account,
             'report'             => $this->report,
             'note'               => $this->note,
         ];

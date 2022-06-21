@@ -67,9 +67,9 @@ class ReportController extends Controller
         $from = isset($from) ? $from->format('d/m/Y') : (clone $reports)->get()->first()->created_at->format('d/m/Y');
         $to   = isset($to) ? $to->format('d/m/Y') : (clone $reports)->get()->last()->created_at->format('d/m/Y');
 
-        $final_commission = (clone $reports)->where('type', ReportTypeEnum::COMMISSION)->pluck('amount')?->sum() ?? 0;
-        $final_charge_subscriber = -1 * (clone $reports)->where('type', ReportTypeEnum::CHARGE_SUBSCRIBER)->pluck('amount')?->sum() ?? 0;
-        $final_charge_point = (clone $reports)->where('type', ReportTypeEnum::CHARGE_POINT)->pluck('amount')?->sum() ?? 0;
+        $final_commission = (clone $reports)->where('type', ReportTypeEnum::COMMISSION->value)->pluck('amount')?->sum() ?? 0;
+        $final_charge_subscriber = -1 * (clone $reports)->where('type', ReportTypeEnum::CHARGE_SUBSCRIBER->value)->pluck('amount')?->sum() ?? 0;
+        $final_charge_point = (clone $reports)->where('type', ReportTypeEnum::CHARGE_POINT->value)->pluck('amount')?->sum() ?? 0;
 
         return view('admin.pages.reports', [
             'points' => Point::select(['id', 'name'])->get(),

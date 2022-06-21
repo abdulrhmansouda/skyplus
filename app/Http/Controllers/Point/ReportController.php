@@ -42,9 +42,9 @@ class ReportController extends Controller
         // $final_commission = (clone $reports)->where('type',ReportTypeEnum::COMMISSION)->pluck('to_him')?->sum() ?? 0;
         // $final_charge_subscriber = (clone $reports)->where('type',ReportTypeEnum::CHARGE_SUBSCRIBER)->pluck('on_him')?->sum() ?? 0;
         // $final_charge_point = (clone $reports)->where('type',ReportTypeEnum::CHARGE_POINT)->pluck('to_him')?->sum() ?? 0;
-        $final_commission = (clone $reports)->where('type',ReportTypeEnum::COMMISSION)->pluck('amount')?->sum() ?? 0;
-        $final_charge_subscriber = (clone $reports)->where('type',ReportTypeEnum::CHARGE_SUBSCRIBER)->pluck('amount')?->sum() ?? 0;
-        $final_charge_point = (clone $reports)->where('type',ReportTypeEnum::CHARGE_POINT)->pluck('amount')?->sum() ?? 0;
+        $final_commission = (clone $reports)->where('type',ReportTypeEnum::COMMISSION->value)->pluck('amount')?->sum() ?? 0;
+        $final_charge_subscriber = (clone $reports)->where('type',ReportTypeEnum::CHARGE_SUBSCRIBER->value)->pluck('amount')?->sum() ?? 0;
+        $final_charge_point = (clone $reports)->where('type',ReportTypeEnum::CHARGE_POINT->value)->pluck('amount')?->sum() ?? 0;
 
         return view('point.pages.reports', [
             'name_point' => $point->name,
@@ -56,9 +56,6 @@ class ReportController extends Controller
 
             'from' => isset($from) ? $from->format('d/m/Y') : 'all',
             'to' => isset($to) ? $to->format('d/m/Y') : 'all',
-            'final_commission' => $final_commission,
-            'final_charge_subscriber' => $final_charge_subscriber,
-            'final_charge_point' => $final_charge_point,
         ]);
     }
 

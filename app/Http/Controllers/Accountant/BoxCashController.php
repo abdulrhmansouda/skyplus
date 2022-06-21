@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Accountant;
 
+use App\Enums\BoxTransactionTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Accountant\StoreBoxCashRequest;
 use App\Models\BoxCash;
@@ -38,12 +39,16 @@ class BoxCashController extends Controller
             $boxCashs = $boxCashs->where('box_transaction_type', $box_transaction_type);
         }
 
-        $boxCashs = $boxCashs
-            ->orderBy('created_at');
+        // $boxCashs = $boxCashs
+        //     ->orderBy('created_at');
+
+        $final_charge_subscriber = (clone $boxCashs)->where('box_transaction_type', BoxTransactionTypeEnum::CHARGE_POINT->value)->pluck('amount')?->sum() ?? 0;
+        $final_sell =              (clone $boxCashs)->where('box_transaction_type', BoxTransactionTypeEnum::SELL->value)->pluck('amount')?->sum() ?? 0;
+        $final_pay =               (clone $boxCashs)->where('box_transaction_type', BoxTransactionTypeEnum::PAY->value)->pluck('amount')?->sum() ?? 0;
 
         $pre_account = (clone $boxCashs)?->first()?->pre_account ?? 0;
         return view('accountant.pages.box-cash', [
-            'pre_account' => $pre_account,
+            // 'pre_account' => $pre_account,
             'boxCashs' => $boxCashs->get(),
             'daterange' => $daterange,
             'all_date' => $all_date,
@@ -51,6 +56,9 @@ class BoxCashController extends Controller
             'pre' => isset($pre) ? $pre->format('d/m/Y') : 'all',
             'from' => isset($from) ? $from->format('d/m/Y') : 'all',
             'to' => isset($to) ? $to->format('d/m/Y') : 'all',
+            'final_charge_subscriber'   =>  $final_charge_subscriber,
+            'final_sell'    =>  $final_sell,
+            'final_pay'     =>  $final_pay,
         ]);
     }
 

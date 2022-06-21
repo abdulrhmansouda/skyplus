@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('report');
             $table->string('note')->nullable();
             $table->tinyInteger('box_transaction_type');
+            $table->double('amount',30,3);
             $table->double('pre_account',30,3);
             $table->double('account',30,3);
             $table->tinyInteger('transaction_type');

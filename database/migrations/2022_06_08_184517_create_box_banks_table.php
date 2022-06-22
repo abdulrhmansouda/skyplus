@@ -16,7 +16,15 @@ return new class extends Migration
     {
         Schema::create('box_banks', function (Blueprint $table) {
             $table->id();
+            $table->string('report');
+            $table->string('note')->nullable();
+            $table->tinyInteger('box_transaction_type');
+            $table->double('amount',30,3);
+            $table->double('pre_account',30,3);
+            $table->double('account',30,3);
+            $table->tinyInteger('transaction_type');
             $table->timestamps();
+
             // Relations
             $table->foreignIdFor(User::class)->constrained()->cascadeOnUpdate();
         });

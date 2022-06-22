@@ -1,4 +1,4 @@
-@extends('admin.dashboard')
+@extends('accountant.app')
 
 
 @section('title', 'شحن الرصيد')
@@ -88,7 +88,7 @@
                                                         <i class="fas fa-money-bill-wave-alt"></i>
                                                     </a>
                                                     <!-- satrt charge1 Modal -->
-                                                    <form action="{{ route('admin.recharge.charge', $point->id) }}"
+                                                    <form action="{{ route('accountant.recharge.charge', $point->id) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('PUT')

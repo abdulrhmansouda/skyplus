@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Accountant;
 
 use App\Enums\BoxTransactionTypeEnum;
+use App\Exports\AccountantBoxCashExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Accountant\StoreBoxCashRequest;
 use App\Models\BoxCash;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BoxCashController extends Controller
 {
@@ -29,7 +31,6 @@ class BoxCashController extends Controller
             preg_match_all("/([^-]*) - (.*)/", $daterange, $date);
             if ($date[1]) {
                 $from = new Carbon($date[1][0]);
-                $pre = $from->addDays(-1);
                 $to = new Carbon($date[2][0]);
                 $boxCashs = $boxCashs->whereDate('created_at', '>=', $from)
                     ->whereDate('created_at', '<=', $to);
@@ -39,27 +40,30 @@ class BoxCashController extends Controller
             $boxCashs = $boxCashs->where('box_transaction_type', $box_transaction_type);
         }
 
-        // $boxCashs = $boxCashs
-        //     ->orderBy('created_at');
-
         $final_charge_subscriber = (clone $boxCashs)->where('box_transaction_type', BoxTransactionTypeEnum::CHARGE_POINT->value)->pluck('amount')?->sum() ?? 0;
         $final_sell =              (clone $boxCashs)->where('box_transaction_type', BoxTransactionTypeEnum::SELL->value)->pluck('amount')?->sum() ?? 0;
-        $final_pay =               (clone $boxCashs)->where('box_transaction_type', BoxTransactionTypeEnum::PAY->value)->pluck('amount')?->sum() ?? 0;
+        $final_pay =          -1 * (clone $boxCashs)->where('box_transaction_type', BoxTransactionTypeEnum::PAY->value)->pluck('amount')?->sum() ?? 0;
 
-        $pre_account = (clone $boxCashs)?->first()?->pre_account ?? 0;
         return view('accountant.pages.box-cash', [
-            // 'pre_account' => $pre_account,
             'boxCashs' => $boxCashs->get(),
+
             'daterange' => $daterange,
             'all_date' => $all_date,
             'box_transaction_type' => $box_transaction_type,
-            'pre' => isset($pre) ? $pre->format('d/m/Y') : 'all',
+
             'from' => isset($from) ? $from->format('d/m/Y') : 'all',
             'to' => isset($to) ? $to->format('d/m/Y') : 'all',
             'final_charge_subscriber'   =>  $final_charge_subscriber,
             'final_sell'    =>  $final_sell,
             'final_pay'     =>  $final_pay,
         ]);
+    }
+
+    public function export(Request $request)
+    {
+        $export = new AccountantBoxCashExport($request);
+        $time = now()->format('Y_m_d');
+        return Excel::download($export, "AccountantBoxCashExport_{$time}.xlsx");
     }
 
     /**
@@ -78,29 +82,5 @@ class BoxCashController extends Controller
         BoxCash::create($request->validated());
         session()->flash('success', 'تم اضافة الحركة بنجاح');
         return redirect()->back();
-    }
-
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\BoxCash  $boxCash
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, BoxCash $boxCash)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\BoxCash  $boxCash
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(BoxCash $boxCash)
-    {
-        //
     }
 }

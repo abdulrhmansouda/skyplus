@@ -27,7 +27,6 @@
                 <input type="hidden" name="sort_by" value="{{ $sort_by }}">
                 <input type="hidden" name="s" value="{{ $search }}">
 
-
                 <button class="btn btn-white btn-sm ps-3 pe-3">
                     تصدير
                     <i class="mx-1 fas fa-file-export"></i>
@@ -50,11 +49,10 @@
                                 <div class="col-lg-4 col-md-6">
                                     <div class="form-group">
                                         <label>
-                                            الاسم 
+                                            الاسم
                                             <span class="text-danger"> * </span>
                                         </label>
-                                        <input name="name" type="text" 
-                                            class="form-control" required>
+                                        <input name="name" type="text" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-6">
@@ -63,7 +61,8 @@
                                             اسم المستخدم
                                             <span class="text-danger"> * </span>
                                         </label>
-                                        <input type="text" class="form-control" required name="sub_username" placeholder="username@icenet">
+                                        <input type="text" class="form-control" required name="sub_username"
+                                            placeholder="username@icenet">
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-6">
@@ -141,8 +140,10 @@
                                             <span class="text-danger"> * </span>
                                         </label>
                                         <select class="form-select" required name="status">
-                                            <option value="{{ App\Enums\UserStatusEnum::ACTIVE->value }}" selected> مفعل</option>
-                                            <option value="{{ App\Enums\UserStatusEnum::INACTIVE->value }}"> غير مفعل</option>
+                                            <option value="{{ App\Enums\UserStatusEnum::ACTIVE->value }}" selected> مفعل
+                                            </option>
+                                            <option value="{{ App\Enums\UserStatusEnum::INACTIVE->value }}"> غير مفعل
+                                            </option>
                                             <option value="{{ App\Enums\UserStatusEnum::CLOSED->value }}">مغلق</option>
                                         </select>
                                     </div>
@@ -319,13 +320,6 @@
                                                 </p>
                                             </td>
                                             <td class="text-sm align-middle">
-                                                {{-- @if ($sub->status === 'active')
-                                                    <span class="badge badge-sm bg-gradient-success">مفعل</span>
-                                                @elseif($sub->status === 'deactive')
-                                                    <span class="badge badge-sm bg-gradient-danger">غير مفعل</span>
-                                                @else
-                                                    <span class="badge badge-sm bg-gradient-danger">مغلق</span>
-                                                @endif --}}
                                                 {!! $sub->status() !!}
                                             </td>
                                             <td class="align-middle ">
@@ -429,17 +423,6 @@
                                                                                 <h6>
                                                                                     حالة المستخدم
                                                                                 </h6>
-                                                                                {{-- @if ($sub->status === 'active')
-                                                                                    <span
-                                                                                        class="badge badge-sm bg-gradient-success">مفعل</span>
-                                                                                @elseif($sub->status === 'deactive')
-                                                                                    <span
-                                                                                        class="badge badge-sm bg-gradient-danger">غير
-                                                                                        مفعل</span>
-                                                                                @else
-                                                                                    <span
-                                                                                        class="badge badge-sm bg-gradient-danger">مغلق</span>
-                                                                                @endif --}}
                                                                                 {!! $sub->status() !!}
                                                                             </div>
                                                                         </div>
@@ -506,7 +489,8 @@
                                                         method="POST">
                                                         @csrf
                                                         @method('PUT')
-                                                        <input type="hidden" name="_id" value="{{ $sub->id }}">
+                                                        <input type="hidden" name="_id"
+                                                            value="{{ $sub->id }}">
                                                         <div class="modal fade" id="edit{{ $sub->id }}"
                                                             tabindex="-1" role="dialog" aria-labelledby="add"
                                                             aria-hidden="true">
@@ -538,7 +522,8 @@
                                                                                         <span class="text-danger"> *
                                                                                         </span>
                                                                                     </label>
-                                                                                    <input name="sub_username" type="text"
+                                                                                    <input name="sub_username"
+                                                                                        type="text"
                                                                                         class="form-control"
                                                                                         placeholder="username@icenet"
                                                                                         value="{{ $sub->sub_username }}"
@@ -615,7 +600,8 @@
                                                                                         <span class="text-danger"> *
                                                                                         </span>
                                                                                     </label>
-                                                                                    <input name="package_start" type="date"
+                                                                                    <input name="package_start"
+                                                                                        type="date"
                                                                                         class="form-control"
                                                                                         value="{{ $sub->start_package }}">
                                                                                 </div>
@@ -629,7 +615,8 @@
                                                                                     </label>
                                                                                     <select required class="form-select"
                                                                                         name="package_id">
-                                                                                        <option value="">اختر باقة</option>
+                                                                                        <option value="">اختر باقة
+                                                                                        </option>
                                                                                         @foreach ($packages as $package)
                                                                                             <option
                                                                                                 value="{{ $package->id }}"
@@ -649,33 +636,20 @@
                                                                                     </label>
                                                                                     <select required class="form-select"
                                                                                         name="status">
-                                                                                        {{-- @switch($sub->status)
-                                                                                            @case('active') --}}
-                                                                                                <option value="{{ App\Enums\UserStatusEnum::ACTIVE->value }}" @if($sub->status === App\Enums\UserStatusEnum::ACTIVE->value) selected @endif> مفعل
-                                                                                                </option>
-                                                                                                <option value="{{ App\Enums\UserStatusEnum::INACTIVE->value }}" @if($sub->status === App\Enums\UserStatusEnum::INACTIVE->value) selected @endif> غير مفعل
-                                                                                                </option>
-                                                                                                <option value="{{ App\Enums\UserStatusEnum::CLOSED->value }}" @if($sub->status === App\Enums\UserStatusEnum::CLOSED->value) selected @endif>مغلق</option>
-                                                                                            {{-- @break --}}
-
-                                                                                            {{-- @case('deactive')
-                                                                                                <option value="active"> مفعل</option>
-                                                                                                <option value="deactive" selected>
-                                                                                                    غير مفعل</option>
-                                                                                                <option value="closed">مغلق</option>
-                                                                                            @break
-
-                                                                                            @case('closed')
-                                                                                                <option value="active"> مفعل</option>
-                                                                                                <option value="deactive"> غير مفعل
-                                                                                                </option>
-                                                                                                <option value="closed" selected>مغلق
-                                                                                                </option>
-                                                                                            @break --}}
-
-                                                                                            {{-- @default
-                                                                                        
-                                                                                        @endswitch --}}
+                                                                                        <option
+                                                                                            value="{{ App\Enums\UserStatusEnum::ACTIVE->value }}"
+                                                                                            @if ($sub->status === App\Enums\UserStatusEnum::ACTIVE->value) selected @endif>
+                                                                                            مفعل
+                                                                                        </option>
+                                                                                        <option
+                                                                                            value="{{ App\Enums\UserStatusEnum::INACTIVE->value }}"
+                                                                                            @if ($sub->status === App\Enums\UserStatusEnum::INACTIVE->value) selected @endif>
+                                                                                            غير مفعل
+                                                                                        </option>
+                                                                                        <option
+                                                                                            value="{{ App\Enums\UserStatusEnum::CLOSED->value }}"
+                                                                                            @if ($sub->status === App\Enums\UserStatusEnum::CLOSED->value) selected @endif>
+                                                                                            مغلق</option>
 
                                                                                     </select>
                                                                                 </div>
@@ -709,8 +683,7 @@
                                                                                         <span class="text-danger"> *
                                                                                         </span>
                                                                                     </label>
-                                                                                    <textarea name="installation_address" cols="30" rows="3" required
-                                                                                        class="form-control"> {{ $sub->installation_address }}</textarea>
+                                                                                    <textarea name="installation_address" cols="30" rows="3" required class="form-control"> {{ $sub->installation_address }}</textarea>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-lg-4 col-md-6">
@@ -718,7 +691,7 @@
                                                                                     <label>
                                                                                         الملاحظات
                                                                                     </label>
-                                                                                    <textarea name="note" cols="30" rows="3"  class="form-control">{{ $sub->note }}</textarea>
+                                                                                    <textarea name="note" cols="30" rows="3" class="form-control">{{ $sub->note }}</textarea>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -741,7 +714,8 @@
                                                     <a href="javascript:;"
                                                         class="px-1 text-xs text-secondary font-weight-bold "
                                                         data-toggle="tooltip" data-original-title="delete user"
-                                                        data-bs-toggle="modal" data-bs-target="#delete{{ $sub->id }}">
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#delete{{ $sub->id }}">
                                                         <i class="fas fa-ban fs-6" aria-hidden="true"></i>
                                                     </a>
                                                     <!--start delete Modal -->
@@ -842,24 +816,14 @@
                                                                                         <div class="form-group">
                                                                                             <h6>
                                                                                                 حالة المشترك </h6>
-                                                                                            {{-- @if ($sub->status === 'active')
-                                                                                                <span
-                                                                                                    class="badge badge-sm bg-gradient-success">مفعل</span>
-                                                                                            @elseif($sub->status === 'deactive')
-                                                                                                <span
-                                                                                                    class="badge badge-sm bg-gradient-danger">غير
-                                                                                                    مفعل</span>
-                                                                                            @else
-                                                                                                <span
-                                                                                                    class="badge badge-sm bg-gradient-danger">مغلق</span>
-                                                                                            @endif --}}
                                                                                             {!! $sub->status() !!}
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class=" col-6">
                                                                                         <div class="form-group">
                                                                                             <h6>عدد الأيام </h6>
-                                                                                            <input name="days" type="number"
+                                                                                            <input name="days"
+                                                                                                type="number"
                                                                                                 class="form-control"
                                                                                                 required>
                                                                                         </div>

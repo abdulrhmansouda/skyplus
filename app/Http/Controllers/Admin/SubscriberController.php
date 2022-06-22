@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\UserStatusEnum;
-use App\Exports\SubscribersExport;
-// use App\Helper\Script;
+use App\Exports\AdminSubscribersExport;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\TelegramController;
 use App\Http\Requests\Admin\StoreSubscriberRequest;
@@ -58,24 +57,23 @@ class SubscriberController extends Controller
 
     public function export(Request $request)
     {
-        $sort_by = $request->sort_by;
-        $page = ($request->page - 1) ?? 1;
-        $s = $request->s ?? '';
-        $subs = Subscriber::where('name', 'LIKE', "%$s%")
-            ->orWhere('t_c', 'LIKE', "%$s%")
-            ->orWhere('sub_id', 'LIKE', "%$s%")
-            ->orWhere('subscriber_number', 'LIKE', "%$s%")
-            ->orWhere('phone', 'LIKE', "%$s%");
+        // $sort_by = $request->sort_by;
+        // $page = ($request->page - 1) ?? 1;
+        // $s = $request->s ?? '';
+        // $subs = Subscriber::where('name', 'LIKE', "%$s%")
+        //     ->orWhere('t_c', 'LIKE', "%$s%")
+        //     ->orWhere('sub_id', 'LIKE', "%$s%")
+        //     ->orWhere('subscriber_number', 'LIKE', "%$s%")
+        //     ->orWhere('phone', 'LIKE', "%$s%");
 
-        $pagination_number = $request->pagination_number ?? $subs->count();
+        // $pagination_number = $request->pagination_number ?? $subs->count();
 
-
-        if ($sort_by) {
-            $subs->orderBy($request->sort_by);
-        }
-        $subs = Subscriber::skip($page * $pagination_number)
-            ->take($pagination_number);
-        $export = new SubscribersExport($subs);
+        // if ($sort_by) {
+        //     $subs->orderBy($request->sort_by);
+        // }
+        // $subs = Subscriber::skip($page * $pagination_number)
+        //     ->take($pagination_number);
+        $export = new AdminSubscribersExport($request);
         $now = now();
         return Excel::download($export, "subscribers_$now.xlsx");
     }
@@ -125,25 +123,6 @@ class SubscriberController extends Controller
      */
     public function store(StoreSubscriberRequest $request)
     {
-        // dd($request->all());
-        // $sub = new Subscriber;
-
-        // $sub->name = $request->name;
-        // $sub->t_c = $request->t_c;
-        // $sub->sub_id = $request->sub_id;
-        // $sub->sub_username = $request->sub_username;
-        // $sub->subscriber_number = $request->subscriber_number;
-        // $sub->mother = $request->mother;
-        // $sub->phone = $request->phone;
-        // $sub->package_start = $request->package_start;
-        // $sub->package_end = $request->package_start;
-        // $sub->package_id = $request->package_id;
-        // $sub->status = $request->status;
-        // $sub->address = $request->address;
-        // $sub->installation_address = $request->installation_address;
-        // $sub->mission_executor = $request->mission_executor;
-        // $sub->note = $request->note;
-        // $sub->save();
         $sub = Subscriber::create($request->validated());
 
         session()->flash('success', "تم اضافة المشترك $sub->name بنجاح");
@@ -162,23 +141,6 @@ class SubscriberController extends Controller
     {
         // dd($request->all());
         $sub = Subscriber::findOrFail($id);
-
-        // $sub->name = $request->name;
-        // $sub->t_c = $request->t_c;
-        // $sub->sub_id = $request->sub_id;
-        // $sub->sub_username = $request->sub_username;
-        // $sub->subscriber_number = $request->subscriber_number;
-        // $sub->mother = $request->mother;
-        // $sub->phone = $request->phone;
-        // $sub->package_start = $request->package_start;
-        // $sub->package_end = $request->package_start;
-        // $sub->package_id = $request->package_id;
-        // $sub->status = $request->status;
-        // $sub->address = $request->address;
-        // $sub->installation_address = $request->installation_address;
-        // $sub->mission_executor = $request->mission_executor;
-        // $sub->note = $request->note;
-        // $sub->update();
         $sub->update($request->validated());
 
         session()->flash('success', "تم تعديل المشترك $sub->name بنجاح");
@@ -195,9 +157,9 @@ class SubscriberController extends Controller
     public function destroy(Subscriber $subscriber)
     {
         // if ($subscriber->status !== 'closed') {
-            $subscriber->status = UserStatusEnum::CLOSED->value;
-            $subscriber->update();
-            session()->flash('success', "تم اغلاق المشترك $subscriber->name بنجاح");
+        $subscriber->status = UserStatusEnum::CLOSED->value;
+        $subscriber->update();
+        session()->flash('success', "تم اغلاق المشترك $subscriber->name بنجاح");
         // } else {
         //     session()->flash('error', "المشترك $subscriber->name مغلق بالفعل!");
         // }

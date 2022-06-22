@@ -20,14 +20,14 @@
             إضافة فاتورة
         </button>
         <!-- add Modal -->
-        <form action="{{ route('accountant.box-cash.store') }}" method="POST">
+        <form action="{{ route('accountant.box-bank.store') }}" method="POST">
             @csrf
             <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">إضافة فاتورة للصندوق</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">إضافة فاتورة للبنك</h5>
                         </div>
                         <div class="modal-body">
                             <div class="row">
@@ -86,15 +86,6 @@
         <!-- end add  -->
         <!-- end add -->
         <div class="mb-3 row">
-            {{-- <div class="col-md-10 ">
-            <form action="">
-                <div class="gap-3 d-flex">
-                    <input name="daterange" type="text" class="form-control w-50 daterange"  />
-
-                    <button class="mb-0 btn btn-secondary btn-sm ps-3 pe-3">بحث</button>
-                </div>
-            </form>
-        </div> --}}
 
             <div class="col-md-10 ">
                 <form action="" method="GET">
@@ -120,9 +111,8 @@
                     </div>
                 </form>
             </div>
-
             <div class="col-md-2">
-                <form action="{{ route('accountant.box-cash.export') }}" method="POST">
+                <form action="{{ route('accountant.box-bank.export') }}" method="POST">
                     @csrf
                     <input type="hidden" name="daterange" value="{{ $daterange ?? '' }}" />
                     <input type="hidden" name="all_date" value="{{ $$all_date ?? '' }}" />
@@ -143,24 +133,13 @@
                         <div class="pb-0 card-header">
                             <div class="row">
                                 <div class="col-12">
-                                    <h6>النقد</h6>
+                                    <h6>البنك</h6>
                                 </div>
                             </div>
                         </div>
                         <div class="p-0 table-responsive">
                             <table class="table mb-0 align-items-center">
                                 <thead>
-                                    {{-- <tr>
-                                    <th class="text-xs text-uppercase font-weight-bolder ps-3 bg-info text-dark">
-                                        الحساب : الكل
-                                    </th>
-                                    <th class="px-1 text-xs text-uppercase font-weight-bolder "></th>
-                                    <th class="px-1 text-xs text-uppercase font-weight-bolder "></th>
-                                    <th class="px-1 text-xs text-uppercase font-weight-bolder "></th>
-                                    <th class="px-1 text-xs text-uppercase font-weight-bolder "></th>
-                                    <th class="px-1 text-xs text-uppercase font-weight-bolder "></th>
-                                    <th class="px-1 text-xs text-uppercase font-weight-bolder "></th>
-                                </tr> --}}
                                 </thead>
                                 <tbody>
                                     <tr>
@@ -188,50 +167,49 @@
                                         <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
                                         <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
                                         <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder">
-                                            {{ $boxCashs?->last()?->pre_acount ?? 0 }}
+                                            {{ $boxBanks?->last()?->pre_acount ?? 0 }}
                                         </td>
                                     </tr>
                                     <!-- start foreach -->
-                                    @foreach ($boxCashs as $boxCash)
+                                    @foreach ($boxBanks as $boxBank)
                                         <tr>
                                             <td>
                                                 <div class="px-2 py-1 d-flex">
-                                                    <p class="mb-0 text-xs font-weight-bold">{{ $boxCash->created_at }}
+                                                    <p class="mb-0 text-xs font-weight-bold">{{ $boxBank->created_at }}
                                                     </p>
                                                 </div>
                                             </td>
                                             <td>
                                                 <p class="mb-0 text-xs font-weight-bold">
-                                                    {{ $boxCash->operationSupervisor() }}</p>
+                                                    {{ $boxBank->operationSupervisor() }}</p>
                                             </td>
-                                            <td title='{{ $boxCash->report }}'>
-                                                <p class="mb-0 text-xs font-weight-bold ellipsis">{{ $boxCash->report }}
+                                            <td title='{{ $boxBank->report }}'>
+                                                <p class="mb-0 text-xs font-weight-bold ellipsis">{{ $boxBank->report }}
                                                 </p>
                                             </td>
-                                            <td title='{{ $boxCash->note }}'>
-                                                <p class="mb-0 text-xs font-weight-bold ellipsis">{{ $boxCash->note }}
+                                            <td title='{{ $boxBank->note }}'>
+                                                <p class="mb-0 text-xs font-weight-bold ellipsis">{{ $boxBank->note }}
                                                 </p>
                                             </td>
                                             <td>
                                                 <p class="mb-0 text-xs font-weight-bold">
-                                                    {{-- {{ $boxCash->transaction_type() }} --}}
-                                                    {{ $boxCash->boxTransactionType() }}
+                                                    {{ $boxBank->boxTransactionType() }}
                                                 </p>
                                             </td>
                                             <td>
                                                 <p
                                                     class="mb-0 text-xs font-weight-bold
-                                        @if ($boxCash->amount > 0) bg-success text-white
-                                        @elseif($boxCash->amount < 0)
+                                        @if ($boxBank->amount > 0) bg-success text-white
+                                        @elseif($boxBank->amount < 0)
                                         bg-danger text-white
                                         @else
                                         bg-warning text-dark @endif
                                         ">
-                                                    {{ $boxCash->amount }}
+                                                    {{ $boxBank->amount }}
                                                 </p>
                                             </td>
                                             <td>
-                                                <p class="mb-0 text-xs font-weight-bold">{{ $boxCash->account }}</p>
+                                                <p class="mb-0 text-xs font-weight-bold">{{ $boxBank->account }}</p>
                                             </td>
 
                                         </tr>
@@ -260,9 +238,6 @@
                                         <td class="text-white bg-danger">
                                             <p class="mb-0 text-xs font-weight-bold">{{ $final_pay }}</p>
                                         </td>
-                                        {{-- <!-- <td class="bg-info text-dark">
-                                        <p class="mb-0 text-xs font-weight-bold">{{ $boxCashs?->last()?->account ?? 0 }}</p>
-                                    </td> --> --}}
 
                                     </tr>
 
@@ -272,36 +247,6 @@
                     </div>
                 </div>
                 {{-- <!-- start pagination -->
-                <ul class="pagination pagination-info">
-                    <li class="page-item">
-                        <a class="page-link" href="#link" aria-label="Previous">
-                            <span aria-hidden="true"> <i class="fas fa-angle-right" aria-hidden="true"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#link">1</a>
-                    </li>
-                    <li class="page-item active">
-                        <a class="page-link" href="#link">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#link">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#link">4</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#link">5</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#link" aria-label="Next">
-                            <span aria-hidden="true">
-                                <i class="fas fa-angle-left" aria-hidden="true"></i>
-                            </span>
-                        </a>
-                    </li>
-                </ul>
                 <!-- end pagination --> --}}
             </div>
         </div>

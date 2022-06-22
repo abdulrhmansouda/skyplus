@@ -81,7 +81,7 @@ Route::middleware(['auth', 'admin'])
             ->name('reports.')
             ->group(function () {
                 Route::get('/', 'index')->name('index');
-                Route::post('/export', 'admin_export')->name('export');
+                Route::post('/export', 'export')->name('export');
             });
 
         Route::controller(Admin\SupportController::class)
@@ -213,13 +213,24 @@ Route::middleware(['auth', 'accountant'])
             ->group(function () {
                 Route::get('/', 'index')->name('index');
                 Route::post('/store', 'store')->name('store');
+                Route::post('/accountant-box-cash-export', 'export')->name('export');
             });
-
-        Route::controller(Accountant\BoxBankController::class)
+            
+            Route::controller(Accountant\BoxBankController::class)
             ->prefix('/box-bank')
             ->name('box-bank.')
             ->group(function () {
                 Route::get('/', 'index')->name('index');
+                Route::post('/store', 'store')->name('store');
+                Route::post('/accountant-box-bank-export', 'export')->name('export');
+            });
+
+            Route::controller(Accountant\RechargeController::class)
+            ->prefix('/recharge')
+            ->name('recharge.')
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::put('/charge/{point}', 'charge')->name('charge');
             });
 
         Route::prefix('/sitting')

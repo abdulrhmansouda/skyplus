@@ -118,7 +118,7 @@
                                     <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
                                     <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
                                     <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
-                                    <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder">الكل</td>
+                                    <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
                                     <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
                                     {{-- <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td> --}}
                                     <td class="px-1 text-xs text-uppercase text-secondary font-weight-bolder"></td>
@@ -140,7 +140,7 @@
                                     </td>
 
                                     <td>
-                                        <p class="mb-0 text-xs font-weight-bold">{{ $report?->operationSupervisor() }}
+                                        <p class="mb-0 text-xs font-weight-bold">{{ $report->operationSupervisor() }}
                                         </p>
                                     </td>
                                     <td>

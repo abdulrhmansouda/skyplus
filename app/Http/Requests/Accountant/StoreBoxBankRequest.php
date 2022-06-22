@@ -4,13 +4,13 @@ namespace App\Http\Requests\Accountant;
 
 use App\Enums\BoxTransactionTypeEnum;
 use App\Enums\MoneyTransactionTypeEnum;
-use App\Models\BoxCash;
+use App\Models\BoxBank;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 
-class StoreBoxCashRequest extends FormRequest
+class StoreBoxBankRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -39,8 +39,8 @@ class StoreBoxCashRequest extends FormRequest
 
     public function validated($key = null, $default = null)
     {
-        $last_box_cash = BoxCash::all()->last();
-        $pre_account   = $last_box_cash?->account ?? 0;
+        $last_box_bank = BoxBank::all()->last();
+        $pre_account   = $last_box_bank?->account ?? 0;
         // dd($pre_account);
         if ($this->transaction_type == MoneyTransactionTypeEnum::PUT_MONEY->value) {
             $amount        = $this->amount;

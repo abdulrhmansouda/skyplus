@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\TelegramController;
 use App\Http\Requests\Admin\StoreSubscriberRequest;
 use App\Http\Requests\Admin\UpdateSubscriberRrequest;
+use App\Imports\AdminSubscribersImport;
 use App\Imports\SubscribersImport;
 use App\Models\Package;
 use App\Models\Subscriber;
@@ -57,30 +58,14 @@ class SubscriberController extends Controller
 
     public function export(Request $request)
     {
-        // $sort_by = $request->sort_by;
-        // $page = ($request->page - 1) ?? 1;
-        // $s = $request->s ?? '';
-        // $subs = Subscriber::where('name', 'LIKE', "%$s%")
-        //     ->orWhere('t_c', 'LIKE', "%$s%")
-        //     ->orWhere('sub_id', 'LIKE', "%$s%")
-        //     ->orWhere('subscriber_number', 'LIKE', "%$s%")
-        //     ->orWhere('phone', 'LIKE', "%$s%");
-
-        // $pagination_number = $request->pagination_number ?? $subs->count();
-
-        // if ($sort_by) {
-        //     $subs->orderBy($request->sort_by);
-        // }
-        // $subs = Subscriber::skip($page * $pagination_number)
-        //     ->take($pagination_number);
-        $export = new AdminSubscribersExport($request);
+             $export = new AdminSubscribersExport($request);
         $now = now();
         return Excel::download($export, "subscribers_$now.xlsx");
     }
 
     public function import(Request $request)
     {
-        Excel::import(new SubscribersImport, $request->file('subscribers')->getRealPath());
+        Excel::import(new AdminSubscribersImport, $request->file('subscribers')->getRealPath());
         return redirect()->back()->with('success', ' تم الاستيراد بنجاح');
     }
 

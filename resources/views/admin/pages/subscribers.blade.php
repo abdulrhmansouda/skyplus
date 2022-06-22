@@ -254,11 +254,11 @@
                                     <tr>
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3">
-                                            اسم المستخدم</th>
+                                            الاسم</th>
 
                                         <th
                                             class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            الاسم </th>
+                                        اسم المستخدم </th>
                                         <th
                                             class="px-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             T.C </th>

@@ -6,6 +6,15 @@
 
 @section('content')
     <div class="py-4 container-fluid">
+    @if ( Auth::user()->point->account <= 0)
+    <div class="alert alert-danger alert-dismissible fade show position-relative" role="alert">
+        <span class="alert-icon"><i class='fa fa-warning'></i></span>
+        <span class="alert-text"><strong> عذرا! </strong>انت تقوم بتسديد الفواتير بحالة الدين</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
         <div class="mb-3 row">
             <div class="mb-4 col-lg-3 col-sm-6 mb-lg-0">
                 <div class="card">

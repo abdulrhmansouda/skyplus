@@ -21,7 +21,8 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             Subscriber::convertToDeactive();
             // Point::resetDailyProfit();
-        })->everyMinute();//daily
+        // })->everyMinute();//daily
+        })->daily();//daily
     }
 
     /**

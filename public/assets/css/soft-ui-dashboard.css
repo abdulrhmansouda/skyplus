@@ -25604,8 +25604,15 @@ tr:hover{
   word-wrap: break-word;
   white-space: nowrap;
 }
-
+.d-nav-none{
+  display:none ;
+  }
 /* responsive */
+@media (max-width: 1300px) {
+  .d-nav-none{
+    display:block !important;
+    }
+}
 @media (min-width: 576px) {
   .container-fluid{
     padding-right: 1rem;
@@ -25620,9 +25627,7 @@ tr:hover{
   .w-md-200p{
     width:200px;
   }
-  .d-md-none{
-  display:none;
-  }
+  
 }
 .toggle-nav{
   position: fixed;

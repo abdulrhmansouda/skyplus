@@ -33,7 +33,7 @@
                 </li>
             </ol>
         </nav>
-        <a href="javascript:;" class="p-0 nav-link text-body d-lg-none toggle-nav" id="iconNavbarSidenav">
+        <a href="javascript:;" class="p-0 nav-link text-body d-nav-none toggle-nav" id="iconNavbarSidenav">
             <div class="sidenav-toggler-inner">
                 <i class="bg-black sidenav-toggler-line"></i>
                 <i class="bg-black sidenav-toggler-line"></i>

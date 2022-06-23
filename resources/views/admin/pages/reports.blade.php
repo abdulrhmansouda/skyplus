@@ -7,22 +7,22 @@
 @section('content')
 <div class="py-4 container-fluid">
     <div class="mb-3 row">
-        <div class="col-md-12 ">
+        <div class="col-md-10 ">
             <form action="" method="GET">
-                <div class="gap-2 d-flex align-items-center">
-                    <input name="daterange" type="text" class="form-control w-50 daterange" value="{{ $daterange ?? '' }}" />
+                <div class="flex-wrap flex-grow gap-2 d-flex align-items-center">
+                    <input name="daterange" type="text" class="form-control w-md-50 daterange" value="{{ $daterange ?? '' }}" />
                     <div class="gap-1 m-0 form-group d-flex">
                         <input name="all_date" class="form-check-input" type="checkbox" value="true" @if($all_date==="true" )checked @endif id="all">
                         <label class="form-check-label text-nowrap" for="all">كل المدة
                         </label>
                     </div>
-                    <select name="points[]" class="js-data-example-ajax form-select" id="mySelect2" multiple>
+                    <select name="points[]" class="js-data-example-ajax form-select w-md-50" id="mySelect2" multiple>
                         <option value="0" @if(in_array("0",$_points)) selected @endif>الكل</option>
                         @foreach ($points as $point)
                         <option value="{{ $point->id }}" @if(in_array($point->id,$_points))selected @endif>{{ $point->name }}</option>
                         @endforeach
                     </select>
-                    <select name="report_type" class="form-select" style="width:200px">
+                    <select name="report_type" class="form-select w-md-200p " >
                         <option value="">الكل</option>
                         <option value="{{ App\Enums\ReportTypeEnum::CHARGE_POINT->value }}" @if($report_type == App\Enums\ReportTypeEnum::CHARGE_POINT->value) selected @endif>شحن لنقطة</option>
                         <option value="{{ App\Enums\ReportTypeEnum::CHARGE_SUBSCRIBER->value }}" @if($report_type == App\Enums\ReportTypeEnum::CHARGE_SUBSCRIBER->value) selected @endif>تسديد لمشترك</option>
@@ -33,21 +33,6 @@
                 </div>
             </form>
         </div>
-
-
-    </div>
-    <div class="mb-3 row justify-content-between">
-        {{-- <div class="col-md-5 ">
-            <form action="" method="GET">
-                <select name="box_transaction_type" class="form-select">
-                    <option>الكل</option>
-                    <option value="{{ App\Enums\ReportTypeEnum::CHARGE_POINT->value }}">شحن لنقطة</option>
-                    <option value="{{ App\Enums\ReportTypeEnum::CHARGE_SUBSCRIBER->value }}">تسديد لمشترك</option>
-                    <option value="{{ App\Enums\ReportTypeEnum::COMMISSION->value }}">عمولات</option>
-                    <option value="{{ App\Enums\ReportTypeEnum::SUPPORT->value }}">تقارير الدعم</option>
-                </select>
-            </form>
-        </div> --}}
         <div class="col-md-2">
             <form action="{{ route('admin.reports.export') }}" method="POST">
                 @csrf
@@ -56,13 +41,15 @@
 
                 <?php $value = base64_encode(serialize($_points)); ?>
                 <input name="points" type="hidden" value="{{ $value }}">
-                <button class="m-2 btn btn-white ps-3 pe-3 m-md-0 w-100">
+                <button class="my-2 btn btn-white ps-3 pe-3 m-md-0">
                     تصدير الى excel
                     <i class="mx-1 fas fa-file-export"></i>
                 </button>
             </form>
         </div>
+
     </div>
+    
     <div class="row">
         <div class="col-12">
             <div class="mb-4 card">

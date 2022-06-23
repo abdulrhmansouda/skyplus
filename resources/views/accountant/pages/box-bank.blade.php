@@ -89,8 +89,8 @@
 
             <div class="col-md-10 ">
                 <form action="" method="GET">
-                    <div class="gap-2 d-flex align-items-center">
-                        <input name="daterange" type="text" class="form-control w-50 daterange"
+                    <div class="flex flex-wrap gap-2 d-flex align-items-center">
+                        <input name="daterange" type="text" class="form-control w-md-50 daterange"
                             value="{{ $daterange ?? '' }}" />
                         <div class="gap-1 m-0 form-group d-flex">
                             <input name="all_date" class="form-check-input " type="checkbox" value="true"
@@ -98,7 +98,7 @@
                             <label class="form-check-label text-nowrap" for="all">كل المدة
                             </label>
                         </div>
-                        <select name="box_transaction_type" class="form-select">
+                        <select name="box_transaction_type" class="form-select w-md-50">
                             <option value="">الكل</option>
                             <option value="{{ App\Enums\BoxTransactionTypeEnum::CHARGE_POINT->value }}"
                                 @if ($box_transaction_type == App\Enums\BoxTransactionTypeEnum::CHARGE_POINT->value) selected @endif>شحن رصيد</option>
@@ -118,7 +118,7 @@
                     <input type="hidden" name="all_date" value="{{ $$all_date ?? '' }}" />
                     <input type="hidden" name="box_transaction_type" value="{{ $$box_transaction_type ?? '' }}" />
 
-                    <button type="submit" class="m-2 btn btn-white ps-3 pe-3 m-md-0">
+                    <button type="submit" class="my-2 btn btn-white ps-3 pe-3 m-md-0">
                         تصدير الى excel
                         <i class="mx-1 fas fa-file-export"></i>
                     </button>

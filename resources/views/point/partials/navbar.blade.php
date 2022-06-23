@@ -33,6 +33,13 @@
                 </li>
             </ol>
         </nav>
+        <a href="javascript:;" class="p-0 nav-link text-body d-md-none toggle-nav" id="iconNavbarSidenav">
+            <div class="sidenav-toggler-inner">
+                <i class="bg-black sidenav-toggler-line"></i>
+                <i class="bg-black sidenav-toggler-line"></i>
+                <i class="bg-black sidenav-toggler-line"></i>
+            </div>
+        </a>
         @switch(Route::currentRouteName())
             @case('point.subscribers.index')
                 <div class="px-0 mt-2 collapse navbar-collapse mt-sm-0" id="navbar">

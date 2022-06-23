@@ -25604,4 +25604,37 @@ tr:hover{
   word-wrap: break-word;
   white-space: nowrap;
 }
+
+/* responsive */
+@media (min-width: 576px) {
+  .container-fluid{
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+}
+@media (min-width: 768px) {
+  .w-md-50{
+    width:50% !important;
+  }
+  .w-md-200p{
+    width:200px;
+  }
+  .d-md-none{
+  display:none;
+  }
+}
+.toggle-nav{
+  position: fixed;
+  left: 1rem;
+  background: #fff;
+  padding: 0.5rem !important;
+}
+@media (max-width: 768px) {
+  .justify-xs-start{
+    justify-content:start;
+  }
+  
+}
+
 /*# sourceMappingURL=dashboard-free.css.map */

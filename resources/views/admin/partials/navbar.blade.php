@@ -79,7 +79,14 @@
                 </li>
             </ol>
         </nav>
-        <div class="collapse navbar-collapse mt-sm-0 mt-2 px-0" id="navbar">
+        <a href="javascript:;" class="p-0 nav-link text-body toggle-nav d-md-none" id="iconNavbarSidenav">
+            <div class="sidenav-toggler-inner">
+                <i class="bg-black sidenav-toggler-line"></i>
+                <i class="bg-black sidenav-toggler-line"></i>
+                <i class="bg-black sidenav-toggler-line"></i>
+            </div>
+        </a>
+        <div class="px-0 mt-2 collapse navbar-collapse mt-sm-0" id="navbar">
             <div class="px-0 mt-2 collapse navbar-collapse mt-sm-0" id="navbar">
                 @switch(Route::currentRouteName())
                     @case('admin.points.index')

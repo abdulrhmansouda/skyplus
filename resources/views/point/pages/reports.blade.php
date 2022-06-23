@@ -9,8 +9,8 @@
     <div class="mb-3 row">
         <div class="col-md-10 ">
             <form action="" method="GET">
-                <div class="gap-2 d-flex align-items-center">
-                    <input name="daterange" type="text" class="form-control w-50 daterange" value="{{ $daterange ?? '' }}" />
+                <div class="flex flex-wrap gap-2 d-flex align-items-center">
+                    <input name="daterange" type="text" class="form-control w-md-50 daterange" value="{{ $daterange ?? '' }}" />
                     <div class="gap-1 m-0 form-group d-flex">
                         <input name="all_date" class="form-check-input " type="checkbox" value="true" @if($all_date === "true")checked @endif id="all">
                         <label class="form-check-label text-nowrap" for="all">كل المدة
@@ -28,7 +28,7 @@
                 <input name="_daterange" type="hidden" value="{{ $daterange ?? '' }}" />
                 <input name="all_date" type="hidden" value="{{ $all_date }}" >
 
-                <button class="m-2 btn btn-white ps-3 pe-3 m-md-0">
+                <button class="my-2 btn btn-white ps-3 pe-3 m-md-0">
                     تصدير الى excel
                     <i class="mx-1 fas fa-file-export"></i>
                 </button>

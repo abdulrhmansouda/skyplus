@@ -50,12 +50,12 @@ class Point extends Model
             $this->update();
     }
 
-    public static function resetDailyProfit(){
-        foreach(static::all() as $point){
-            $point->daily_profit = 0;
-            $point->update();
-        }
-    }
+    // public static function resetDailyProfit(){
+    //     foreach(static::all() as $point){
+    //         $point->daily_profit = 0;
+    //         $point->update();
+    //     }
+    // }
 
     //Relations
 

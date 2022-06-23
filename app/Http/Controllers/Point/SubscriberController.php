@@ -58,6 +58,10 @@ class SubscriberController extends Controller
         $sub = Subscriber::findOrFail($id);
         $package = $sub->package;
 
+        if ($sub->status === UserStatusEnum::CLOSED->value) {
+            session()->flash('error', 'هذه المشترك مغلق الرجاء الأتصال بفريق الدعم');
+            return redirect()->back();
+        }
         if ($package->status === UserStatusEnum::CLOSED->value) {
             session()->flash('error', 'هذه الباقة لم تعد متاحة الرجاء ترقية الباقة');
             return redirect()->back();
@@ -239,6 +243,10 @@ class SubscriberController extends Controller
     public function switchPackageAndChargeRequest(SwitchPackageAndChargeSubscriberRequest $request, $id)
     {
         $sub = Subscriber::findOrFail($id);
+        if ($sub->status === UserStatusEnum::CLOSED->value) {
+            session()->flash('error', 'هذه المشترك مغلق الرجاء الأتصال بفريق الدعم');
+            return redirect()->back();
+        }
         $attributes['subscriber_id'] = $id;
         $pre_package = $sub->package;
         $attributes['pre_package_id'] = $pre_package->id;

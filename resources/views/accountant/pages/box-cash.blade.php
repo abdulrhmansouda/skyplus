@@ -1,7 +1,7 @@
 @extends('accountant.app')
 
 
-@section('title', 'الصفحة الرئيسية')
+@section('title', 'الصندوق/النقد')
 
 @section('content')
     <div class="py-4 container-fluid">

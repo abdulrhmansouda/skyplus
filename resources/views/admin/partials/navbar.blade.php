@@ -3,8 +3,7 @@
     <div class="px-3 py-1 container-fluid">
         <nav aria-label="breadcrumb">
             <ol class="px-0 pt-1 pb-0 mb-0 bg-transparent breadcrumb ">
-                <li class="text-sm breadcrumb-item ps-2"><a class="opacity-5 text-dark"
-                        href="{{ route('admin.home') }}">
+                <li class="text-sm breadcrumb-item ps-2"><a class="opacity-5 text-dark" href="{{ route('admin.home') }}">
                         لوحات
                         التحكم</a></li>
                 <li class="text-sm breadcrumb-item text-dark active" aria-current="page">
@@ -12,6 +11,15 @@
                         @case('admin.home')
                             الرئيسية
                         @break
+
+                        @case('admin.box-cash.index')
+                            صندوق / نقد
+                        @break
+                        
+                        @case('admin.box-bank.index')
+                            صندوق / البنك
+                        @break
+
 
                         @case('admin.points.index')
                             نقاط البيع

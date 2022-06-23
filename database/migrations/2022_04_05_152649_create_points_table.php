@@ -25,7 +25,7 @@ return new class extends Migration
             $table->double('charge_commission', 30, 3);
             $table->double('new_commission', 30, 3);
             $table->double('switch_commission', 30, 3);
-            $table->double('daily_profit', 30, 3)->default(0);
+            // $table->double('daily_profit', 30, 3)->default(0);
             $table->string('t_c');
             $table->string('phone');
             $table->tinyInteger('status')->default(UserStatusEnum::ACTIVE->value);

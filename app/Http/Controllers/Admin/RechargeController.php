@@ -8,6 +8,7 @@ use App\Enums\PaymentTypeEnum;
 use App\Enums\ReportTypeEnum;
 use App\Enums\UserStatusEnum;
 use App\Http\Controllers\Controller;
+use App\Models\BoxBank;
 use App\Models\BoxCash;
 use App\Models\Point;
 use App\Models\Recharge;
@@ -74,10 +75,24 @@ class RechargeController extends Controller
             ]);
             // dd(1);
             if ($request->payment_type == PaymentTypeEnum::CASH->value) {
-                $last_box_cash = BoxCash::all()->last();
-                $pre_account   = $last_box_cash?->account ?? 0;
+                // $last_box_cash = BoxCash::all()->last();
+                // $pre_account   = $last_box_cash?->account ?? 0;
+                // // $account       = ;
+                // BoxCash::create([
+                //     'transaction_type'   => MoneyTransactionTypeEnum::PUT_MONEY->value,
+                //     'box_transaction_type' => BoxTransactionTypeEnum::CHARGE_POINT->value,
+                //     'amount'             => $amount,
+                //     'pre_account'        => $pre_account,
+                //     'account'            => $pre_account + $amount,
+                //     'report'             => $report_message,
+                //     'note'               => $request->note,
+                //     'user_id'            => Auth::user()->id,
+                // ]);
+            } elseif ($request->payment_type == PaymentTypeEnum::BANK->value) {
+                $last_box_bank = BoxBank::all()->last();
+                $pre_account   = $last_box_bank?->account ?? 0;
                 // $account       = ;
-                BoxCash::create([
+                BoxBank::create([
                     'transaction_type'   => MoneyTransactionTypeEnum::PUT_MONEY->value,
                     'box_transaction_type' => BoxTransactionTypeEnum::CHARGE_POINT->value,
                     'amount'             => $amount,
@@ -87,8 +102,6 @@ class RechargeController extends Controller
                     'note'               => $request->note,
                     'user_id'            => Auth::user()->id,
                 ]);
-            } elseif ($request->payment_type == PaymentTypeEnum::BANK->value) {
-                dd('rechargecontroller_bank');
             }
 
             $point->addToAccount($amount);

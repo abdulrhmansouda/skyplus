@@ -1,4 +1,4 @@
-@extends('accountant.app')
+@extends('admin.dashboard')
 
 
 @section('title', 'الصندوق/البنك')
@@ -20,7 +20,7 @@
             إضافة فاتورة
         </button>
         <!-- add Modal -->
-        <form action="{{ route('accountant.box-bank.store') }}" method="POST">
+        <form action="{{ route('admin.box-bank.store') }}" method="POST">
             @csrf
             <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -112,7 +112,7 @@
                 </form>
             </div>
             <div class="col-md-2">
-                <form action="{{ route('accountant.box-bank.export') }}" method="POST">
+                <form action="{{ route('admin.box-bank.export') }}" method="POST">
                     @csrf
                     <input type="hidden" name="daterange" value="{{ $daterange ?? '' }}" />
                     <input type="hidden" name="all_date" value="{{ $$all_date ?? '' }}" />

@@ -30,7 +30,7 @@ class PointFactory extends Factory
             // 'borrowing_is_allowed' => $this->faker->boolean,
             'status'                  => Collection::make([1,3])->random(),
             'phone'                   => $this->faker->phoneNumber,
-            'daily_profit'            => $this->faker->numberBetween(0, 1000),
+            // 'daily_profit'            => $this->faker->numberBetween(0, 1000),
             // 'maximum_debt_limit'      => $this->faker->numberBetween(0, 1000),
             'maximum_debt_limit'      => 0,
         ];

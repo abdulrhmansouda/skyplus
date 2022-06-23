@@ -20,7 +20,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         $schedule->call(function () {
             Subscriber::convertToDeactive();
-            Point::resetDailyProfit();
+            // Point::resetDailyProfit();
         })->everyMinute();//daily
     }
 

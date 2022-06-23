@@ -21,6 +21,27 @@ Route::middleware(['auth', 'admin'])
             ->group(function () {
                 Route::get('/', 'index')->name('home');
             });
+        Route::controller(Admin\BoxCashController::class)
+            ->middleware(['superadmin'])
+            ->prefix('/box-cash')
+            ->name('box-cash.')
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::post('/store', 'store')->name('store');
+                Route::post('/admin-box-cash-export', 'export')->name('export');
+            });
+
+        Route::controller(Admin\BoxBankController::class)
+            ->middleware(['superadmin'])
+            ->prefix('/box-bank')
+            ->name('box-bank.')
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::post('/store', 'store')->name('store');
+                Route::post('/admin-box-bank-export', 'export')->name('export');
+            });
+
+
 
         Route::controller(Admin\PointController::class)
             ->prefix('/points')
@@ -58,6 +79,7 @@ Route::middleware(['auth', 'admin'])
             });
 
         Route::controller(Admin\RechargeController::class)
+            ->middleware(['superadmin'])
             ->prefix('/recharge')
             ->name('recharge.')
             ->group(function () {
@@ -215,8 +237,8 @@ Route::middleware(['auth', 'accountant'])
                 Route::post('/store', 'store')->name('store');
                 Route::post('/accountant-box-cash-export', 'export')->name('export');
             });
-            
-            Route::controller(Accountant\BoxBankController::class)
+
+        Route::controller(Accountant\BoxBankController::class)
             ->prefix('/box-bank')
             ->name('box-bank.')
             ->group(function () {
@@ -225,7 +247,7 @@ Route::middleware(['auth', 'accountant'])
                 Route::post('/accountant-box-bank-export', 'export')->name('export');
             });
 
-            Route::controller(Accountant\RechargeController::class)
+        Route::controller(Accountant\RechargeController::class)
             ->prefix('/recharge')
             ->name('recharge.')
             ->group(function () {

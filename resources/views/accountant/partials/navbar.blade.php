@@ -8,15 +8,18 @@
                 <li class="text-sm breadcrumb-item text-dark active" aria-current="page">
                     @switch(Route::currentRouteName())
                         @case('accountant.home')
-                        الرئيسية
+                            الرئيسية
                         @break
 
-                        @case('accountant.support.index')
-                             طلبات الدعم
+                        @case('accountant.box-cash.index')
+                            صندوق / نقد
                         @break
 
-                        @case('accountant.reports.index')
-                            التقارير
+                        @case('accountant.box-bank.index')
+                            صندوق / البنك
+                        @break
+                        @case('accountant.recharge.index')
+                             شحن رصيد
                         @break
 
                         @case('accountant.setting.change-password.index')

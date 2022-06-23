@@ -58,13 +58,19 @@ class ReportController extends Controller
                 $reports = $reports->whereDate('created_at', '>=', $from)
                     ->whereDate('created_at', '<=', $to);
             }
+        } else {
+            preg_match_all("/([^-]*) - (.*)/", $daterange, $date);
+            if ($date[1]) {
+                $from = new Carbon($date[1][0]);
+                $to = new Carbon($date[2][0]);
+            }
         }
 
         $reports = $reports
             ->orderBy('created_at');
 
-        $from = isset($from) ? $from->format('d/m/Y') : (clone $reports)->get()->first()->created_at->format('d/m/Y');
-        $to   = isset($to) ? $to->format('d/m/Y') : (clone $reports)->get()->last()->created_at->format('d/m/Y');
+        $from = $from->format('d/m/Y');
+        $to   =  $to->format('d/m/Y');
 
         $final_commission = (clone $reports)->where('type', ReportTypeEnum::COMMISSION->value)->pluck('amount')?->sum() ?? 0;
         $final_charge_subscriber = -1 * (clone $reports)->where('type', ReportTypeEnum::CHARGE_SUBSCRIBER->value)->pluck('amount')?->sum() ?? 0;
@@ -89,7 +95,7 @@ class ReportController extends Controller
     }
 
     public function export(Request $request)
-    {    
+    {
         $export = new AdminReportsExport($request);
 
         $now    = now()->format('Y_m_d');

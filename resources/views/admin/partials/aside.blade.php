@@ -40,6 +40,38 @@
                     <span class="nav-link-text me-1">الرئيسية</span>
                 </a>
             </li>
+            @if (Auth::user()->isSuperAdmin())
+                <li class="position-relative nav-item">
+                    <button data-bs-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#box"
+                        aria-expanded="false" aria-controls="setting"
+                        class="nav-link @if (Route::currentRouteName() === 'admin.box-cash.index' || Route::currentRouteName() === 'admin.box-bank.index') active @endif">
+
+                        <div
+                            class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="text-dark " width="20"
+                                viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <span class="nav-link-text me-1">الصندوق</span>
+                    </button>
+                    <div class="collapse @if (Route::currentRouteName() === 'admin.box-cash.index' || Route::currentRouteName() === 'admin.box-bank.index') show @endif" id="box">
+                        <ul class="ul-links">
+                            <li class="mb-1 position-relative @if (Route::currentRouteName() === 'admin.box-cash.index') active @endif"><a
+                                    href="{{ route('admin.box-cash.index') }}">النقد </a>
+
+                            </li>
+
+                            <li class="mb-1 position-relative @if (Route::currentRouteName() === 'admin.box-bank.index') active @endif"><a
+                                    href="{{ route('admin.box-bank.index') }}">البنك</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            @endif
+
             <li class="nav-item">
                 <a class="nav-link @if (Route::currentRouteName() === 'admin.points.index') active @endif"
                     href="{{ route('admin.points.index') }}">
@@ -78,7 +110,8 @@
                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>customer-support</title>
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <g transform="translate(-1717.000000, -291.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                <g transform="translate(-1717.000000, -291.000000)" fill="#FFFFFF"
+                                    fill-rule="nonzero">
                                     <g transform="translate(1716.000000, 291.000000)">
                                         <g transform="translate(1.000000, 0.000000)">
                                             <path class="color-background opacity-6"
@@ -128,36 +161,39 @@
                     <span class="nav-link-text me-1">الباقات</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link @if (Route::currentRouteName() === 'admin.recharge.index') active @endif"
-                    href="{{ route('admin.recharge.index') }}">
-                    <div
-                        class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
-                        <svg class="text-dark" width="16px" height="16px" viewBox="0 0 42 42" version="1.1"
-                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <title>office</title>
-                            <g id="Basic-Elements" stroke="none" stroke-width="1" fill="none"
-                                fill-rule="evenodd">
-                                <g id="Rounded-Icons" transform="translate(-1869.000000, -293.000000)" fill="#FFFFFF"
-                                    fill-rule="nonzero">
-                                    <g id="Icons-with-opacity" transform="translate(1716.000000, 291.000000)">
-                                        <g id="office" transform="translate(153.000000, 2.000000)">
-                                            <path class="color-background"
-                                                d="M12.25,17.5 L8.75,17.5 L8.75,1.75 C8.75,0.78225 9.53225,0 10.5,0 L31.5,0 C32.46775,0 33.25,0.78225 33.25,1.75 L33.25,12.25 L29.75,12.25 L29.75,3.5 L12.25,3.5 L12.25,17.5 Z"
-                                                id="Path" opacity="0.6"></path>
-                                            <path class="color-background"
-                                                d="M40.25,14 L24.5,14 C23.53225,14 22.75,14.78225 22.75,15.75 L22.75,38.5 L19.25,38.5 L19.25,22.75 C19.25,21.78225 18.46775,21 17.5,21 L1.75,21 C0.78225,21 0,21.78225 0,22.75 L0,40.25 C0,41.21775 0.78225,42 1.75,42 L40.25,42 C41.21775,42 42,41.21775 42,40.25 L42,15.75 C42,14.78225 41.21775,14 40.25,14 Z M12.25,36.75 L7,36.75 L7,33.25 L12.25,33.25 L12.25,36.75 Z M12.25,29.75 L7,29.75 L7,26.25 L12.25,26.25 L12.25,29.75 Z M35,36.75 L29.75,36.75 L29.75,33.25 L35,33.25 L35,36.75 Z M35,29.75 L29.75,29.75 L29.75,26.25 L35,26.25 L35,29.75 Z M35,22.75 L29.75,22.75 L29.75,19.25 L35,19.25 L35,22.75 Z">
-                                            </path>
+            @if (Auth::user()->isSuperAdmin())
+                <li class="nav-item">
+                    <a class="nav-link @if (Route::currentRouteName() === 'admin.recharge.index') active @endif"
+                        href="{{ route('admin.recharge.index') }}">
+                        <div
+                            class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
+                            <svg class="text-dark" width="16px" height="16px" viewBox="0 0 42 42" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <title>office</title>
+                                <g id="Basic-Elements" stroke="none" stroke-width="1" fill="none"
+                                    fill-rule="evenodd">
+                                    <g id="Rounded-Icons" transform="translate(-1869.000000, -293.000000)"
+                                        fill="#FFFFFF" fill-rule="nonzero">
+                                        <g id="Icons-with-opacity" transform="translate(1716.000000, 291.000000)">
+                                            <g id="office" transform="translate(153.000000, 2.000000)">
+                                                <path class="color-background"
+                                                    d="M12.25,17.5 L8.75,17.5 L8.75,1.75 C8.75,0.78225 9.53225,0 10.5,0 L31.5,0 C32.46775,0 33.25,0.78225 33.25,1.75 L33.25,12.25 L29.75,12.25 L29.75,3.5 L12.25,3.5 L12.25,17.5 Z"
+                                                    id="Path" opacity="0.6"></path>
+                                                <path class="color-background"
+                                                    d="M40.25,14 L24.5,14 C23.53225,14 22.75,14.78225 22.75,15.75 L22.75,38.5 L19.25,38.5 L19.25,22.75 C19.25,21.78225 18.46775,21 17.5,21 L1.75,21 C0.78225,21 0,21.78225 0,22.75 L0,40.25 C0,41.21775 0.78225,42 1.75,42 L40.25,42 C41.21775,42 42,41.21775 42,40.25 L42,15.75 C42,14.78225 41.21775,14 40.25,14 Z M12.25,36.75 L7,36.75 L7,33.25 L12.25,33.25 L12.25,36.75 Z M12.25,29.75 L7,29.75 L7,26.25 L12.25,26.25 L12.25,29.75 Z M35,36.75 L29.75,36.75 L29.75,33.25 L35,33.25 L35,36.75 Z M35,29.75 L29.75,29.75 L29.75,26.25 L35,26.25 L35,29.75 Z M35,22.75 L29.75,22.75 L29.75,19.25 L35,19.25 L35,22.75 Z">
+                                                </path>
+                                            </g>
                                         </g>
                                     </g>
                                 </g>
-                            </g>
-                        </svg>
+                            </svg>
 
-                    </div>
-                    <span class="nav-link-text me-1">شحن رصيد</span>
-                </a>
-            </li>
+                        </div>
+                        <span class="nav-link-text me-1">شحن رصيد</span>
+                    </a>
+                </li>
+            @endif
+
             <li class="nav-item">
                 <a class="nav-link @if (Route::currentRouteName() === 'admin.reports.index') active @endif"
                     href="{{ route('admin.reports.index') }}">
@@ -232,10 +268,9 @@
             <li class="position-relative nav-item">
                 <button data-bs-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#support"
                     aria-expanded="false" aria-controls="setting"
-                    class="nav-link @if (Route::currentRouteName() === 'admin.support.index' || Route::currentRouteName() === 'admin.supportNewSubscriber.index') active @endif"
-                    >
+                    class="nav-link @if (Route::currentRouteName() === 'admin.support.index' || Route::currentRouteName() === 'admin.supportNewSubscriber.index') active @endif">
 
-                    @if (App\Models\Notification::isThereSupportNotification()||App\Models\Notification::isThereSupportNewSubscriberNotification())
+                    @if (App\Models\Notification::isThereSupportNotification() || App\Models\Notification::isThereSupportNewSubscriberNotification())
                         <span class="bg-danger red-point"></span>
                     @endif
                     <div

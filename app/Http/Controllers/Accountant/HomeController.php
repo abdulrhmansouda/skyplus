@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Accountant;
 
+use App\Enums\UserStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\BoxBank;
 use App\Models\BoxCash;
@@ -15,9 +16,9 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $active     = Subscriber::where('status' , 'active')->count();
-        $deactive   = Subscriber::where('status' , 'deactive')->count();
-        $closed     = Subscriber::where('status' , 'closed')->count();
+        $active     = Subscriber::where('status', UserStatusEnum::ACTIVE->value)->count();
+        $deactive   = Subscriber::where('status', UserStatusEnum::INACTIVE->value)->count();
+        $closed     = Subscriber::where('status', UserStatusEnum::CLOSED->value)->count();
         // start daterange
         $daterange = $request->daterange ?? now()->format('m/d/Y') . " - " . now()->format('m/d/Y');
 
@@ -29,7 +30,7 @@ class HomeController extends Controller
         }
 
         $count = Invoice::whereDate('created_at', '>=', $from)
-        ->whereDate('created_at', '<=', $to);
+            ->whereDate('created_at', '<=', $to);
         // end daterange
 
 
@@ -40,10 +41,10 @@ class HomeController extends Controller
 
         $current_box_cash = BoxCash::all()?->last()?->account ?? 0;
         $current_box_bank = BoxBank::all()?->last()?->account ?? 0;
-        $current_debts    = Point::where('account','<',0)->get()->sum('account');
+        $current_debts    = Point::where('account', '<', 0)->get()->sum('account');
 
 
-        return view('accountant.pages.home',[
+        return view('accountant.pages.home', [
             'active' => $active,
             'deactive' => $deactive,
             'closed' => $closed,

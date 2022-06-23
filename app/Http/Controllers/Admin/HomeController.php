@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\UserStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\BoxBank;
 use App\Models\BoxCash;
@@ -20,9 +21,9 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $active = Subscriber::where('status', 'active')->count();
-        $deactive = Subscriber::where('status', 'deactive')->count();
-        $closed = Subscriber::where('status', 'closed')->count();
+        $active = Subscriber::where('status', UserStatusEnum::ACTIVE->value)->count();
+        $deactive = Subscriber::where('status', UserStatusEnum::INACTIVE->value)->count();
+        $closed = Subscriber::where('status', UserStatusEnum::CLOSED->value)->count();
         // start daterange
         $daterange = $request->daterange ?? now()->format('m/d/Y') . " - " . now()->format('m/d/Y');
 

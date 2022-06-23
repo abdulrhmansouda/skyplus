@@ -7,7 +7,7 @@
 <div class="py-4 container-fluid">
     <div class="row">
         <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
-            <a class="card" href="">
+            <a class="card" target="_blank" href="{{ route('admin.box-cash.index') }}">
                 <div class="card-body p-3">
                     <div class="row">
                         <div class="col-8">
@@ -29,7 +29,7 @@
             </a>
         </div>
         <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
-            <a class="card" href="/">
+            <a class="card" target="_blank" href="{{ route('admin.box-bank.index') }}">
                 <div class="card-body p-3">
                     <div class="row">
                         <div class="col-8">

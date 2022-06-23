@@ -43,8 +43,7 @@
             </li>
             <li class="position-relative nav-item">
                 <button data-bs-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#box" aria-expanded="false"
-                    aria-controls="setting" class="nav-link @if (Route::currentRouteName() === 'admin.support.index') active @endif"
-                    href="{{ route('admin.support.index') }}">
+                    aria-controls="setting" class="nav-link @if (Route::currentRouteName() === 'accountant.box-cash.index' || Route::currentRouteName() === 'accountant.box-bank.index') active @endif">
 
                     <div
                         class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
@@ -57,7 +56,7 @@
                     </div>
                     <span class="nav-link-text me-1">الصندوق</span>
                 </button>
-                <div class="collapse @if (Route::currentRouteName() === 'accountant.box-cash.index' || Route::currentRouteName() === 'accountant.box-bank.index' || Route::currentRouteName() === 'admin.setting.social.index' || Route::currentRouteName() === 'admin.setting.other.index') show @endif" id="box">
+                <div class="collapse @if (Route::currentRouteName() === 'accountant.box-cash.index' || Route::currentRouteName() === 'accountant.box-bank.index') show @endif" id="box">
                     <ul class="ul-links">
                         <li class="mb-1 position-relative @if (Route::currentRouteName() === 'accountant.box-cash.index') active @endif"><a
                                 href="{{ route('accountant.box-cash.index') }}">النقد </a>

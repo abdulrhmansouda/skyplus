@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
-            <div class="card">
+            <a class="card"href="">
                 <div class="card-body p-3">
                     <div class="row">
                         <div class="col-8">
@@ -48,10 +48,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
         <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
-            <div class="card">
+            <a class="card" href="/">
                 <div class="card-body p-3">
                     <div class="row">
                         <div class="col-8">
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
       
     </div>

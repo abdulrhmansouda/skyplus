@@ -7,7 +7,7 @@
 <div class="py-4 container-fluid">
     <div class="row">
         <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
-            <div class="card">
+            <a class="card" href="">
                 <div class="card-body p-3">
                     <div class="row">
                         <div class="col-8">
@@ -20,16 +20,16 @@
                         </div>
                         <div class="col-4 text-start">
                             <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
-                            <i class="fas fa-money-bill-wave text-lg opacity-10"></i>
+                                <i class="fas fa-money-bill-wave text-lg opacity-10"></i>
 
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
         <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
-            <div class="card">
+            <a class="card" href="/">
                 <div class="card-body p-3">
                     <div class="row">
                         <div class="col-8">
@@ -42,13 +42,13 @@
                         </div>
                         <div class="col-4 text-start">
                             <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
-                            <i class="fas fa-money-check text-lg opacity-10"></i>
-                            	
+                                <i class="fas fa-money-check text-lg opacity-10"></i>
+
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
         <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
             <div class="card">
@@ -64,14 +64,14 @@
                         </div>
                         <div class="col-4 text-start">
                             <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
-                            <i class="fas fa-hand-holding-usd"></i>
+                                <i class="fas fa-hand-holding-usd"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-      
+
     </div>
     <div class="mt-4 row">
         <div class="mb-4 col-lg-7 mb-lg-0">
@@ -99,7 +99,7 @@
                                         :</strong> &nbsp; {{ $sum }}</li>
                             </ul>
                         </div>
-                       
+
                     </div>
                 </div>
             </div>

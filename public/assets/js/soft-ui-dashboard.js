@@ -461,7 +461,9 @@ function HideShowSelectmaintenance(event){
 function getPricePackage(event){
   fetch( `/api/package?id=${event.target.value}`)
   .then(response => response.json())
-  .then(data => {event.target.parentElement.parentElement.parentElement.querySelector(".price").innerHTML = data.package_price});
+  .then(data => {event.target.parentElement.parentElement.parentElement.querySelector(".price").innerHTML = data.package_price 
+  event.target.parentElement.parentElement.parentElement.querySelector(".final-price").innerHTML = data.package_price * +event.target.parentElement.parentElement.parentElement.querySelector(".month").value
+});
 }
 
 function openTab(event) {
@@ -469,4 +471,8 @@ function openTab(event) {
   event.target.classList.add("active");
   event.target.parentElement.parentElement.parentElement.querySelectorAll(`.tab-pane`).forEach((tab => { tab.classList.remove("active"); }))
   document.querySelector(`#${event.target.dataset.tab}`).classList.add("active")
+}
+function  changeMonth(event){
+  var oldPrice = event.target.parentElement.parentElement.parentElement.querySelector(".price").innerText;
+  event.target.parentElement.parentElement.parentElement.querySelector(".final-price").innerHTML = +oldPrice * +event.target.value
 }

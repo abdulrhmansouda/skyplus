@@ -14,14 +14,6 @@
                     صندوق / نقد
                     @break
 
-<<<<<<< HEAD
-                    @case('accountant.box-bank.index')
-                    صندوق / البنك
-                    @break
-                    @case('accountant.recharge.index')
-                    شحن رصيد
-                    @break
-=======
                         @case('accountant.box-bank.index')
                             صندوق / البنك
                         @break
@@ -29,7 +21,6 @@
                         @case('accountant.recharge.index')
                             شحن رصيد
                         @break
->>>>>>> 7b870beba34fb1fec0310a7994965fccc661db53
 
                     @case('accountant.setting.change-password.index')
                     الاعدادات / تغيير كلمة المرور
@@ -45,7 +36,7 @@
                 </li>
             </ol>
         </nav>
-        <a href="javascript:;" class="p-0 nav-link text-body toggle-nav d-md-none" id="iconNavbarSidenav">
+        <a href="javascript:;" class="p-0 nav-link text-body toggle-nav d-lg-none" id="iconNavbarSidenav">
             <div class="sidenav-toggler-inner">
                 <i class="bg-black sidenav-toggler-line"></i>
                 <i class="bg-black sidenav-toggler-line"></i>
@@ -53,15 +44,6 @@
             </div>
         </a>
         @switch(Route::currentRouteName())
-<<<<<<< HEAD
-        @case('accountant.subscribers.index')
-        <div class="px-0 mt-2 collapse navbar-collapse mt-sm-0" id="navbar">
-            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                <form action="" method="GET">
-                    <div class="input-group">
-                        <span class="input-group-text text-body"><button class="submit search-button"><i class="fas fa-search" aria-hidden="true"></i></button></span>
-                        <input type="text" class="form-control" placeholder="ابحث لتسديد فاتورة" name="s" value="@if (isset($search)) {{ $search ? $search : '' }} @endif">
-=======
             @case('accountant.recharge.index')
                 <div class="px-0 mt-2 collapse navbar-collapse mt-sm-0" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -73,7 +55,6 @@
                                     value="@if (isset($search)) {{ $search ? $search : '' }} @endif">
                             </div>
                         </form>
->>>>>>> 7b870beba34fb1fec0310a7994965fccc661db53
                     </div>
                 </form>
             </div>

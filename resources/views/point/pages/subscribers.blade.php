@@ -219,6 +219,7 @@
                                                                                 {{ $sub->package->price }}
                                                                             </div>
                                                                         </div>
+
                                                                         <div class="col-lg-4 col-md-6">
                                                                             <div class="form-group">
                                                                                 <h6>
@@ -326,7 +327,7 @@
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <!-- tabs -->
-                                                                        <ul class="nav nav-tabs mb-3">
+                                                                        <ul class="mb-3 nav nav-tabs">
                                                                             <li class="nav-item">
                                                                                 <button type="button"
                                                                                     class="nav-link active"
@@ -346,7 +347,7 @@
                                                                             </li>
                                                                         </ul>
                                                                         <div class="tab-content">
-                                                                            <div class="tab-pane   active"
+                                                                            <div class="tab-pane active"
                                                                                 id="tab1-{{ $sub->id }}">
                                                                                 <!-- start tab 1 -->
                                                                                 <form
@@ -381,7 +382,16 @@
                                                                                             <div class="form-group">
                                                                                                 <h6>
                                                                                                     سعر الباقة </h6>
-                                                                                                <span class="price">
+                                                                                                <span class="price" >
+                                                                                                    {{ $sub->package->price }}
+                                                                                                </span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class=" col-6">
+                                                                                            <div class="form-group">
+                                                                                                <h6>
+                                                                                                     السعر الكلي </h6>
+                                                                                                <span class="final-price" >
                                                                                                     {{ $sub->package->price }}
                                                                                                 </span>
                                                                                             </div>
@@ -410,8 +420,9 @@
                                                                                                 <h6>
                                                                                                     الأشهر </h6>
                                                                                                 <select name="months"
+                                                                                                onchange="changeMonth(event)"
                                                                                                     id=""
-                                                                                                    class="form-select">
+                                                                                                    class="form-select month">
                                                                                                     <option value="1">
                                                                                                         1
                                                                                                     </option>
@@ -464,7 +475,7 @@
                                                                                 </form>
                                                                                 <!-- end tab 1 -->
                                                                             </div>
-                                                                            <div class="tab-pane   "
+                                                                            <div class="tab-pane "
                                                                                 id="tab2-{{ $sub->id }}">
                                                                                 <form
                                                                                     action="{{ route('point.subscribers.uncharge', $sub->id) }}"
@@ -499,12 +510,20 @@
                                                                                             <div class="form-group">
                                                                                                 <h6>
                                                                                                     سعر الباقة </h6>
-                                                                                                <span class="price">
+                                                                                                <span class="price" >
                                                                                                     {{ $sub->package->price }}
                                                                                                 </span>
                                                                                             </div>
                                                                                         </div>
-
+                                                                                        <div class=" col-6">
+                                                                                            <div class="form-group">
+                                                                                                <h6>
+                                                                                                     السعر الكلي </h6>
+                                                                                                <span class="final-price" >
+                                                                                                    {{ $sub->package->price }}
+                                                                                                </span>
+                                                                                            </div>
+                                                                                        </div>
                                                                                         <div class=" col-6">
                                                                                             <div class="form-group">
                                                                                                 <h6>
@@ -528,8 +547,9 @@
                                                                                                 <h6>
                                                                                                     الأشهر </h6>
                                                                                                 <select name="months"
+                                                                                                 onchange="changeMonth(event)"
                                                                                                     id=""
-                                                                                                    class="form-select">
+                                                                                                    class="form-select month">
                                                                                                     <option value="1">
                                                                                                         1
                                                                                                     </option>
@@ -616,7 +636,16 @@
                                                                                             <div class="form-group">
                                                                                                 <h6>
                                                                                                     سعر الباقة </h6>
-                                                                                                <span class="price">
+                                                                                                <span class="price" >
+                                                                                                    {{ $sub->package->price }}
+                                                                                                </span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class=" col-6">
+                                                                                            <div class="form-group">
+                                                                                                <h6>
+                                                                                                     السعر الكلي </h6>
+                                                                                                <span class="final-price" >
                                                                                                     {{ $sub->package->price }}
                                                                                                 </span>
                                                                                             </div>
@@ -645,8 +674,10 @@
                                                                                                 <h6>
                                                                                                     الأشهر </h6>
                                                                                                 <select name="months"
+                                                                                                 onchange="changeMonth(event)"
                                                                                                     id=""
-                                                                                                    class="form-select">
+                                                                                                    
+                                                                                                    class="form-select month">
                                                                                                     <option value="1">
                                                                                                         1
                                                                                                     </option>
@@ -687,7 +718,7 @@
                                                                                             </div>
                                                                                         </div>
 
-                                                                                        <div class=" col-6 ">
+                                                                                        <div class=" col-6">
                                                                                             <div class="form-group">
                                                                                                 <h6>
                                                                                                     اختر الباقة الجديدة
@@ -768,7 +799,7 @@
                                                                         طلب صيانة </h5>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <ul class="nav nav-tabs mb-3">
+                                                                    <ul class="mb-3 nav nav-tabs">
                                                                         <li class="nav-item">
                                                                             <button type="button" class="nav-link active"
                                                                                 data-tab="tab4-{{ $sub->id }}"
@@ -782,7 +813,7 @@
                                                                         </li>
                                                                     </ul>
                                                                     <div class="tab-content">
-                                                                        <div class="tab-pane   active"
+                                                                        <div class="tab-pane active"
                                                                             id="tab4-{{ $sub->id }}">
                                                                             <form
                                                                                 action="{{ route('point.subscribers.transfer', $sub->id) }}"
@@ -827,7 +858,7 @@
                                                                                 </div>
                                                                             </form>
                                                                         </div>
-                                                                        <div class="tab-pane  "
+                                                                        <div class="tab-pane "
                                                                             id="tab5-{{ $sub->id }}">
                                                                             <form
                                                                                 action="{{ route('point.subscribers.maintenance', $sub->id) }}"
@@ -853,7 +884,7 @@
                                                                                         </div>
                                                                                     </div>
 
-                                                                                    <div class=" col-6 ">
+                                                                                    <div class=" col-6">
                                                                                         <div class="form-group">
                                                                                             <h6>
                                                                                                 اختر سبب الصيانة </h6>

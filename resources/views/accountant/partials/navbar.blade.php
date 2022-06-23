@@ -18,8 +18,9 @@
                         @case('accountant.box-bank.index')
                             صندوق / البنك
                         @break
+
                         @case('accountant.recharge.index')
-                             شحن رصيد
+                            شحن رصيد
                         @break
 
                         @case('accountant.setting.change-password.index')
@@ -37,7 +38,7 @@
             </ol>
         </nav>
         @switch(Route::currentRouteName())
-            @case('accountant.subscribers.index')
+            @case('accountant.recharge.index')
                 <div class="px-0 mt-2 collapse navbar-collapse mt-sm-0" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                         <form action="" method="GET">

@@ -1,13 +1,22 @@
 <?php
 
+use App\Enums\UserStatusEnum;
 use App\Http\Controllers\Accountant;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\Point;
 use App\Http\Controllers\TelegramController;
+use App\Models\Subscriber;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/getUpdateTelegram', [TelegramController::class, 'updatedActivity']);
 
+// Route::get('/test', function () {
+//     // return ;
+//     dd(Subscriber::where('status', UserStatusEnum::ACTIVE->value)
+//     ->whereDate('package_end','<=',new Carbon(now()))->get());
+//     return new Carbon(now());
+// });
 Route::get('/', function () {
     return redirect(route('login'));
 });

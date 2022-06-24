@@ -54,14 +54,15 @@ class Subscriber extends Model
         return $d1->diffInDays($d2, false) > 0 ? $d1->diffInDays($d2, false) : 0;
     }
 
-    public static function convertToDeactive()
+    public static function convertToInactive()
     {
-        $subs = static::where('status', UserStatusEnum::ACTIVE->value)->get();
+        $subs = static::where('status', UserStatusEnum::ACTIVE->value)
+        ->whereDate('package_end','<=',new Carbon(now()))->get();
         foreach ($subs as $sub) {
-            if ($sub->days_to_end == 0) {
+            // if ($sub->days_to_end == 0) {
                 $sub->status = UserStatusEnum::INACTIVE->value;
                 $sub->update();
-            }
+            // }
         }
     }
 

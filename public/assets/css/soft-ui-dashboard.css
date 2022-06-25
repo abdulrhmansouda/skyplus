@@ -25609,13 +25609,7 @@ tr {
 tr:hover {
     background: #eee;
 }
-.ellipsis {
-    width: 150px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    word-wrap: break-word;
-    white-space: nowrap;
-}
+
 .d-nav-none {
     display: none;
 }
@@ -25638,6 +25632,13 @@ tr:hover {
     .w-md-200p {
         width: 200px;
     }
+    .ellipsis {
+      width: 150px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-wrap: break-word;
+      white-space: nowrap;
+  }
 }
 .toggle-nav {
     position: fixed;
@@ -25650,21 +25651,5 @@ tr:hover {
         justify-content: start;
     }
 }
-@media (pointer: coarse), (hover: none) {
-    [title] {
-        position: relative;
-        display: inline-flex;
-        justify-content: center;
-    }
-    [title]:focus::after {
-        content: attr(title);
-        position: absolute;
-        top: 90%;
-        color: #000;
-        background-color: #fff;
-        border: 1px solid;
-        width: fit-content;
-        padding: 3px;
-    }
-}
+
 /*# sourceMappingURL=dashboard-free.css.map */

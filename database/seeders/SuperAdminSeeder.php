@@ -21,8 +21,8 @@ class SuperAdminSeeder extends Seeder
             'user_id' => User::factory(1)->create(['username' => 'skyplus', 'role' => UserRoleEnum::SUPER_ADMIN->value])->first()->id,
         ]);
 
-        SuperAdmin::factory(1)->create([
-            'user_id' => User::factory(1)->create(['username' => 'skyplus1', 'role' => UserRoleEnum::SUPER_ADMIN->value])->first()->id,
-        ]);
+        // SuperAdmin::factory(1)->create([
+        //     'user_id' => User::factory(1)->create(['username' => 'skyplus1', 'role' => UserRoleEnum::SUPER_ADMIN->value])->first()->id,
+        // ]);
     }
 }

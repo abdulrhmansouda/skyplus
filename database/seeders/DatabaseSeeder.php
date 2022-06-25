@@ -26,24 +26,19 @@ class DatabaseSeeder extends Seeder
         $this->call([
             // UserSeeder::class,
             SuperAdminSeeder::class,
-            AdminSeeder::class,
+            // AdminSeeder::class,
             AccountantSeeder::class,
-            PointSeeder::class,
+            // PointSeeder::class,
             TelegramSeeder::class,
         ]);
 
-        // Report::factory(100)->create();
-        // BoxCash::factory(100)->create();
+        
+        
+        // Package::factory()
+        // ->count(10)
+        // ->hasSubscribers(10)
+        //     ->create();
 
-
-        Package::factory()
-            ->count(10)
-            ->hasSubscribers(10)
-            ->create();
-
-        // ProjectSetting::create([
-        //     'maximum_amount_of_borrowing' => 0,
-        // ]);
 
 
         Social::create([
@@ -58,9 +53,12 @@ class DatabaseSeeder extends Seeder
             'facebook_url' => 'https://www.facebook.com/skyplus',
             'address' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero vitae voluptatum sequi deleniti itaque accusamus adipisci dolore atque tempora placeat error tempore distinctio similique sed deserunt, amet beatae cum ducimus.',
         ]);
-
+        
         Notification::create([
-            'support_notification' => true,
+            'support_notification' => false,
         ]);
+        
+        // Report::factory(100)->create();
+        // BoxCash::factory(100)->create();
     }
 }

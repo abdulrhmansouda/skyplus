@@ -8,9 +8,9 @@ use Telegram\Bot\Api;
 class TelegramController extends Controller
 {
 
-    public static function updatedActivity()
+    public static function updatedActivity($id)
     {
-        $bot = TelegramBot::findOrFail(4);
+        $bot = TelegramBot::findOrFail($id);
         // dd($bot);
         $telegram = new Api($bot->bot_token);
         $activity = $telegram->getUpdates();

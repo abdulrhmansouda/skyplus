@@ -9,7 +9,6 @@ use App\Models\Subscriber;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/getUpdateTelegram', [TelegramController::class, 'updatedActivity']);
 
 // Route::get('/test', function () {
 //     // return ;
@@ -25,6 +24,7 @@ Route::middleware(['auth', 'admin'])
     ->prefix('/admin/dashboard')
     ->name('admin.')
     ->group(function () {
+        Route::get('/getUpdateTelegram/bot/{bot}', [TelegramController::class, 'updatedActivity']);
         Route::controller(Admin\HomeController::class)
             ->prefix('/home')
             ->group(function () {

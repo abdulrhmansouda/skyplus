@@ -27,7 +27,7 @@ class ChargeSubscriberRequest extends FormRequest
         return [
             'months' => ['required', 'numeric', 'between:1,12'],
             // 'type' => ['required', Rule::in(['true', 'false', 'upgrate'])],
-            // 'package_id' => [Rule::requiredIf($this->type === 'upgrate'),'exists:packages,id'],
+            // 'package_id' => [Rule::requiredIf($this->type == 'upgrate'),'exists:packages,id'],
         ];
     }
 }

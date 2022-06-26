@@ -250,10 +250,10 @@
                                                                                 <h6>
                                                                                     حالة المستخدم
                                                                                 </h6>
-                                                                                {{-- @if ($sub->status === 'active')
+                                                                                {{-- @if ($sub->status == 'active')
                                                                                     <span
                                                                                         class="badge badge-sm bg-gradient-success">مفعل</span>
-                                                                                @elseif($sub->status === 'deactive')
+                                                                                @elseif($sub->status == 'deactive')
                                                                                     <span
                                                                                         class="badge badge-sm bg-gradient-danger">غير
                                                                                         مفعل</span>
@@ -401,10 +401,10 @@
                                                                                             <div class="form-group">
                                                                                                 <h6>
                                                                                                     حالة المشترك </h6>
-                                                                                                {{-- @if ($sub->status === 'active')
+                                                                                                {{-- @if ($sub->status == 'active')
                                                                                                     <span
                                                                                                         class="badge badge-sm bg-gradient-success">مفعل</span>
-                                                                                                @elseif($sub->status === 'deactive')
+                                                                                                @elseif($sub->status == 'deactive')
                                                                                                     <span
                                                                                                         class="badge badge-sm bg-gradient-danger">غير
                                                                                                         مفعل</span>
@@ -528,10 +528,10 @@
                                                                                             <div class="form-group">
                                                                                                 <h6>
                                                                                                     حالة المشترك </h6>
-                                                                                                {{-- @if ($sub->status === 'active')
+                                                                                                {{-- @if ($sub->status == 'active')
                                                                                                     <span
                                                                                                         class="badge badge-sm bg-gradient-success">مفعل</span>
-                                                                                                @elseif($sub->status === 'deactive')
+                                                                                                @elseif($sub->status == 'deactive')
                                                                                                     <span
                                                                                                         class="badge badge-sm bg-gradient-danger">غير
                                                                                                         مفعل</span>
@@ -655,10 +655,10 @@
                                                                                             <div class="form-group">
                                                                                                 <h6>
                                                                                                     حالة المشترك </h6>
-                                                                                                {{-- @if ($sub->status === 'active')
+                                                                                                {{-- @if ($sub->status == 'active')
                                                                                                     <span
                                                                                                         class="badge badge-sm bg-gradient-success">مفعل</span>
-                                                                                                @elseif($sub->status === 'deactive')
+                                                                                                @elseif($sub->status == 'deactive')
                                                                                                     <span
                                                                                                         class="badge badge-sm bg-gradient-danger">غير
                                                                                                         مفعل</span>

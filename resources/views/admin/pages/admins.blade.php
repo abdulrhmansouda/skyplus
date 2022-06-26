@@ -137,7 +137,7 @@
                                         <p class="mb-0 text-xs font-weight-bold">{{ $admin->t_c }}</p>
                                     </td>
                                     <td class="text-sm align-middle">
-                                        {{-- @if ($admin->status === 'active')
+                                        {{-- @if ($admin->status == 'active')
                                         <span class="badge badge-sm bg-gradient-success">مفعل</span>
                                         @else
                                         <span class="badge badge-sm bg-gradient-danger">مغلق</span>
@@ -196,7 +196,7 @@
                                                                         <h6>
                                                                             حالة المستخدم
                                                                         </h6>
-                                                                        {{-- @if ($admin->status === 'active')
+                                                                        {{-- @if ($admin->status == 'active')
                                                                         <span class="badge badge-sm bg-gradient-success">مفعل</span>
                                                                         @else
                                                                         <span class="badge badge-sm bg-gradient-danger">مغلق</span>
@@ -287,8 +287,8 @@
                                                                                 </span>
                                                                             </label>
                                                                             <select required class="form-select" name="status">
-                                                                                <option value="{{ App\Enums\UserStatusEnum::ACTIVE->value }}" @if($admin->status === App\Enums\UserStatusEnum::ACTIVE->value) selected @endif> مفعل</option>
-                                                                                <option value="{{ App\Enums\UserStatusEnum::CLOSED->value }}" @if($admin->status === App\Enums\UserStatusEnum::CLOSED->value) selected @endif>مفلق</option>
+                                                                                <option value="{{ App\Enums\UserStatusEnum::ACTIVE->value }}" @if($admin->status == App\Enums\UserStatusEnum::ACTIVE->value) selected @endif> مفعل</option>
+                                                                                <option value="{{ App\Enums\UserStatusEnum::CLOSED->value }}" @if($admin->status == App\Enums\UserStatusEnum::CLOSED->value) selected @endif>مفلق</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>

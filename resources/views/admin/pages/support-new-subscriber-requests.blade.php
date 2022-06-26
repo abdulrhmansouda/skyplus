@@ -167,7 +167,7 @@
                                                                                 {{ $request->request_type_arabic() }}
                                                                             </div>
                                                                         </div>
-                                                                        @if ($request->type === App\Enums\SupportRequestTypeEnum::NEW_SUBSCRIBER->value)
+                                                                        @if ($request->type == App\Enums\SupportRequestTypeEnum::NEW_SUBSCRIBER->value)
                                                                             <div class=" col-md-6">
                                                                                 <div class="form-group">
                                                                                     <h6>
@@ -198,7 +198,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    @if ($request->status === App\Enums\RequestStatusEnum::WAINTING->value)
+                                                                    @if ($request->status == App\Enums\RequestStatusEnum::WAINTING->value)
                                                                         <form
                                                                             action="{{ route('admin.supportNewSubscriber.acceptRequest', $request->id) }}"
                                                                             method="POST">

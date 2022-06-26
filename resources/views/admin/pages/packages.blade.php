@@ -125,8 +125,8 @@
                                                                         </span>
                                                                     </label>
                                                                     <select required="" class="form-select" name="status">
-                                                                        <option value="{{ App\Enums\UserStatusEnum::ACTIVE->value }}" @if($package->status === App\Enums\UserStatusEnum::ACTIVE->value) selected @endif> مفعل</option>
-                                                                        <option value="{{ App\Enums\UserStatusEnum::CLOSED->value }}" @if($package->status === App\Enums\UserStatusEnum::CLOSED->value) selected @endif>مفلق</option>
+                                                                        <option value="{{ App\Enums\UserStatusEnum::ACTIVE->value }}" @if($package->status == App\Enums\UserStatusEnum::ACTIVE->value) selected @endif> مفعل</option>
+                                                                        <option value="{{ App\Enums\UserStatusEnum::CLOSED->value }}" @if($package->status == App\Enums\UserStatusEnum::CLOSED->value) selected @endif>مفلق</option>
                                                                     </select>
                                                                 </div>
                                                             </div>

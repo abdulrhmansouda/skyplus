@@ -50,22 +50,22 @@ class User extends Authenticatable
     }
     public function isSuperAdmin()
     {
-        return $this->role === UserRoleEnum::SUPER_ADMIN->value;
+        return $this->role == UserRoleEnum::SUPER_ADMIN->value;
     }
 
     public function isAdmin()
     {
-        return $this->role === UserRoleEnum::ADMIN->value;
+        return $this->role == UserRoleEnum::ADMIN->value;
     }
 
     public function isAccountant()
     {
-        return $this->role === UserRoleEnum::ACCOUNTANT->value;
+        return $this->role == UserRoleEnum::ACCOUNTANT->value;
     }
 
     public function isPoint()
     {
-        return $this->role === UserRoleEnum::POINT->value;
+        return $this->role == UserRoleEnum::POINT->value;
     }
 
     //Relations

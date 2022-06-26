@@ -12,7 +12,7 @@
     <div class="w-auto px-0 collapse navbar-collapse max-height-vh-100 h-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link @if (Route::currentRouteName() === 'accountant.home') active @endif "
+                <a class="nav-link @if (Route::currentRouteName() == 'accountant.home') active @endif "
                     href="{{ route('accountant.home') }}">
                     <div
                         class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
@@ -43,7 +43,7 @@
             </li>
             <li class="position-relative nav-item">
                 <button data-bs-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#box" aria-expanded="false"
-                    aria-controls="setting" class="nav-link @if (Route::currentRouteName() === 'accountant.box-cash.index' || Route::currentRouteName() === 'accountant.box-bank.index') active @endif">
+                    aria-controls="setting" class="nav-link @if (Route::currentRouteName() == 'accountant.box-cash.index' || Route::currentRouteName() == 'accountant.box-bank.index') active @endif">
 
                     <div
                         class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
@@ -56,21 +56,21 @@
                     </div>
                     <span class="nav-link-text me-1">الصندوق</span>
                 </button>
-                <div class="collapse @if (Route::currentRouteName() === 'accountant.box-cash.index' || Route::currentRouteName() === 'accountant.box-bank.index') show @endif" id="box">
+                <div class="collapse @if (Route::currentRouteName() == 'accountant.box-cash.index' || Route::currentRouteName() == 'accountant.box-bank.index') show @endif" id="box">
                     <ul class="ul-links">
-                        <li class="mb-1 position-relative @if (Route::currentRouteName() === 'accountant.box-cash.index') active @endif"><a
+                        <li class="mb-1 position-relative @if (Route::currentRouteName() == 'accountant.box-cash.index') active @endif"><a
                                 href="{{ route('accountant.box-cash.index') }}">النقد </a>
 
                         </li>
 
-                        <li class="mb-1 position-relative @if (Route::currentRouteName() === 'accountant.box-bank.index') active @endif"><a
+                        <li class="mb-1 position-relative @if (Route::currentRouteName() == 'accountant.box-bank.index') active @endif"><a
                                 href="{{ route('accountant.box-bank.index') }}">البنك</a>
                         </li>
                     </ul>
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link @if (Route::currentRouteName() === 'accountant.recharge.index') active @endif"
+                <a class="nav-link @if (Route::currentRouteName() == 'accountant.recharge.index') active @endif"
                     href="{{ route('accountant.recharge.index') }}">
                     <div
                         class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
@@ -99,7 +99,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  @if (Route::currentRouteName() === 'accountant.setting.change-password.index') active @endif"
+                <a class="nav-link  @if (Route::currentRouteName() == 'accountant.setting.change-password.index') active @endif"
                     href="{{ route('accountant.setting.change-password.index') }}">
                     <div
                         class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">

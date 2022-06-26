@@ -247,7 +247,7 @@
 
                                             <td class="text-sm align-middle">
                                                 {!! $point->status() !!}
-                                                {{-- @if ($point->status === 'active')
+                                                {{-- @if ($point->status == 'active')
                                         <!-- positive  -->
                                         <span class="badge badge-sm bg-gradient-success">مفعل</span>
                                         <!-- zero  -->
@@ -362,7 +362,7 @@
                                                                                 <h6>
                                                                                     حالة المستخدم
                                                                                 </h6>
-                                                                                @if ($point->status === 'active')
+                                                                                @if ($point->status == 'active')
                                                                                     <span
                                                                                         class="badge badge-sm bg-gradient-success">مفعل</span>
                                                                                 @else
@@ -597,10 +597,10 @@
                                                                                         class="form-select"
                                                                                         name="status">
                                                                                         <option value={{ App\Enums\UserStatusEnum::ACTIVE->value }}
-                                                                                            @if ($point->status === App\Enums\UserStatusEnum::ACTIVE->value) selected @endif>
+                                                                                            @if ($point->status == App\Enums\UserStatusEnum::ACTIVE->value) selected @endif>
                                                                                             مفعل</option>
-                                                                                        <option value={{ $point->status === App\Enums\UserStatusEnum::CLOSED->value }}
-                                                                                            @if ($point->status === App\Enums\UserStatusEnum::CLOSED->value) selected @endif>
+                                                                                        <option value={{ $point->status == App\Enums\UserStatusEnum::CLOSED->value }}
+                                                                                            @if ($point->status == App\Enums\UserStatusEnum::CLOSED->value) selected @endif>
                                                                                             مفلق</option>
                                                                                     </select>
                                                                                 </div>

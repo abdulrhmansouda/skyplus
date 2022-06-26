@@ -11,7 +11,7 @@
         <ul class="navbar-nav">
 
             <li class="nav-item">
-                <button data-bs-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#actions" aria-expanded="false" aria-controls="actions" class="nav-link @if(Route::currentRouteName() === 'point.subscribers.index') active @endif" href="{{ route('point.subscribers.index') }}">
+                <button data-bs-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#actions" aria-expanded="false" aria-controls="actions" class="nav-link @if(Route::currentRouteName() == 'point.subscribers.index') active @endif" href="{{ route('point.subscribers.index') }}">
                     <div class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
                         <svg class="text-dark" width="16px" height="16px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>office</title>
@@ -31,16 +31,16 @@
                     </div>
                     <span class="nav-link-text me-1">العمليات</span>
                 </button>
-                <div class="collapse @if (Route::currentRouteName() === 'point.subscribers.index' 
-                || Route::currentRouteName() === 'point.support.index') show @endif" id="actions">
+                <div class="collapse @if (Route::currentRouteName() == 'point.subscribers.index' 
+                || Route::currentRouteName() == 'point.support.index') show @endif" id="actions">
                     <ul class="ul-links">
-                        <li class="mb-1 @if(Route::currentRouteName() === 'point.subscribers.index') active @endif"><a href="{{ route('point.subscribers.index') }}">تسديد-صيانة</a></li>
-                        <li class="mb-1 @if(Route::currentRouteName() === 'point.support.index') active @endif" ><a href="{{ route('point.support.index') }}">طلبات الدعم</a></li>
+                        <li class="mb-1 @if(Route::currentRouteName() == 'point.subscribers.index') active @endif"><a href="{{ route('point.subscribers.index') }}">تسديد-صيانة</a></li>
+                        <li class="mb-1 @if(Route::currentRouteName() == 'point.support.index') active @endif" ><a href="{{ route('point.support.index') }}">طلبات الدعم</a></li>
                     </ul>
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link @if(Route::currentRouteName() === 'point.reports.index') active @endif" href="{{ route('point.reports.index') }}">
+                <a class="nav-link @if(Route::currentRouteName() == 'point.reports.index') active @endif" href="{{ route('point.reports.index') }}">
                     <div class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>document</title>
@@ -62,7 +62,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link @if(Route::currentRouteName() === 'point.social.index') active @endif" href="{{ route('point.social.index') }}">
+                <a class="nav-link @if(Route::currentRouteName() == 'point.social.index') active @endif" href="{{ route('point.social.index') }}">
                     <div class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
@@ -72,7 +72,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  @if(Route::currentRouteName() === 'point.setting.change-password.index') active @endif" href="{{ route('point.setting.change-password.index') }}">
+                <a class="nav-link  @if(Route::currentRouteName() == 'point.setting.change-password.index') active @endif" href="{{ route('point.setting.change-password.index') }}">
                     <div class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>settings</title>

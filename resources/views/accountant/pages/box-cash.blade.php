@@ -95,7 +95,7 @@
                             value="{{ $daterange ?? '' }}" />
                         <div class="gap-1 m-0 form-group d-flex">
                             <input name="all_date" class="form-check-input " type="checkbox" value="true"
-                                @if ($all_date === 'true') checked @endif id="all">
+                                @if ($all_date == 'true') checked @endif id="all">
                             <label class="form-check-label text-nowrap" for="all">كل المدة
                             </label>
                         </div>

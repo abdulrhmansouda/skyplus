@@ -206,11 +206,11 @@
                         <span>ترتيب حسب حقل</span>
                         <select required class="form-select input-200" name="sort_by" onchange="form.submit()">
                             <option value="">اختر احد الحقول</option>
-                            <option @if ($sort_by === 'name') selected @endif value="name">الاسم </option>
-                            <option @if ($sort_by === 't_c') selected @endif value="t_c">T.C</option>
-                            <option @if ($sort_by === 'package_start') selected @endif value="package_start">تاريخ البدء
+                            <option @if ($sort_by == 'name') selected @endif value="name">الاسم </option>
+                            <option @if ($sort_by == 't_c') selected @endif value="t_c">T.C</option>
+                            <option @if ($sort_by == 'package_start') selected @endif value="package_start">تاريخ البدء
                             </option>
-                            <option @if ($sort_by === 'status') selected @endif value="status">حالة المستخدم</option>
+                            <option @if ($sort_by == 'status') selected @endif value="status">حالة المستخدم</option>
                         </select>
                     </div>
                 </form>
@@ -620,7 +620,7 @@
                                                                                         @foreach ($packages as $package)
                                                                                             <option
                                                                                                 value="{{ $package->id }}"
-                                                                                                @if ($sub->package_id === $package->id) selected @endif>
+                                                                                                @if ($sub->package_id == $package->id) selected @endif>
                                                                                                 {{ $package->name }}
                                                                                             </option>
                                                                                         @endforeach
@@ -638,17 +638,17 @@
                                                                                         name="status">
                                                                                         <option
                                                                                             value="{{ App\Enums\UserStatusEnum::ACTIVE->value }}"
-                                                                                            @if ($sub->status === App\Enums\UserStatusEnum::ACTIVE->value) selected @endif>
+                                                                                            @if ($sub->status == App\Enums\UserStatusEnum::ACTIVE->value) selected @endif>
                                                                                             مفعل
                                                                                         </option>
                                                                                         <option
                                                                                             value="{{ App\Enums\UserStatusEnum::INACTIVE->value }}"
-                                                                                            @if ($sub->status === App\Enums\UserStatusEnum::INACTIVE->value) selected @endif>
+                                                                                            @if ($sub->status == App\Enums\UserStatusEnum::INACTIVE->value) selected @endif>
                                                                                             غير مفعل
                                                                                         </option>
                                                                                         <option
                                                                                             value="{{ App\Enums\UserStatusEnum::CLOSED->value }}"
-                                                                                            @if ($sub->status === App\Enums\UserStatusEnum::CLOSED->value) selected @endif>
+                                                                                            @if ($sub->status == App\Enums\UserStatusEnum::CLOSED->value) selected @endif>
                                                                                             مغلق</option>
 
                                                                                     </select>

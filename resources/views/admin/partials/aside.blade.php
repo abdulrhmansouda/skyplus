@@ -12,7 +12,7 @@
     <div class="w-auto px-0 collapse navbar-collapse max-height-vh-100 h-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link @if (Route::currentRouteName() === 'admin.home') active @endif " href="{{ route('admin.home') }}">
+                <a class="nav-link @if (Route::currentRouteName() == 'admin.home') active @endif " href="{{ route('admin.home') }}">
                     <div
                         class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
                         <svg class="text-dark" width="16px" height="16px" viewBox="0 0 42 42" version="1.1"
@@ -44,7 +44,7 @@
                 <li class="position-relative nav-item">
                     <button data-bs-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#box"
                         aria-expanded="false" aria-controls="setting"
-                        class="nav-link @if (Route::currentRouteName() === 'admin.box-cash.index' || Route::currentRouteName() === 'admin.box-bank.index') active @endif">
+                        class="nav-link @if (Route::currentRouteName() == 'admin.box-cash.index' || Route::currentRouteName() == 'admin.box-bank.index') active @endif">
 
                         <div
                             class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
@@ -57,14 +57,14 @@
                         </div>
                         <span class="nav-link-text me-1">الصندوق</span>
                     </button>
-                    <div class="collapse @if (Route::currentRouteName() === 'admin.box-cash.index' || Route::currentRouteName() === 'admin.box-bank.index') show @endif" id="box">
+                    <div class="collapse @if (Route::currentRouteName() == 'admin.box-cash.index' || Route::currentRouteName() == 'admin.box-bank.index') show @endif" id="box">
                         <ul class="ul-links">
-                            <li class="mb-1 position-relative @if (Route::currentRouteName() === 'admin.box-cash.index') active @endif"><a
+                            <li class="mb-1 position-relative @if (Route::currentRouteName() == 'admin.box-cash.index') active @endif"><a
                                     href="{{ route('admin.box-cash.index') }}">النقد </a>
 
                             </li>
 
-                            <li class="mb-1 position-relative @if (Route::currentRouteName() === 'admin.box-bank.index') active @endif"><a
+                            <li class="mb-1 position-relative @if (Route::currentRouteName() == 'admin.box-bank.index') active @endif"><a
                                     href="{{ route('admin.box-bank.index') }}">البنك</a>
                             </li>
                         </ul>
@@ -73,9 +73,9 @@
             @endif
 
             <li class="nav-item">
-                <a class="nav-link @if (Route::currentRouteName() === 'admin.points.index') active @endif"
+                <a class="nav-link @if (Route::currentRouteName() == 'admin.points.index') active @endif"
                     href="{{ route('admin.points.index') }}">
-                    {{-- @dd(Route::currentRouteName() === "admin.home") --}}
+                    {{-- @dd(Route::currentRouteName() == "admin.home") --}}
                     {{-- strcmp($str1, $str2) --}}
                     <div
                         class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
@@ -102,7 +102,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link @if (Route::currentRouteName() === 'admin.subscribers.index') active @endif"
+                <a class="nav-link @if (Route::currentRouteName() == 'admin.subscribers.index') active @endif"
                     href="{{ route('admin.subscribers.index', ['pagination_number' => 10]) }}">
                     <div
                         class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
@@ -134,7 +134,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link @if (Route::currentRouteName() === 'admin.packages.index') active @endif"
+                <a class="nav-link @if (Route::currentRouteName() == 'admin.packages.index') active @endif"
                     href="{{ route('admin.packages.index') }}">
                     <div
                         class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
@@ -163,7 +163,7 @@
             </li>
             @if (Auth::user()->isSuperAdmin())
                 <li class="nav-item">
-                    <a class="nav-link @if (Route::currentRouteName() === 'admin.recharge.index') active @endif"
+                    <a class="nav-link @if (Route::currentRouteName() == 'admin.recharge.index') active @endif"
                         href="{{ route('admin.recharge.index') }}">
                         <div
                             class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
@@ -195,7 +195,7 @@
             @endif
 
             <li class="nav-item">
-                <a class="nav-link @if (Route::currentRouteName() === 'admin.reports.index') active @endif"
+                <a class="nav-link @if (Route::currentRouteName() == 'admin.reports.index') active @endif"
                     href="{{ route('admin.reports.index') }}">
                     <div
                         class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
@@ -225,7 +225,7 @@
 
             @if (Auth::user()->isSuperAdmin())
                 <li class="nav-item">
-                    <a class="nav-link @if (Route::currentRouteName() === 'admin.admins.index') active @endif"
+                    <a class="nav-link @if (Route::currentRouteName() == 'admin.admins.index') active @endif"
                         href="{{ route('admin.admins.index') }}">
                         <div
                             class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
@@ -242,7 +242,7 @@
                 </li>
             @endif
             {{-- <li class="position-relative nav-item">
-                <button data-bs-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#box" aria-expanded="false" aria-controls="setting" class="nav-link @if (Route::currentRouteName() === 'admin.support.index') active @endif" href="{{ route('admin.support.index') }}">
+                <button data-bs-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#box" aria-expanded="false" aria-controls="setting" class="nav-link @if (Route::currentRouteName() == 'admin.support.index') active @endif" href="{{ route('admin.support.index') }}">
 
                     @if (App\Models\Notification::isThereSupportNotification())
                     <span class="bg-danger red-point"></span>
@@ -254,13 +254,13 @@
                     </div>
                     <span class="nav-link-text me-1">الصندوق</span>
                 </button>
-                <div class="collapse @if (Route::currentRouteName() === 'admin.support.index' || Route::currentRouteName() === 'admin.support.index' || Route::currentRouteName() === 'admin.setting.social.index' || Route::currentRouteName() === 'admin.setting.other.index') show @endif" id="box">
+                <div class="collapse @if (Route::currentRouteName() == 'admin.support.index' || Route::currentRouteName() == 'admin.support.index' || Route::currentRouteName() == 'admin.setting.social.index' || Route::currentRouteName() == 'admin.setting.other.index') show @endif" id="box">
                     <ul class="ul-links">
-                        <li class="mb-1 position-relative @if (Route::currentRouteName() === 'admin.support.index') active @endif"><a href="{{ route('admin.support.index') }}">النقد </a>
+                        <li class="mb-1 position-relative @if (Route::currentRouteName() == 'admin.support.index') active @endif"><a href="{{ route('admin.support.index') }}">النقد </a>
 
                         </li>
 
-                        <li class="mb-1 position-relative @if (Route::currentRouteName() === 'admin.support.index') active @endif"><a href="{{ route('admin.support.index') }}">البنك</a>
+                        <li class="mb-1 position-relative @if (Route::currentRouteName() == 'admin.support.index') active @endif"><a href="{{ route('admin.support.index') }}">البنك</a>
                         </li>
                     </ul>
                 </div>
@@ -268,7 +268,7 @@
             <li class="position-relative nav-item">
                 <button data-bs-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#support"
                     aria-expanded="false" aria-controls="setting"
-                    class="nav-link @if (Route::currentRouteName() === 'admin.support.index' || Route::currentRouteName() === 'admin.supportNewSubscriber.index') active @endif">
+                    class="nav-link @if (Route::currentRouteName() == 'admin.support.index' || Route::currentRouteName() == 'admin.supportNewSubscriber.index') active @endif">
 
                     @if (App\Models\Notification::isThereSupportNotification() || App\Models\Notification::isThereSupportNewSubscriberNotification())
                         <span class="bg-danger red-point"></span>
@@ -284,9 +284,9 @@
                     </div>
                     <span class="nav-link-text me-1">الدعم الفني</span>
                 </button>
-                <div class="collapse @if (Route::currentRouteName() === 'admin.support.index' || Route::currentRouteName() === 'admin.supportNewSubscriber.index') show @endif" id="support">
+                <div class="collapse @if (Route::currentRouteName() == 'admin.support.index' || Route::currentRouteName() == 'admin.supportNewSubscriber.index') show @endif" id="support">
                     <ul class="ul-links">
-                        <li class="mb-1 position-relative @if (Route::currentRouteName() === 'admin.support.index') active @endif"><a
+                        <li class="mb-1 position-relative @if (Route::currentRouteName() == 'admin.support.index') active @endif"><a
                                 href="{{ route('admin.support.index') }}">لمشتركين أساسيين</a>
                             <!-- if  -->
                             @if (App\Models\Notification::isThereSupportNotification())
@@ -296,7 +296,7 @@
                             <!-- end if  -->
                         </li>
 
-                        <li class="mb-1 position-relative @if (Route::currentRouteName() === 'admin.supportNewSubscriber.index') active @endif"><a
+                        <li class="mb-1 position-relative @if (Route::currentRouteName() == 'admin.supportNewSubscriber.index') active @endif"><a
                                 href="{{ route('admin.supportNewSubscriber.index') }}">لمشتركين جدد</a>
                             <!-- if  -->
                             @if (App\Models\Notification::isThereSupportNewSubscriberNotification())
@@ -311,7 +311,7 @@
             <li class="nav-item">
                 <button data-bs-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#setting"
                     aria-expanded="false" aria-controls="setting"
-                    class="nav-link @if (Route::currentRouteName() === 'admin.setting.binding-telegram.index' || Route::currentRouteName() === 'admin.setting.change-password.index') active @endif">
+                    class="nav-link @if (Route::currentRouteName() == 'admin.setting.binding-telegram.index' || Route::currentRouteName() == 'admin.setting.change-password.index') active @endif">
                     <div
                         class="text-center bg-white shadow icon icon-shape icon-sm border-radius-md ms-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1"
@@ -339,21 +339,21 @@
                     </div>
                     <span class="nav-link-text me-1">الاعدادات
                 </button>
-                <div class="collapse @if (Route::currentRouteName() === 'admin.setting.binding-telegram.index' || Route::currentRouteName() === 'admin.setting.change-password.index' || Route::currentRouteName() === 'admin.setting.social.index' || Route::currentRouteName() === 'admin.setting.other.index') show @endif" id="setting">
+                <div class="collapse @if (Route::currentRouteName() == 'admin.setting.binding-telegram.index' || Route::currentRouteName() == 'admin.setting.change-password.index' || Route::currentRouteName() == 'admin.setting.social.index' || Route::currentRouteName() == 'admin.setting.other.index') show @endif" id="setting">
                     <ul class="ul-links">
 
                         @if (Auth::user()->isSuperAdmin())
-                            <li class="mb-1 @if (Route::currentRouteName() === 'admin.setting.binding-telegram.index') active @endif"><a
+                            <li class="mb-1 @if (Route::currentRouteName() == 'admin.setting.binding-telegram.index') active @endif"><a
                                     href="{{ route('admin.setting.binding-telegram.index') }}">اعدادات ربط
                                     تيليجرام</a></li>
                         @endif
 
-                        <li class="mb-1 @if (Route::currentRouteName() === 'admin.setting.change-password.index') active @endif"><a
+                        <li class="mb-1 @if (Route::currentRouteName() == 'admin.setting.change-password.index') active @endif"><a
                                 href="{{ route('admin.setting.change-password.index') }}">تغير كلمة المرور</a></li>
 
-                        <li class="mb-1 @if (Route::currentRouteName() === 'admin.setting.social.index') active @endif"><a
+                        <li class="mb-1 @if (Route::currentRouteName() == 'admin.setting.social.index') active @endif"><a
                                 href="{{ route('admin.setting.social.index') }}">معلومات التواصل</a></li>
-                        {{-- <li class="mb-1 @if (Route::currentRouteName() === 'admin.setting.other.index') active @endif"><a
+                        {{-- <li class="mb-1 @if (Route::currentRouteName() == 'admin.setting.other.index') active @endif"><a
                                 href="{{ route('admin.setting.other.index') }}">اعدادات أٌخرى</a></li> --}}
                     </ul>
                 </div>

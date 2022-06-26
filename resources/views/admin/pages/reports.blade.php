@@ -12,7 +12,7 @@
                 <div class="flex-wrap flex-grow gap-2 d-flex align-items-center">
                     <input name="daterange" type="text" class="form-control w-md-50 daterange" value="{{ $daterange ?? '' }}" />
                     <div class="gap-1 m-0 form-group d-flex">
-                        <input name="all_date" class="form-check-input" type="checkbox" value="true" @if($all_date==="true" )checked @endif id="all">
+                        <input name="all_date" class="form-check-input" type="checkbox" value="true" @if($all_date=="true" )checked @endif id="all">
                         <label class="form-check-label text-nowrap" for="all">كل المدة
                         </label>
                     </div>
@@ -67,7 +67,7 @@
                                 <tr>
                                     {{-- @foreach() --}}
                                     <th class="text-xs text-white text-uppercase font-weight-bolder ps-3 bg-info">
-                                        الحساب : {{ $name_points === '' ? 'الكل' : $name_points }}
+                                        الحساب : {{ $name_points == '' ? 'الكل' : $name_points }}
                                     </th>
                                     <th class="px-1 text-xs text-uppercase font-weight-bolder "></th>
                                     <th class="px-1 text-xs text-uppercase font-weight-bolder "></th>

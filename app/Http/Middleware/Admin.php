@@ -22,7 +22,7 @@ class Admin
             abort(403);
         }
         // dd(Auth::user());
-        if((!Auth::user()->isSuperAdmin())&&Auth::user()->admin->status !== UserStatusEnum::ACTIVE->value){
+        if((!Auth::user()->isSuperAdmin())&&Auth::user()->admin->status != UserStatusEnum::ACTIVE->value){
             abort(403,'تم تعطيل الحساب الرجاء الاتصال بفريق الدعم');
             return view('point.pages.point-inactive');
         }

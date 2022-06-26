@@ -30,7 +30,7 @@ class ReportController extends Controller
         $reports = Report::where('point_id', $point->id);
 
 
-        if ($all_date !== "true") {
+        if ($all_date != "true") {
             preg_match_all("/([^-]*) - (.*)/", $daterange, $date);
             if ($date[1]) {
                 $from = new Carbon($date[1][0]);

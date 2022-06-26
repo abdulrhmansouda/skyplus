@@ -772,7 +772,7 @@
                                                                 <div class="modal-dialog modal-dialog-centered"
                                                                     role="document">
                                                                     <div class="modal-content">
-                                                                        @if ($sub->status !== 'closed')
+                                                                        @if ($sub->status != 'closed')
                                                                             <div class="modal-header">
                                                                                 <h5 class="modal-title"
                                                                                     id="exampleModalLabel">

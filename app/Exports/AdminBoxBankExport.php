@@ -31,7 +31,7 @@ class AdminBoxBankExport implements FromCollection
 
         $boxBanks = new BoxBank;
 
-        if ($all_date !== "true") {
+        if ($all_date != "true") {
             preg_match_all("/([^-]*) - (.*)/", $daterange, $date);
             if ($date[1]) {
                 $from = new Carbon($date[1][0]);

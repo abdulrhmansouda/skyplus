@@ -97,7 +97,7 @@ class PackageController extends Controller
      */
     public function destroy(Package $package)
     {
-        // if ($package->status !== 'closed') {
+        // if ($package->status != 'closed') {
             $package->status = UserStatusEnum::CLOSED->value;
             $package->update();
             session()->flash('success', "تم اغلاق الباقة $package->name بنجاح");

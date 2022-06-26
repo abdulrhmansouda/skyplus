@@ -23,7 +23,7 @@ class Point
         }
         // dd(Auth::user());
         // dd(!Auth::user()->point->status != UserStatusEnum::ACTIVE->value);
-        if(Auth::user()->point->status !== UserStatusEnum::ACTIVE->value){
+        if(Auth::user()->point->status != UserStatusEnum::ACTIVE->value){
             abort(403,'تم تعطيل الحساب الرجاء الاتصال بفريق الدعم');
             return view('point.pages.point-inactive');
         }

@@ -141,7 +141,7 @@ class SubscriberController extends Controller
      */
     public function destroy(Subscriber $subscriber)
     {
-        // if ($subscriber->status !== 'closed') {
+        // if ($subscriber->status != 'closed') {
         $subscriber->status = UserStatusEnum::CLOSED->value;
         $subscriber->update();
         session()->flash('success', "تم اغلاق المشترك $subscriber->name بنجاح");

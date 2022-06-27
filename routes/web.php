@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\UserStatusEnum;
+use App\Helper\helper_methods;
 use App\Http\Controllers\Accountant;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\Point;
@@ -10,11 +11,9 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 
+
 // Route::get('/test', function () {
-//     // return ;
-//     dd(Subscriber::where('status', UserStatusEnum::ACTIVE->value)
-//     ->whereDate('package_end','<=',new Carbon(now()))->get());
-//     return new Carbon(now());
+// helper_methods::deleteDir(public_path('temp'));
 // });
 Route::get('/', function () {
     return redirect(route('login'));

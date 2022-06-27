@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Helper\helper_methods;
 use App\Models\Point;
 use App\Models\Subscriber;
 use Illuminate\Console\Scheduling\Schedule;
@@ -20,8 +21,9 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         $schedule->call(function () {
             Subscriber::convertToInactive();
+            helper_methods::deleteDir(public_path('temp'));
             // Point::resetDailyProfit();
-        // })->everyMinute();//daily
+        // })->everyMinute(); //daily
         })->daily();//daily
     }
 
@@ -32,7 +34,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

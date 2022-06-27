@@ -58,14 +58,14 @@ class SubscriberController extends Controller
 
     public function export(Request $request)
     {
-             $export = new AdminSubscribersExport($request);
+        $export = new AdminSubscribersExport($request);
         $now = now();
         return Excel::download($export, "subscribers_$now.xlsx");
     }
 
     public function import(Request $request)
     {
-        Excel::import(new AdminSubscribersImport, $request->file('subscribers')->getRealPath());
+        Excel::import(new AdminSubscribersImport, public_path('temp') . '/' . $request->file('subscribers')->store('excel', 'temp'));
         return redirect()->back()->with('success', ' تم الاستيراد بنجاح');
     }
 

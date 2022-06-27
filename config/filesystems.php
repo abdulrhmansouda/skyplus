@@ -62,6 +62,12 @@ return [
             'throw' => false,
         ],
 
+        'temp' => [
+            'driver' => 'local',
+            'root' => public_path('temp'),
+            'throw' => false,
+        ],
+
     ],
 
     /*
